@@ -8,9 +8,9 @@
       <div class="navbar-nav">
         <a class="nav-link active text-color" aria-current="page" href="#">Home</a>
         <a class="nav-link text-color" href="#">Features</a>
-        <div id='divAuthentification'>
-          <button type="button" class="btn btn-primary">Connexion</button>
-          <button type="button" class="btn btn-primary">Inscription</button>
+        <div id='divAuthentification' class=''>
+          <button type="button"  class="btn btn-primary">Connexion</button>
+          <button type="button" data-bs-toggle='modal' data-bs-taret='#modalInscription' class="btn btn-primary">Inscription</button>
         </div>
       </div>
     </div>

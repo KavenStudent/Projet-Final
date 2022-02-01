@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
   
   <!-- Modal Inscription-->
   <div class="modalInscritption" id="modalInscription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -62,5 +61,5 @@
       </div>
     </div>
   </div>
-  </html>
+ 
 
