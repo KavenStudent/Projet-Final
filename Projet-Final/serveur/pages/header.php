@@ -1,5 +1,20 @@
-  <nav class="navbar navbar-dark bg-primary">
-    <!-- Navbar content -->
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand text-color" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><img id='menu-icon' src="Projet-Final/client/public/images/menu-icon.png" alt='menu-icon'></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <button type="button"  class="btn btn-primary">Mon Profil</button>
+        <a class="nav-link text-color" href="#">Features</a>
+        <div id='divAuthentification' class='float-right'>
+          <button type="button"  class="btn btn-primary">Connexion</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInscription">Inscription</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
   
   
