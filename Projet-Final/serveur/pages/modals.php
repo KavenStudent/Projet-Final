@@ -77,10 +77,7 @@
 						<!-- Form connexion -->
 
 						<form class="form-connexion" id="form-connexion">
-							<input type="hidden" name="action" value="connexion">
-
-							<input type="submit" id="validation-connexion" class="validation" />
-
+						
 							<div class="myInput">
 								<label for="pages" class="form-label">Courriel</label>
 								<input type="email" class="form-control" id="email-Connexion" name="email" required>

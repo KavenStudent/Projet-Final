@@ -5,12 +5,12 @@
       <span class="navbar-toggler-icon"><img id='menu-icon' src="Projet-Final/client/public/images/menu-icon.png" alt='menu-icon'></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <button type="button"  class="btn btn-primary">Mon Profil</button>
-        <a class="nav-link text-color" href="#">Features</a>
-        <div id='divAuthentification' class='float-right'>
-          <button type="button"  class="btn btn-primary">Connexion</button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInscription">Inscription</button>
+      <div class="navbar-nav ml-auto">
+        <button type="button"  class="btn btn-light buttonNav">Mon Profil</button>
+        
+        <div id='divAuthentification'>
+          <button type="button"  class="btn btn-light buttonNav" data-bs-toggle="modal" data-bs-target="#modalConnexion">Connexion</button>
+          <button type="button" class="btn btn-light buttonNav" data-bs-toggle="modal" data-bs-target="#modalInscription">Inscription</button>
         </div>
       </div>
     </div>

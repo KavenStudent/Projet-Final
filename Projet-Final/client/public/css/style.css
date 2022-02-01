@@ -9,8 +9,19 @@
     color: black;
 }
 
+.navbar-customized{
+    float: right;
+}
 
-
+.buttonNav{
+    margin-left: 1em;
+    margin-right: 0;
+}
+#divAuthentification{
+    margin-left: 55em;
+    margin-right: 0;
+    
+}
 
 /* Termes et Conditions */
 .contentConditions {
