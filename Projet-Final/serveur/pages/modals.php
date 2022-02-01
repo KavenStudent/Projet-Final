@@ -63,3 +63,44 @@
       </div>
     </div>
   </div>
+
+
+  <!-- modal connexion -->
+  <div class="modal fade" id="modalConnexion" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Connexion</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- Form connexion -->
+
+						<form class="form-connexion" id="form-connexion">
+							<input type="hidden" name="action" value="connexion">
+
+							<input type="submit" id="validation-connexion" class="validation" />
+
+							<div class="myInput">
+								<label for="pages" class="form-label">Courriel</label>
+								<input type="email" class="form-control" id="email-Connexion" name="email" required>
+
+							</div>
+
+							<div class="myInput">
+								<label for="password" class="form-label">Mot de passe</label>
+								<input type="password" class="form-control" id="passwordConnexion" name="password" required>
+							</div>
+
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">Connexion</button>
+							</div>
+						</form>
+
+						<!-- Fin form connexion -->
+					</div>
+
+				</div>
+			</div>
+		</div> <!-- Fin modal connexion -->
