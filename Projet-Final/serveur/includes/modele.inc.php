@@ -32,7 +32,7 @@ class Modele{
     }
 
 	function obtenirConnexion(){
-		$maConnexion = new Connexion("localhost", "root", "", "bdfilmsjoaniekaven");
+		$maConnexion = new Connexion("localhost", "root", "", "bdforuban");
 		$maConnexion->connecter();
 		return $maConnexion->getConnexion();
 	}
