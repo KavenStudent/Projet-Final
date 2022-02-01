@@ -53,9 +53,11 @@
                   </label>
                 </div>
                 <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-primary">Sauvegarder</button>
-        </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary">Sauvegarder</button>
+                </div>
+                
+          </div>      
       </div>
     </div>
   </div>

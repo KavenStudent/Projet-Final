@@ -6,11 +6,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active text-color" aria-current="page" href="#">Home</a>
+        <button type="button"  class="btn btn-primary">Mon Profil</button>
         <a class="nav-link text-color" href="#">Features</a>
-        <div id='divAuthentification' class=''>
+        <div id='divAuthentification' class='float-right'>
           <button type="button"  class="btn btn-primary">Connexion</button>
-          <button type="button" data-bs-toggle='modal' data-bs-taret='#modalInscription' class="btn btn-primary">Inscription</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInscription">Inscription</button>
         </div>
       </div>
     </div>
