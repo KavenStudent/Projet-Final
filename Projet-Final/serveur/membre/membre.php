@@ -2,7 +2,7 @@
 // Classe Membre
 class Membre
 {
-    private $idMembre;
+    private $id;
     private $nom;
     private $prenom;
     private $courriel;
@@ -14,11 +14,12 @@ class Membre
     private $membrePremium;
     private $dateFinAbonnement;
     private $motDePasse;
+    private $role;
 
-    public function __construct(int $idMembre,  string $nom, string $prenom, string $courriel, string $numeroTelephone,
-     string $description,int $actif, int $prive, string $imageProfil, int $membrePremium, string $dateFinAbonnement, string $motDePasse)
+    public function __construct(int $id,  string $nom, string $prenom, string $courriel, string $numeroTelephone,
+     string $description,int $actif, int $prive, string $imageProfil, int $membrePremium, string $dateFinAbonnement, string $motDePasse, string $role)
     {
-        $this->idMembre = $idMembre;
+        $this->id = $id;
         $this->prenom = $prenom;
         $this->nom = $nom;
         $this->courriel = $courriel;
@@ -30,12 +31,12 @@ class Membre
         $this->membrePremium = $membrePremium;
         $this->dateFinAbonnement = $dateFinAbonnement;
         $this->motDePasse = $motDePasse;
-      
+        $this->role = $role;
     }
 
-    public function getIdMembre(): int
+    public function getid(): int
     {
-        return $this->idMembre;
+        return $this->id;
     }
 
     public function getNom(): string
@@ -136,6 +137,9 @@ class Membre
     public function setMotdePasse(string $motDePasse)
     {
         $this->motDePasse = $motDePasse;
+    }
+    public function getRole() {
+        return $this->role;
     }
 }
 ?>

@@ -55,13 +55,13 @@ class MembreDaoImp extends Modele implements MembreDao
     {
         try {
             // enregistre dans membre
-            $requete = "INSERT INTO membres VALUES(0,?,?,?,?,?)";
+            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array($Membre->getPrenom(), $Membre->getNom(), $Membre->getCourriel(), $Membre->getSexe(), $Membre->getDateDeNaisssance()));
+            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getActif(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), $Membre->getDateFinAbonnement(), $Membre->getRole()));
             $stmt = $this->executer();
 
             // enregistre dans connexion
-            $requete = "INSERT INTO connexion VALUES(0,?,?,'1','M')";
+            $requete = "INSERT INTO connexion VALUES(0,?,?)";
             $this->setRequete($requete);
             $this->setParams(array($Membre->getCourriel(), $Membre->getMotdePasse()));
             $stmt = $this->executer();
@@ -71,11 +71,11 @@ class MembreDaoImp extends Modele implements MembreDao
             unset($requete);
         }
     }
-    public function verifiCourriel(string $courriel): bool
+    public function verifierCourriel(string $courriel): bool
     {
         try {
             $existe = false;
-            $requete = "SELECT * FROM membres WHERE courriel=?";
+            $requete = "SELECT * FROM membre WHERE courriel=?";
             $this->setRequete($requete);
             $this->setParams(array($courriel));
             $stmt = $this->executer();
@@ -93,7 +93,7 @@ class MembreDaoImp extends Modele implements MembreDao
     {
         try {
             $existe = false;
-            $requete = "SELECT * FROM membres WHERE courriel=? and idMembre NOT IN ($idMembre)";
+            $requete = "SELECT * FROM membre WHERE courriel=? and idMembre NOT IN ($idMembre)";
             $this->setRequete($requete);
             $this->setParams(array($courriel));
             $stmt = $this->executer();
@@ -138,12 +138,12 @@ class MembreDaoImp extends Modele implements MembreDao
 
             if ($membre = $stmt->fetch(PDO::FETCH_OBJ)) {
                 // si le statut est actif
-                if ($membre->statut == 1) {
+                if ($membre->actif == 1) {
 
                     //si c'est un membre
                     if ($membre->role === "M") {
                         $_SESSION['membre'] = $membre->idMembre;
-                    } else {
+                    } else if ($membre->role === "A") {
                         $_SESSION['admin'] = $membre->idMembre;
                     }
                 } else { // si inactif
@@ -192,57 +192,16 @@ class MembreDaoImp extends Modele implements MembreDao
         }
         return $tab;
     }
-
-    public function afficherLocationMembre(int $idMembre): array
-    {
-        try {
-            $tab = array();
-            $requete = "SELECT f.idFilm, f.titre ,l.dateAchat, l.dureeLocation, f.image FROM location l INNER JOIN films f ON l.idFilm = f.idFilm WHERE l.idMembre = ? ORDER by l.dateAchat DESC ";
-            $this->setRequete($requete);
-            $this->setParams(array($idMembre));
-            $stmt = $this->executer();
-
-            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                //Variable
-                $dateAujourd = date("Y-m-d");
-                $dateFin = date("Y-m-d", strtotime($ligne->dateAchat . "+ $ligne->dureeLocation days"));
-                //Ajouter colones
-                $ligne->dateFin = $dateFin;
-                $ligne->nbJourRestant = round(NbJours($dateAujourd, $dateFin));
-                //si la location n'est plus a louable il supprime de location et ajoute dans son historique
-                if ($ligne->nbJourRestant < 0) {
-
-                    $idFilm = $ligne->idFilm;
-                    //Enleve des locations en cours
-                    $requete1 = "DELETE FROM location WHERE idFilm=?";
-                    $unModele = new Modele($requete1, array($idFilm));
-                    $stmt = $unModele->executer();
-
-                    //Ajoute dans l'historiques de location
-                    $requete1 = "INSERT INTO historiquelocation VALUES(?,?,?)";
-                    $unModele = new Modele($requete1, array($idFilm, $idMembre, $ligne->dateAchat));
-                    $stmt = $unModele->executer();
-                } else {
-                    $tab[] = $ligne;
-                }
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        } finally {
-            unset($requete);
-        }
-        return $tab;
-    }
     public function getMembre(int $idMembre): Membre
     {
         try {
-            $requete = $requete = "SELECT m.idMembre, m.prenom, m.nom, m.courriel, m.sexe, m.dateDeNaissance, c.motDePasse, c.statut, c.role FROM membres m INNER JOIN connexion c ON m.idMembre = c.idMembre WHERE m.idMembre = ?";
+            $requete = $requete = "SELECT m.idMembre, m.nom, m.prenom, m.courriel, m.numeroTelephone, m.description, m.actif, m.prive, m.imageProfil, m.membrePremium, m.dateFinAbonnement, c.motDePasse, m.role, FROM membres m INNER JOIN connexion c ON m.idMembre = c.idMembre WHERE m.idMembre = ?";
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
 
             if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $unMembre = new Membre($ligne->idMembre, $ligne->prenom, $ligne->nom, $ligne->courriel, $ligne->sexe, $ligne->dateDeNaissance, $ligne->motDePasse, $ligne->statut);
+                $unMembre = new Membre($ligne->idMembre, $ligne->nom, $ligne->prenom, $ligne->courriel, $ligne->numeroTelephone, $ligne->description, $ligne->actif, $ligne->prive, $ligne->imageProfil, $ligne->membrePremium, $ligne->dateFinAbonnement, $ligne->motDePasse, $ligne->role);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
