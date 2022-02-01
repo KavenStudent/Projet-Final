@@ -1,3 +1,5 @@
+
+/* NAV BAR */
 .navbar-custom {
     background-color: #4169E1;
     color: black;
@@ -5,4 +7,8 @@
 
 .text-color{
     color: black;
+}
+
+#divAuthentification{
+    float: right;
 }
