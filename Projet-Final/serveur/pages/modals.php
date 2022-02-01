@@ -39,12 +39,14 @@
                 <label for="validationCustom05" class="form-label">Confirmer le mot de passe</label>
                 <input type="password" class="form-control" id="cpassword" required>
               </div>
+              <br>
               <div class="col-md-6">
                 <button type="button" class="collapsible">Termes et conditions</button>
-                <div class="content">
+                <div class="contentConditions">
                   <p>Inserer termes et conditions</p>
                 </div>
-              </div> 
+              </div>
+      
               <div class="col-6">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
@@ -52,7 +54,7 @@
                       Accepter les termes et conditions.
                     </label>
                   </div>
-              </div>  
+              </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary">Sauvegarder</button>
