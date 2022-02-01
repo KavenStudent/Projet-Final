@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 31 jan. 2022 à 21:12
+-- Généré le :  lun. 31 jan. 2022 à 23:10
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -39,10 +39,10 @@ CREATE TABLE `connexion` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `hi`
+-- Structure de la table `historiquepaiement`
 --
 
-CREATE TABLE `historiquePaiement` (
+CREATE TABLE `historiquepaiement` (
   `id` int(11) NOT NULL,
   `cout` float NOT NULL,
   `date` date NOT NULL,
@@ -113,6 +113,19 @@ CREATE TABLE `projettag` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `signalisation`
+--
+
+CREATE TABLE `signalisation` (
+  `id` int(11) NOT NULL,
+  `idMembre` int(11) NOT NULL,
+  `idProjet` int(11) NOT NULL,
+  `description` varchar(1024) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `tag`
 --
 
@@ -126,9 +139,9 @@ CREATE TABLE `tag` (
 --
 
 --
--- Index pour la table `historiquePaiement`
+-- Index pour la table `historiquepaiement`
 --
-ALTER TABLE `historiquePaiement`
+ALTER TABLE `historiquepaiement`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -144,6 +157,12 @@ ALTER TABLE `projet`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `signalisation`
+--
+ALTER TABLE `signalisation`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `tag`
 --
 ALTER TABLE `tag`
@@ -154,9 +173,9 @@ ALTER TABLE `tag`
 --
 
 --
--- AUTO_INCREMENT pour la table `historiquePaiement`
+-- AUTO_INCREMENT pour la table `historiquepaiement`
 --
-ALTER TABLE `historiquePaiement`
+ALTER TABLE `historiquepaiement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `membre`
@@ -167,6 +186,11 @@ ALTER TABLE `membre`
 -- AUTO_INCREMENT pour la table `projet`
 --
 ALTER TABLE `projet`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `signalisation`
+--
+ALTER TABLE `signalisation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `tag`
