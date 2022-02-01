@@ -53,7 +53,7 @@ function enregistrerMembre()
     $unMembre = new Membre(0, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password);
     $dao = new MembreDaoImp();
     // couriel deja utilisé existant
-    if ($dao->verifiCourriel($courriel)) {
+    if ($dao->verifierCourriel($courriel)) {
 
         $tabRes['action'] = "enregistrerMembre";
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";

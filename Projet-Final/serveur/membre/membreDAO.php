@@ -12,10 +12,10 @@ interface MembreDao
     public function enregistrerMembre(Membre $Membre);
 
     //Verifie son courriel s'il existe deja dans la bd
-    public function verifiCourriel(string $courriel): bool;
+    public function verifierCourriel(string $courriel): bool;
 
     //Verifie son courriel s'il existe deja dans la bd excluant lui meme
-    public function verifiCourrielModifier(string $courriel, int $idMembre): bool;
+    public function verifierCourrielModifier(string $courriel, int $idMembre): bool;
 
     //Modifie un membre
     public function modifierMembre(Membre $Membre);
