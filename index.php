@@ -15,5 +15,9 @@
         require_once('Projet-Final/serveur/pages/header.php');
     ?>
     <h1>Test 4</h1>
+
+    <?php
+        require_once('Projet-Final/serveur/pages/modals.php');
+    ?>
 </body>
 </html>

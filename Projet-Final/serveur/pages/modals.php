@@ -1,5 +1,4 @@
 
-  
   <!-- Modal Inscription-->
   <div class="modal fade" id="modalInscription" tabindex="-1" aria-labelledby="titreModalInscription" aria-hidden="true">
     <div class="modal-dialog">
@@ -60,4 +59,3 @@
       </div>
     </div>
   </div>
-
