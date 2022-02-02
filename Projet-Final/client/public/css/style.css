@@ -1,13 +1,31 @@
 /* GLOBAL */
+html {
+    min-height: 100%;
+}
+
+body{
+    background: linear-gradient(#676767,#4169e1ab) fixed;
+}
+
+button{
+    border-radius: 5px;
+}
+
+input{
+    padding-left: 1em;
+    border: 1px solid black;
+}
 
 textarea {
+    max-width: 100%;
     resize: none;
-  }
+}
 
 /* NAV BAR */
 .navbar-custom {
     background-color: #4169E1;
     color: black;
+    border-bottom: 1px solid black;
 }
 
 .text-color{
@@ -22,11 +40,13 @@ textarea {
 #divAuthentification{
     margin-left: auto;
 }
+
 @media only screen and (max-width: 992px) {
     .itemsMobileVersion{
         display: flex;
         margin-top: 1em;
     }
+    
 }
 
 /* TITRE DU SITE */
@@ -44,10 +64,13 @@ textarea {
 
 /* Termes et Conditions */
 .contentConditions {
+    margin-top: 1em;
+    margin-bottom: 1em;
     padding: 0 18px;
     display: none;
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #cac7c7;
+    border-radius: 5px;
   }
 
 
@@ -62,4 +85,34 @@ textarea {
   #searchBar{
       width: 50em;
       border-radius: 20px;
+      border-width: 5px;
+      border-color: #4169E1;
   }
+
+
+  /* MODAL INSCRIPTION */
+  .modalCustom{
+    background-color: #ADD8E6;
+    /* background: linear-gradient(#676767,#ADD8E6) fixed; */
+    border:0;
+    color: black;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .itemInput{
+    float:none;
+    margin:auto;
+  }
+
+  .modalHeader{
+      border:0;
+  }
+
+  .modalFooter{
+    border:0;
+  }
+
+
+
+  /* MODAL CONNEXION */
