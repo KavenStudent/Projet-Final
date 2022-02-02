@@ -92,12 +92,9 @@ textarea {
 
   /* MODAL INSCRIPTION */
   .modalCustom{
-    background-color: #ADD8E6;
-    /* background: linear-gradient(#676767,#ADD8E6) fixed; */
-    border:0;
-    color: black;
-    align-items: center;
-    justify-content: center;
+    background-color: #888a8a;
+    color: white;
+
   }
 
   .itemInput{
@@ -106,11 +103,16 @@ textarea {
   }
 
   .modalHeader{
-      border:0;
+      background-color: #5c5e5f;
+      border-bottom: 1px solid black;
   }
 
   .modalFooter{
     border:0;
+  }
+
+  .modalInput{
+      background-color: rgb(241, 238, 238);
   }
 
 

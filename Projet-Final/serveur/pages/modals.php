@@ -5,6 +5,7 @@
       <div class="modal-content modalCustom">
         <div class="modal-header modalHeader">
           <h5 class="modal-title" id="titreModalInscription">Inscription</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body modalCustom">
             <!-- Formulaire devenir membre -->
@@ -12,31 +13,31 @@
 
               <div class="col-md-8 itemInput">
                 <label for="validationCustom02" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
+                <input type="text" class="form-control modalInput" id="nom" name="nom" required>
               </div>
               <div class="col-md-8 itemInput">
                 <label for="validationCustom01" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" required>
+                <input type="text" class="form-control modalInput" id="prenom" name="prenom" required>
               </div>
               <div class="col-md-8 itemInput">
                 <label for="validationCustomUsername" class="form-label">Courriel</label>
-                <input type="email" class="form-control" id="courriel" name="courriel" required>
+                <input type="email" class="form-control modalInput" id="courriel" name="courriel" required>
               </div>
               <div class="col-md-8 itemInput">
                 <label for="validationCustomUsername" class="form-label">Téléphone</label>
-                <input type="tel" class="form-control" id="telephone" name="telephone" required>
+                <input type="tel" class="form-control modalInput" id="telephone" name="telephone" required>
               </div>
               <div class="col-md-8 itemInput">
                 <label for="validationCustomUsername" class="form-label">Description</label>
-                <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+                <textarea id="description" name="description modalInput" rows="4" cols="50" required></textarea>
               </div>
               <div class="col-md-8 itemInput">
                 <label for="validationCustom03" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control modalInput" id="password" name="password" required>
               </div>
               <div class="col-md-8 itemInput">
                 <label for="validationCustom05" class="form-label">Confirmer le mot de passe</label>
-                <input type="password" class="form-control" id="cpassword" required>
+                <input type="password" class="form-control modalInput" id="cpassword" required>
               </div>
               <br>
               <div class="col-md-8 itemInput">
@@ -55,7 +56,6 @@
                   </div>
               </div>
               <div class="modal-footer modalFooter">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary">Envoyer</button>
               </div>
           </div>      
