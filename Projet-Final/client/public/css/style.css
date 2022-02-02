@@ -1,3 +1,8 @@
+/* GLOBAL */
+
+textarea {
+    resize: none;
+  }
 
 /* NAV BAR */
 .navbar-custom {
@@ -9,18 +14,32 @@
     color: black;
 }
 
-.navbar-customized{
-    float: right;
+
+.divNavContenu{
+    display: flex;
 }
 
-.buttonNav{
-    margin-left: 1em;
-    margin-right: 0;
-}
 #divAuthentification{
-    margin-left: 55em;
-    margin-right: 0;
-    
+    margin-left: auto;
+}
+@media only screen and (max-width: 992px) {
+    .itemsMobileVersion{
+        display: flex;
+        margin-top: 1em;
+    }
+}
+
+/* TITRE DU SITE */
+
+.titreDuSite{
+    margin-top: 1em;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+.premiereLettre{
+    color: #4169E1;
 }
 
 /* Termes et Conditions */
@@ -29,4 +48,18 @@
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
+  }
+
+
+  /* SEARCH BAR */
+
+  #searchBarForm{
+      margin-top: 2em;
+      display: flex;
+      justify-content: center;
+  }
+
+  #searchBar{
+      width: 50em;
+      border-radius: 20px;
   }
