@@ -3,7 +3,7 @@ function enregistrerMembre() {
 
   $.ajax({
     type: "POST",
-    url: "./Projet-Final/serveur/Membres/membresControleur.php",
+    url: "./Projet-Final/serveur/membre/membreController.php",
     data: form,
     dataType: "json",
     contentType: false,
@@ -28,7 +28,7 @@ function connexion() {
   } else {
     $.ajax({
       type: "POST",
-      url: "./Projet-Final/Membres/membresControleur.php",
+      url: "./Projet-Final/membre/membreController.php",
       data: form,
       dataType: "json",
       contentType: false,
@@ -53,7 +53,7 @@ function deconnexion() {
 
   $.ajax({
     type: "POST",
-    url: "Projet-Final/Membres/membresControleur.php",
+    url: "Projet-Final/membre/membreController.php",
     data: form,
     dataType: "json",
     contentType: false,

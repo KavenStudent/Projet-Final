@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 01 fév. 2022 à 22:02
+-- Généré le :  jeu. 03 fév. 2022 à 14:58
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -140,6 +140,12 @@ CREATE TABLE `tag` (
 --
 
 --
+-- Index pour la table `connexion`
+--
+ALTER TABLE `connexion`
+  ADD KEY `idMembre` (`idMembre`);
+
+--
 -- Index pour la table `historiquepaiement`
 --
 ALTER TABLE `historiquepaiement`
@@ -182,7 +188,7 @@ ALTER TABLE `historiquepaiement`
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT pour la table `projet`
 --
@@ -197,7 +203,17 @@ ALTER TABLE `signalisation`
 -- AUTO_INCREMENT pour la table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `connexion`
+--
+ALTER TABLE `connexion`
+  ADD CONSTRAINT `fk_idmembre` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
