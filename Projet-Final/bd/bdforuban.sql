@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 31 jan. 2022 à 23:10
+-- Généré le :  mar. 01 fév. 2022 à 22:02
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -33,7 +33,8 @@ USE `bdforuban`;
 CREATE TABLE `connexion` (
   `idMembre` int(11) NOT NULL,
   `courriel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `motDePasse` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `motDePasse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(1) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
