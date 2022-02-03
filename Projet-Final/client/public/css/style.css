@@ -145,9 +145,18 @@ textarea {
     justify-content: center;
   }
   .image-explication{
-      height: 15em;
-      width: 30em;
+      height: 20em;
+      width: 40em;
+      border-radius: 10px;
   }
   .text-Format{
-      
+      height: 15em;
+      width: 35em;
+      background-color: white;
+      color: black;
+      border: 5px solid #4169E1;
+      margin-top: 2em;
+      margin-bottom: 2em;
+      text-align: center;
+      padding: 1em;
   }
