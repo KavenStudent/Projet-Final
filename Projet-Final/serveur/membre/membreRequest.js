@@ -28,18 +28,21 @@ function connexion() {
   } else {
     $.ajax({
       type: "POST",
-      url: "./Projet-Final/membre/membreController.php",
+      url: "./Projet-Final/serveur/membre/membreController.php",
       data: form,
       dataType: "json",
       contentType: false,
       processData: false,
       success: function (reponse) {
         if (reponse.msg != "") {
-          initialiser(reponse.msg); // msg = erreur information connexion
-          $("#modal-Connexion").modal("hide");
+            alert('fail');
+            $("#textToast").toast("show");
+        //   initialiser(reponse.msg); // msg = erreur information connexion
+          $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
-          window.location.reload();
+            alert('reussi');
+        //   window.location.reload();
         }
       },
       fail: function (err) {},
@@ -53,7 +56,7 @@ function deconnexion() {
 
   $.ajax({
     type: "POST",
-    url: "Projet-Final/membre/membreController.php",
+    url: "./Projet-Final/serveur/membre/membreController.php",
     data: form,
     dataType: "json",
     contentType: false,

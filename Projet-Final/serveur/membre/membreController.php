@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once("membre.php");
 require_once("membreDAOImpl.php");
 //Controller
@@ -55,7 +56,7 @@ function enregistrerMembre()
   
     $unMembre = new Membre(0, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
     $dao = new MembreDaoImpl();
-    print_r($unMembre);
+   
     // couriel deja utilisé existant
     if ($dao->verifierCourriel($courriel)) {
 
@@ -80,9 +81,9 @@ function connexion()
 
     $tabRes['action'] = "connexion";
     $dao = new MembreDaoImpl();
+
     //Connecter le membre
     $tabRes['msg'] = $dao->connecter($courriel, $password);
-
 }
 
 //deconnexion d'un membre

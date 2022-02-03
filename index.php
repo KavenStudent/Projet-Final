@@ -11,9 +11,10 @@
     ?>
 </head>
 
-<body>
+<body onLoad="initialiser(<?php echo "'" . $msg . "'" ?>);">
     <?php
         require_once('Projet-Final/serveur/pages/header.php');
+        require_once('Projet-Final/serveur/pages/references.html');
         require_once('Projet-Final/serveur/pages/frontPage.php')
     ?>
 

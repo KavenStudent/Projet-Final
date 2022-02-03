@@ -81,6 +81,7 @@
 
         <form class="form-connexion" id="form-connexion">
 
+          <input type="hidden" name="action" value="connexion">
           <div class="myInput">
             <label for="pages" class="form-label">Courriel</label>
             <input type="email" class="form-control" id="email-Connexion" name="email" required>

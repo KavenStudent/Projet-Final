@@ -56,15 +56,15 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             // enregistre dans membre
-            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?,?)";
+            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getActif(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
+            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
             $stmt = $this->executer();
             $lastId = $this->getLastId();
             // enregistre dans connexion
-            $requete = "INSERT INTO connexion VALUES(?,?,?,?)";
+            $requete = "INSERT INTO connexion VALUES(?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array($lastId, $Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getRole()));
+            $this->setParams(array($lastId, $Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getRole(), $Membre->getActif()));
             $stmt = $this->executer();
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -138,12 +138,14 @@ class MembreDaoImpl extends Modele implements MembreDao
             $stmt = $this->executer();
 
             if ($membre = $stmt->fetch(PDO::FETCH_OBJ)) {
+
                 // si le statut est actif
                 if ($membre->actif == 1) {
 
                     //si c'est un membre
                     if ($membre->role === "M") {
                         $_SESSION['membre'] = $membre->idMembre;
+                        
                     } else if ($membre->role === "A") {
                         $_SESSION['admin'] = $membre->idMembre;
                     }
