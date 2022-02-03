@@ -118,3 +118,36 @@ textarea {
 
 
   /* MODAL CONNEXION */
+
+  /* Front-page */
+
+  #containerFrontPage{
+      display: flex;
+  }
+  #premiereSection {
+      display: flex;
+      flex-direction: row;
+      flex: 2;
+      margin-top: 2em;
+  }
+  #premiereColonne {
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  #deuxiemeColonne{
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  .image-explication{
+      height: 15em;
+      width: 30em;
+  }
+  .text-Format{
+      
+  }
