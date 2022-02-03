@@ -1,4 +1,7 @@
 <?php 
+session_start();
+require_once("membre.php");
+require_once("membreDAOImpl.php");
 //Controller
 $action = $_POST['action'];
 switch ($action) {
@@ -47,13 +50,15 @@ function enregistrerMembre()
     $prive = 0;
     $imageProfil = "defaultProfil.png";
     $membrePremium = 0;
-    $dateFinAbonnement = null;
+    $dateFinAbonnement = "";
     $password = $_POST['password'];
+    $role = "M";
   
-    $unMembre = new Membre(0, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password);
-    $dao = new MembreDaoImp();
+    $unMembre = new Membre(0, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $dao = new MembreDaoImpl();
+   
     // couriel deja utilisé existant
-    if ($dao->verifiCourriel($courriel)) {
+    if ($dao->verifierCourriel($courriel)) {
 
         $tabRes['action'] = "enregistrerMembre";
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
@@ -75,10 +80,10 @@ function connexion()
     $password = $_POST['password'];
 
     $tabRes['action'] = "connexion";
-    $dao = new MembreDaoImp();
+    $dao = new MembreDaoImpl();
+
     //Connecter le membre
     $tabRes['msg'] = $dao->connecter($courriel, $password);
-
 }
 
 //deconnexion d'un membre
@@ -89,5 +94,3 @@ function deconnexion()
 }
 
 echo json_encode($tabRes);
-
-?>

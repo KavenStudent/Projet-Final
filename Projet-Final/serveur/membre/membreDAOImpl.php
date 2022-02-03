@@ -1,8 +1,9 @@
-<?php 
+<?php
 require_once("membre.php");
-require_once("MembreDAO.php");
+require_once("membreDAO.php");
+require_once("../includes/modele.inc.php");
 
-class MembreDaoImp extends Modele implements MembreDao
+class MembreDaoImpl extends Modele implements MembreDao
 {
 
     public function getAllMembre(): array
@@ -55,15 +56,15 @@ class MembreDaoImp extends Modele implements MembreDao
     {
         try {
             // enregistre dans membre
-            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?,?,?)";
+            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getActif(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), $Membre->getDateFinAbonnement(), $Membre->getRole()));
+            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
             $stmt = $this->executer();
-
+            $lastId = $this->getLastId();
             // enregistre dans connexion
-            $requete = "INSERT INTO connexion VALUES(0,?,?)";
+            $requete = "INSERT INTO connexion VALUES(?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array($Membre->getCourriel(), $Membre->getMotdePasse()));
+            $this->setParams(array($lastId, $Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getRole(), $Membre->getActif()));
             $stmt = $this->executer();
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -89,7 +90,7 @@ class MembreDaoImp extends Modele implements MembreDao
         }
         return $existe;
     }
-    public function verifiCourrielModifier(string $courriel, int $idMembre): bool
+    public function verifierCourrielModifier(string $courriel, int $idMembre): bool
     {
         try {
             $existe = false;
@@ -137,12 +138,14 @@ class MembreDaoImp extends Modele implements MembreDao
             $stmt = $this->executer();
 
             if ($membre = $stmt->fetch(PDO::FETCH_OBJ)) {
+
                 // si le statut est actif
                 if ($membre->actif == 1) {
 
                     //si c'est un membre
                     if ($membre->role === "M") {
                         $_SESSION['membre'] = $membre->idMembre;
+                        
                     } else if ($membre->role === "A") {
                         $_SESSION['admin'] = $membre->idMembre;
                     }
@@ -159,7 +162,7 @@ class MembreDaoImp extends Modele implements MembreDao
         }
         return $msgErreur;
     }
-    public function changerStatutMembre(int $statut, int $idMembre)
+    public function changerStatutActif(int $statut, int $idMembre)
     {
         try {
             //modifie le statut
@@ -211,5 +214,3 @@ class MembreDaoImp extends Modele implements MembreDao
         return $unMembre;
     }
 }
-
-?>
