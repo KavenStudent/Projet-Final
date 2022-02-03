@@ -123,6 +123,7 @@ textarea {
 
   #containerFrontPage{
       display: flex;
+      flex-direction: column;
   }
   #premiereSection {
       display: flex;
@@ -159,4 +160,71 @@ textarea {
       margin-bottom: 2em;
       text-align: center;
       padding: 1em;
+  }
+
+  #deuxiemeSection{
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    margin-top: 2em;
+  }
+
+  #type-abonnement{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      flex: 1;
+  }
+  .case-abonnement{
+    border: 5px solid #4169E1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 15em;
+    height: 15em;
+    padding: 1em;
+  }
+  #raison{
+    align-self: center;
+    justify-self: center;
+    width: 80em;
+    height: 10em;
+    border: 5px solid #4169E1;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+  }
+  #about-us{
+    align-self: center;
+    justify-self: center;
+    width: 80em;
+    height: 10em;
+    border: 5px solid #4169E1;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+  }
+  #sign-button{
+    margin-top: auto;
+    height: 2em;
+    width: 10em;
+    border-radius: 50px;
+    border: 5px solid #C0C0C0;
+    line-height: 5px;
+  }
+  #upgrade-button{
+    margin-top: auto;
+    height: 2em;
+    width: 10em;
+    border-radius: 50px;
+    border: 5px solid #FDD017;
+    line-height: 5px;
   }
