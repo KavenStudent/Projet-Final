@@ -35,14 +35,12 @@ function connexion() {
       processData: false,
       success: function (reponse) {
         if (reponse.msg != "") {
-          alert("fail");
           afficherToastMiseAJourReussi(reponse.msg, "Fail");
           //   initialiser(reponse.msg); // msg = erreur information connexion
           $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
-          alert("reussi");
-          //   window.location.reload();
+            window.location.reload();
         }
       },
       fail: function (err) {},

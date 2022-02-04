@@ -9,9 +9,10 @@ class Projet {
     private $autresParticipants;
     private $nbTelechargements;
     private $lienExterne;
+    private $thumbnail;
 
     // ------------------------------------------------------------Constructeur
-    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresParticipants, int $nbTelechargements, string $liensExternes) {
+    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresParticipants, int $nbTelechargements, string $liensExternes, string $thumbnail) {
         $this->id = $id;
         $this->createurId = $createurId;
         $this->titre = $titre;
@@ -21,6 +22,7 @@ class Projet {
         $this->autresparticipants = $autresparticipants;
         $this->nbTelechargements = $nbTelechargements;
         $this->lienExterne = $lienExterne;
+        $this->thumbnail = $thumbnail;
     }
 
     // ----------------------------------------------------------------Getters
@@ -51,7 +53,10 @@ class Projet {
     function getLienExterne() {
         return $this->lienExterne;
     }
-
+    function getThumbnail() {
+        return $this->thumbnail;
+    }
+  
     //----------------------------------------------------------------Setters
     function setTitre(string $titre) {
         $this->titre = $titre;
@@ -74,5 +79,7 @@ class Projet {
     function setLienExterne(string $lienExterne) {
         $this->lienExterne = $lienExterne;
     }
+    function setThumbnail(string $thumbnail) {
+        $this->thumbnail = $thumbnail;
+    }
 }
-?>

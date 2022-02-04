@@ -1,8 +1,9 @@
-<?php 
+<?php
 session_start();
 require_once("membre.php");
 require_once("membreDAOImpl.php");
 //Controller
+$tabRes = array();
 $action = $_POST['action'];
 switch ($action) {
     case "enregistrerMembre":
@@ -48,15 +49,15 @@ function enregistrerMembre()
     $description = $_POST['description'];
     $actif = 1;
     $prive = 0;
-    $imageProfil = "defaultProfil.png";
+    $imageProfil = "images-profil/defaultProfil.png";
     $membrePremium = 0;
     $dateFinAbonnement = "";
     $password = $_POST['password'];
     $role = "M";
-  
+
     $unMembre = new Membre(0, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
     $dao = new MembreDaoImpl();
-   
+
     // couriel deja utilisé existant
     if ($dao->verifierCourriel($courriel)) {
 
@@ -69,7 +70,6 @@ function enregistrerMembre()
         $_SESSION['membre'] = $idMembre;
         $tabRes['idMembre'] = $idMembre;
     }
-
 }
 
 //Connexion d'un membre
