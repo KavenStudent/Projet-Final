@@ -19,7 +19,9 @@
     ?>
 
 
+
     <?php
+        require_once('Projet-Final/serveur/pages/footer.html');
         require_once('Projet-Final/serveur/pages/modals.php');
     ?>
 </body>
