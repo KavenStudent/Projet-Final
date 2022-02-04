@@ -1,5 +1,6 @@
 <?php
-class Projet {
+class Projet
+{
     private $id;
     private $createurId;
     private $titre;
@@ -12,7 +13,8 @@ class Projet {
     private $thumbnail;
 
     // ------------------------------------------------------------Constructeur
-    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresParticipants, int $nbTelechargements, string $liensExternes, string $thumbnail) {
+    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresparticipants, int $nbTelechargements, string $lienExterne, string $thumbnail)
+    {
         $this->id = $id;
         $this->createurId = $createurId;
         $this->titre = $titre;
@@ -26,60 +28,78 @@ class Projet {
     }
 
     // ----------------------------------------------------------------Getters
-    function getId() {
+    function getId()
+    {
         return $this->id;
     }
-    function getCreateurId() {
+    function getCreateurId()
+    {
         return $this->createurId;
     }
-    function getTitre() {
+    function getTitre()
+    {
         return $this->titre;
     }
-    function getDescription() {
+    function getDescription()
+    {
         return $this->description;
     }
-    function getPath() {
+    function getPath()
+    {
         return $this->path;
     }
-    function isPrive() {
+    function isPrive()
+    {
         return $this->prive;
     }
-    function getAutresParticipants() {
+    function getAutresParticipants()
+    {
         return $this->autresParticipants;
     }
-    function getNbTelechargements() {
+    function getNbTelechargements()
+    {
         return $this->nbTelechargements;
     }
-    function getLienExterne() {
+    function getLienExterne()
+    {
         return $this->lienExterne;
     }
-    function getThumbnail() {
+    function getThumbnail()
+    {
         return $this->thumbnail;
     }
-  
+
     //----------------------------------------------------------------Setters
-    function setTitre(string $titre) {
+    function setTitre(string $titre)
+    {
         $this->titre = $titre;
     }
-    function setDescription(string $description) {
+    function setDescription(string $description)
+    {
         $this->description = $description;
     }
-    function setPath(string $path) {
+    function setPath(string $path)
+    {
         $this->path = $path;
     }
-    function setPrive(bool $prive) {
+    function setPrive(bool $prive)
+    {
         $this->prive = $prive;
     }
-    function setAutresParticipants(string $autresParticipants) {
+    function setAutresParticipants(string $autresParticipants)
+    {
         $this->autresParticipants = $autresParticipants;
     }
-    function setNbTelechargements(string $nbTelechargements) {
+    function setNbTelechargements(string $nbTelechargements)
+    {
         $this->nbTelechargements = $nbTelechargements;
     }
-    function setLienExterne(string $lienExterne) {
+    function setLienExterne(string $lienExterne)
+    {
         $this->lienExterne = $lienExterne;
     }
-    function setThumbnail(string $thumbnail) {
+    function setThumbnail(string $thumbnail)
+    {
         $this->thumbnail = $thumbnail;
     }
 }
