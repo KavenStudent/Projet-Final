@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 03 fév. 2022 à 15:39
+-- Généré le :  ven. 04 fév. 2022 à 21:17
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -38,6 +38,14 @@ CREATE TABLE `connexion` (
   `actif` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `connexion`
+--
+
+INSERT INTO `connexion` (`idMembre`, `courriel`, `motDePasse`, `role`, `actif`) VALUES
+(1, '1@1', '1', 'M', 1),
+(2, '1@2', '1', 'M', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +78,14 @@ CREATE TABLE `membre` (
   `dateFinAbonnement` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `membre`
+--
+
+INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`) VALUES
+(1, 'a', 'a', '1@1', '1', '1', 0, 'defaultProfil.png', 0, NULL),
+(2, 'a', 'a', '1@2', '1', '1', 0, 'images-profil/defaultProfil.png', 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -97,7 +113,8 @@ CREATE TABLE `projet` (
   `autreParticipant` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nbTelechargement` int(11) NOT NULL DEFAULT '0',
   `lienExterne` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nbSignalisation` int(11) NOT NULL DEFAULT '0'
+  `nbSignalisation` int(11) NOT NULL DEFAULT '0',
+  `thumbnail` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -188,7 +205,7 @@ ALTER TABLE `historiquepaiement`
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `projet`
 --
