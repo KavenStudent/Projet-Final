@@ -284,16 +284,17 @@ textarea {
   }
 
   .emailFooter{
-        flex: 1;
+    flex: 1;
       font-weight: bold;
       color: whitesmoke;
       text-align: right;
   }
-  .logoNav{
-      height: 60px;
-      width: 60px;
-      background-color: white;
-      padding: 5px;
-      border-radius: 5px;
 
-  }
+  .logoNav{
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+
+}
