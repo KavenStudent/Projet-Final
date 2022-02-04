@@ -289,4 +289,11 @@ textarea {
       color: whitesmoke;
       text-align: right;
   }
+  .logoNav{
+      height: 60px;
+      width: 60px;
+      background-color: white;
+      padding: 5px;
+      border-radius: 5px;
 
+  }
