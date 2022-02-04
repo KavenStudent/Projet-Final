@@ -122,28 +122,86 @@ textarea {
 }
 
 
-
-
   /* MODAL CONNEXION */
 
   /* Front-page */
 
+  @media only screen and (max-width: 992px) {
+    .image-explication{
+        max-height: 20em;
+        max-width: 40em;
+        border-radius: 10px;
+    }
+
+    .text-Format{
+        max-height: 15em;
+        max-width: 35em;
+        background-color: white;
+        color: black;
+        border: 5px solid #4169E1;
+        margin-top: 2em;
+        margin-bottom: 2em;
+        text-align: center;
+        padding: 1em;
+      
+    }
+
+    .case-abonnement{
+        border: 5px solid #4169E1;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        max-width: 15em;
+        max-height: 15em;
+        padding: 1em;
+        flex-wrap: wrap;
+      }
+
+    #raison{
+        align-self: center;
+        justify-self: center;
+        max-width: 80em;
+        max-height: 10em;
+        border: 5px solid #4169E1;
+        background-color: white;
+        color: black;
+        text-align: center;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding: 1em;
+        flex-wrap: wrap;
+      }
+      #about-us{
+        align-self: center;
+        justify-self: center;
+        max-width: 80em;
+        max-height: 10em;
+        border: 5px solid #4169E1;
+        background-color: white;
+        color: black;
+        text-align: center;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding: 1em;
+        flex-wrap: wrap;
+      }
+  }
+
   #containerFrontPage{
       display: flex;
       flex-direction: column;
-      flex-wrap:wrap;
   }
   #premiereSection {
       display: flex;
-      flex-wrap: wrap;
       flex-direction: row;
-      flex: 2;
       margin-top: 2em;
+      flex-wrap:wrap;
   }
   #premiereColonne {
     flex-direction: column;
     display: flex;
-    flex-wrap: wrap;
     flex: 1;
     align-items: center;
     justify-content: center;
@@ -151,7 +209,6 @@ textarea {
   #deuxiemeColonne{
     flex-direction: column;
     display: flex;
-    flex-wrap: wrap;
     flex: 1;
     align-items: center;
     justify-content: center;
@@ -171,27 +228,27 @@ textarea {
       margin-bottom: 2em;
       text-align: center;
       padding: 1em;
+    
   }
 
   #deuxiemeSection{
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     flex: 3;
     margin-top: 2em;
+    flex-wrap:wrap;
   }
 
   #type-abonnement{
       display: flex;
-      flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-evenly;
       flex: 1;
+      flex-wrap: wrap;
   }
   .case-abonnement{
     border: 5px solid #4169E1;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     background-color: white;
     justify-content: center;
@@ -212,6 +269,7 @@ textarea {
     margin-top: 1em;
     margin-bottom: 1em;
     padding: 1em;
+    flex-wrap: wrap;
   }
   #about-us{
     align-self: center;
@@ -225,6 +283,7 @@ textarea {
     margin-top: 1em;
     margin-bottom: 1em;
     padding: 1em;
+    flex-wrap: wrap;
   }
   #sign-button{
     margin-top: auto;
@@ -248,7 +307,7 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-
+  
 }
 
   #textFooterDiv{
@@ -260,6 +319,7 @@ textarea {
     margin-right: 1em;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     
   }
 
@@ -277,17 +337,18 @@ textarea {
   }
 
   .footerTxt{
+    font-size: 1.17em;
     font-weight: bold;
     color: whitesmoke;
     flex: 1;
-    
   }
 
   .emailFooter{
     flex: 1;
-      font-weight: bold;
-      color: whitesmoke;
-      text-align: right;
+    font-size: 1.17em;
+    font-weight: bold;
+    color: whitesmoke;
+   text-align: right;
   }
 
   .logoNav{
