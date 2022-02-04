@@ -5,24 +5,28 @@ session_start();
     <div class="container-fluid">
 
 
-        <a class="navbar-brand text-color" href="index.php"><img src=''>Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <a class="navbar-brand text-color" href="index.php"><img src=''>Logo</a> -->
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
 
-            <a class="navbar-brand text-color" href="index.php"><img class="logoNav" src='Projet-Final/client/public/images/logoFinale.png'></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse itemsMobileVersion" id="navbarNavAltMarkup">
-
-        <a class="navbar-brand text-color" href="index.php"><img class="logoNav" src='Projet-Final/client/public/images/logoFinale.png'></a>
+        <a class="navbar-brand text-color" href="index.php"><img class="logoNav"
+                src='Projet-Final/client/public/images/logoFinale.png'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse itemsMobileVersion" id="navbarNavAltMarkup">
 
-               <?php
+            <!-- <a class="navbar-brand text-color" href="index.php"><img class="logoNav"
+                    src='Projet-Final/client/public/images/logoFinale.png'></a> -->
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <div class="collapse navbar-collapse itemsMobileVersion" id="navbarNavAltMarkup">
+
+                <?php
                 if (isset($_SESSION['membre'])) {
                     echo '<button type="button" class="btn btn-light buttonNav">Mon Profil</button>
                 <div id="divAuthentification">
@@ -39,7 +43,7 @@ session_start();
                 ?>
 
             </div>
-    </div>
+        </div>
 </nav>
 
 
