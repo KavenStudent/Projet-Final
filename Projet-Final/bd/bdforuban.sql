@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 31 jan. 2022 à 23:10
+-- Généré le :  ven. 04 fév. 2022 à 21:17
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -33,8 +33,18 @@ USE `bdforuban`;
 CREATE TABLE `connexion` (
   `idMembre` int(11) NOT NULL,
   `courriel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `motDePasse` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `motDePasse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `actif` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `connexion`
+--
+
+INSERT INTO `connexion` (`idMembre`, `courriel`, `motDePasse`, `role`, `actif`) VALUES
+(1, '1@1', '1', 'M', 1),
+(2, '1@2', '1', 'M', 1);
 
 -- --------------------------------------------------------
 
@@ -62,12 +72,19 @@ CREATE TABLE `membre` (
   `courriel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `numeroTelephone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `actif` int(1) NOT NULL DEFAULT '1',
   `prive` int(1) NOT NULL DEFAULT '0',
   `imageProfil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `membrePremium` int(1) NOT NULL DEFAULT '0',
   `dateFinAbonnement` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `membre`
+--
+
+INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`) VALUES
+(1, 'a', 'a', '1@1', '1', '1', 0, 'defaultProfil.png', 0, NULL),
+(2, 'a', 'a', '1@2', '1', '1', 0, 'images-profil/defaultProfil.png', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -96,7 +113,8 @@ CREATE TABLE `projet` (
   `autreParticipant` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nbTelechargement` int(11) NOT NULL DEFAULT '0',
   `lienExterne` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nbSignalisation` int(11) NOT NULL DEFAULT '0'
+  `nbSignalisation` int(11) NOT NULL DEFAULT '0',
+  `thumbnail` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -137,6 +155,12 @@ CREATE TABLE `tag` (
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `connexion`
+--
+ALTER TABLE `connexion`
+  ADD KEY `idMembre` (`idMembre`);
 
 --
 -- Index pour la table `historiquepaiement`
@@ -181,7 +205,7 @@ ALTER TABLE `historiquepaiement`
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `projet`
 --
@@ -196,7 +220,17 @@ ALTER TABLE `signalisation`
 -- AUTO_INCREMENT pour la table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `connexion`
+--
+ALTER TABLE `connexion`
+  ADD CONSTRAINT `fk_idmembre` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
