@@ -3,6 +3,7 @@ session_start();
 require_once("membre.php");
 require_once("membreDAOImpl.php");
 //Controller
+$tabRes = array();
 $action = $_POST['action'];
 switch ($action) {
     case "enregistrerMembre":
