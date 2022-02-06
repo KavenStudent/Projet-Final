@@ -6,6 +6,7 @@ html {
 
 body {
     /* background: linear-gradient(#676767, #4169e1ab) fixed; */
+    margin-bottom: 0;
 }
 
 button {
@@ -246,13 +247,17 @@ textarea {
   
 
 /* FOOTER */
-  
+.customized-footer{
+  margin-top: 3em;
+  margin-bottom: 0;
+}
 .footer{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
+    min-height: 3.5em;
 }
 
   .backTop{
@@ -277,8 +282,7 @@ textarea {
     flex: 1;
     font-weight: bold;
     color: black;
+    padding-bottom: 1em;
   }
 
-.customized-footer{
-  margin-top: 2em;
-}
+
