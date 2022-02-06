@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    background: linear-gradient(#676767, #4169e1ab) fixed;
+    /* background: linear-gradient(#676767, #4169e1ab) fixed; */
 }
 
 button {
@@ -45,6 +45,14 @@ textarea {
 /* toast */
 .toast-container {
     z-index: 10000;
+}
+
+.logoNav{
+  height: 60px;
+  width: 60px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -127,58 +135,19 @@ textarea {
   /* MODAL CONNEXION */
 
   /* Front-page */
-
-  #containerFrontPage{
-      display: flex;
-      flex-direction: column;
-      flex-wrap:wrap;
+  
+  .customized-front-page-container{
+    margin-top: 3em;
   }
-  #premiereSection {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      flex: 2;
-      margin-top: 2em;
-  }
-  #premiereColonne {
-    flex-direction: column;
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1;
+  .customized-row{
     align-items: center;
     justify-content: center;
   }
-  #deuxiemeColonne{
-    flex-direction: column;
+  .customized-item{
     display: flex;
-    flex-wrap: wrap;
-    flex: 1;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  .image-explication{
-      height: 20em;
-      width: 40em;
-      border-radius: 10px;
-  }
-  .text-Format{
-      height: 15em;
-      width: 35em;
-      background-color: white;
-      color: black;
-      border: 5px solid #4169E1;
-      margin-top: 2em;
-      margin-bottom: 2em;
-      text-align: center;
-      padding: 1em;
-  }
-
-  #deuxiemeSection{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    flex: 3;
-    margin-top: 2em;
   }
 
   #type-abonnement{
@@ -189,7 +158,7 @@ textarea {
       flex: 1;
   }
   .case-abonnement{
-    border: 5px solid #4169E1;
+    border: 1px solid #dddde0;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -200,72 +169,49 @@ textarea {
     height: 15em;
     padding: 1em;
   }
-  #raison{
-    align-self: center;
-    justify-self: center;
-    width: 80em;
-    height: 10em;
-    border: 5px solid #4169E1;
-    background-color: white;
-    color: black;
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding: 1em;
-  }
-  #about-us{
-    align-self: center;
-    justify-self: center;
-    width: 80em;
-    height: 10em;
-    border: 5px solid #4169E1;
-    background-color: white;
-    color: black;
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding: 1em;
-  }
+
   #sign-button{
     margin-top: auto;
     height: 2em;
     width: 10em;
     border-radius: 50px;
-    border: 5px solid #C0C0C0;
+    border: 2px solid #C0C0C0;
     line-height: 5px;
+    transition: 0.6s;
+  }
+  #sign-button:hover{
+    background-color: #4169E1;
+    color: white;
   }
   #upgrade-button{
     margin-top: auto;
     height: 2em;
     width: 10em;
     border-radius: 50px;
-    border: 5px solid #FDD017;
+    border: 2px solid #FDD017;
     line-height: 5px;
+    transition: 0.6s;
   }
+  #upgrade-button:hover{
+    background-color: #4169E1;
+    color: white;
+  }
+
+  /* animation fire */
+  
+
 /* FOOTER */
   
-#footer{
+.footer{
     display: flex;
     align-items: center;
     justify-content: center;
-
+    flex-wrap: wrap;
+    flex-direction: row;
 }
-
-  #textFooterDiv{
-    width: 80em;
-    display: flex;
-    flex: 3;
-    margin-top: 1em;
-    margin-left: 1em;
-    margin-right: 1em;
-    align-items: center;
-    justify-content: center;
-    
-  }
 
   .backTop{
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: center;
   }
@@ -273,28 +219,21 @@ textarea {
   #arrow-top{
     width:2em;
     height:2em;
-    margin: 1em;
+    margin-bottom: 1em;
   }
 
   .footerTxt{
     font-weight: bold;
-    color: whitesmoke;
+    color: black;
     flex: 1;
-    
   }
 
   .emailFooter{
     flex: 1;
-      font-weight: bold;
-      color: whitesmoke;
-      text-align: right;
+    font-weight: bold;
+    color: black;
   }
 
-  .logoNav{
-    height: 60px;
-    width: 60px;
-    background-color: white;
-    padding: 5px;
-    border-radius: 5px;
-
+.customized-footer{
+  margin-top: 2em;
 }
