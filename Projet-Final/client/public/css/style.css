@@ -6,7 +6,7 @@ html {
 
 body {
     /* background: linear-gradient(#676767, #4169e1ab) fixed; */
-    margin-bottom: 0;
+   
 }
 
 button {
@@ -174,16 +174,18 @@ textarea {
     justify-content: center;
     
   }
-
+  /* dont work! */
   .customized-details-button{
-    background-color: #4169E1 !important;
+    background-color: #4169E1;
     border-radius: 5px;
   }
+  /* dont work!  without !important*/
   .btn-secondary:hover,
   .btn-secondary:active,
   .btn-secondary:visited,
-  .btn-secondary:focus {
-    background-color: #4169E1 !important;
+  .btn-secondary:focus,
+  .btn-secondary:active:focus {
+    background-color: #4169E1;
   }
 
   .customized-colorHR{
@@ -243,7 +245,7 @@ textarea {
     color: white;
   }
 
-  /* animation fire */
+  
   
 
 /* FOOTER */
