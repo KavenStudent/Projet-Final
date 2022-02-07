@@ -145,7 +145,6 @@ class MembreDaoImpl extends Modele implements MembreDao
                     //si c'est un membre
                     if ($membre->role === "M") {
                         $_SESSION['membre'] = $membre->idMembre;
-                        
                     } else if ($membre->role === "A") {
                         $_SESSION['admin'] = $membre->idMembre;
                     }
@@ -176,8 +175,15 @@ class MembreDaoImpl extends Modele implements MembreDao
             unset($requete);
         }
     }
+    public function mettreProfilPrive(int $prive, int $idMembre)
+    {
+    }
 
-    public function afficherHistoriqueMembre(int $idMembre): array
+    public function devenirPremium(int $idMembre)
+    {
+    }
+
+    public function afficherHistoriqueAbonnement(int $idMembre): array
     {
         try {
             $tab = array();

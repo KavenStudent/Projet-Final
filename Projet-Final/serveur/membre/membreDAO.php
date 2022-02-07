@@ -24,16 +24,16 @@ interface MembreDao
     public function connecter(string $courriel, string $motDePasse): string;
 
     //Change le statut actif  d'un membre
-    // public function changerStatutActif(int $actif, int $idMembre);
+    public function changerStatutActif(int $actif, int $idMembre);
 
-    // //change le profil a prive
-    // public function mettreProfilPrive(int $prive, int $idMembre);
+    //change le profil a prive
+    public function mettreProfilPrive(int $prive, int $idMembre);
 
-    // // Paie l'abonnement du membre pour devenir premium
-    // public function devenirPremium(int $idMembre);
+    // Paie l'abonnement du membre pour devenir premium
+    public function devenirPremium(int $idMembre);
 
-    // //Affiche l'historique d'abonnement
-    // public function afficherHistoriqueAbonnement(int $idMembre): array;
+    //Affiche l'historique d'abonnement
+    public function afficherHistoriqueAbonnement(int $idMembre): array;
 
     //Affiche un membre
     public function getMembre(int $idMembre): Membre;
