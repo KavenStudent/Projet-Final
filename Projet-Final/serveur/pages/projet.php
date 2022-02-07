@@ -4,7 +4,10 @@
             alt="...">
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button">Télécharger</button>
-            <button class="btn btn-primary" type="button">Modifier le projet</button>
+            <?php
+            if (isset($_SESSION['membre']))
+                echo '<button class="btn btn-primary" type="button">Modifier le projet</button>';
+            ?>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
@@ -40,10 +43,15 @@
             <p class="lead">https://Lien externe.com</p>
         </a>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="adminSwitchHideProject">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Cacher le projet de l'utilisateur</label>
+
+            <?php
+            if (isset($_SESSION['admin'])) {
+                echo '<input class="form-check-input" type="checkbox" id="adminSwitchHideProject">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Cacher le projet de l\'utilisateur</label>';
+            }
+                
+            ?>
         </div>
 
     </div>
-    <!-- Content here -->
 </div>
