@@ -39,6 +39,11 @@
             porta ut fermentum sed, gravida eu dui. Duis cursus tempor quam, eu lobortis diam pretium eu. Sed ac
             dignissim justo, non consequat sapien. Quisque ornare ultrices tellus ac suscipit. Aliquam id risus
             tincidunt, lobortis felis nec, efficitur lorem. Nulla facilisi. Duis ac egestas dolor.</p>
+        <ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Autres participants: ">
+            <li class="list-inline-item"><a href="participant.page">Web</a></li>
+            <li class="list-inline-item"><a href="participant.page">Portfolio</a></li>
+            <li class="list-inline-item"><a href="participant.page">Recherche d'emploi</a></li>
+        </ul>
         <a href="https://Lien externe.com">
             <p class="lead">https://Lien externe.com</p>
         </a>
