@@ -5,8 +5,7 @@ html {
 }
 
 body {
-    /* background: linear-gradient(#676767, #4169e1ab) fixed; */
-   
+    background: linear-gradient(#676767, #4169e1ab) fixed;
 }
 
 button {
@@ -27,8 +26,7 @@ textarea {
 .navbar-custom {
     background-color: #4169E1;
     color: black;
-    border-bottom: 1px solid #6f89d6;
-    margin: 0;
+    border-bottom: 1px solid black;
 }
 
 .text-color {
@@ -49,14 +47,6 @@ textarea {
     z-index: 10000;
 }
 
-.logoNav{
-  height: 60px;
-  width: 60px;
-  background-color: white;
-  padding: 5px;
-  border-radius: 5px;
-}
-
 @media only screen and (max-width: 992px) {
     .itemsMobileVersion {
         display: flex;
@@ -70,7 +60,7 @@ textarea {
 .titreDuSite {
     margin-top: 1em;
     text-align: center;
-    font-size: 4em;
+    font-size: 2em;
     font-weight: bolder;
 }
 
@@ -78,7 +68,16 @@ textarea {
     color: #4169E1;
 }
 
-
+/* Termes et Conditions */
+.contentConditions {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #cac7c7;
+    border-radius: 5px;
+}
 
 
 /* SEARCH BAR */
@@ -99,8 +98,9 @@ textarea {
 
 /* MODAL INSCRIPTION */
 .modalCustom {
-    background-color: #ffffff;
-    color: black;
+    background-color: #888a8a;
+    color: white;
+
 }
 
 .itemInput {
@@ -108,13 +108,9 @@ textarea {
     margin: auto;
 }
 
-.titreModalInscription{
-  font-weight: bolder;
-}
-
 .modalHeader {
-    background-color: #148eca;
-    border-bottom: 0.5px solid #5eafd8;
+    background-color: #5c5e5f;
+    border-bottom: 1px solid black;
 }
 
 .modalFooter {
@@ -125,61 +121,64 @@ textarea {
     background-color: rgb(241, 238, 238);
 }
 
-.collapsible{
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
-
-.active, .collapsible:hover {
-  background-color: #ccc;
-}
-
-/* Termes et Conditions */
-.contentConditions {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #cac7c7;
-  border-radius: 5px;
-}
-
 
 
 
   /* MODAL CONNEXION */
 
   /* Front-page */
-  
-  .customized-front-page-container{
-    margin-top: 3em;
+
+  #containerFrontPage{
+      display: flex;
+      flex-direction: column;
+      flex-wrap:wrap;
   }
-  .customized-row{
-    align-items: center;
-    justify-content: center;
+  #premiereSection {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      flex: 2;
+      margin-top: 2em;
   }
-  .customized-item{
-    display: flex;
+  #premiereColonne {
     flex-direction: column;
+    display: flex;
     flex-wrap: wrap;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    
   }
- 
-  .customized-colorHR{
-    background-color: #4169E1;
+  #deuxiemeColonne{
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
   }
-  .details {
-    margin-top: auto;
+  .image-explication{
+      height: 20em;
+      width: 40em;
+      border-radius: 10px;
+  }
+  .text-Format{
+      height: 15em;
+      width: 35em;
+      background-color: white;
+      color: black;
+      border: 5px solid #4169E1;
+      margin-top: 2em;
+      margin-bottom: 2em;
+      text-align: center;
+      padding: 1em;
+  }
+
+  #deuxiemeSection{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex: 3;
+    margin-top: 2em;
   }
 
   #type-abonnement{
@@ -190,7 +189,7 @@ textarea {
       flex: 1;
   }
   .case-abonnement{
-    border: 1px solid #4169E1;
+    border: 5px solid #4169E1;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -201,56 +200,72 @@ textarea {
     height: 15em;
     padding: 1em;
   }
-  .titreAbonnementCase{
-    font-weight: bolder;
+  #raison{
+    align-self: center;
+    justify-self: center;
+    width: 80em;
+    height: 10em;
+    border: 5px solid #4169E1;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
   }
-
+  #about-us{
+    align-self: center;
+    justify-self: center;
+    width: 80em;
+    height: 10em;
+    border: 5px solid #4169E1;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+  }
   #sign-button{
     margin-top: auto;
     height: 2em;
     width: 10em;
     border-radius: 50px;
-    border: 2px solid #C0C0C0;
+    border: 5px solid #C0C0C0;
     line-height: 5px;
-    transition: 0.6s;
-  }
-  #sign-button:hover{
-    background-color: #4169E1;
-    color: white;
   }
   #upgrade-button{
     margin-top: auto;
     height: 2em;
     width: 10em;
     border-radius: 50px;
-    border: 2px solid #FDD017;
+    border: 5px solid #FDD017;
     line-height: 5px;
-    transition: 0.6s;
   }
-  #upgrade-button:hover{
-    background-color: #4169E1;
-    color: white;
-  }
-
-  
-  
-
 /* FOOTER */
-.customized-footer{
-  margin-top: 3em;
-  margin-bottom: 0;
-}
-.footer{
+  
+#footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    min-height: 3.5em;
+
 }
+
+  #textFooterDiv{
+    width: 80em;
+    display: flex;
+    flex: 3;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    align-items: center;
+    justify-content: center;
+    
+  }
 
   .backTop{
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
   }
@@ -258,20 +273,28 @@ textarea {
   #arrow-top{
     width:2em;
     height:2em;
-    margin-bottom: 1em;
+    margin: 1em;
   }
 
   .footerTxt{
     font-weight: bold;
-    color: black;
+    color: whitesmoke;
     flex: 1;
+    
   }
 
   .emailFooter{
     flex: 1;
-    font-weight: bold;
-    color: black;
-    padding-bottom: 1em;
+      font-weight: bold;
+      color: whitesmoke;
+      text-align: right;
   }
 
+  .logoNav{
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
 
+}
