@@ -174,20 +174,7 @@ textarea {
     justify-content: center;
     
   }
-  /* dont work! */
-  .customized-details-button{
-    background-color: #4169E1;
-    border-radius: 5px;
-  }
-  /* dont work!  without !important*/
-  .btn-secondary:hover,
-  .btn-secondary:active,
-  .btn-secondary:visited,
-  .btn-secondary:focus,
-  .btn-secondary:active:focus {
-    background-color: #4169E1;
-  }
-
+ 
   .customized-colorHR{
     background-color: #4169E1;
   }
