@@ -18,7 +18,7 @@ interface MembreDao
     public function verifierCourrielModifier(string $courriel, int $idMembre): bool;
 
     //Modifie un membre
-    public function modifierMembre(Membre $Membre);
+    public function modifierMembre(Membre $Membre, $dossier);
 
     //Connecter un membre et renvoie dans sa page
     public function connecter(string $courriel, string $motDePasse): string;
