@@ -6,21 +6,21 @@
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
         <h2>But</h2>
         <p>Nous voulions faire un site web social qui démontre les projets réalisés par chaque membre de notre site.</p>
-        <p class="details"><a class="btn btn-secondary customized-details-button" href="#">détails »</a></p>
+        <p class="details"><a class="btn btn-primary" href="#">détails »</a></p>
       </div><!-- /.col-lg-4 -->
 
       <div class="col-lg-4 customized-item">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
         <h2>À propros de nous</h2>
         <p>Nous sommes une petite équipe de 5 étudiants au collège Ahuntsic.</p>
-        <p class="details"><a class="btn btn-secondary customized-details-button" href="#">détails »</a></p>
+        <p class="details"><a class="btn btn-primary" href="#">détails »</a></p>
       </div><!-- /.col-lg-4 -->
 
       <div class="col-lg-4 customized-item">
         <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
         <h2>Mission</h2>
         <p>Aider tous les jeunes programmeurs, désigners et développeur d'application. <!--Ils seront capable de montrer à des employeurs les compétences qui ont développées tout au long de leur vie --></p>
-        <p class="details"><a class="btn btn-secondary customized-details-button" href="#">détails  »</a></p>
+        <p class="details"><a class="btn btn-primary" href="#">détails  »</a></p>
       </div><!-- /.col-lg-4 -->
 
     </div><!-- /.row -->
