@@ -1,0 +1,18 @@
+#output {
+    height: 20rem;
+    width: 20rem;
+}
+.myRowFile{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#switchBox{
+    justify-content: flex-end;
+    display: flex;
+}
+.profilEdit{
+    margin: auto;
+    padding: 10px;
+}

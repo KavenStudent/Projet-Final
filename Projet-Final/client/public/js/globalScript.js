@@ -59,3 +59,12 @@ function closeToast() {
   $("#toast").toast("hide");
   $("#toastForm").toast("hide");
 }
+
+//Preview une image
+var loadFile = function(event) {
+  var output = document.getElementById('output');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function() {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+};
