@@ -1,0 +1,123 @@
+/* page Membre */
+
+.big-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.premiere-colonne{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+
+#image-profil{
+    width: 15em;
+    height: 16em;
+    border: 0;
+    border-radius: 50px;
+}
+
+.informations-profil{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 0.5px solid #4169E1;
+    max-width: 15em;
+    max-height: 35em;
+    margin-top: 1em;
+    text-align:justify;
+    padding: 1em;
+}
+
+.informations-profil label{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#description-profil{
+    border: 1px solid rgb(197, 191, 191);
+    max-width: 20em;
+    max-height: 15em;
+    padding: 0.5em;
+    overflow-y: auto;
+}
+
+.deuxieme-colonne{
+    display: flex;
+    flex-wrap: wrap;
+    flex:2;
+}
+
+.item1-deuxieme-colonne{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:flex-end;
+    margin-bottom: 1em;
+    max-width: 60em;
+}
+
+.item-switch{
+    align-self: flex-end;
+    justify-self: end;
+}
+
+.div-projets{
+    border: 5px solid #4169E1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x:auto;
+    width: 60em;
+    height: 35em;
+    justify-content: space-between;
+    background-color:#4169e157;
+   
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #7b7b7c; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7b7b7c; 
+  }
+
+.card-item{
+    margin: 2em;
+    min-width: 15em;
+    min-height: 20em;
+
+    max-width: 16em;
+    max-height: 30em;
+    
+}
+
+.card-item-body{
+    overflow-y: auto;
+}
+.text-of-card{
+
+    overflow-y: auto;
+}
