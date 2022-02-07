@@ -11,7 +11,7 @@
     ?>
 </head>
 
-<body onLoad="initialiser(<?php echo "'" . $msg . "'" ?>);">
+<body>
     <?php
         require_once('Projet-Final/serveur/pages/header.php');
         require_once('Projet-Final/serveur/pages/toasts.html');

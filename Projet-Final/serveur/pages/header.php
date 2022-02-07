@@ -16,14 +16,7 @@ session_start();
 
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse itemsMobileVersion" id="navbarNavAltMarkup">
-
-            <!-- <a class="navbar-brand text-color" href="index.php"><img class="logoNav"
-                    src='Projet-Final/client/public/images/logoFinale.png'></a> -->
-            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button> -->
+      
             <div class="collapse navbar-collapse itemsMobileVersion" id="navbarNavAltMarkup">
 
                 <?php
@@ -43,7 +36,7 @@ session_start();
                 ?>
 
             </div>
-        </div>
+        
 </nav>
 
 
