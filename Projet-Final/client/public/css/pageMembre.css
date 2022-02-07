@@ -1,0 +1,35 @@
+/* page Membre */
+
+.big-container{
+    display: flex;
+    flex-direction: row;
+   
+}
+
+.premiere-colonne{
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+
+#image-profil{
+    width: 15em;
+    height: 15em;
+    border-radius: 100px;
+}
+
+
+.deuxieme-colonne{
+    flex:2;
+}
+
+.div-projets{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+
+.card-item{
+    width: 30em;
+    height: 30em;
+}
