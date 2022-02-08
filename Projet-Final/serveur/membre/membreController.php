@@ -6,17 +6,20 @@ require_once("membreDAOImpl.php");
 $tabRes = array();
 $action = $_POST['action'];
 switch ($action) {
-    case "enregistrerMembre":
+    case "enregistrerMembre": //done
         enregistrerMembre();
         break;
-    case "modifierProfil":
-        modifierProfil();
-        break;
-    case "connexion":
+    case "connexion": //done
         connexion();
         break;
-    case "deconnexion":
+    case "deconnexion": //done
         deconnexion();
+        break;
+    case "getMembre":
+        getMembre();
+        break;
+    case "modifierMembre":
+        modifierMembre();
         break;
     case "tableMembres":
         tableMembres();
@@ -29,9 +32,6 @@ switch ($action) {
         break;
     case "tableHistoriqueLocation":
         tableHistoriquesLocation();
-        break;
-    case "profil":
-        profil();
         break;
     case "tableLocation":
         tableLocations();
@@ -92,5 +92,65 @@ function deconnexion()
     session_unset();
     session_destroy();
 }
+
+// get les info d'un membre
+function getMembre()
+{
+    global $tabRes;
+    $id = $_POST['id'];
+
+    $tabRes['action'] = "getMembre";
+    $dao = new MembreDaoImpl();
+
+    $tabRes['membre'] = $dao->getMembre($id);
+}
+
+function modifierMembre()
+{
+    global $tabRes;
+    $id = $_POST['idMembreEdit'];
+    $nom = $_POST['nomEdit'];
+    $prenom = $_POST['prenomEdit'];
+    $courriel = $_POST['courrielEdit'];
+    $numeroTelephone = $_POST['numeroTelephoneEdit'];
+    $description = $_POST['descriptionEdit'];
+    $actif = 1;
+    $prive = 0;
+    $imageProfil = "images-profil/defaultProfil.png";
+    $membrePremium = 0;
+    $dateFinAbonnement = "";
+    $password = $_POST['passwordEdit'];
+    $role = "M";
+
+
+    $unMembre = new Membre($id, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $dao = new MembreDaoImpl();
+
+    // couriel deja utilisé existant
+    if ($dao->verifierCourrielModifier($courriel, $id)) {
+
+        $tabRes['action'] = "modifierProfil";
+        $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
+    } else {
+        //modifie le membre
+        $dao->modifierMembre($unMembre, "images-profil");
+        $tabRes['msg'] = "Profil à jour";
+    }
+}
+
+//table de tous les membre
+function tableMembres()
+{
+    global $tabRes;
+    $par = $_POST['par'];
+    $valeurPar = strtolower(trim($_POST['valeurPar']));
+
+    $tabRes['action'] = "tableMembres";
+    $dao = new MembreDaoImpl();
+    //retourne tout les membre
+    $tabRes['listeMembres'] = $dao->getAllMembreRecherche($par, $valeurPar);
+}
+
+
 
 echo json_encode($tabRes);

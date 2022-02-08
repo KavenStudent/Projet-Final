@@ -1,0 +1,33 @@
+#projetMainDiv {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#projetLeftDiv {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+#projetRightDiv {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+#projetParticipantDiv {
+  border: 1px solid #4169e1;
+  padding: 5px;
+}
+#projetCreateurTitle {
+  font-weight: bold;
+}
+#projetDescription {
+  overflow-y: auto;
+  max-height: 270px;
+  min-width: 270px;
+}
+ul:before {
+  content: attr(aria-label);
+  font-size: 100%;
+  font-weight: bold;
+}
