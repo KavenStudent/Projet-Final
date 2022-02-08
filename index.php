@@ -14,9 +14,15 @@
 <body>
     <?php
         require_once('Projet-Final/serveur/pages/header.php');
+
+        require_once('Projet-Final/serveur/pages/toasts.html');
+        require_once('Projet-Final/serveur/pages/frontPage.php')
+        // require_once('Projet-Final/serveur/pages/membreEdit.php')
+
         require_once('Projet-Final/serveur/pages/toasts.html');     
         //require_once('Projet-Final/serveur/pages/membre.php');
-        require_once('Projet-Final/serveur/pages/frontPage.php');
+   
+
 
     ?>
 
