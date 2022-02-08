@@ -109,3 +109,41 @@
     </div>
   </div>
 </div> <!-- Fin modal connexion -->
+
+<!-- modal signalisation -->
+<div class="modal fade" id="modalSignalisation" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content modalCustom">
+      <div class="modal-header modalHeader">
+        <h5 class="modal-title titreModalInscription">Raisons</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modalCustom">
+
+        <div class="card descCard">
+          <div class="card-header">
+            nom projet
+          </div>
+          <div class="card-body">
+
+            <p>raison</p>
+
+          </div>
+        </div>
+
+        <div class="card descCard">
+          <div class="card-header">
+            nom projet
+          </div>
+          <div class="card-body">
+
+            <p>raison</p>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div> <!-- modal signalisation -->
