@@ -9,35 +9,35 @@
         <div class="row mb-4">
             <div class="col">
                 <div class="form-outline">
-                    <input type="text" name="prenomEdit" class="form-control modalInput" />
                     <label class="form-label" for="prenomEdit">Prénom</label>
+                    <input type="text" name="prenomEdit" class="form-control modalInput" />
                 </div>
             </div>
 
             <div class="col">
                 <div class="form-outline">
+                <label class="form-label" for="nomEdit">Nom</label>
                     <input type="text" name="nomEdit" class="form-control modalInput" />
-                    <label class="form-label" for="nomEdit">Nom</label>
                 </div>
             </div>
         </div>
 
         <!-- Email input -->
         <div class="form-outline mb-4">
-            <input type="email" name="courrielEdit" class="form-control modalInput" />
             <label class="form-label" for="courrielEdit">Courriel</label>
+            <input type="email" name="courrielEdit" class="form-control modalInput" />
         </div>
 
         <!-- Cell input -->
         <div class="form-outline mb-4">
-            <input type="number" name="numeroTelephoneEdit" class="form-control modalInput" />
             <label class="form-label" for="numeroTelephoneEdit">Téléphone</label>
+            <input type="number" name="numeroTelephoneEdit" class="form-control modalInput" />
         </div>
 
         <!-- Description input -->
         <div class="form-outline mb-4">
-            <textarea class="form-control modalInput" name="descriptionEdit" rows="4"></textarea>
             <label class="form-label" for="descriptionEdit">Description</label>
+            <textarea class="form-control modalInput" name="descriptionEdit" rows="4"></textarea>
         </div>
 
         <div class="form-outline mb-4">
@@ -54,7 +54,7 @@
         <div class="row mb-4" id='divCentrer'>
 
             <div class="col-sm profilEdit">
-                <img id="output" class="rounded-circle" src="Projet-Final/client/public/images/default-image.png" alt="imageProfil" />
+                <img id="output" class="img-fluid" src="Projet-Final/client/public/images/defaultProfil.png" alt="imageProfil" />
             </div>
 
             <div class="col-sm profilEdit">
