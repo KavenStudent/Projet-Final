@@ -11,6 +11,7 @@
         <!-- Formulaire devenir membre -->
         <form id="form-enregistrer-membre">
           <input type="hidden" name="action" value="enregistrerMembre">
+          <input type="submit" id="validation-form-membre" class="validation" />
 
           <div class="col-md-8 itemInput">
             <label for="validationCustom02" class="form-label">Nom</label>
@@ -26,7 +27,7 @@
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Téléphone</label>
-            <input type="tel" class="form-control modalInput" id="numeroTelephone" name="numeroTelephone" required>
+            <input type="tel" class="form-control modalInput" id="numeroTelephone" name="numeroTelephone" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s-]\d{3}[\s-]\d{4}$" required>
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Description</label>
@@ -35,10 +36,12 @@
           <div class="col-md-8 itemInput">
             <label for="validationCustom03" class="form-label">Mot de passe</label>
             <input type="password" class="form-control modalInput" id="password" name="password" required>
+            <span id="msg-password-erreur">Le mot de passe doit contenir au moins 8 charactères </span>
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustom05" class="form-label">Confirmer le mot de passe</label>
-            <input type="password" class="form-control modalInput" id="cpassword" required>
+            <input type="password" class="form-control modalInput" id="confirmPassword" required>
+            <span id="msg-confirm-password-erreur">Confirmation invalide</span>
           </div>
           <br>
           <div class="col-md-8 itemInput">
@@ -58,7 +61,7 @@
           </div>
 
           <div class="modal-footer modalFooter">
-            <button type="button" class="btn btn-primary" onclick="enregistrerMembre()">Envoyer</button>
+            <button type="button" class="btn btn-primary" onClick="valider('form-enregistrer-membre');">Envoyer</button>
           </div>
         </form>
 
@@ -82,6 +85,7 @@
         <form class="form-connexion" id="form-connexion">
 
           <input type="hidden" name="action" value="connexion">
+          <input type="submit" id="validation-connexion" class="validation">
           <div class="myInput">
             <label for="pages" class="form-label">Courriel</label>
             <input type="email" class="form-control" id="email-Connexion" name="email" required>

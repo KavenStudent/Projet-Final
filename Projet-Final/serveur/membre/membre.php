@@ -34,7 +34,7 @@ class Membre
         $this->role = $role;
     }
 
-    public function getid(): int
+    public function getId(): int
     {
         return $this->id;
     }

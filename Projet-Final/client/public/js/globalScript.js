@@ -1,5 +1,12 @@
 window.onload = function () {
   showConditions();
+  // empeche d'utiliser la touche entrer dans les forms
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
 };
 
 // fonction show terme et conditions
@@ -17,6 +24,36 @@ function showConditions() {
       }
     });
   }
+}
+
+// valide le form devenir membre
+let valider = (id) => {
+  let myForm = document.getElementById(id);
+  let password = myForm.password.value;
+  let confirmPassword = myForm.confirmPassword.value;
+  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let valide = true;
+
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-membre').click();
+    valide = false;
+
+  } else if (!(password.trim() === confirmPassword.trim())) {
+
+    document.getElementById('msg-confirm-password-erreur').style.display = 'block';
+    valide = false;
+
+  } else if (!pattern.test(password)) {
+
+    document.getElementById('msg-password-erreur').style.display = 'block';
+    valide = false;
+
+  }
+
+  if (valide) {
+    enregistrerMembre();
+  }
+
 }
 
 // initialise les toast
