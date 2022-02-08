@@ -20,7 +20,7 @@
             aria-label="Autres participants: ">
             <li class="list-inline-item">Joanie Birtz</li>
             <li class="list-inline-item"><a href="participant.page">Vimhoang Nguyen</a></li>
-            <li class="list-inline-item">Patrick Al-Motlak</li>
+            <li class="list-inline-item">Patrick Al-Mondalek</li>
             <li class="list-inline-item"><a href="participant.page">Sacha Robitaille</a></li>
             <li class="list-inline-item"><a href="participant.page">Kaven Ung</a></li>
         </ul>

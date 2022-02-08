@@ -10,21 +10,21 @@
   <!-- Message input -->
   <div class="form-outline mb-69">
     <label class="form-label" for="form6Example7">Description:</label>
-    <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description..."></textarea>
+    <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description"></textarea>
     
   </div>
 
   <!-- Message input -->
   <div class="form-outline mb-69">
     <label class="form-label" for="form6Example7">Participants:</label>
-    <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants..."></textarea>
+    <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants"></textarea>
     
   </div>
 
   <!-- Email input -->
   <div class="form-outline mb-69">
     <label class="form-label" for="form6Example5">Lien:</label>
-    <input type="url" id="form6Example5" class="form-control" placeholder="Lien..." />
+    <input type="url" id="form6Example5" class="form-control" placeholder="Lien" />
     
   </div>
 
@@ -43,6 +43,6 @@
       </div>
 </div>
   <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+  <button type="reset" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
   <button type="submit" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
 </form>
