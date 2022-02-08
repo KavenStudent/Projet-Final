@@ -1,0 +1,44 @@
+#adminContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+
+}
+
+#report {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 50%;
+    height: 650px;
+    overflow-y: scroll;
+}
+
+#image-profil-report {
+    width: 100px;
+    height: 100px;
+}
+
+#image-profil-report:hover {
+    cursor: pointer;
+}
+
+#card-contenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.myReportCard {
+    margin: 10px;
+}
+
+h5:hover {
+    cursor: pointer;
+}
+
+.descCard {
+    margin-bottom: 10px;
+}
