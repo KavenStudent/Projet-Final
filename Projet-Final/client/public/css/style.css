@@ -282,11 +282,56 @@ textarea {
   margin-bottom: 1em;
 }
 
+
+  .editProj {
+   padding-left: 3rem;
+   padding-right: 3rem;
+    font-weight: bold;
+  
+  }
+
+  .editProj img{
+   padding-top: 1em;
+   padding-bottom: 1em;
+    flex:1;
+    
+  }
+
+  .editProj .customize{
+  /*
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    */
+    padding: 1em;
+   }
+  .editProj .inpt{
+    flex:1;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    
+  }  
+
+  .editProj .canBtn{
+    background-color: #FDD017;
+  }
+  .editProj .mb-69{/* 
+    flex-direction: row;
+    display: flex;
+    align-items: center;*/
+    padding: 0.7em;
+  } 
+  /* .editProj .ftxt{
+    padding: 0.3em;
+  } */
+ 
+
 .footerTxt {
   font-weight: bold;
   color: black;
   flex: 1;
 }
+
 
 .emailFooter {
   flex: 1;
