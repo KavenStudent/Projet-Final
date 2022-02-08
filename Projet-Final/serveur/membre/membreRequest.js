@@ -107,10 +107,11 @@ function modifierMembre() {
   });
 }
 
-function loadMembre() {
+function loadMembre(pageType, idMembre) {
   var form = new FormData();
   form.append("action", "loadMembre");
-
+  form.append("idMembre", idMembre);
+  form.append("page", pageType);
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
@@ -126,24 +127,7 @@ function loadMembre() {
   });
 }
 
-function loadMembreEdit() {
-  var form = new FormData();
-  form.append("action", "loadMembreEdit");
 
-  $.ajax({
-    type: "POST",
-    url: "./Projet-Final/serveur/membre/membreController.php",
-    data: form,
-    dataType: "json",
-    contentType: false,
-    processData: false,
-    success: function (reponse) {
-      // window.location();
-      membresVue(reponse);
-    },
-    fail: function (err) {},
-  });
-}
 
 function loadPageAccueil() {
   var form = new FormData();

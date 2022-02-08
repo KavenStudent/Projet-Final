@@ -4,6 +4,8 @@ require_once("membre.php");
 require_once("membreDAOImpl.php");
 //Controller
 $tabRes = array();
+$tabRes['action'] = null;
+$dao = new MembreDaoImpl();
 $action = $_POST['action'];
 switch ($action) {
     case "enregistrerMembre": //done
@@ -36,8 +38,12 @@ switch ($action) {
     case "tableLocation":
         tableLocations();
         break;
-    case "navigation":
-        navigation();
+    case "loadMembre":
+        loadPageMembre();
+        break;
+
+    case "loadPageAccueil":
+        loadPageAccueil();
         break;
 }
 
@@ -79,11 +85,11 @@ function enregistrerMembre()
 function connexion()
 {
     global $tabRes;
+    global $dao;
     $courriel = $_POST['email'];
     $password = $_POST['password'];
 
     $tabRes['action'] = "connexion";
-    $dao = new MembreDaoImpl();
 
     //Connecter le membre
     $tabRes['msg'] = $dao->connecter($courriel, $password);
@@ -97,20 +103,12 @@ function deconnexion()
 }
 
 // get les info d'un membre
-function getMembre()
-{
-    global $tabRes;
-    $id = $_POST['id'];
 
-    $tabRes['action'] = "getMembre";
-    $dao = new MembreDaoImpl();
-
-    $tabRes['membre'] = $dao->getMembre($id);
-}
 
 function modifierMembre()
 {
     global $tabRes;
+    global $dao;
     $id = $_POST['idMembreEdit'];
     $nom = $_POST['nomEdit'];
     $prenom = $_POST['prenomEdit'];
@@ -145,13 +143,50 @@ function modifierMembre()
 function tableMembres()
 {
     global $tabRes;
+    global $dao;
     $par = $_POST['par'];
     $valeurPar = strtolower(trim($_POST['valeurPar']));
-
     $tabRes['action'] = "tableMembres";
-    $dao = new MembreDaoImpl();
     //retourne tout les membre
     $tabRes['listeMembres'] = $dao->getAllMembreRecherche($par, $valeurPar);
+}
+
+// FUNCTIONS LOAD PAGES
+
+function loadPageMembre(){
+
+    global $tabRes;
+    global $dao;
+
+    $page= $_POST['page'];
+    $idMembre = $_POST['idMembre'];
+
+    if($tabRes['action'] == null){
+        $tabRes['membre'] = $dao->getMembre($idMembre);
+        switch($page){
+           case 'pageMembre': 
+            $daoProjet = new projetDAOImpl();
+            $tab['listProjet'] = null ;//$daoProjet -> ;break;
+            $tabRes['action'] = $page; break;
+
+
+           case 'pageMembreEdit': $tabRes['action'] = $page;break;
+           
+        }
+        
+    }
+}
+
+function loadPageAccueil(){
+
+    global $tabRes;
+    global $dao;
+
+    $page= $_POST['page'];
+    if($tabRes['action'] == null){
+        $tabRes['action'] = $page;
+    }
+
 }
 
 
