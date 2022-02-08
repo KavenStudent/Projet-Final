@@ -1,5 +1,6 @@
 window.onload = function () {
   showConditions();
+  loadPageAccueil();
   // empeche d'utiliser la touche entrer dans les forms
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
