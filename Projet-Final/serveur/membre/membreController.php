@@ -182,9 +182,9 @@ function loadPageAccueil(){
     global $tabRes;
     global $dao;
 
-    $page= $_POST['page'];
+    
     if($tabRes['action'] == null){
-        $tabRes['action'] = $page;
+        $tabRes['action'] = 'pageAccueil';
     }
 
 }
