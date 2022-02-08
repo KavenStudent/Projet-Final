@@ -180,13 +180,10 @@ function loadPageMembre(){
 function loadPageAccueil(){
 
     global $tabRes;
-    global $dao;
 
-    
     if($tabRes['action'] == null){
         $tabRes['action'] = 'pageAccueil';
     }
-
 }
 
 

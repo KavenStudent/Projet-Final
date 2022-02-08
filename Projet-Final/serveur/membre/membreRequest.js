@@ -132,7 +132,6 @@ function loadMembre(pageType, idMembre) {
 function loadPageAccueil() {
   var form = new FormData();
   form.append("action", "loadPageAccueil");
-
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
@@ -142,7 +141,9 @@ function loadPageAccueil() {
     processData: false,
     success: function (reponse) {
       // window.location();
+      alert(reponse.action);
       membresVue(reponse);
+      
     },
     fail: function (err) {},
   });

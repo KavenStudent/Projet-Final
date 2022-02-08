@@ -3,7 +3,7 @@ var membresVue = function (reponse) {
 
     switch (action) {
         case "pageAccueil":
-            afficherPageIndex(reponse);
+            afficherPageIndex();
             break;
         case "pageMembre":
             afficherPageMembre(reponse);
@@ -13,7 +13,7 @@ var membresVue = function (reponse) {
             break;
     }
 
-    function afficherPageIndex(json) {
+    function afficherPageIndex() {
         let contenu = ` <div class="container marketing customized-front-page-container">
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
