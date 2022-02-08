@@ -40,7 +40,7 @@ function connexion() {
           $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
-            window.location.reload();
+          window.location.reload();
         }
       },
       fail: function (err) {},
@@ -67,48 +67,99 @@ function deconnexion() {
   });
 }
 
-function getMembre(){
-	var form = new FormData();
-	form.append('action', 'getMembre');
-	form.append('id', document.getElementById('myMemberid').value);
+function getMembre() {
+  var form = new FormData();
+  form.append("action", "getMembre");
+  form.append("id", document.getElementById("myMemberid").value);
 
-	$.ajax({
-		type : 'POST',
+  $.ajax({
+    type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
-		data : form,
-		dataType : 'json',
-		contentType : false,
-		processData : false,
-		success : function (reponse){
-				membresVue(reponse);
-			
-		},
-		fail : function (err){
-		 
-		}
-	});
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (reponse) {
+      membresVue(reponse);
+    },
+    fail: function (err) {},
+  });
 }
 
-function modifierMembre(){
-	var form = new FormData(document.getElementById('membre-edit'));
-	$.ajax({
-		type : 'POST',
+function modifierMembre() {
+  var form = new FormData(document.getElementById("membre-edit"));
+  $.ajax({
+    type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
-		data : form,
-		dataType : 'json', 
-		contentType : false,
-		processData : false,
-		success : function (reponse){
-			if(reponse.msg != null){
-				initialiser(reponse.msg); // msg = Profil à jour
-				$("#modal-profil-Membre").modal('hide');
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (reponse) {
+      if (reponse.msg != null) {
+        initialiser(reponse.msg); // msg = Profil à jour
+        $("#modal-profil-Membre").modal("hide");
+      } else {
+        membresVue(reponse);
+      }
+    },
+    fail: function (err) {},
+  });
+}
 
-			}else{
-				membresVue(reponse);
-			}
-		},
-		fail : function (err){
-		 
-		}
-	});
+function loadMembre() {
+  var form = new FormData();
+  form.append("action", "loadMembre");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (reponse) {
+      // window.location();
+      membresVue(reponse);
+    },
+    fail: function (err) {},
+  });
+}
+
+function loadMembreEdit() {
+  var form = new FormData();
+  form.append("action", "loadMembreEdit");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (reponse) {
+      // window.location();
+      membresVue(reponse);
+    },
+    fail: function (err) {},
+  });
+}
+
+function loadPageAccueil() {
+  var form = new FormData();
+  form.append("action", "loadPageAccueil");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    success: function (reponse) {
+      // window.location();
+      membresVue(reponse);
+    },
+    fail: function (err) {},
+  });
 }

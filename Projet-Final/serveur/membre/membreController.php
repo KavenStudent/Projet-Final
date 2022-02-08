@@ -36,6 +36,9 @@ switch ($action) {
     case "tableLocation":
         tableLocations();
         break;
+    case "navigation":
+        navigation();
+        break;
 }
 
 //Enregistre un membre
