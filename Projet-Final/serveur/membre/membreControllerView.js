@@ -170,7 +170,7 @@ var membresVue = function (reponse) {
     function afficherPageMembreEdit(json) {
 
         let contenu = `<div class="container" id='containerEdit'>
-        <form id='membreForme' name="membre-edit">
+        <form id='membreEditForme' name="membre-edit">
     
             <input type='hidden' name='idMembre' value="<?php $_SESSION['membre'] ?>">
             <input type="hidden" name="action" value="modifierMembre">
@@ -181,14 +181,14 @@ var membresVue = function (reponse) {
                 <div class="col">
                     <div class="form-outline">
                         <label class="form-label" for="prenomEdit">Prénom</label>
-                        <input type="text" name="prenomEdit" class="form-control modalInput value=${json.membre.prenom}" />
+                        <input type="text" name="prenomEdit" class="form-control modalInput" value=${json.membre.prenom} />
                     </div>
                 </div>
     
                 <div class="col">
                     <div class="form-outline">
                         <label class="form-label" for="nomEdit">Nom</label>
-                        <input type="text" name="nomEdit" class="form-control modalInput value=${json.membre.nom}" />
+                        <input type="text" name="nomEdit" class="form-control modalInput" value=${json.membre.nom} />
                     </div>
                 </div>
             </div>
@@ -196,24 +196,24 @@ var membresVue = function (reponse) {
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="courrielEdit">Courriel</label>
-                <input type="email" name="courrielEdit" class="form-control modalInput value=${json.membre.courriel}" />
+                <input type="email" name="courrielEdit" class="form-control modalInput" value=${json.membre.courriel} />
             </div>
     
             <!-- Cell input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="numeroTelephoneEdit">Téléphone</label>
-                <input type="number" name="numeroTelephoneEdit" class="form-control modalInput value=${json.membre.numeroTelephone}" />
+                <input type="tel" name="numeroTelephoneEdit" class="form-control modalInput" value=${json.membre.numeroTelephone} />
             </div>
     
             <!-- Description input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="descriptionEdit">Description</label>
-                <textarea class="form-control modalInput" name="descriptionEdit" rows="4" value=${json.membre.description}></textarea>
+                <textarea class="form-control modalInput" name="descriptionEdit" rows="4">${json.membre.description}</textarea>
             </div>
     
             <div class="form-outline mb-4">
                 <label for="validationCustom03" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control modalInput" id="passwordEdit" name="passwordEdit value=${json.membre.motDePasse}" required>
+                <input type="password" class="form-control modalInput" id="passwordEdit" name="passwordEdit" value=${json.membre.motDePasse} required>
                 <span id="msg-password-erreur-edit">Le mot de passe doit contenir au moins 8 charactères </span>
             </div>
             <div class="form-outline mb-4">

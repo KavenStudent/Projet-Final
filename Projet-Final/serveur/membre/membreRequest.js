@@ -87,7 +87,7 @@ function getMembre() {
 }
 
 function modifierMembre() {
-  var form = new FormData(document.getElementById("membre-edit"));
+  var form = new FormData(document.getElementById("membreEditForme"));
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
