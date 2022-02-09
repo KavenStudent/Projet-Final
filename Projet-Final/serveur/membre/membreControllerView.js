@@ -112,6 +112,59 @@ var membresVue = function (reponse) {
 
     function afficherPageMembre(json) {
 
+        let contenu = `<div class="container big-container">
+            <div class="premiere-colonne">
+                <img id='image-profil' src="Projet-Final/client/public/images/logoFinale.png" class="img-thumbnail" alt="...">
+                <div class="container informations-profil">
+                    <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
+                    
+                    <label><strong>Courriel:</strong> <span>${json.membre.courriel}</span></label>
+                    
+                    <label><strong>Téléphone:</strong> <span>${json.membre.numeroTelephone}</span></label>
+                    
+                    <label><strong>Description:</strong><span ><div id='description-profil'>${json.membre.description}</div></span></label>
+                    
+                    <label><strong>Statut :</strong> <span>`;
+                    
+                    if(json.membre.membrePremium == 0){
+                        contenu += `non-abonné`;
+                    }else if(json.membre.membrePremium == 1){
+                        contenu += `Abonné`;
+                    }
+                    
+
+                  contenu += `</span></label>  <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>
+                <!-- Content here -->
+                </div>
+                <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id});' class="btn btn-primary">Editer</button>
+            </div>
+
+            <div class="container deuxieme-colonne">
+                <div class="container item1-deuxieme-colonne">
+                    <button type="button" class="btn btn-primary">Nouveau projet</button>
+                    <div class="form-check form-switch item-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
+                    </div>
+                </div>
+                
+                <div class='div-projets'>`;
+                   contenu +=` <!-- CARD -->
+                    <div class="card card-item">
+                       <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
+                      <div class="card-body card-item-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore atque voluptatem eius dolorum asperiores labore nulla repellat optio minus, omnis sit deleniti numquam! Sed, aliquam similique cumque repellendus saepe iure! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis ullam deserunt blanditiis aspernatur eum minus architecto expedita sint! Esse officiis nemo dolorem facilis, repudiandae quia rerum reprehenderit ab dolor animi!</p>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>`;
+
+        $('#contenu').html(contenu);
+
+
     }
 
     function afficherPageMembreEdit(json) {

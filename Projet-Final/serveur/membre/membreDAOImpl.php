@@ -223,28 +223,33 @@ class MembreDaoImpl extends Modele implements MembreDao
             $requete = $requete = "SELECT m.id, m.nom, m.prenom, m.courriel, m.numeroTelephone,
              m.description, c.actif, m.prive, m.imageProfil, m.membrePremium, 
             m.dateFinAbonnement, c.motDePasse, c.role, c.actif
-             FROM membre m INNER JOIN connexion c ON m.idMembre = c.idMembre WHERE m.idMembre = ?";
+             FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
 
             if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $unMembre = $ligne;
-                // $unMembre = new Membre(
-                //     $ligne->id,
-                //     $ligne->nom,
-                //     $ligne->prenom,
-                //     $ligne->courriel,
-                //     $ligne->numeroTelephone,
-                //     $ligne->description,
-                //     $ligne->actif,
-                //     $ligne->prive,
-                //     $ligne->imageProfil,
-                //     $ligne->membrePremium,
-                //     $ligne->dateFinAbonnement,
-                //     $ligne->motDePasse,
-                //     $ligne->role
-                // );
+                // $unMembre = $ligne;
+                if($ligne->dateFinAbonnement == null){
+                    $laDate = '';
+                }else{
+                    $laDate = $ligne->dateFinAbonnement;
+                }
+                $unMembre = new Membre(
+                    $ligne->id,
+                    $ligne->nom,
+                    $ligne->prenom,
+                    $ligne->courriel,
+                    $ligne->numeroTelephone,
+                    $ligne->description,
+                    $ligne->actif,
+                    $ligne->prive,
+                    $ligne->imageProfil,
+                    $ligne->membrePremium,
+                    $laDate,
+                    $ligne->motDePasse,
+                    $ligne->role
+                );
             }
         } catch (Exception $e) {
             echo $e->getMessage();

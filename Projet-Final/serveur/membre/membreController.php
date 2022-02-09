@@ -64,7 +64,7 @@ function enregistrerMembre()
     $password = $_POST['password'];
     $role = "M";
 
-    $unMembre = new Membre(0, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $unMembre = new Membre(0, $nom, $prenom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
     $dao = new MembreDaoImpl();
 
     // couriel deja utilisé existant
@@ -162,10 +162,15 @@ function loadPageMembre(){
     $idMembre = $_POST['idMembre'];
 
     if($tabRes['action'] == null){
-        $tabRes['membre'] = $dao->getMembre($idMembre);
+        $membre = $dao->getMembre($idMembre);
+        $tabRes['membre'] = array("id"=>$membre->getId(), "nom"=> $membre->getNom(), "prenom"=> $membre->getPrenom(),
+        "courriel"=> $membre->getCourriel(), "numeroTelephone"=> $membre->getNumeroTelephone(),
+        "description"=> $membre->getDescription(),"actif"=> $membre->getActif(), "prive"=> $membre->getPrive(), "imageProfil"=> $membre->getImageProfil(),
+        "membrePremium"=> $membre->getMembrePremium(), "dateFinAbonnement"=> $membre->getDateFinAbonnement(),
+        "motDePasse"=> $membre->getMotDePasse(), "role"=> $membre->getRole());
         switch($page){
            case 'pageMembre': 
-            $daoProjet = new projetDAOImpl();
+            // $daoProjet = new projetDAOImpl();
             $tab['listProjet'] = null ;//$daoProjet -> ;break;
             $tabRes['action'] = $page; break;
 
