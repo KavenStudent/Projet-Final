@@ -235,16 +235,21 @@ class MembreDaoImpl extends Modele implements MembreDao
                 }else{
                     $laDate = $ligne->dateFinAbonnement;
                 }
+                if($ligne->imageProfil == null){
+                    $monImageProfil = '';
+                }else{
+                    $monImageProfil = $ligne->imageProfil;
+                }
                 $unMembre = new Membre(
                     $ligne->id,
-                    $ligne->nom,
                     $ligne->prenom,
+                    $ligne->nom,
                     $ligne->courriel,
                     $ligne->numeroTelephone,
                     $ligne->description,
                     $ligne->actif,
                     $ligne->prive,
-                    $ligne->imageProfil,
+                    $monImageProfil,
                     $ligne->membrePremium,
                     $laDate,
                     $ligne->motDePasse,

@@ -114,7 +114,7 @@ var membresVue = function (reponse) {
 
         let contenu = `<div class="container big-container">
             <div class="premiere-colonne">
-                <img id='image-profil' src="Projet-Final/client/public/images/logoFinale.png" class="img-thumbnail" alt="...">
+                <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
                     <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     
@@ -172,7 +172,7 @@ var membresVue = function (reponse) {
         let contenu = `<div class="container" id='containerEdit'>
         <form id='membreEditForme' name="membre-edit">
     
-            <input type='hidden' name='idMembre' value="<?php $_SESSION['membre'] ?>">
+            <input type='hidden' name='idMembre' value=${json.membre.id}>
             <input type="hidden" name="action" value="modifierMembre">
             <!-- <input type="submit" id="validation-form-membre-edit" class="validation" /> -->
     
@@ -248,7 +248,7 @@ var membresVue = function (reponse) {
             </div>
             <!-- Submit button -->
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
+                <button type="submit" onclick="modifierMembre();" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
             </div>
     
         </form>
