@@ -65,7 +65,7 @@ function enregistrerMembre()
     $password = $_POST['password'];
     $role = "M";
 
-    $unMembre = new Membre(0, $nom, $prenom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $unMembre = new Membre(0, $prenom, $nom,  $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
 
     // couriel deja utilisé existant
     if ($dao->verifierCourriel($courriel)) {

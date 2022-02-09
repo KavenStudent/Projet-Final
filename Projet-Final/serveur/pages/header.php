@@ -21,8 +21,8 @@ session_start();
 
                 <?php
                 if (isset($_SESSION['membre'])) {
-                    $leId = $_SESSION['membre'] ;
-                    echo '<button type="button" '.'onclick="loadMembre(`pageMembre`,'.$leId.')"'.' class="btn btn-light buttonNav">Mon Profil</button>
+                    
+                    echo '<button type="button" '.'onclick="loadMembre(`pageMembre`,'.$_SESSION['membre'].')"'.' class="btn btn-light buttonNav">Mon Profil</button>
                 <div id="divAuthentification">
                 <button type="button" class="btn btn-light buttonNav" onclick="deconnexion()">Déconnecter</button>
                 </div>';
