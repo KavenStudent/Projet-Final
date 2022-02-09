@@ -220,7 +220,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     public function getMembre(int $idMembre): Membre
     {
         try {
-            $requete = $requete = "SELECT m.id, m.nom, m.prenom, m.courriel, m.numeroTelephone,
+            $requete = "SELECT m.id, m.nom, m.prenom, m.courriel, m.numeroTelephone,
              m.description, c.actif, m.prive, m.imageProfil, m.membrePremium, 
             m.dateFinAbonnement, c.motDePasse, c.role, c.actif
              FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.id = ?";
@@ -262,5 +262,15 @@ class MembreDaoImpl extends Modele implements MembreDao
             unset($requete);
         }
         return $unMembre;
+    }
+
+    public function getLastMembreId(){
+        $requete = "SELECT id FROM membre ORDER BY id DESC LIMIT 1";
+        $this->setRequete($requete);
+        $this->setParams(array());
+        $stmt = $this->executer();
+        $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $ligne->id;
     }
 }

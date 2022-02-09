@@ -114,7 +114,7 @@ var membresVue = function (reponse) {
 
         let contenu = `<div class="container big-container">
             <div class="premiere-colonne">
-                <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" class="img-thumbnail" alt="...">
+                <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
                     <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     

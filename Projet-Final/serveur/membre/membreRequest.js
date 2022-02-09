@@ -109,7 +109,6 @@ function modifierMembre() {
 
 function loadMembre(pageType, idMembre) {
   var form = new FormData();
-  
   form.append("action", "loadMembre");
   form.append("idMembre", idMembre);
   form.append("page", pageType);

@@ -51,6 +51,7 @@ switch ($action) {
 function enregistrerMembre()
 {
     global $tabRes;
+    global $dao;
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $courriel = $_POST['courriel'];
@@ -58,14 +59,13 @@ function enregistrerMembre()
     $description = $_POST['description'];
     $actif = 1;
     $prive = 0;
-    $imageProfil = "images-profil/defaultProfil.png";
+    $imageProfil = "defaultProfil.png";
     $membrePremium = 0;
     $dateFinAbonnement = "";
     $password = $_POST['password'];
     $role = "M";
 
     $unMembre = new Membre(0, $nom, $prenom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
-    $dao = new MembreDaoImpl();
 
     // couriel deja utilisé existant
     if ($dao->verifierCourriel($courriel)) {
@@ -75,7 +75,7 @@ function enregistrerMembre()
     } else {
         //enregistre le membre
         $dao->enregistrerMembre($unMembre);
-        $idMembre = $dao->getLastId();
+        $idMembre = $dao->getLastMembreId();
         $_SESSION['membre'] = $idMembre;
         $tabRes['idMembre'] = $idMembre;
     }
