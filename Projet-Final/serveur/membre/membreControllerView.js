@@ -150,7 +150,7 @@ var membresVue = function (reponse) {
                 
                 <div class='div-projets'>`;
                    contenu +=` <!-- CARD -->
-                    <div class="card card-item">
+                    <div class="card card-item" onclick="alert('sss');">
                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
                       <div class="card-body card-item-body">
                             <h5 class="card-title">Card title</h5>

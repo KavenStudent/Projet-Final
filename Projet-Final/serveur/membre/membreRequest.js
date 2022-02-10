@@ -8,6 +8,9 @@ function enregistrerMembre() {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		},
     success: function (reponse) {
       if (reponse.msg != null) {
         afficherToast(reponse.msg, "Erreur");
@@ -16,7 +19,11 @@ function enregistrerMembre() {
         window.location.reload();
       }
     },
-    fail: function (err) { },
+    fail: function (err) {},
+    complete: function(){
+			$('.lds-ring').addClass('hidden');
+		},   
+
   });
 }
 
@@ -33,6 +40,9 @@ function connexion() {
       dataType: "json",
       contentType: false,
       processData: false,
+      beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		  },
       success: function (reponse) {
         if (reponse.msg != "") {
           afficherToast(reponse.msg, "Erreur de connexion");
@@ -41,9 +51,17 @@ function connexion() {
         } else {
           window.location.reload();
         }
+
+      },
+      fail: function (err) {},
+      complete: function(){
+			  $('.lds-ring').addClass('hidden');
+		  },
+
       }
+
     });
-  }
+  
 }
 
 function deconnexion() {
@@ -57,30 +75,23 @@ function deconnexion() {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		  },
     success: function (reponse) {
       window.location.reload();
-    }
-  });
-}
 
-function getMembre() {
-  var form = new FormData();
-  form.append("action", "getMembre");
-  form.append("id", document.getElementById("myMemberid").value);
-
-  $.ajax({
-    type: "POST",
-    url: "./Projet-Final/serveur/membre/membreController.php",
-    data: form,
-    dataType: "json",
-    contentType: false,
-    processData: false,
-    success: function (reponse) {
       membresVue(reponse);
     },
-    fail: function (err) { },
+    fail: function (err) {},
+    complete: function(){
+			  $('.lds-ring').addClass('hidden');
+		},
   });
 }
+
+
+
 
 function modifierMembre() {
   var form = new FormData(document.getElementById("membreEditForme"));
@@ -91,13 +102,23 @@ function modifierMembre() {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		},
     success: function (reponse) {
 
       if (reponse.msg != null) {
         loadMembre("pageMembre", reponse.idDuMembre);
         afficherToast(reponse.msg, "Message");
       }
-    }
+
+    },
+    fail: function (err) {},
+    complete: function(){
+			$('.lds-ring').addClass('hidden');
+		},
+
+
   });
 }
 
@@ -114,9 +135,17 @@ function loadMembre(pageType, idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		},
     success: function (reponse) {
       membresVue(reponse);
-    }
+    },
+    fail: function (err) {},
+    complete: function(){
+			$('.lds-ring').addClass('hidden');
+		},
+
   });
 }
 
@@ -132,9 +161,16 @@ function loadPageAccueil() {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		},
     success: function (reponse) {
       membresVue(reponse);
+    },
+    fail: function (err) {},
+    complete: function(){
+			$('.lds-ring').addClass('hidden');
+		},
 
-    }
   });
 }
