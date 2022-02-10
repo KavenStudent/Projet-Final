@@ -14,6 +14,7 @@ function enregistrerMembre() {
     success: function (reponse) {
       if (reponse.msg != null) {
         afficherToast(reponse.msg, "Erreur");
+        afficherSnackbar(reponse.msg);
         $("#modalInscription").modal("hide");
       } else if (reponse.idMembre != null) {
         window.location.reload();
@@ -46,6 +47,7 @@ function connexion() {
       success: function (reponse) {
         if (reponse.msg != "") {
           afficherToast(reponse.msg, "Erreur de connexion");
+          afficherSnackbar(reponse.msg);
           $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
@@ -106,6 +108,7 @@ function modifierMembre() {
       if (reponse.msg != null) {
         loadMembre("pageMembre", reponse.idDuMembre);
         afficherToast(reponse.msg, "Message");
+        afficherSnackbar(reponse.msg);
       }
     },
     fail: function (err) {},

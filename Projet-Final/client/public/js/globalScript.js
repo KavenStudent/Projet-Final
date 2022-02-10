@@ -76,6 +76,12 @@ function afficherToast(text, header) {
   $("#toast").toast("show");
   document.getElementById("toast").scrollIntoView();
 }
+function afficherSnackbar(text) {
+  var x = document.getElementById("snackbar");
+  x.innerHTML = text;
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 
 //Permet de fermer les toasts
 function closeToast() {
