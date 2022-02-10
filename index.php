@@ -16,29 +16,21 @@
     require_once('Projet-Final/serveur/pages/header.php');
 
 
-        require_once('Projet-Final/serveur/pages/toasts.html');
-        
-        // require_once('Projet-Final/serveur/pages/frontPage.php');
-       // require_once('Projet-Final/serveur/pages/projetEdit.php');
+    require_once('Projet-Final/serveur/pages/toasts.html');
+
+    // require_once('Projet-Final/serveur/pages/frontPage.php');
+    // require_once('Projet-Final/serveur/pages/projetEdit.php');
 
 
-
-
-
-
-
-    
-        require_once('Projet-Final/serveur/pages/toasts.html');     
-        //require_once('Projet-Final/serveur/pages/membre.php');
-   
-
-
+    //require_once('Projet-Final/serveur/pages/membre.php');
     ?>
+
     <div id='contenu'></div>
 
 
 
     <?php
+
     require_once('Projet-Final/serveur/pages/footer.html');
     require_once('Projet-Final/serveur/pages/modals.php');
     ?>
