@@ -17,9 +17,6 @@ switch ($action) {
     case "deconnexion": //done
         deconnexion();
         break;
-    case "getMembre":
-        getMembre();
-        break;
     case "modifierMembre":
         modifierMembre();
         break;
