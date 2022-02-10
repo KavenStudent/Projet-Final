@@ -142,7 +142,6 @@ class MembreDaoImpl extends Modele implements MembreDao
             echo $e->getMessage();
         } finally {
             unset($requete);
-            return print_r($ancienneImage);
         }
     }
     public function connecter(string $courriel, string $motDePasse): string

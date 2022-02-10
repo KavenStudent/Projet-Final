@@ -132,7 +132,7 @@ function modifierMembre(){
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
     } else {
         //modifie le membre
-        $tabRes['monErreur'] = $dao->modifierMembre($unMembre, "images-profil");
+        $dao->modifierMembre($unMembre, "images-profil");
         $tabRes['msg'] = "Profil à jour";
     }
 }
