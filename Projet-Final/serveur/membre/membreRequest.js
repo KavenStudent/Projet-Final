@@ -122,11 +122,17 @@ function loadMembre(pageType, idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		},
     success: function (reponse) {
       // window.location();
       membresVue(reponse);
     },
     fail: function (err) {},
+    complete: function(){
+			$('.lds-ring').addClass('hidden');
+		},
   });
 }
 
@@ -147,6 +153,12 @@ function loadPageAccueil() {
       membresVue(reponse);
       
     },
+    beforeSend: function(){
+			$('.lds-ring').removeClass('hidden');
+		},
     fail: function (err) {},
+    complete: function(){
+			$('.lds-ring').addClass('hidden');
+		},
   });
 }

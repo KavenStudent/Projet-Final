@@ -105,6 +105,7 @@
   }
 
 .card-item{
+    z-index: 999;
     margin: 2em;
     min-width: 15em;
     min-height: 20em;
