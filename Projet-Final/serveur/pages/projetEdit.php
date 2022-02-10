@@ -3,7 +3,7 @@
    <!-- Text input -->
   <div class="form-outline mb-69">
     <label class="form-label ftxt" for="form6Example3">Titre:</label>
-    <input type="text" id="form6Example3" class="form-control" placeholder="Example" />
+    <input type="text" id="form6Example3" class="form-control" placeholder="Example"/>
     
   </div>
 
