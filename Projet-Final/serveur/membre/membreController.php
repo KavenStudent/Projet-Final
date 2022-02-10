@@ -108,7 +108,7 @@ function deconnexion()
 function modifierMembre(){
     global $tabRes;
     global $dao;
-    $id = $_POST['idMembre'];
+    $id = (int) $_POST['idMembre'];
     $nom = $_POST['nomEdit'];
     $prenom = $_POST['prenomEdit'];
     $courriel = $_POST['courrielEdit'];
@@ -116,7 +116,7 @@ function modifierMembre(){
     $description = $_POST['descriptionEdit'];
     $actif = 1;
     $prive = 0;
-    $imageProfil = "images-profil/defaultProfil.png";
+    $imageProfil = "";
     $membrePremium = 0;
     $dateFinAbonnement = "";
     $password = $_POST['passwordEdit'];
@@ -132,7 +132,7 @@ function modifierMembre(){
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
     } else {
         //modifie le membre
-        $dao->modifierMembre($unMembre, "images-profil");
+        $tabRes['monErreur'] = $dao->modifierMembre($unMembre, "images-profil");
         $tabRes['msg'] = "Profil à jour";
     }
 }

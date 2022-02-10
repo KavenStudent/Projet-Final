@@ -96,11 +96,14 @@ function modifierMembre() {
     contentType: false,
     processData: false,
     success: function (reponse) {
+      alert(reponse.monErreur);
       if (reponse.msg != null) {
-        initialiser(reponse.msg); // msg = Profil à jour
-        $("#modal-profil-Membre").modal("hide");
+        //initialiser(reponse.msg); // msg = Profil à jour
+       
+        
       } else {
-        membresVue(reponse);
+        //membresVue(reponse);
+        
       }
     },
     fail: function (err) {},

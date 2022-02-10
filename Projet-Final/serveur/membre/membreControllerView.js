@@ -248,7 +248,7 @@ var membresVue = function (reponse) {
             </div>
             <!-- Submit button -->
             <div class="col-md-12 text-center">
-                <button type="submit" onclick="modifierMembre();" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
+                <button type="button" onclick="modifierMembre();" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
             </div>
     
         </form>

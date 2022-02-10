@@ -119,7 +119,8 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setParams(array($Membre->getId()));
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
-            $ancienneImage = $ligne->image;
+            $ancienneImage = $ligne->imageProfil;
+            
 
             $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom() + $Membre->getPrenom());
 
@@ -141,6 +142,7 @@ class MembreDaoImpl extends Modele implements MembreDao
             echo $e->getMessage();
         } finally {
             unset($requete);
+            return print_r($ancienneImage);
         }
     }
     public function connecter(string $courriel, string $motDePasse): string
