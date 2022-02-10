@@ -7,26 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foruban</title>
     <?php
-        require_once('Projet-Final/serveur/pages/references.html');
+    require_once('Projet-Final/serveur/pages/references.html');
     ?>
 </head>
 
 <body>
     <?php
-        require_once('Projet-Final/serveur/pages/header.php');
+    require_once('Projet-Final/serveur/pages/header.php');
+
 
         require_once('Projet-Final/serveur/pages/toasts.html');
         
         // require_once('Projet-Final/serveur/pages/frontPage.php');
        // require_once('Projet-Final/serveur/pages/projetEdit.php');
 
-       
-        // require_once('Projet-Final/serveur/pages/membreEdit.php')
+
+
+
+
+
 
     
         require_once('Projet-Final/serveur/pages/toasts.html');     
         //require_once('Projet-Final/serveur/pages/membre.php');
    
+
 
     ?>
     <div id='contenu'></div>
@@ -34,8 +39,8 @@
 
 
     <?php
-        require_once('Projet-Final/serveur/pages/footer.html');
-        require_once('Projet-Final/serveur/pages/modals.php');
+    require_once('Projet-Final/serveur/pages/footer.html');
+    require_once('Projet-Final/serveur/pages/modals.php');
     ?>
 </body>
 
