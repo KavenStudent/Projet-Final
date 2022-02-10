@@ -96,7 +96,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $existe = false;
-            $requete = "SELECT * FROM membre WHERE courriel=? and idMembre NOT IN ($idMembre)";
+            $requete = "SELECT * FROM membre WHERE courriel=? and id NOT IN ($idMembre)";
             $this->setRequete($requete);
             $this->setParams(array($courriel));
             $stmt = $this->executer();
@@ -122,7 +122,7 @@ class MembreDaoImpl extends Modele implements MembreDao
             $ancienneImage = $ligne->imageProfil;
             
 
-            $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom() + $Membre->getPrenom());
+            $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom().$Membre->getPrenom());
 
             // modifie dans membre
             $requete = "UPDATE membre SET nom=?,prenom=?,courriel=?,numeroTelephone=?,description=?,prive=?,imageProfil=? WHERE id=?";

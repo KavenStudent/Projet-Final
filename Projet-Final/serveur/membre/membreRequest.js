@@ -96,10 +96,10 @@ function modifierMembre() {
     contentType: false,
     processData: false,
     success: function (reponse) {
-      alert(reponse.msg);
+      
       if (reponse.msg != null) {
         //initialiser(reponse.msg); // msg = Profil à jour
-       
+        loadMembre("pageMembre", reponse.idDuMembre);
         
       } else {
         //membresVue(reponse);

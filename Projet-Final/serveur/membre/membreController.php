@@ -133,6 +133,7 @@ function modifierMembre(){
     } else {
         //modifie le membre
         $dao->modifierMembre($unMembre, "images-profil");
+        $tabRes['idDuMembre'] = $_SESSION['membre'];
         $tabRes['msg'] = "Profil à jour";
     }
 }
