@@ -51,16 +51,13 @@ function connexion() {
         } else {
           window.location.reload();
         }
-
       },
       fail: function (err) {},
       complete: function(){
 			  $('.lds-ring').addClass('hidden');
 		  },
-
-      }
-
     });
+  }
   
 }
 
@@ -106,19 +103,15 @@ function modifierMembre() {
 			$('.lds-ring').removeClass('hidden');
 		},
     success: function (reponse) {
-
       if (reponse.msg != null) {
         loadMembre("pageMembre", reponse.idDuMembre);
         afficherToast(reponse.msg, "Message");
       }
-
     },
     fail: function (err) {},
     complete: function(){
 			$('.lds-ring').addClass('hidden');
 		},
-
-
   });
 }
 
@@ -145,7 +138,7 @@ function loadMembre(pageType, idMembre) {
     complete: function(){
 			$('.lds-ring').addClass('hidden');
 		},
-
+    
   });
 }
 
@@ -171,6 +164,6 @@ function loadPageAccueil() {
     complete: function(){
 			$('.lds-ring').addClass('hidden');
 		},
-
+  
   });
 }
