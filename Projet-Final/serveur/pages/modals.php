@@ -14,13 +14,14 @@
           <input type="submit" id="validation-form-membre" class="validation" />
 
           <div class="col-md-8 itemInput">
-            <label for="validationCustom02" class="form-label">Nom</label>
-            <input type="text" class="form-control modalInput" id="nom" name="nom" required>
-          </div>
-          <div class="col-md-8 itemInput">
             <label for="validationCustom01" class="form-label">Prénom</label>
             <input type="text" class="form-control modalInput" id="prenom" name="prenom" required>
           </div>
+          <div class="col-md-8 itemInput">
+            <label for="validationCustom02" class="form-label">Nom</label>
+            <input type="text" class="form-control modalInput" id="nom" name="nom" required>
+          </div>
+          
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Courriel</label>
             <input type="email" class="form-control modalInput" id="courriel" name="courriel" required>

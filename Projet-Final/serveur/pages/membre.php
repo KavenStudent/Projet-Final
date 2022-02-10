@@ -36,35 +36,7 @@
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore atque voluptatem eius dolorum asperiores labore nulla repellat optio minus, omnis sit deleniti numquam! Sed, aliquam similique cumque repellendus saepe iure! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis ullam deserunt blanditiis aspernatur eum minus architecto expedita sint! Esse officiis nemo dolorem facilis, repudiandae quia rerum reprehenderit ab dolor animi!</p>
                 </div>
             </div>
-
-            <div class="card card-item">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
-                <div class="card-body card-item-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis ullam deserunt blanditiis aspernatur eum minus architecto expedita sint! Esse officiis nemo dolorem facilis, repudiandae quia rerum reprehenderit ab dolor animi!</p>
-                </div>
-            </div>
-
-            <div class="card card-item">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
-                <div class="card-body card-item-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis ullam deserunt blanditiis aspernatur eum minus architecto expedita sint! Esse officiis nemo dolorem facilis, repudiandae quia rerum reprehenderit ab dolor animi!</p>
-                </div>
-            </div>
-
-            <div class="card card-item">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
-                <div class="card-body card-item-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis ullam deserunt blanditiis aspernatur eum minus architecto expedita sint! Esse officiis nemo dolorem facilis, repudiandae quia rerum reprehenderit ab dolor animi!</p>
-                </div>
-            </div>
-
-            
-            
-
-            
+           
            
         </div>
     </div>
