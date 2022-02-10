@@ -22,7 +22,7 @@ function ajouterProjetAffichage(json) {
        rep+=`  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> 
 
        <ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Autres participants: ">
-            <li class="list-inline-item"><a href="participant.page">Web</a></li>
+            <li class="list-inline-item"><a href="participant.page">${json.projet.idTag}</a></li>
             <li class="list-inline-item"><a href="participant.page">Portfolio</a></li>
             <li class="list-inline-item"><a href="participant.page">Recherche d'emploi</a></li>
         </ul>`
@@ -39,33 +39,33 @@ function ajouterProjetAffichage(json) {
 }
 
 
-function modifierProjetAffichage(response) {
+function modifierProjetAffichage(json) {
 var rep =  `<form class="editProj">
 
 
 <div class="form-outline mb-69">
  <label class="form-label ftxt" for="form6Example3">Titre:</label>
- <input type="text" id="form6Example3" class="form-control" placeholder="Example" />
+ <input type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}"/>
 </div>
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example7">Description:</label>
- <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description..."></textarea>
+ <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description...">${json.projet.description}</textarea>
 </div>
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example7">Participants:</label>
- <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants..."></textarea>
+ <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants...">${json.projet.autreParticipant}</textarea>
 </div>
 
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example5">Lien:</label>
- <input type="url" id="form6Example5" class="form-control" placeholder="Lien..." />
+ <input type="url" id="form6Example5" class="form-control" placeholder="Lien..." value="${json.projet.lienExterne}"/>
 </div>
 
 <div class="col-md-5 order-md-1 customize">
-<img id="output" src="Projet-Final/client/public/images/default-image.png" class="rounded mx-auto d-block" height="600px" width="600px">
+<img id="output" src="Projet-Final/client/public/images/${json.projet.thumbnail}" class="rounded mx-auto d-block" height="600px" width="600px">
 
 
 <div class="form-outline-inpt inpt">
@@ -73,7 +73,7 @@ var rep =  `<form class="editProj">
 </div>
 
  <div class="form-check form-switch">
-   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
+   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" ${json.projet.prive} />
    <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
    </div>
 </div>
@@ -96,15 +96,4 @@ var projetVue=function(response) {
         break;
     }
 }
-var membreVue=function(reponse){
-    var action=reponse.action;
-    switch(action){
-        case "deleteMembreVue" : deleteMembreVue(reponse.deleted); break;
-        case "modifierMembreVue" : modifierMembreVue(reponse.membre, reponse.modifierMembreStatus); break;
-        case "afficherMembreVue" : afficherMembreInfo(reponse.membre); break;
-        case "afficherTransactionsVue" : afficherTransactionsVue(reponse.listPaiement); break;
-        case "connexionAffichage" : connexionAffichage(reponse.message, reponse.pseudo, reponse.idM); break;
-        case "affichageMembreConnecterVue" :affichageMembreConnecterVue(reponse.pseudo, reponse.message, reponse.idM);break;
-        case "deconnexionVue" : deconnexionVue(); break;
-    }
-}
+
