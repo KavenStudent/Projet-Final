@@ -236,7 +236,7 @@ class MembreDaoImpl extends Modele implements MembreDao
                     $laDate = $ligne->dateFinAbonnement;
                 }
                 if($ligne->imageProfil == null){
-                    $monImageProfil = '';
+                    $monImageProfil = 'defaultProfil.png';
                 }else{
                     $monImageProfil = $ligne->imageProfil;
                 }
