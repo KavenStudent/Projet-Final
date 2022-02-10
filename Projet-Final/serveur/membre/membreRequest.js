@@ -10,13 +10,13 @@ function enregistrerMembre() {
     processData: false,
     success: function (reponse) {
       if (reponse.msg != null) {
-        initialiser(reponse.msg); // msg = Email deja utilise
-        $("#modal-Membre").modal("hide");
+        afficherToast(reponse.msg, "Erreur");
+        $("#modalInscription").modal("hide");
       } else if (reponse.idMembre != null) {
         window.location.reload();
       }
     },
-    fail: function (err) {},
+    fail: function (err) { },
   });
 }
 
@@ -35,15 +35,13 @@ function connexion() {
       processData: false,
       success: function (reponse) {
         if (reponse.msg != "") {
-          afficherToastMiseAJourReussi(reponse.msg, "Fail");
-          //   initialiser(reponse.msg); // msg = erreur information connexion
+          afficherToast(reponse.msg, "Erreur de connexion");
           $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
           window.location.reload();
         }
-      },
-      fail: function (err) {},
+      }
     });
   }
 }
@@ -61,9 +59,7 @@ function deconnexion() {
     processData: false,
     success: function (reponse) {
       window.location.reload();
-      membresVue(reponse);
-    },
-    fail: function (err) {},
+    }
   });
 }
 
@@ -82,7 +78,7 @@ function getMembre() {
     success: function (reponse) {
       membresVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
   });
 }
 
@@ -96,17 +92,12 @@ function modifierMembre() {
     contentType: false,
     processData: false,
     success: function (reponse) {
-      
+
       if (reponse.msg != null) {
-        //initialiser(reponse.msg); // msg = Profil à jour
         loadMembre("pageMembre", reponse.idDuMembre);
-        
-      } else {
-        //membresVue(reponse);
-        
+        afficherToast(reponse.msg, "Message");
       }
-    },
-    fail: function (err) {},
+    }
   });
 }
 
@@ -115,6 +106,7 @@ function loadMembre(pageType, idMembre) {
   form.append("action", "loadMembre");
   form.append("idMembre", idMembre);
   form.append("page", pageType);
+
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
@@ -123,10 +115,8 @@ function loadMembre(pageType, idMembre) {
     contentType: false,
     processData: false,
     success: function (reponse) {
-      // window.location();
       membresVue(reponse);
-    },
-    fail: function (err) {},
+    }
   });
 }
 
@@ -143,10 +133,8 @@ function loadPageAccueil() {
     contentType: false,
     processData: false,
     success: function (reponse) {
-      // window.location();
       membresVue(reponse);
-      
-    },
-    fail: function (err) {},
+
+    }
   });
 }

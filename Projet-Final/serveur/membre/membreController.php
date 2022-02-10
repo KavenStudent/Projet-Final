@@ -8,17 +8,14 @@ $tabRes['action'] = null;
 $dao = new MembreDaoImpl();
 $action = $_POST['action'];
 switch ($action) {
-    case "enregistrerMembre": //done
+    case "enregistrerMembre":
         enregistrerMembre();
         break;
-    case "connexion": //done
+    case "connexion":
         connexion();
         break;
-    case "deconnexion": //done
+    case "deconnexion":
         deconnexion();
-        break;
-    case "getMembre":
-        getMembre();
         break;
     case "modifierMembre":
         modifierMembre();
@@ -105,10 +102,11 @@ function deconnexion()
 // get les info d'un membre
 
 
-function modifierMembre(){
+function modifierMembre()
+{
     global $tabRes;
     global $dao;
-    $id = (int) $_POST['idMembre'];
+    $id = $_POST['idMembre'];
     $nom = $_POST['nomEdit'];
     $prenom = $_POST['prenomEdit'];
     $courriel = $_POST['courrielEdit'];
@@ -128,7 +126,7 @@ function modifierMembre(){
     // couriel deja utilisé existant
     if ($dao->verifierCourrielModifier($courriel, $id)) {
 
-        $tabRes['action'] = "modifierProfil";
+        $tabRes['action'] = "pageMembreEdit";
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
     } else {
         //modifie le membre
@@ -152,41 +150,46 @@ function tableMembres()
 
 // FUNCTIONS LOAD PAGES
 
-function loadPageMembre(){
+function loadPageMembre()
+{
 
     global $tabRes;
     global $dao;
 
-    $page= $_POST['page'];
+    $page = $_POST['page'];
     $idMembre = $_POST['idMembre'];
 
-    if($tabRes['action'] == null){
+    if ($tabRes['action'] == null) {
         $membre = $dao->getMembre($idMembre);
-        
-        $tabRes['membre'] = array("id"=>$membre->getId(), "nom"=> $membre->getNom(), "prenom"=> $membre->getPrenom(),
-        "courriel"=> $membre->getCourriel(), "numeroTelephone"=> $membre->getNumeroTelephone(),
-        "description"=> $membre->getDescription(),"actif"=> $membre->getActif(), "prive"=> $membre->getPrive(), "imageProfil"=> $membre->getImageProfil(),
-        "membrePremium"=> $membre->getMembrePremium(), "dateFinAbonnement"=> $membre->getDateFinAbonnement(),
-        "motDePasse"=> $membre->getMotDePasse(), "role"=> $membre->getRole());
-        switch($page){
-           case 'pageMembre': 
-            // $daoProjet = new projetDAOImpl();
-            $tab['listProjet'] = null ;//$daoProjet -> ;break;
-            $tabRes['action'] = $page; break;
+
+        $tabRes['membre'] = array(
+            "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+            "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+            "description" => $membre->getDescription(), "actif" => $membre->getActif(), "prive" => $membre->getPrive(), "imageProfil" => $membre->getImageProfil(),
+            "membrePremium" => $membre->getMembrePremium(), "dateFinAbonnement" => $membre->getDateFinAbonnement(),
+            "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole()
+        );
+        switch ($page) {
+            case 'pageMembre':
+                // $daoProjet = new projetDAOImpl();
+                $tab['listProjet'] = null; //$daoProjet -> ;break;
+                $tabRes['action'] = $page;
+                break;
 
 
-           case 'pageMembreEdit': $tabRes['action'] = $page;break;
-           
+            case 'pageMembreEdit':
+                $tabRes['action'] = $page;
+                break;
         }
-        
     }
 }
 
-function loadPageAccueil(){
+function loadPageAccueil()
+{
 
     global $tabRes;
 
-    if($tabRes['action'] == null){
+    if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
     }
 }
