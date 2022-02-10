@@ -13,8 +13,8 @@ function enregistrerMembre() {
 		},
     success: function (reponse) {
       if (reponse.msg != null) {
-        initialiser(reponse.msg); // msg = Email deja utilise
-        $("#modal-Membre").modal("hide");
+        afficherToast(reponse.msg, "Erreur");
+        $("#modalInscription").modal("hide");
       } else if (reponse.idMembre != null) {
         window.location.reload();
       }
@@ -22,7 +22,8 @@ function enregistrerMembre() {
     fail: function (err) {},
     complete: function(){
 			$('.lds-ring').addClass('hidden');
-		},
+		},   
+
   });
 }
 
@@ -44,20 +45,23 @@ function connexion() {
 		  },
       success: function (reponse) {
         if (reponse.msg != "") {
-          afficherToastMiseAJourReussi(reponse.msg, "Fail");
-          //   initialiser(reponse.msg); // msg = erreur information connexion
+          afficherToast(reponse.msg, "Erreur de connexion");
           $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
           window.location.reload();
         }
+
       },
       fail: function (err) {},
       complete: function(){
 			  $('.lds-ring').addClass('hidden');
 		  },
+
+      }
+
     });
-  }
+  
 }
 
 function deconnexion() {
@@ -76,6 +80,7 @@ function deconnexion() {
 		  },
     success: function (reponse) {
       window.location.reload();
+
       membresVue(reponse);
     },
     fail: function (err) {},
@@ -84,6 +89,8 @@ function deconnexion() {
 		},
   });
 }
+
+
 
 
 function modifierMembre() {
@@ -99,20 +106,19 @@ function modifierMembre() {
 			$('.lds-ring').removeClass('hidden');
 		},
     success: function (reponse) {
-      
+
       if (reponse.msg != null) {
-        //initialiser(reponse.msg); // msg = Profil à jour
         loadMembre("pageMembre", reponse.idDuMembre);
-        
-      } else {
-        //membresVue(reponse);
-        
+        afficherToast(reponse.msg, "Message");
       }
+
     },
     fail: function (err) {},
     complete: function(){
 			$('.lds-ring').addClass('hidden');
 		},
+
+
   });
 }
 
@@ -121,6 +127,7 @@ function loadMembre(pageType, idMembre) {
   form.append("action", "loadMembre");
   form.append("idMembre", idMembre);
   form.append("page", pageType);
+
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/membre/membreController.php",
@@ -132,13 +139,13 @@ function loadMembre(pageType, idMembre) {
 			$('.lds-ring').removeClass('hidden');
 		},
     success: function (reponse) {
-      // window.location();
       membresVue(reponse);
     },
     fail: function (err) {},
     complete: function(){
 			$('.lds-ring').addClass('hidden');
 		},
+
   });
 }
 
@@ -158,13 +165,12 @@ function loadPageAccueil() {
 			$('.lds-ring').removeClass('hidden');
 		},
     success: function (reponse) {
-      // window.location();
       membresVue(reponse);
-      
     },
     fail: function (err) {},
     complete: function(){
 			$('.lds-ring').addClass('hidden');
 		},
+
   });
 }

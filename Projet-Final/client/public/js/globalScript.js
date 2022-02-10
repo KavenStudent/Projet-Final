@@ -57,22 +57,7 @@ let valider = (id) => {
 
 }
 
-// initialise les toast
-// let initialiser = (message) => {
-//     let textToast = document.getElementById("textToast");
-//     let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-//     let toastList = toastElList.map(function (toastEl) {
-//         return new bootstrap.Toast(toastEl)
-//     })
-
-//     if (message.length > 0) {
-//         textToast.innerHTML = message;
-//         $(".toast-container").css("display", "block");
-//         toastList[0].show();
-//     }
-// }
-
-function afficherToastMiseAJourReussi(text, header) {
+function afficherToast(text, header) {
   let textBody = document.getElementById("toastBody");
   let headerToast = document.getElementById("headerToast");
   let headerDivToast = document.getElementById("toastHeader");
@@ -100,10 +85,10 @@ function closeToast() {
 
 // fonction onload Image
 
-var loadFile = function(event) {
+var loadFile = function (event) {
   var output = document.getElementById('output');
   output.src = URL.createObjectURL(event.target.files[0]);
-  output.onload = function() {
+  output.onload = function () {
     URL.revokeObjectURL(output.src) // free memory
   }
 };
