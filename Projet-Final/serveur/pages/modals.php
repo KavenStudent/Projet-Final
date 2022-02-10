@@ -28,7 +28,7 @@
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Téléphone</label>
-            <input type="tel" class="form-control modalInput" id="numeroTelephone" name="numeroTelephone" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s-]\d{3}[\s-]\d{4}$" required>
+            <input type="tel" class="form-control modalInput" id="numeroTelephone" name="numeroTelephone" pattern="^\d{10}|(\+\d{1,2}\s)?\(?\d{3}\)?[\s-]\d{3}[\s-]\d{4}$" required>
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Description</label>
