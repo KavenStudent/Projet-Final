@@ -1,4 +1,20 @@
-function ajouterProjetAffichage(json) {
+
+var projetVue=function(response) {
+    var action=response.action;
+    switch(action){
+        case "afficherProjet" : 
+        projetAffichage(response);
+        break;
+        case "ajouterProjet" : 
+        ajouterProjetAffichage();
+        break;
+        case "modifierProjet" : 
+        modifierProjetAffichage(response);
+        break;
+    }
+}
+
+function projetAffichage(json) {
    var rep = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png' class='img-fluid, img-thumbnail'"
             alt="...">
@@ -38,6 +54,52 @@ function ajouterProjetAffichage(json) {
 </div>`;
 }
 
+function ajouterProjetAffichage() {
+    var rep = `<form class="editProj">
+
+    <!-- Text input -->
+   <div class="form-outline mb-69">
+     <label class="form-label ftxt" for="form6Example3">Titre:</label>
+     <input type="text" id="form6Example3" class="form-control" placeholder="Titre"/>
+     
+   </div>
+ 
+   <!-- Message input -->
+   <div class="form-outline mb-69">
+     <label class="form-label" for="form6Example7">Description:</label>
+     <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description"></textarea>
+     
+   </div>
+ 
+   <!-- Message input -->
+   <div class="form-outline mb-69">
+     <label class="form-label" for="form6Example7">Participants:</label>
+     <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants"></textarea>
+     
+   </div>
+ 
+   <!-- Email input -->
+   <div class="form-outline mb-69">
+     <label class="form-label" for="form6Example5">Lien:</label>
+     <input type="url" id="form6Example5" class="form-control" placeholder="Lien" />
+     
+   </div>
+ 
+   <div class="col-md-5 order-md-1 customize">
+ 
+   <img id="output" src="Projet-Final/client/public/images/default-image.png" class="rounded mx-auto d-block" height="600px" width="600px">
+   
+ 
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept="image/*" onchange="loadFile(event)">
+   </div>
+ 
+ </div>
+   <!-- Submit button -->
+   <button type="reset" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+   <button type="submit" class="btn btn-primary btn-block mb-4">Ajouter</button>
+ </form>`
+}
 
 function modifierProjetAffichage(json) {
 var rep =  `<form class="editProj">
@@ -85,15 +147,5 @@ var rep =  `<form class="editProj">
 
 
 
-var projetVue=function(response) {
-    var action=response.action;
-    switch(action){
-        case "ajouterProjet" : 
-        ajouterProjetAffichage(response);
-        break;
-        case "modifierProjet" : 
-        modifierProjetAffichage(response);
-        break;
-    }
-}
+
 
