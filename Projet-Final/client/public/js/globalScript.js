@@ -28,8 +28,8 @@ function showConditions() {
 }
 
 // valide le form devenir membre
-let valider = (id) => {
-  let myForm = document.getElementById(id);
+function valider() {
+  let myForm = document.getElementById('form-enregistrer-membre');
   let password = myForm.password.value;
   let confirmPassword = myForm.confirmPassword.value;
   let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
@@ -57,30 +57,42 @@ let valider = (id) => {
 
 }
 
-function afficherToast(text, header) {
-  let textBody = document.getElementById("toastBody");
-  let headerToast = document.getElementById("headerToast");
-  let headerDivToast = document.getElementById("toastHeader");
-  let toastDiv = document.getElementById("toast");
+// valide le form modifier
+function validerMembreEdit() {
+  let myForm = document.getElementById('membreEditForm');
+  let password = myForm.passwordEdit.value;
+  let confirmPassword = myForm.confirmPasswordEdit.value;
+  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let valide = true;
 
-  textBody.innerHTML = text;
-  textBody.style.color = "black";
-  textBody.style.backgroundColor = "#cac7c7";
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-membre-edit').click();
+    valide = false;
 
-  headerToast.innerHTML = header;
-  headerToast.style.color = "black";
+  } else if (!(password.trim() === confirmPassword.trim())) {
 
-  headerDivToast.style.backgroundColor = "#4169E1";
-  toastDiv.style.backgroundColor = "#4169E1";
+    document.getElementById('msg-confirm-password-erreur-edit').style.display = 'block';
+    valide = false;
 
-  $("#toast").toast("show");
-  document.getElementById("toast").scrollIntoView();
+  } else if (!pattern.test(password)) {
+
+    document.getElementById('msg-password-erreur-edit').style.display = 'block';
+    valide = false;
+
+  }
+
+  if (valide) {
+    modifierMembre();
+  }
+
 }
+
+
 function afficherSnackbar(text) {
   var x = document.getElementById("snackbar");
   x.innerHTML = text;
   x.className = "show";
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
 
 //Permet de fermer les toasts

@@ -186,6 +186,16 @@ textarea {
   display: none;
 }
 
+#msg-password-erreur-edit {
+  color: red;
+  display: none;
+}
+
+#msg-confirm-password-erreur-edit {
+  color: red;
+  display: none;
+}
+
 .validation {
   display: none;
 }

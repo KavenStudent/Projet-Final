@@ -21,7 +21,7 @@
             <label for="validationCustom02" class="form-label">Nom</label>
             <input type="text" class="form-control modalInput" id="nom" name="nom" required>
           </div>
-          
+
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Courriel</label>
             <input type="email" class="form-control modalInput" id="courriel" name="courriel" required>
@@ -62,7 +62,7 @@
           </div>
 
           <div class="modal-footer modalFooter">
-            <button type="button" class="btn btn-primary" onClick="valider('form-enregistrer-membre');">Envoyer</button>
+            <button type="button" class="btn btn-primary" onClick="valider();">Envoyer</button>
           </div>
         </form>
 

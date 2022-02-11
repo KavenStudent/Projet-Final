@@ -125,15 +125,15 @@ var membresVue = function (reponse) {
                     <label><strong>Description:</strong><span ><div id='description-profil'>${json.membre.description}</div></span></label>
                     
                     <label><strong>Statut :</strong> <span>`;
-                    
-                    if(json.membre.membrePremium == 0){
-                        contenu += `non-abonné`;
-                    }else if(json.membre.membrePremium == 1){
-                        contenu += `Abonné`;
-                    }
-                    
 
-                  contenu += `</span></label>  <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>
+        if (json.membre.membrePremium == 0) {
+            contenu += `non-abonné`;
+        } else if (json.membre.membrePremium == 1) {
+            contenu += `Abonné`;
+        }
+
+
+        contenu += `</span></label>  <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>
                 <!-- Content here -->
                 </div>
                 <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id});' class="btn btn-primary">Editer</button>
@@ -149,7 +149,7 @@ var membresVue = function (reponse) {
                 </div>
                 
                 <div class='div-projets'>`;
-                   contenu +=` <!-- CARD -->
+        contenu += ` <!-- CARD -->
                     <div class="card card-item" onclick="alert('sss');">
                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp" class="card-img-top" alt="Fissure in Sandstone"/>
                       <div class="card-body card-item-body">
@@ -170,25 +170,25 @@ var membresVue = function (reponse) {
     function afficherPageMembreEdit(json) {
 
         let contenu = `<div class="container" id='containerEdit'>
-        <form id='membreEditForme' name="membre-edit">
+        <form id='membreEditForm' name="membre-edit">
     
-            <input type='hidden' name='idMembre' value=${json.membre.id}>
+            <input type='hidden' name='idMembre' value="${json.membre.id}">
             <input type="hidden" name="action" value="modifierMembre">
-            <!-- <input type="submit" id="validation-form-membre-edit" class="validation" /> -->
+            <input type="submit" id="validation-form-membre-edit" class="validation" />
     
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
                 <div class="col">
                     <div class="form-outline">
                         <label class="form-label" for="prenomEdit">Prénom</label>
-                        <input type="text" name="prenomEdit" class="form-control modalInput" value=${json.membre.prenom} />
+                        <input type="text" name="prenomEdit" class="form-control modalInput" value="${json.membre.prenom}" required/>
                     </div>
                 </div>
     
                 <div class="col">
                     <div class="form-outline">
                         <label class="form-label" for="nomEdit">Nom</label>
-                        <input type="text" name="nomEdit" class="form-control modalInput" value=${json.membre.nom} />
+                        <input type="text" name="nomEdit" class="form-control modalInput" value="${json.membre.nom}" required/>
                     </div>
                 </div>
             </div>
@@ -196,13 +196,13 @@ var membresVue = function (reponse) {
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="courrielEdit">Courriel</label>
-                <input type="email" name="courrielEdit" class="form-control modalInput" value=${json.membre.courriel} />
+                <input type="email" name="courrielEdit" class="form-control modalInput" value="${json.membre.courriel}" required/>
             </div>
     
             <!-- Cell input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="numeroTelephoneEdit">Téléphone</label>
-                <input type="tel" name="numeroTelephoneEdit" class="form-control modalInput" value=${json.membre.numeroTelephone} />
+                <input type="tel" class="form-control modalInput" id="numeroTelephoneEdit" name="numeroTelephoneEdit" value="${json.membre.numeroTelephone}" pattern="^\\d{10}|(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s-]\\d{3}[\\s-]\\d{4}$" required>
             </div>
     
             <!-- Description input -->
@@ -213,12 +213,12 @@ var membresVue = function (reponse) {
     
             <div class="form-outline mb-4">
                 <label for="validationCustom03" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control modalInput" id="passwordEdit" name="passwordEdit" value=${json.membre.motDePasse} required>
+                <input type="password" class="form-control modalInput" id="passwordEdit" name="passwordEdit" value="${json.membre.motDePasse}" required>
                 <span id="msg-password-erreur-edit">Le mot de passe doit contenir au moins 8 charactères </span>
             </div>
             <div class="form-outline mb-4">
                 <label for="validationCustom05" class="form-label">Confirmer le mot de passe</label>
-                <input type="password" class="form-control modalInput" id="confirmPasswordEdit" value=${json.membre.motDePasse} required>
+                <input type="password" class="form-control modalInput" id="confirmPasswordEdit" value="${json.membre.motDePasse}" required>
                 <span id="msg-confirm-password-erreur-edit">Confirmation invalide</span>
             </div>
             <!-- 3 column grid layout with preview, upload and visibile -->
@@ -248,7 +248,7 @@ var membresVue = function (reponse) {
             </div>
             <!-- Submit button -->
             <div class="col-md-12 text-center">
-                <button type="button" onclick="modifierMembre();" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
+                <button type="button" onclick="validerMembreEdit();" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
             </div>
     
         </form>

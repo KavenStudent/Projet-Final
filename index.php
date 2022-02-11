@@ -12,15 +12,15 @@
 </head>
 
 <body>
+
     <?php
         require_once('Projet-Final/serveur/pages/header.php');
 
-
-        require_once('Projet-Final/serveur/pages/toasts.html');    
         //require_once('Projet-Final/serveur/pages/membre.php');
 
 
     ?>
+    <div id="snackbar"></div>
     <div class="lds-ring hidden"><div></div><div></div><div></div><div></div></div>
 
     <div id='contenu'></div>
