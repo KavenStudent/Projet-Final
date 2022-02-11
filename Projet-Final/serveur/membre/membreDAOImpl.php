@@ -2,6 +2,7 @@
 require_once("membre.php");
 require_once("membreDAO.php");
 require_once("../includes/modele.inc.php");
+// require_once("Projet-Final/serveur/includes/modele.inc.php");    // Utiliser ce require pour les tests
 
 class MembreDaoImpl extends Modele implements MembreDao
 {
@@ -53,11 +54,11 @@ class MembreDaoImpl extends Modele implements MembreDao
         return $tab;
     }
 
-    public function enregistrerMembre(Membre $Membre)
+    public function enregistrerMembre(Membre $Membre): bool
     {
         try {
-
             // enregistre dans membre
+            $result;
             $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
             $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
@@ -68,10 +69,13 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($lastId, $Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getRole(), $Membre->getActif()));
             $stmt = $this->executer();
+            $result = true;
         } catch (Exception $e) {
-            echo $e->getMessage();
+            // echo $e->getMessage();
+            $result = false;
         } finally {
             unset($requete);
+            return $result;
         }
     }
     public function verifierCourriel(string $courriel): bool
@@ -110,9 +114,10 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $existe;
     }
-    public function modifierMembre(Membre $Membre, $dossier)
+    public function modifierMembre(Membre $Membre, $dossier) : bool
     {
         try {
+            $result;
             // cherche l'image du film a modifier
             $requete = "SELECT imageProfil FROM membre WHERE id=?";
             $this->setRequete($requete);
@@ -138,10 +143,14 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getActif(), $Membre->getId()));
             $stmt = $this->executer();
+
+            $result = true;
         } catch (Exception $e) {
             echo $e->getMessage();
+            $result = false;
         } finally {
             unset($requete);
+            return $result;
         }
     }
     public function connecter(string $courriel, string $motDePasse): string
@@ -177,7 +186,7 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $msgErreur;
     }
-    public function changerStatutActif(int $statut, int $idMembre)
+    public function changerStatutActif(int $statut, int $idMembre): bool
     {
         try {
             //modifie le statut
@@ -185,17 +194,20 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($statut, $idMembre));
             $stmt = $this->executer();
+            $result = true;
         } catch (Exception $e) {
             echo $e->getMessage();
+            $result = false;
         } finally {
             unset($requete);
+            return $result;
         }
     }
-    public function mettreProfilPrive(int $prive, int $idMembre)
+    public function mettreProfilPrive(int $prive, int $idMembre): bool
     {
     }
 
-    public function devenirPremium(int $idMembre)
+    public function devenirPremium(int $idMembre): bool
     {
     }
 
@@ -265,7 +277,7 @@ class MembreDaoImpl extends Modele implements MembreDao
         return $unMembre;
     }
 
-    public function getLastMembreId(){
+    public function getLastMembreId(): int{
         $requete = "SELECT id FROM membre ORDER BY id DESC LIMIT 1";
         $this->setRequete($requete);
         $this->setParams(array());
