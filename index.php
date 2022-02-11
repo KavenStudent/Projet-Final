@@ -20,11 +20,11 @@
 
 
     ?>
-    <div id="snackbar"></div>
-    <div class="lds-ring hidden"><div></div><div></div><div></div><div></div></div>
-
+    
     <div id='contenu'></div>
 
+    <div id="snackbar"></div>
+    <div class="lds-ring hidden"><div></div><div></div><div></div><div></div></div>
     <?php
 
     require_once('Projet-Final/serveur/pages/footer.html');

@@ -1,7 +1,12 @@
 <?php
-class MembreDaoImpl extends Modele implements MembreDao
-{
-    public function getProjet($idProjet): Projet {
+require_once("projet.php");
+require_once("projetDAO.php");
+require_once("../includes/modele.inc.php");
+
+
+class ProjetDaoImpl extends Modele implements ProjetDao
+{ 
+    public function getProjet(int $idProjet): Projet {
         try {
             $projet;
             $requete = "SELECT * FROM projet WHERE id = ?";
@@ -18,7 +23,7 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $projet;
     }
-    public function getAllProjets($idMembre): array {
+    public function getAllProjets(): array {
         try {
             $tab = array();
             $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ?";
@@ -35,7 +40,7 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $tab;
     }
-    public function getAllProjetsForMembre($idMembre): array {
+    public function getAllProjetsForMembre(int $idMembre): array {
         try {
             $tab = array();
             $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ?";

@@ -1,7 +1,5 @@
 <?php 
-require_once("projet.php");
-require_once("projetDAO.php");
-require_once("../includes/modele.inc.php");
+
 //Interface MembreDao
 interface ProjetDao
 {

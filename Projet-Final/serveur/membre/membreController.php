@@ -2,6 +2,7 @@
 session_start();
 require_once("membre.php");
 require_once("membreDAOImpl.php");
+require_once("../projet/projetDAOImpl.php");
 //Controller
 $tabRes = array();
 $tabRes['action'] = null;
@@ -114,12 +115,14 @@ function modifierMembre()
     $description = $_POST['descriptionEdit'];
     $actif = 1;
     $prive = 0;
+    // $prive =  $_POST['isPublic'];
     $imageProfil = "";
     $membrePremium = 0;
     $dateFinAbonnement = "";
     $password = $_POST['passwordEdit'];
     $role = "M";
 
+    $tabRes['test'] =  $prive;
 
     $unMembre = new Membre($id, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
 
@@ -171,8 +174,8 @@ function loadPageMembre()
         );
         switch ($page) {
             case 'pageMembre':
-                // $daoProjet = new projetDAOImpl();
-                $tab['listProjet'] = null; //$daoProjet -> ;break;
+                $daoProjet = new ProjetDaoImpl();
+                $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre); //$daoProjet -> ;break;
                 $tabRes['action'] = $page;
                 break;
 
