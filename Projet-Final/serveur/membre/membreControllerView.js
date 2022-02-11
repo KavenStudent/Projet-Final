@@ -154,7 +154,7 @@ var membresVue = function (reponse) {
                     alert("Poop");
                     JsonListProjet.listProjet.forEach(function(item){
                     contenu += ` <!-- CARD -->
-                            <div class="card card-item" onclick="alert('sss');">
+                            <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
                             <img src="Projet-Final/serveur/projet/thumbnail/${item.thumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
                             <div class="card-body card-item-body">
                                     <h5 class="card-title">${item.titre}</h5>
