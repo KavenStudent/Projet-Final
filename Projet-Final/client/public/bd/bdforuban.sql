@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  ven. 04 fév. 2022 à 21:17
+-- Généré le :  ven. 11 fév. 2022 à 22:43
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -44,7 +44,8 @@ CREATE TABLE `connexion` (
 
 INSERT INTO `connexion` (`idMembre`, `courriel`, `motDePasse`, `role`, `actif`) VALUES
 (1, '1@1', '1', 'M', 1),
-(2, '1@2', '1', 'M', 1);
+(2, '1@2', '1', 'M', 1),
+(3, 'joanie.birtz@gmail.com', '12345678', 'M', 1);
 
 -- --------------------------------------------------------
 
@@ -83,8 +84,9 @@ CREATE TABLE `membre` (
 --
 
 INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`) VALUES
-(1, 'a', 'a', '1@1', '1', '1', 0, 'defaultProfil.png', 0, NULL),
-(2, 'a', 'a', '1@2', '1', '1', 0, 'images-profil/defaultProfil.png', 0, NULL);
+(1, 'a', 'a', '1@1', '1', '1', 0, 'fffe0a0843607c7269705a2d1760e03a64a0a5dd.png', 0, NULL),
+(2, 'a', 'a', '1@2', '1', '1', 0, 'images-profil/defaultProfil.png', 0, NULL),
+(3, 'Birtz', 'Joanie', 'joanie.birtz@gmail.com', '', 'Etudiant infomatique', 0, 'ae883cf20302d83668ee603d2d1ee3459d5bc201.png', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,6 +155,14 @@ CREATE TABLE `tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Déchargement des données de la table `tag`
+--
+
+INSERT INTO `tag` (`id`, `nomTag`) VALUES
+(1, 'Web'),
+(2, 'Js');
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -166,7 +176,8 @@ ALTER TABLE `connexion`
 -- Index pour la table `historiquepaiement`
 --
 ALTER TABLE `historiquepaiement`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idMembre` (`idMembre`);
 
 --
 -- Index pour la table `membre`
@@ -175,16 +186,32 @@ ALTER TABLE `membre`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `membreprojet`
+--
+ALTER TABLE `membreprojet`
+  ADD KEY `idMembre` (`idMembre`),
+  ADD KEY `idProjet` (`idProjet`);
+
+--
 -- Index pour la table `projet`
 --
 ALTER TABLE `projet`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `projettag`
+--
+ALTER TABLE `projettag`
+  ADD KEY `idProjet` (`idProjet`),
+  ADD KEY `idTag` (`idTag`);
+
+--
 -- Index pour la table `signalisation`
 --
 ALTER TABLE `signalisation`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idMembre` (`idMembre`),
+  ADD KEY `idProjet` (`idProjet`);
 
 --
 -- Index pour la table `tag`
@@ -205,7 +232,7 @@ ALTER TABLE `historiquepaiement`
 -- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `projet`
 --
@@ -220,7 +247,7 @@ ALTER TABLE `signalisation`
 -- AUTO_INCREMENT pour la table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables déchargées
 --
@@ -230,6 +257,38 @@ ALTER TABLE `tag`
 --
 ALTER TABLE `connexion`
   ADD CONSTRAINT `fk_idmembre` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `historiquepaiement`
+--
+ALTER TABLE `historiquepaiement`
+  ADD CONSTRAINT `historiquepaiement_ibfk_1` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `membreprojet`
+--
+ALTER TABLE `membreprojet`
+  ADD CONSTRAINT `membreprojet_ibfk_1` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `projet`
+--
+ALTER TABLE `projet`
+  ADD CONSTRAINT `projet_ibfk_1` FOREIGN KEY (`id`) REFERENCES `membreprojet` (`idProjet`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `projettag`
+--
+ALTER TABLE `projettag`
+  ADD CONSTRAINT `projettag_ibfk_1` FOREIGN KEY (`idProjet`) REFERENCES `projet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `projettag_ibfk_2` FOREIGN KEY (`idTag`) REFERENCES `tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `signalisation`
+--
+ALTER TABLE `signalisation`
+  ADD CONSTRAINT `signalisation_ibfk_1` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `signalisation_ibfk_2` FOREIGN KEY (`idProjet`) REFERENCES `projet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
