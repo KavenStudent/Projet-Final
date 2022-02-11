@@ -12,7 +12,7 @@ class Projet {
     private $thumbnail;
 
     // ------------------------------------------------------------Constructeur
-    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresParticipants, int $nbTelechargements, string $liensExternes, string $thumbnail) {
+    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresParticipants, int $nbTelechargements, string $lienExterne, string $thumbnail) {
         $this->id = $id;
         $this->createurId = $createurId;
         $this->titre = $titre;
