@@ -117,5 +117,5 @@ function resetForm(){
   setTimeout(function(){
     var output = document.getElementById('output');
     output.src = "Projet-Final/client/public/images/default-image.png";
-    }, 1);
+    }, 0);
 }
