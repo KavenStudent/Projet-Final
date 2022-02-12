@@ -39,9 +39,11 @@ switch ($action) {
     case "loadMembre":
         loadPageMembre();
         break;
-
     case "loadPageAccueil":
         loadPageAccueil();
+        break;
+    case "loadPageAdmin":
+        loadPageAdmin();
         break;
 }
 
@@ -195,6 +197,16 @@ function loadPageAccueil()
     if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
     }
+}
+
+function loadPageAdmin()
+{
+    global $tabRes;
+    global $dao;
+
+    $tabRes['action'] = "pageAdmin";
+    //retourne tout les membre
+    $tabRes['listeSignalisation'] = $dao->getAllSignalisation();
 }
 
 

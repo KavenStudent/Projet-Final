@@ -39,5 +39,6 @@ interface MembreDao
     public function getMembre(int $idMembre): Membre;
 
     public function getLastMembreId(): int;
+
+    public function getAllSignalisation() : array;
 }
-?>

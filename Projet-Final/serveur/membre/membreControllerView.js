@@ -9,12 +9,16 @@ var membresVue = function (reponse) {
             afficherPageMembre(reponse, reponse.listProjet);
             break;
         case "pageMembreEdit":
-            afficherPageMembreEdit(reponse)
+            afficherPageMembreEdit(reponse);
+            break;
+        case "pageAdmin":
+            afficherPageAdmin(reponse);
             break;
     }
+}
 
-    function afficherPageIndex() {
-        let contenu = ` <div class="container marketing customized-front-page-container">
+function afficherPageIndex() {
+    let contenu = ` <div class="container marketing customized-front-page-container">
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
       <div class="col-lg-4 customized-item">
@@ -107,12 +111,13 @@ var membresVue = function (reponse) {
     <!-- /END THE FEATURETTES -->
   </div>`
 
-        $('#contenu').html(contenu);
-    }
+    $('#contenu').html(contenu);
+}
 
-    function afficherPageMembre(json, listProjet) {
+function afficherPageMembre(json, listProjet) {
 
-        let contenu = `<div class="container big-container">
+
+    let contenu = `<div class="container big-container">
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
@@ -126,14 +131,14 @@ var membresVue = function (reponse) {
                     
                     <label><strong>Statut :</strong> <span>`;
 
-        if (json.membre.membrePremium == 0) {
-            contenu += `non-abonné`;
-        } else if (json.membre.membrePremium == 1) {
-            contenu += `Abonné`;
-        }
+    if (json.membre.membrePremium == 0) {
+        contenu += `non-abonné`;
+    } else if (json.membre.membrePremium == 1) {
+        contenu += `Abonné`;
+    }
 
 
-        contenu += `</span></label>  <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>
+    contenu += `</span></label>  <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>
                 <!-- Content here -->
                 </div>
                 <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id});' class="btn btn-primary">Editer</button>
@@ -149,16 +154,16 @@ var membresVue = function (reponse) {
                 </div>
                 
                 <div class='div-projets'>`;
-                // src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
-                if(listProjet != null){
-                    listProjet.forEach(function(item){
-                        let myThumbnail;
-                        if(item.thumbnail == ""){
-                            myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
-                        }else{
-                            myThumbnail = `Projet-Final/serveur/projet/thumbnail/${myThumbnail}`;
-                        }
-                    contenu += ` <!-- CARD -->
+    // src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
+    if (listProjet != null) {
+        listProjet.forEach(function (item) {
+            let myThumbnail;
+            if (item.thumbnail == "") {
+                myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
+            } else {
+                myThumbnail = `Projet-Final/serveur/projet/thumbnail/${myThumbnail}`;
+            }
+            contenu += ` <!-- CARD -->
                             <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
                             <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
                             <div class="card-body card-item-body">
@@ -166,22 +171,22 @@ var membresVue = function (reponse) {
                                     <p class="card-text">${item.description}</p>
                                 </div>
                             </div>`
-                    });
-                }
-                
-        contenu +=`
+        });
+    }
+
+    contenu += `
                 </div>
             </div>
         </div>`;
 
-        $('#contenu').html(contenu);
+    $('#contenu').html(contenu);
 
 
-    }
+}
 
-    function afficherPageMembreEdit(json) {
+function afficherPageMembreEdit(json) {
 
-        let contenu = `<div class="container" id='containerEdit'>
+    let contenu = `<div class="container" id='containerEdit'>
         <form id='membreEditForm' name="membre-edit">
     
             <input type='hidden' name='idMembre' value="${json.membre.id}">
@@ -247,14 +252,14 @@ var membresVue = function (reponse) {
                 <div class="col-sm profilEdit">
                     <div class="form-check form-switch" id='switchBox'>`;
 
-        if (json.membre.prive == 0) {
-            contenu += `<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />`;
-        }
-        else {
-            contenu += `<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"/>`
-        }
+    if (json.membre.prive == 0) {
+        contenu += `<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />`;
+    }
+    else {
+        contenu += `<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"/>`
+    }
 
-        contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Public</label>
+    contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Public</label>
                     </div>
                 </div>
             </div>
@@ -268,6 +273,29 @@ var membresVue = function (reponse) {
     </div>
     
     `;
-        $('#contenu').html(contenu);
+    $('#contenu').html(contenu);
+}
+
+function afficherPageAdmin(json) {
+
+    let contenu = `<div id="adminContainer">
+    <div id="report">
+        <div class="card myReportCard">`;
+
+    for (let i = 0; i < json.listeSignalisation.length; i++) {
+        contenu += `<div class="card-body">
+                <div id="card-contenu">
+                    <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage">
+                    <h5>${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom}</h5>
+                    <h5 data-bs-toggle="modal" data-bs-target="#modalSignalisation">${json.listeSignalisation[i].nb} signalisations</h5>
+                </div>
+
+            </div>`;
+
     }
+
+
+    contenu += `</div> </div> </div>`;
+
+    $('#contenu').html(contenu);
 }

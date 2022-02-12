@@ -58,7 +58,6 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             // enregistre dans membre
-            $result;
             $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
             $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
@@ -114,10 +113,10 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $existe;
     }
-    public function modifierMembre(Membre $Membre, $dossier) : bool
+    public function modifierMembre(Membre $Membre, $dossier): bool
     {
         try {
-            $result;
+
             // cherche l'image du film a modifier
             $requete = "SELECT imageProfil FROM membre WHERE id=?";
             $this->setRequete($requete);
@@ -125,9 +124,9 @@ class MembreDaoImpl extends Modele implements MembreDao
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->imageProfil;
-            
 
-            $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom().$Membre->getPrenom());
+
+            $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom() . $Membre->getPrenom());
 
             // modifie dans membre
             $requete = "UPDATE membre SET nom=?,prenom=?,courriel=?,numeroTelephone=?,description=?,prive=?,imageProfil=? WHERE id=?";
@@ -205,10 +204,12 @@ class MembreDaoImpl extends Modele implements MembreDao
     }
     public function mettreProfilPrive(int $prive, int $idMembre): bool
     {
+        return true;
     }
 
     public function devenirPremium(int $idMembre): bool
     {
+        return true;
     }
 
     public function afficherHistoriqueAbonnement(int $idMembre): array
@@ -243,14 +244,14 @@ class MembreDaoImpl extends Modele implements MembreDao
 
             if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 // $unMembre = $ligne;
-                if($ligne->dateFinAbonnement == null){
+                if ($ligne->dateFinAbonnement == null) {
                     $laDate = '';
-                }else{
+                } else {
                     $laDate = $ligne->dateFinAbonnement;
                 }
-                if($ligne->imageProfil == null){
+                if ($ligne->imageProfil == null) {
                     $monImageProfil = 'defaultProfil.png';
-                }else{
+                } else {
                     $monImageProfil = $ligne->imageProfil;
                 }
                 $unMembre = new Membre(
@@ -277,7 +278,8 @@ class MembreDaoImpl extends Modele implements MembreDao
         return $unMembre;
     }
 
-    public function getLastMembreId(): int{
+    public function getLastMembreId(): int
+    {
         $requete = "SELECT id FROM membre ORDER BY id DESC LIMIT 1";
         $this->setRequete($requete);
         $this->setParams(array());
@@ -285,5 +287,25 @@ class MembreDaoImpl extends Modele implements MembreDao
         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
 
         return $ligne->id;
+    }
+
+    public function getAllSignalisation(): array
+    {
+        try {
+            $tab = array();
+            $requete = "SELECT membre.imageProfil, membre.prenom, membre.nom, COUNT(*) as nb FROM signalisation inner JOIN membre
+             ON idMembre = membre.id GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+        return $tab;
     }
 }
