@@ -109,6 +109,7 @@ textarea {
   margin-top: 2em;
   display: flex;
   justify-content: center;
+  margin-bottom: 2em;
 }
 
 #searchBar {

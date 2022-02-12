@@ -8,13 +8,18 @@ class ProjetDaoImpl extends Modele implements ProjetDao
 { 
     public function getProjet(int $idProjet): Projet {
         try {
-            $projet;
+            
             $requete = "SELECT * FROM projet WHERE id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();
             if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $projet = new Projet($ligne->id, $ligne->createurId, $ligne->titre, $ligne->description, $ligne->path, $ligne->prive, $ligne->autresParticipants, $ligne->nbTelechargements, $ligne->liensExternes, $ligne->thumbnail);
+                if($ligne->autreParticipant == null){
+                    $mesParticipants = " ";
+                }else{
+                    $mesParticipants = $ligne->autreParticipant;
+                }
+                $projet = new Projet($ligne->id, $ligne->idCreateur, $ligne->titre, $ligne->description, $ligne->path, $ligne->prive, $mesParticipants, $ligne->nbTelechargement, $ligne->lienExterne, $ligne->thumbnail);
             }
         } catch (Exception $e) {
             echo $e->getMessage();

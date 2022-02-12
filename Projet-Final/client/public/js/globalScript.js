@@ -110,3 +110,12 @@ var loadFile = function (event) {
     URL.revokeObjectURL(output.src) // free memory
   }
 };
+
+// fonction reset form et Image vide
+
+function resetForm(){
+  setTimeout(function(){
+    var output = document.getElementById('output');
+    output.src = "Projet-Final/client/public/images/default-image.png";
+    }, 1);
+}

@@ -91,7 +91,7 @@ function deconnexion() {
 
 
 function modifierMembre() {
-  var form = new FormData(document.getElementById("membreEditForme"));
+  var form = new FormData(document.getElementById("membreEditForm"));
 
   $.ajax({
     type: "POST",

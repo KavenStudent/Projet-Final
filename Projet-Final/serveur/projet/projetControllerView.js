@@ -1,5 +1,21 @@
-function ajouterProjetAffichage(json) {
-   var rep = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+var projetVue=function(response) {
+    var action=response.action;
+    switch(action){
+        case "pageProjet" : 
+        afficherPageProjet(response);
+        break;
+        case "pageProjetEdit" : 
+        afficherPageProjetEdit(response);
+        break;
+        case "pageProjetAjouter" :
+        ajouterProjetAffichage(response.idMembre);
+        break;
+        
+    }
+}
+
+function afficherPageProjet(json) {
+   var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png' class='img-fluid, img-thumbnail'"
             alt="...">
         <div class="d-grid gap-2">
@@ -9,38 +25,39 @@ function ajouterProjetAffichage(json) {
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>
 
-        <h5><span id="projetCreateurTitle">'Createur:' </span><a href="mon profil.page" id="projetCreateurContent"
+        <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
                 name="projetCreateurContent">${json.projet.idCreator}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
             aria-label="Autres participants: ">
             <li class="list-inline-item">${json.projet.autreParticipant}</li>
         </ul>`
-        array.forEach(membreProjet => {
-            //mettre participants clickable + autres participants
-        });
-       rep+=`  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> 
+        // array.forEach(membreProjet => {
+        //     //mettre participants clickable + autres participants
+        // });
+       contenu+=`  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> 
 
        <ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Autres participants: ">
             <li class="list-inline-item"><a href="participant.page">${json.projet.idTag}</a></li>
             <li class="list-inline-item"><a href="participant.page">Portfolio</a></li>
             <li class="list-inline-item"><a href="participant.page">Recherche d'emploi</a></li>
         </ul>`
-        array.forEach(tags => {
-            //mettre les tags
-        });
-       rep+= `<a href=${json.projet.lienExterne}>
+        // array.forEach(tags => {
+        //     //mettre les tags
+        // });
+       contenu+= `<a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
         <div class="form-check form-switch">
         </div>
     </div>
 </div>`;
+  $('#contenu').html(contenu);
 }
 
 
-function modifierProjetAffichage(json) {
-var rep =  `<form class="editProj">
+function afficherPageProjetEdit(json) {
+var contenu =  `<form  class="editProj">
 
 
 <div class="form-outline mb-69">
@@ -81,19 +98,61 @@ var rep =  `<form class="editProj">
 <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
 <button type="submit" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
 </form>`;
+$('#contenu').html(contenu);
+}
+
+function ajouterProjetAffichage(idMembre) {
+  
+    var contenu = `<form id='ajouterProjetForm' class="editProj">
+
+    
+    <!-- Text input -->
+   <div class="form-outline mb-69">
+     <label class="form-label ftxt" for="titreProjet">Titre:</label>
+     <input type="text" name="titreProjet" class="form-control" placeholder="Titre"/>
+     
+   </div>
+ 
+   <!-- Message input -->
+   <div class="form-outline mb-69">
+     <label class="form-label" for="descriptionProjet">Description:</label>
+     <textarea class="form-control ftxt" name="descriptionProjet" rows="4" placeholder="Description"></textarea>
+     
+   </div>
+ 
+   <!-- Message input -->
+   <div class="form-outline mb-69">
+     <label class="form-label" for="participantsProjet">Participants:</label>
+     <textarea class="form-control ftxt" name="participantsProjet" rows="4" placeholder="Patricipants"></textarea>
+     
+   </div>
+ 
+   <!-- Email input -->
+   <div class="form-outline mb-69">
+     <label class="form-label" for="lienProjet">Lien:</label>
+     <input type="url" name="lienProjet" class="form-control" placeholder="Lien" />
+     
+   </div>
+ 
+   <div class="col-md-5 order-md-1 customize">
+ 
+   <img id="output" src="Projet-Final/client/public/images/default-image.png" class="rounded mx-auto d-block" height="600px" width="600px">
+   
+ 
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept="image/*" onchange="loadFile(event)" name='imageVignette' id="imagView">
+   </div>
+ 
+ </div>
+   <!-- Submit button -->
+   <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
+   <button type="button" onclick="loadMembre('pageMembre', ${idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
+   <button type="button" onclick="ajouterProjetRequete(${idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
+ </form>`;
+ $('#contenu').html(contenu);
 }
 
 
 
-var projetVue=function(response) {
-    var action=response.action;
-    switch(action){
-        case "ajouterProjet" : 
-        ajouterProjetAffichage(response);
-        break;
-        case "modifierProjet" : 
-        modifierProjetAffichage(response);
-        break;
-    }
-}
+
 

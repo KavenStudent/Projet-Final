@@ -110,7 +110,7 @@ var membresVue = function (reponse) {
         $('#contenu').html(contenu);
     }
 
-    function afficherPageMembre(json, JsonListProjet) {
+    function afficherPageMembre(json, listProjet) {
 
         let contenu = `<div class="container big-container">
             <div class="premiere-colonne">
@@ -141,7 +141,7 @@ var membresVue = function (reponse) {
 
             <div class="container deuxieme-colonne">
                 <div class="container item1-deuxieme-colonne">
-                    <button type="button" class="btn btn-primary">Nouveau projet</button>
+                    <button type="button" onclick="loadPageAjouterProjet(${json.membre.id});" class="btn btn-primary">Nouveau projet</button>
                     <div class="form-check form-switch item-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
                         <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
@@ -150,12 +150,17 @@ var membresVue = function (reponse) {
                 
                 <div class='div-projets'>`;
                 // src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
-                if(JsonListProjet.listProjet != null){
-                    alert("Poop");
-                    JsonListProjet.listProjet.forEach(function(item){
+                if(listProjet != null){
+                    listProjet.forEach(function(item){
+                        let myThumbnail;
+                        if(item.thumbnail == ""){
+                            myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
+                        }else{
+                            myThumbnail = `Projet-Final/serveur/projet/thumbnail/${myThumbnail}`;
+                        }
                     contenu += ` <!-- CARD -->
                             <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
-                            <img src="Projet-Final/serveur/projet/thumbnail/${item.thumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
+                            <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
                             <div class="card-body card-item-body">
                                     <h5 class="card-title">${item.titre}</h5>
                                     <p class="card-text">${item.description}</p>

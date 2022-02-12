@@ -12,74 +12,77 @@ class Projet {
     private $thumbnail;
 
     // ------------------------------------------------------------Constructeur
-    function __Construct(int $id, int $createurId, string $titre, string $description, string $path, bool $prive, string $autresParticipants, int $nbTelechargements, string $lienExterne, string $thumbnail) {
+    public function __construct(int $id, int $createurId, string $titre, string $description,
+     string $path, int $prive, string $autresParticipants, int $nbTelechargements, string $lienExterne, string $thumbnail) {
         $this->id = $id;
         $this->createurId = $createurId;
         $this->titre = $titre;
         $this->description = $description;
         $this->path = $path;
         $this->prive = $prive;
-        $this->autresparticipants = $autresparticipants;
+        $this->autresparticipants = $autresParticipants;
         $this->nbTelechargements = $nbTelechargements;
         $this->lienExterne = $lienExterne;
         $this->thumbnail = $thumbnail;
     }
 
     // ----------------------------------------------------------------Getters
-    function getId() {
+    public function getId() {
         return $this->id;
     }
-    function getCreateurId() {
+    public function getCreateurId() {
         return $this->createurId;
     }
-    function getTitre() {
+    public function getTitre() {
         return $this->titre;
     }
-    function getDescription() {
+    public function getDescription() {
         return $this->description;
     }
-    function getPath() {
+    public function getPath() {
         return $this->path;
     }
-    function isPrive() {
+    public function isPrive() {
         return $this->prive;
     }
-    function getAutresParticipants() {
+    public function getAutresParticipants() {
         return $this->autresParticipants;
     }
-    function getNbTelechargements() {
+    public function getNbTelechargements() {
         return $this->nbTelechargements;
     }
-    function getLienExterne() {
+    public function getLienExterne() {
         return $this->lienExterne;
     }
-    function getThumbnail() {
+    public function getThumbnail() {
         return $this->thumbnail;
     }
   
     //----------------------------------------------------------------Setters
-    function setTitre(string $titre) {
+    public function setTitre(string $titre) {
         $this->titre = $titre;
     }
-    function setDescription(string $description) {
+    public function setDescription(string $description) {
         $this->description = $description;
     }
-    function setPath(string $path) {
+    public function setPath(string $path) {
         $this->path = $path;
     }
-    function setPrive(bool $prive) {
+    public function setPrive(bool $prive) {
         $this->prive = $prive;
     }
-    function setAutresParticipants(string $autresParticipants) {
+    public function setAutresParticipants(string $autresParticipants) {
         $this->autresParticipants = $autresParticipants;
     }
-    function setNbTelechargements(string $nbTelechargements) {
+    public function setNbTelechargements(string $nbTelechargements) {
         $this->nbTelechargements = $nbTelechargements;
     }
-    function setLienExterne(string $lienExterne) {
+    public function setLienExterne(string $lienExterne) {
         $this->lienExterne = $lienExterne;
     }
-    function setThumbnail(string $thumbnail) {
+    public function setThumbnail(string $thumbnail) {
         $this->thumbnail = $thumbnail;
     }
 }
+
+?>
