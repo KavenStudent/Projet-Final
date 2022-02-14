@@ -24,16 +24,14 @@ final class MembreTest extends TestCase
         // Assert
         $this->assertTrue($actual);
     }
-    public function testEnregistrerMembreReturnsFalseOnInvalidMembre() {
+
+    public function testVerifierCourrielReturnsTrueOnValidCourriel() {
         // Arrange
         $dao = new MembreDaoImpl();
-        $membreOld = new Membre(-1,"","","1@1","","",0,0,"",0,"","","");
-        $dao->enregistrerMembre($membreOld);
-        $membreNew = new Membre(-1,"","","1@1","","",0,0,"",0,"","","");
         // Act
-        $actual = $dao->enregistrerMembre($membreNew);
+        $actual = $dao->enregistrerMembre($membre);
         // Assert
-        $this->assertFalse($actual);
+        $this->assertTrue($actual);
     }
 
     // public function testReturnsMembreFromValidId(): void
