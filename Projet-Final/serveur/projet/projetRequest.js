@@ -80,3 +80,29 @@ function ajouterProjetRequete(idMembre){
   });
 
 }
+
+function getAlltags(){
+  var form = new FormData();
+  form.append("action", "getAllTags");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/projet/projetController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+     beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse){
+      projetVue(reponse);
+     
+    },
+    fail: function (err){},
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+}

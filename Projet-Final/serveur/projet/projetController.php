@@ -48,6 +48,7 @@ function  loadPageAjouterProjetController(){
         $tabRes['action'] = "pageProjetAjouter";
 
     $tabRes['idMembre'] = $idMembre;
+    $tabRes['tabTags'] = $dao->getAllTags();
     
 }
 

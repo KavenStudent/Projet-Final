@@ -170,5 +170,23 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function telechargerProjet(int $idProjet) {
         
     }
+
+    public function getAllTags() : array {
+        try {
+            $tab = array();
+            $requete = "SELECT * FROM tag ";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+        return $tab;
+    }
 }
 ?>

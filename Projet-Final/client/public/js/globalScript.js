@@ -1,3 +1,5 @@
+const tagsArray = [];
+
 window.onload = function () {
   showConditions();
   loadPageAccueil();
@@ -119,3 +121,18 @@ function resetForm(){
     output.src = "Projet-Final/client/public/images/default-image.png";
     }, 0);
 }
+
+function findTag(tag, tagsArray){
+  return tagsArray.filter( t => {
+    const regex = new RegExp(tag, 'gi');
+    return t.match(regex);
+  });
+}
+
+function displayTagMatches(){
+  const searchInput = document.querySelector('.tagCreate');
+  console.log(searchInput);
+  // console.log('test');
+}
+
+

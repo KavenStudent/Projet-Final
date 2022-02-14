@@ -26,5 +26,8 @@ interface ProjetDao
 
     //Télécharge le fichier d'un projet
     public function telechargerProjet(int $idProjet);
+
+    //Tous les tags
+    public function getAllTags() : array;
 }
 ?>
