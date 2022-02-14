@@ -50,7 +50,6 @@ function valider() {
 
     document.getElementById('msg-password-erreur').style.display = 'block';
     valide = false;
-
   }
 
   if (valide) {
@@ -115,11 +114,11 @@ var loadFile = function (event) {
 
 // fonction reset form et Image vide
 
-function resetForm(){
-  setTimeout(function(){
+function resetForm() {
+  setTimeout(function () {
     var output = document.getElementById('output');
     output.src = "Projet-Final/client/public/images/default-image.png";
-    }, 0);
+  }, 0);
 }
 
 function findTag(tag, tagsArray){
