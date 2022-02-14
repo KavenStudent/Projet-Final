@@ -1,6 +1,6 @@
 window.onload = function () {
   showConditions();
-  loadPageAccueil();
+  loadPage();
   // empeche d'utiliser la touche entrer dans les forms
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
@@ -113,9 +113,25 @@ var loadFile = function (event) {
 
 // fonction reset form et Image vide
 
-function resetForm(){
-  setTimeout(function(){
+function resetForm() {
+  setTimeout(function () {
     var output = document.getElementById('output');
     output.src = "Projet-Final/client/public/images/default-image.png";
-    }, 0);
+  }, 0);
+}
+
+function loadPage() {
+
+  var typePage = document.getElementById('typePage').value;
+
+  switch (typePage) {
+    case "visiteur":
+      loadPageAccueil();
+      break;
+    case "admin":
+      loadPageAdmin();
+      break;
+    default:
+      loadMembre(`pageMembre`, typePage);
+  }
 }
