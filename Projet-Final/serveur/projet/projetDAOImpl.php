@@ -119,9 +119,10 @@ class MembreDaoImpl extends Modele implements MembreDao
             //  Ajouter les participants au projet
             foreach($participants as $part) {
                 //  Ajouter les participants a la table membreprojet
-                $requete = "INSERT INTO membreprojet VALUES (?, (SELECT idMembre FROM tag WHERE nomTag = ?))";
+                $part.split(' ');   // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+                $requete = "INSERT INTO membreprojet VALUES (?, ?)";
                 $this->setRequete($requete);
-                $this->setParams(array($projet->getId(), $tag));
+                $this->setParams(array($part[2], $projet->getId()));
                 $stmt = $this->executer();
             }
             
