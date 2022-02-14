@@ -10,6 +10,9 @@ var projetVue=function(response) {
         case "pageProjetAjouter" :
         ajouterProjetAffichage(response.idMembre);
         break;
+        case "AjouterProjetReussi" : 
+        ajouterProjetReussi(response.idMembre);
+        break;
         
     }
 }
@@ -147,10 +150,16 @@ function ajouterProjetAffichage(idMembre) {
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
    <button type="button" onclick="loadMembre('pageMembre', ${idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
-   <button type="button"  class="btn btn-primary btn-block mb-4">Ajouter</button>
+   <button type="button" onclick="ajouterProjetRequete(${idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
  </form>`;
 //  onclick="ajouterProjetRequete(${idMembre})"
  $('#contenu').html(contenu);
+}
+
+function ajouterProjetReussi(idMembre){
+
+  loadMembre('pageMembre', idMembre);
+  afficherSnackbar("Projet ajouté avec succès!");
 }
 
 

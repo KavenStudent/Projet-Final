@@ -64,12 +64,30 @@ function ajouterProjet() {
     $nbTelechargements = 0;
     $lienProjet =$_POST['lienProjet'];
     $thumbnail = "";
+
+    $tags = array('web', 'js') ;// $_POST['inputTags'];
+    $tabParticipantAvecId = array();
+    $tabParticipantSansId ="";
+    $tabParticipants = explode(',',$participantsProjet);
+    foreach($tabParticipants as $part){
+        if (preg_match('~[0-9]+~', $part)) {
+            $tabParticipantAvecId[] = trim($part);
+        }else{
+            $tabParticipantSansId .= $part .",";
+        }
+    }
     
-    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $participantsProjet, $nbTelechargements, $lienProjet, $thumbnail);
+
+    $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) -1);
+
+    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail);
 
     if($tabRes['action'] == null){
-        // $dao -> creerProjet($projet, array $tags, array $participants);
-        //A FINIR
+        if($dao -> creerProjet($projet, $tags,  $tabParticipantAvecId)){
+            $tabRes['action'] = 'AjouterProjetReussi';
+            $tabRes['idMembre'] = $idMembre;
+        }
+        
     }
        
 }

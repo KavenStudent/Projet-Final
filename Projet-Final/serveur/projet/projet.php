@@ -20,7 +20,7 @@ class Projet {
         $this->description = $description;
         $this->path = $path;
         $this->prive = $prive;
-        $this->autresparticipants = $autresParticipants;
+        $this->autresParticipants = $autresParticipants;
         $this->nbTelechargements = $nbTelechargements;
         $this->lienExterne = $lienExterne;
         $this->thumbnail = $thumbnail;
