@@ -38,17 +38,19 @@ function valider() {
   if (!myForm.checkValidity()) {
     document.getElementById('validation-form-membre').click();
     valide = false;
+    alert('x');
 
   } else if (!(password.trim() === confirmPassword.trim())) {
 
     document.getElementById('msg-confirm-password-erreur').style.display = 'block';
     valide = false;
+    alert('1');
 
   } else if (!pattern.test(password)) {
-
+ 
     document.getElementById('msg-password-erreur').style.display = 'block';
     valide = false;
-
+    alert('2');
   }
 
   if (valide) {
@@ -113,9 +115,9 @@ var loadFile = function (event) {
 
 // fonction reset form et Image vide
 
-function resetForm(){
-  setTimeout(function(){
+function resetForm() {
+  setTimeout(function () {
     var output = document.getElementById('output');
     output.src = "Projet-Final/client/public/images/default-image.png";
-    }, 0);
+  }, 0);
 }
