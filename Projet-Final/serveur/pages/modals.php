@@ -88,7 +88,7 @@
           <input type="hidden" name="action" value="connexion">
           <input type="submit" id="validation-connexion" class="validation">
           <div class="myInput">
-            <label for="pages" class="form-label">Courriel</label>
+            <label for="pages" class="form-label"> </label>
             <input type="email" class="form-control" id="email-Connexion" name="email" required>
 
           </div>

@@ -48,7 +48,6 @@ function valider() {
 
     document.getElementById('msg-password-erreur').style.display = 'block';
     valide = false;
-
   }
 
   if (valide) {
