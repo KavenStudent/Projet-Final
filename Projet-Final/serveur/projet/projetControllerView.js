@@ -136,7 +136,7 @@ function ajouterProjetAffichage(idMembre) {
  
    <div class="col-md-5 order-md-1 customize">
  
-   <img id="output" src="Projet-Final/client/public/images/default-image.png" class="rounded mx-auto d-block" height="600px" width="600px">
+   <img id="output" src="Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png" class="rounded mx-auto d-block" height="600px" width="600px">
    
  
    <div class="form-outline-inpt inpt">
