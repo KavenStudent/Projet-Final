@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2022 at 11:49 PM
+-- Generation Time: Feb 14, 2022 at 11:38 PM
 -- Server version: 5.7.17
 -- PHP Version: 7.1.3
 
@@ -43,7 +43,7 @@ CREATE TABLE `connexion` (
 --
 
 INSERT INTO `connexion` (`idMembre`, `courriel`, `motDePasse`, `role`, `actif`) VALUES
-(3, 'joanie.birtz@gmail.com', '12345678', 'M', 1);
+(4, 'vim123@hotmail.fr', '123456789', 'M', 1);
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,7 @@ CREATE TABLE `membre` (
 --
 
 INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`) VALUES
-(3, 'Birtz', 'Joanie', 'joanie.birtz@gmail.com', '', 'Etudiant infomatique', 0, 'ae883cf20302d83668ee603d2d1ee3459d5bc201.png', 0, NULL);
+(4, 'Nguyen', 'Vim', 'vim123@hotmail.fr', '5146774205', 'Petit', 0, '9e80eb373c1fc5a1ae715a736e0b0cf0f462df91.png', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,13 +94,6 @@ CREATE TABLE `membreprojet` (
   `idMembre` int(11) NOT NULL,
   `idProjet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `membreprojet`
---
-
-INSERT INTO `membreprojet` (`idMembre`, `idProjet`) VALUES
-(3, 7);
 
 -- --------------------------------------------------------
 
@@ -121,13 +114,6 @@ CREATE TABLE `projet` (
   `nbSignalisation` int(11) NOT NULL DEFAULT '0',
   `thumbnail` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `projet`
---
-
-INSERT INTO `projet` (`id`, `idCreateur`, `titre`, `description`, `path`, `prive`, `autreParticipant`, `nbTelechargement`, `lienExterne`, `nbSignalisation`, `thumbnail`) VALUES
-(7, 3, 'kajo', 'very', '', 0, NULL, 0, NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -163,14 +149,6 @@ CREATE TABLE `tag` (
   `id` int(11) NOT NULL,
   `nomTag` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `tag`
---
-
-INSERT INTO `tag` (`id`, `nomTag`) VALUES
-(1, 'Web'),
-(2, 'Js');
 
 --
 -- Indexes for dumped tables
@@ -243,12 +221,12 @@ ALTER TABLE `historiquepaiement`
 -- AUTO_INCREMENT for table `membre`
 --
 ALTER TABLE `membre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `projet`
 --
 ALTER TABLE `projet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `signalisation`
 --
@@ -258,7 +236,7 @@ ALTER TABLE `signalisation`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
