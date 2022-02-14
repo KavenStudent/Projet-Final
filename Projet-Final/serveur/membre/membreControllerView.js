@@ -253,10 +253,10 @@ function afficherPageMembreEdit(json) {
                     <div class="form-check form-switch" id='switchBox'>`;
 
     if (json.membre.prive == 0) {
-        contenu += `<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />`;
+        contenu += `<input class="form-check-input" type="checkbox"  name='profilPublic' value='${json.membre.prive}' checked />`;
     }
     else {
-        contenu += `<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"/>`
+        contenu += `<input class="form-check-input" type="checkbox"  name='profilPublic' value='${json.membre.prive}'/>`
     }
 
     contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Public</label>

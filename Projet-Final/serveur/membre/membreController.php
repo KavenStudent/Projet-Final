@@ -116,7 +116,7 @@ function modifierMembre()
     $numeroTelephone = $_POST['numeroTelephoneEdit'];
     $description = $_POST['descriptionEdit'];
     $actif = 1;
-    $prive = 0;
+    $prive = $_POST['profilPublic'];
     // $prive =  $_POST['isPublic'];
     $imageProfil = "";
     $membrePremium = 0;
