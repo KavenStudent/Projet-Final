@@ -29,7 +29,7 @@ function afficherPageProjet(json) {
         <h1>${json.projet.titre}</h1>
 
         <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
-                name="projetCreateurContent">${json.projet.idCreator}</a></h5>
+                name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
             aria-label="Autres participants: ">
