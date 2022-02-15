@@ -129,9 +129,9 @@ function findTag(tag, tagsArray){
 }
 
 function displayTagMatches(){
-  const searchInput = document.querySelector('.tagCreate');
-  console.log(searchInput);
-  // console.log('test');
+  const matchArray = findTag(this.value, tagsArray);
+  console.log(matchArray);
 }
-
+const searchInput = document.querySelector('.tagCreate');
+ 
 
