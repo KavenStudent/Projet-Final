@@ -109,7 +109,7 @@ function ajouterProjetAffichage(json) {
     <!-- Text input -->
    <div class="form-outline mb-69">
      <label class="form-label ftxt" for="titreProjet">Titre:</label>
-     <input type="text" name="titreProjet" class="form-control" placeholder="Titre"/>
+     <input type="text" name="titreProjet" class="form-control" placeholder="Titre">
      
    </div>
  
@@ -131,13 +131,17 @@ function ajouterProjetAffichage(json) {
    <!-- Email input -->
    <div class="form-outline mb-69">
      <label class="form-label" for="lienProjet">Lien:</label>
-     <input type="url" name="lienProjet" class="form-control" placeholder="Lien" />
+     <input type="url" name="lienProjet" class="form-control" placeholder="Lien">
      
    </div>
  <!-- Message input -->
-   <div class="form-outline mb-69">
-     <label class="form-label" for="tagProjet">tags:</label>
-     <input class="form-control ftxt tagCreate" id="tagCreate" name="tagProjet" rows="4" placeholder="tags"></input>
+    <div class="form-outline mb-69">
+      <label class="form-label" for="tagProjet">tags:</label>
+
+      <!-- TAGS ICI -->
+      <div class="m-5 col-md-6">
+        <input id="tagCreate" name='tags' value='' class="form-control" autofocus>
+      </div>
     
      <div id='tagsReponse'></div>
    </div>
@@ -164,9 +168,15 @@ function ajouterProjetAffichage(json) {
   $('#contenu').html(contenu);
 
   $("#tagCreate").keyup(function () {
+    alert("miam");
     displayTagMatches();
     // console.log('test');
   });
+
+  var input = document.querySelector('input[name=tags]');
+
+  // initialize Tagify on the above input node reference
+  new Tagify(input);
 }
 
 

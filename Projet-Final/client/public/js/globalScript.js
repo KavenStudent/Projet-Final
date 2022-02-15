@@ -144,12 +144,17 @@ function displayTagMatches() {
   }
   $('#tagsReponse').html(contenu);
 }
-const searchInput = document.querySelector('.tagCreate');
+
 
 function addInput(element) {
   var tagInputEle = $('#tagCreate');
   tagInputEle.tagsinput();
   tagInputEle.tagsinput('add', (element + ' ;'));
+
+  
+  $('#tagsReponse').html("");
 }
+
+
 
 
