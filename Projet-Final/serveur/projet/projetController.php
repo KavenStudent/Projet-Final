@@ -35,7 +35,8 @@ function loadPageProjetController() {
 
     $projet = $dao->getProjet($idProjet);
     $tabRes['projet'] = array("id" => $projet->getId(),"titre"=> $projet->getTitre() ,"idCreator"=> $projet->getCreateurId(), "autreParticipant"=> $projet->getAutresParticipants(),
-    "description"=> $projet->getDescription(), "lienExterne"=> $projet->getLienExterne());
+    "description"=> $projet->getDescription(), "lienExterne"=> $projet->getLienExterne(),
+     "nomComplet"=> $projet->getNomMembre());
 }
 
 function  loadPageAjouterProjetController(){

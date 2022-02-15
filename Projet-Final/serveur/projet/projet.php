@@ -10,10 +10,12 @@ class Projet {
     private $nbTelechargements;
     private $lienExterne;
     private $thumbnail;
+    private $nomMembre;
 
     // ------------------------------------------------------------Constructeur
     public function __construct(int $id, int $createurId, string $titre, string $description,
-     string $path, int $prive, string $autresParticipants, int $nbTelechargements, string $lienExterne, string $thumbnail) {
+     string $path, int $prive, string $autresParticipants,
+      int $nbTelechargements, string $lienExterne, string $thumbnail, string $nomMembre) {
         $this->id = $id;
         $this->createurId = $createurId;
         $this->titre = $titre;
@@ -24,6 +26,7 @@ class Projet {
         $this->nbTelechargements = $nbTelechargements;
         $this->lienExterne = $lienExterne;
         $this->thumbnail = $thumbnail;
+        $this->nomMembre = $nomMembre;
     }
 
     // ----------------------------------------------------------------Getters
@@ -57,6 +60,10 @@ class Projet {
     public function getThumbnail() {
         return $this->thumbnail;
     }
+
+    public function getNomMembre(){
+        return $this->nomMembre;
+    }
   
     //----------------------------------------------------------------Setters
     public function setTitre(string $titre) {
@@ -82,6 +89,10 @@ class Projet {
     }
     public function setThumbnail(string $thumbnail) {
         $this->thumbnail = $thumbnail;
+    }
+
+    public function setNomMembre(string $nomMembre){
+        $this->nomMembre = $nomMembre;
     }
 }
 

@@ -19,7 +19,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function getProjet(int $idProjet): Projet {
         try {
             
-            $requete = "SELECT * FROM projet WHERE id = ?";
+            $requete = "SELECT *, p.description as descriptionProjet, p.id as idProjet FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE p.id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();
@@ -29,7 +29,12 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 }else{
                     $mesParticipants = $ligne->autreParticipant;
                 }
-                $projet = new Projet($ligne->id, $ligne->idCreateur, $ligne->titre, $ligne->description, $ligne->path, $ligne->prive, $mesParticipants, $ligne->nbTelechargement, $ligne->lienExterne, $ligne->thumbnail);
+                $nom = ($ligne->nom);
+                $prenom = ($ligne->prenom);
+                $nomComplet = $prenom." ".$nom;
+                $projet = new Projet($ligne->idProjet, $ligne->idCreateur, $ligne->titre,
+                 $ligne->descriptionProjet, $ligne->path, $ligne->prive, $mesParticipants,
+                  $ligne->nbTelechargement, $ligne->lienExterne, $ligne->thumbnail, $nomComplet);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
