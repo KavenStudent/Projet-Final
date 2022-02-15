@@ -134,12 +134,15 @@ function findTag(tag, tagsArray) {
 
 function displayTagMatches() {
   let value = document.getElementById('tagCreate').value;
-
+  let contenu = '';
   if (value.length > 0) {
     const matchArray = findTag(value, tagsArray);
     console.log(matchArray);
+    matchArray.forEach(element => {
+      contenu += `<p>${element}<p/>`;
+    });
   }
-
+  $('#tagsReponse').html(contenu);
 }
 const searchInput = document.querySelector('.tagCreate');
 

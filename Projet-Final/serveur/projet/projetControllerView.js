@@ -138,7 +138,8 @@ function ajouterProjetAffichage(json) {
    <div class="form-outline mb-69">
      <label class="form-label" for="tagProjet">tags:</label>
      <input class="form-control ftxt tagCreate" id="tagCreate" name="tagProjet" rows="4" placeholder="tags"></input>
-     
+    
+     <div id='tagsReponse'></div>
    </div>
    <div class="col-md-5 order-md-1 customize">
  
