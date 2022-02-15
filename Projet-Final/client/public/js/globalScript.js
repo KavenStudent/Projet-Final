@@ -139,11 +139,17 @@ function displayTagMatches() {
     const matchArray = findTag(value, tagsArray);
     console.log(matchArray);
     matchArray.forEach(element => {
-      contenu += `<p>${element}<p/>`;
+      contenu += `<p onclick="addInput('${element}')">${element}</p>`;
     });
   }
   $('#tagsReponse').html(contenu);
 }
 const searchInput = document.querySelector('.tagCreate');
+
+function addInput(element) {
+  var tagInputEle = $('#tagCreate');
+  tagInputEle.tagsinput();
+  tagInputEle.tagsinput('add', (element + ' ;'));
+}
 
 
