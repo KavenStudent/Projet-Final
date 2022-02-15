@@ -121,17 +121,26 @@ function resetForm() {
   }, 0);
 }
 
-function findTag(tag, tagsArray){
-  return tagsArray.filter( t => {
-    const regex = new RegExp(tag, 'gi');
-    return t.match(regex);
+function findTag(tag, tagsArray) {
+  return tagsArray.filter(t => {
+
+    if (t.toLowerCase().includes(tag.toLowerCase())) {
+      return t;
+    }
+
   });
 }
 
-function displayTagMatches(){
-  const matchArray = findTag(this.value, tagsArray);
-  console.log(matchArray);
+
+function displayTagMatches() {
+  let value = document.getElementById('tagCreate').value;
+
+  if (value.length > 0) {
+    const matchArray = findTag(value, tagsArray);
+    console.log(matchArray);
+  }
+
 }
 const searchInput = document.querySelector('.tagCreate');
- 
+
 

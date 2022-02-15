@@ -159,14 +159,8 @@ function ajouterProjetAffichage(json) {
   json.tabTags.forEach(element => {
     tagsArray.push(element.nomTag);
   });
-  // console.log(tagsArray);
 
-  //  onclick="ajouterProjetRequete(${idMembre})"
   $('#contenu').html(contenu);
-
-  // const searchInput = document.querySelector('.tagCreate');
-  // const tagSuggestions = document.getElementById('tagCreate');
-  // searchInput.addEventListener('keyup', displayTagMatches());
 
   $("#tagCreate").keyup(function () {
     displayTagMatches();
