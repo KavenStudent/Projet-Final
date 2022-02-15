@@ -8,6 +8,32 @@ window.onload = function () {
       return false;
     }
   });
+
+  //EYE INSCRIPTION
+  const togglePassword = document.querySelector("#togglePassword");
+  const password = document.querySelector("#password");
+
+  togglePassword.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+  //EYE CONNEXION
+  const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
+  const passwordConnexion = document.querySelector("#passwordConnexion");
+
+  togglePasswordConnexion.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = passwordConnexion.getAttribute("type") === "password" ? "text" : "password";
+    passwordConnexion.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
 };
 
 // fonction show terme et conditions
