@@ -238,6 +238,7 @@ function isLabelExist(label){
   return exist;
 }
 
+//Ajoute des suggestions et add le tag lors du click de la suggestion
 function displayTagMatches2() {
   let value = document.getElementById('monInputTag').value;
   let contenu = '';
