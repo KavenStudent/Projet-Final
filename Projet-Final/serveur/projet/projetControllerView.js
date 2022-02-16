@@ -1,17 +1,21 @@
-var projetVue = function (response) {
-  var action = response.action;
-  switch (action) {
-    case "pageProjet":
-      afficherPageProjet(response);
-      break;
-    case "pageProjetEdit":
-      afficherPageProjetEdit(response);
-      break;
-    case "pageProjetAjouter":
-      ajouterProjetAffichage(response);
-      break;
 
-  }
+var projetVue=function(response) {
+    var action=response.action;
+    switch(action){
+        case "pageProjet" : 
+        afficherPageProjet(response);
+        break;
+        case "pageProjetEdit" : 
+        afficherPageProjetEdit(response);
+        break;
+        case "pageProjetAjouter" :
+        ajouterProjetAffichage(response.idMembre);
+        break;
+        case "AjouterProjetReussi" : 
+        ajouterProjetReussi(response.idMembre);
+        break;
+        
+    }
 }
 
 function afficherPageProjet(json) {
@@ -26,7 +30,7 @@ function afficherPageProjet(json) {
         <h1>${json.projet.titre}</h1>
 
         <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
-                name="projetCreateurContent">${json.projet.idCreator}</a></h5>
+                name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
             aria-label="Autres participants: ">
@@ -159,8 +163,8 @@ function ajouterProjetAffichage(json) {
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
    <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
-   <button type="button"  class="btn btn-primary btn-block mb-4">Ajouter</button>
-   <button type="button"  class="btn btn-primary btn-block mb-4" onclick="console.log(document.getElementById('tagCreate').value)">Ajouter</button>
+   <button type="button" onclick="ajouterProjetRequete(${idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
+
  </form>`;
   json.tabTags.forEach(element => {
     tagsArray.push(element.nomTag);
@@ -190,6 +194,12 @@ function ajouterProjetAffichage(json) {
 
   
 
+}
+
+function ajouterProjetReussi(idMembre){
+
+  loadMembre('pageMembre', idMembre);
+  afficherSnackbar("Projet ajouté avec succès!");
 }
 
 

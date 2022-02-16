@@ -6,10 +6,20 @@ require_once("../includes/modele.inc.php");
 
 class ProjetDaoImpl extends Modele implements ProjetDao
 { 
+    public function getLastProjetId(): int
+    {
+        $requete = "SELECT id FROM projet ORDER BY id DESC LIMIT 1";
+        $this->setRequete($requete);
+        $this->setParams(array());
+        $stmt = $this->executer();
+        $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+
+        return $ligne->id;
+    }
     public function getProjet(int $idProjet): Projet {
         try {
             
-            $requete = "SELECT * FROM projet WHERE id = ?";
+            $requete = "SELECT *, p.description as descriptionProjet, p.id as idProjet FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE p.id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();
@@ -19,7 +29,12 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 }else{
                     $mesParticipants = $ligne->autreParticipant;
                 }
-                $projet = new Projet($ligne->id, $ligne->idCreateur, $ligne->titre, $ligne->description, $ligne->path, $ligne->prive, $mesParticipants, $ligne->nbTelechargement, $ligne->lienExterne, $ligne->thumbnail);
+                $nom = ($ligne->nom);
+                $prenom = ($ligne->prenom);
+                $nomComplet = $prenom." ".$nom;
+                $projet = new Projet($ligne->idProjet, $ligne->idCreateur, $ligne->titre,
+                 $ligne->descriptionProjet, $ligne->path, $ligne->prive, $mesParticipants,
+                  $ligne->nbTelechargement, $ligne->lienExterne, $ligne->thumbnail, $nomComplet);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -96,17 +111,36 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         }
         return $tab;
     }
-    public function creerProjet(Projet $projet, array $tags, array $participants) {
+    public function creerProjet(Projet $projet, array $tags, array $participants): bool {
         try {
+           
             //  Ajoute le projet
-            $requete = "INSERT INTO projet VALUES(0,?,?,?,?,?,?,?,?)";
+            $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail) VALUES(0,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
             $this->setParams(array(
-                $projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->getprive(),
-                $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $projet->getId()
+                $projet->getCreateurId(),$projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->isPrive(),
+                $projet->getAutresParticipants(), $projet->getLienExterne(), $projet->getThumbnail()
             ));
             $stmt = $this->executer();
             
+
+            //  TO DO: Terminer l'ajout des participants
+            //  Ajouter les participants au projet
+            $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
+            $idProjet = $this->getLastProjetId();
+            foreach($participants as $part) {
+                //  Ajouter les participants a la table membreprojet
+                $tabPart = explode(' ', $part);   // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+                $idMembre = (int) ($tabPart[2]);
+                $this->setRequete($requete);
+                $this->setParams(array(
+                    $idMembre, 
+                    $idProjet
+                     ));
+                    
+                $this->executer();
+            }
+
             //  Ajouter les tags au projet
             foreach($tags as $tag) {
                 //  Inserer le tag dans la liste de tag s'il n'existe pas deja
@@ -119,26 +153,19 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 $stmt = $this->executer();
 
                 //  Ajouter les tags a la table projettag
-                $requete = "INSERT INTO projettag VALUES (?, (SELECT idTag FROM tag WHERE nomTag = ?))";
+                $requete = "INSERT INTO projettag VALUES (?, (SELECT id FROM tag WHERE nomTag = ?))";
                 $this->setRequete($requete);
-                $this->setParams(array($projet->getId(), $tag));
+                $this->setParams(array($idProjet, $tag));
                 $stmt = $this->executer();
             }
+            $returnValue = true;
 
-            //  TO DO: Terminer l'ajout des participants
-            //  Ajouter les participants au projet
-            foreach($participants as $part) {
-                //  Ajouter les participants a la table membreprojet
-                $requete = "INSERT INTO membreprojet VALUES (?, (SELECT idMembre FROM tag WHERE nomTag = ?))";
-                $this->setRequete($requete);
-                $this->setParams(array($projet->getId(), $tag));
-                $stmt = $this->executer();
-            }
-            
         } catch (Exception $e) {
             echo $e->getMessage();
+            $returnValue = false;
         } finally {
             unset($requete);
+            return $returnValue;
         }
     }
     public function modifierProjet(Projet $projet) {
@@ -188,5 +215,6 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         }
         return $tab;
     }
+
 }
 ?>

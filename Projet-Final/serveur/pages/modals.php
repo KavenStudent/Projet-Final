@@ -36,7 +36,10 @@
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustom03" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control modalInput" id="password" name="password" required>
+            <div class="passwordDivInscription">
+              <input type="password" class="form-control modalInput passwordCustomInscription" id="password" name="password" required>
+              <i class="bi bi-eye-slash" id="togglePassword"></i>
+            </div>
             <span id="msg-password-erreur">Le mot de passe doit contenir au moins 8 charactères </span>
           </div>
           <div class="col-md-8 itemInput">
@@ -83,19 +86,21 @@
       <div class="modal-body modalCustom">
         <!-- Form connexion -->
 
-        <form class="form-connexion" id="form-connexion">
+        <form class="form-connexion connexionContainer" id="form-connexion">
 
           <input type="hidden" name="action" value="connexion">
           <input type="submit" id="validation-connexion" class="validation">
           <div class="myInput">
-            <label for="pages" class="form-label"> </label>
-            <input type="email" class="form-control" id="email-Connexion" name="email" required>
-
+            <label for="pages" class="form-label"> Courriel</label>
+            <input type="email" class="form-control inputConnexion" id="email-Connexion" name="email" required>
           </div>
 
           <div class="myInput">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="passwordConnexion" name="password" required>
+            <div class="passwordDivConnexion">
+              <input type="password" class="form-control passwordCustomConnexion" id="passwordConnexion" name="password" required>
+              <i class="bi bi-eye-slash" id="togglePasswordConnexion"></i>
+            </div>
           </div>
 
 

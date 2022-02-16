@@ -2,13 +2,39 @@ const tagsArray = [];
 
 window.onload = function () {
   showConditions();
-  loadPageAccueil();
+  loadPage();
   // empeche d'utiliser la touche entrer dans les forms
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
       event.preventDefault();
       return false;
     }
+  });
+
+  //EYE INSCRIPTION
+  const togglePassword = document.querySelector("#togglePassword");
+  const password = document.querySelector("#password");
+
+  togglePassword.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+  //EYE CONNEXION
+  const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
+  const passwordConnexion = document.querySelector("#passwordConnexion");
+
+  togglePasswordConnexion.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = passwordConnexion.getAttribute("type") === "password" ? "text" : "password";
+    passwordConnexion.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
   });
 };
 
@@ -121,6 +147,7 @@ function resetForm() {
   }, 0);
 }
 
+
 function findTag(tag, tagsArray) {
   return tagsArray.filter(t => {
 
@@ -130,31 +157,6 @@ function findTag(tag, tagsArray) {
 
   });
 }
-
-
-function displayTagMatches() {
-  let value = document.getElementById('tagCreate').value;
-  let contenu = '';
-  if (value.length > 0) {
-    const matchArray = findTag(value, tagsArray);
-    console.log(matchArray);
-    matchArray.forEach(element => {
-      contenu += `<p onclick="addInput('${element}')">${element}</p>`;
-    });
-  }
-  $('#tagsReponse').html(contenu);
-}
-
-
-function addInput(element) {
-  var tagInputEle = $('#tagCreate');
-  tagInputEle.tagsinput();
-  tagInputEle.tagsinput('add', (element + ' ;'));
-
-  
-  $('#tagsReponse').html("");
-}
-
 
 
 // TAGS VIM
@@ -259,4 +261,21 @@ function displayTagMatches2() {
 
 
 
+
+
+function loadPage() {
+
+  var typePage = document.getElementById('typePage').value;
+
+  switch (typePage) {
+    case "visiteur":
+      loadPageAccueil();
+      break;
+    case "admin":
+      loadPageAdmin();
+      break;
+    default:
+      loadMembre(`pageMembre`, typePage);
+  }
+}
 

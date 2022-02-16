@@ -15,8 +15,9 @@ button {
 
 input {
   padding-left: 1em;
-  border: 1px solid black;
+  
 }
+
 
 textarea {
   max-width: 100%;
@@ -55,7 +56,9 @@ textarea {
   background-color: white;
   padding: 5px;
   border-radius: 5px;
+  cursor: pointer;
 }
+
 
 /* snackbar */
 #snackbar {
@@ -146,6 +149,7 @@ textarea {
 
 .modalInput {
   background-color: rgb(241, 238, 238);
+  border: 1px solid rgb(175, 174, 174);
 }
 
 .collapsible {
@@ -202,6 +206,15 @@ textarea {
 }
 
 /* MODAL CONNEXION */
+
+.connexionContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.inputConnexion{
+  border: 1px solid rgb(175, 174, 174);
+}
 
 /* Front-page */
 
@@ -454,19 +467,6 @@ textarea {
   background-color: rgb(207, 124, 124);
 }
 
-/* .bootstrap-tagsinput .tag {
-  background: red;
-  padding: 4px;
-  font-size: 14px;
-} */
-
-.bootstrap-tagsinput .tag {
-  margin-right: 2px;
-  color: white !important;
-  background-color: #0d6efd;
-  padding: 0.2rem;
-}
-
 
 /* TAGS VIM */
 
@@ -514,3 +514,36 @@ textarea {
   border-radius: 3px;
   padding-left: 5px;
 }
+
+
+/* PASSWORD DIV EYEs */
+.passwordDivInscription{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(241, 238, 238);
+  border: 1px solid rgb(161, 159, 159);
+  border-radius: 5px;
+  padding-right: 0.5em;
+}
+
+.passwordCustomInscription{
+  border: 0;
+}
+
+.passwordDivConnexion{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(175, 174, 174);
+  border-radius: 5px;
+  padding-right: 0.5em;
+}
+
+.passwordCustomConnexion{
+  border: 0;
+}
+

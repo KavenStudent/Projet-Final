@@ -19,7 +19,7 @@ interface ProjetDao
     public function getAllTagsForProjet(int $idProjet): array;
 
     //Cree un nouveau projet
-    public function creerProjet(Projet $projet, array $tags, array $participants);
+    public function creerProjet(Projet $projet, array $tags, array $participants): bool;
 
     //Modifie un projet donné
     public function modifierProjet(Projet $projet);
