@@ -9,7 +9,7 @@ var projetVue=function(response) {
         afficherPageProjetEdit(response);
         break;
         case "pageProjetAjouter" :
-        ajouterProjetAffichage(response.idMembre);
+        ajouterProjetAffichage(response);
         break;
         case "AjouterProjetReussi" : 
         ajouterProjetReussi(response.idMembre);
@@ -167,13 +167,11 @@ function ajouterProjetAffichage(json) {
 
  </form>`;
 
-  // json.tabTags.forEach(element => {
-  //   tagsArray.push(element.nomTag);
-  // });
+  json.tabTags.forEach(element => {
+    tagsArray.push(element.nomTag);
+  });
 
   $('#contenu').html(contenu);
-
-  
 
   //Système de tags : VIM
   setTagsBase(new Array());
