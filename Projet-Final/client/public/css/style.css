@@ -451,7 +451,7 @@ textarea {
 }
 
 #tagsReponse{
-  background-color: red;
+  background-color: rgb(207, 124, 124);
 }
 
 /* .bootstrap-tagsinput .tag {
@@ -506,6 +506,7 @@ textarea {
 .suggestionTags{
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  padding-left: 5px;
 }
 
 

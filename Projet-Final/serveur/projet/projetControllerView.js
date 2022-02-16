@@ -168,13 +168,7 @@ function ajouterProjetAffichage(json) {
 
   $('#contenu').html(contenu);
 
-  $("#tagCreate").keyup(function () {
-    alert("miam");
-    displayTagMatches();
-    // console.log('test');
-  });
-
-
+  
 
   //Système de tags : VIM
   setTagsBase(new Array());
