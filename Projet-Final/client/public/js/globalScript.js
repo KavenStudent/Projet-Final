@@ -1,3 +1,5 @@
+const tagsArray = [];
+
 window.onload = function () {
   showConditions();
   loadPage();
@@ -145,6 +147,122 @@ function resetForm() {
   }, 0);
 }
 
+
+function findTag(tag, tagsArray) {
+  return tagsArray.filter(t => {
+
+    if (t.toLowerCase().includes(tag.toLowerCase())) {
+      return t;
+    }
+
+  });
+}
+
+
+// TAGS VIM
+
+let tags = [];
+
+//Setter la liste de tags
+function setTagsBase(originalTags){
+  tags = originalTags;
+}
+
+//Creer un Tag
+function createTag(label){
+  const div = document.createElement('div');
+  div.setAttribute('class', 'tag');
+  const span = document.createElement('span');
+  span.innerHTML = label;
+  const closeBtn = document.createElement('i');
+  closeBtn.setAttribute('class', 'material-icons');
+  closeBtn.setAttribute('data-item', label);
+  closeBtn.innerHTML = 'close';
+
+  div.appendChild(span);
+  div.appendChild(closeBtn);
+  return div;
+}
+
+
+//Ajoute un tag
+function addTag(label){
+  if(isLabelExist(label)){
+    afficherSnackbar("Le tag est déja là!");
+  }else{
+    tags.push(label);
+    addTags();
+    let monInputTag = document.getElementById('monInputTag');
+    monInputTag.value = '';
+  }
+}
+
+
+//Ajoute ma liste de tags dans la div
+function addTags(){
+    clearTags();
+    tags.slice().reverse().forEach(function(tag){
+    const input = createTag(tag);
+    const tagContainer = document.querySelector('.tag-container');
+    tagContainer.prepend(input);
+    $('#tagsReponse').html("");
+    })
+  }
+
+//Clear ma liste de tags
+function clearTags(){
+  document.querySelectorAll('.tag').forEach(function(tag){
+    tag.parentElement.removeChild(tag);
+  });
+}
+
+// Permet de cut un tag parmi la liste de tags
+document.addEventListener('click', function(e){
+  if(e.target.tagName === 'I'){
+    const value = e.target.getAttribute('data-item');
+    const index = tags.indexOf(value);
+    tags = [...tags.slice(0, index),  ...tags.slice(index + 1)];
+    addTags();
+    
+  }
+})
+
+//Permet de Vérifier si le tag est déja dans la list
+function isLabelExist(label){
+  let exist = false;
+  if(tags.length > 0){
+    tags.forEach(function(tag){
+      if(tag === label){
+        exist = true;
+      }
+    })
+  }
+  return exist;
+}
+
+//Ajoute des suggestions et add le tag lors du click de la suggestion
+function displayTagMatches2() {
+  let value = document.getElementById('monInputTag').value;
+  let contenu = '';
+  if (value.length > 0) {
+    const matchArray = findTag(value, tagsArray);
+    console.log(matchArray);
+    matchArray.forEach(element => {
+      contenu += `<p class="suggestionTags" onclick="addTag('${element}')">${element}</p>`;
+    });
+  }
+  $('#tagsReponse').html(contenu);
+}
+
+
+
+
+
+
+
+
+
+
 function loadPage() {
 
   var typePage = document.getElementById('typePage').value;
@@ -160,3 +278,4 @@ function loadPage() {
       loadMembre(`pageMembre`, typePage);
   }
 }
+
