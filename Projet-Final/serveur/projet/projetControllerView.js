@@ -163,12 +163,13 @@ function ajouterProjetAffichage(json) {
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
    <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
-   <button type="button" onclick="ajouterProjetRequete(${idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
+   <button type="button" onclick="ajouterProjetRequete(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
 
  </form>`;
-  json.tabTags.forEach(element => {
-    tagsArray.push(element.nomTag);
-  });
+
+  // json.tabTags.forEach(element => {
+  //   tagsArray.push(element.nomTag);
+  // });
 
   $('#contenu').html(contenu);
 
