@@ -139,11 +139,12 @@ function ajouterProjetAffichage(json) {
       <label class="form-label" for="tagProjet">tags:</label>
 
       <!-- TAGS ICI -->
-      <div class="m-5 col-md-6">
-        <input id="tagCreate" name='tags' value='' class="form-control" autofocus>
+      <div class="tag-container">
+
+        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
       </div>
     
-     <div id='tagsReponse'></div>
+     <div id='tagsReponse' class="suggestionsDivision"></div>
    </div>
    <div class="col-md-5 order-md-1 customize">
  
@@ -173,10 +174,28 @@ function ajouterProjetAffichage(json) {
     // console.log('test');
   });
 
-  var input = document.querySelector('input[name=tags]');
 
-  // initialize Tagify on the above input node reference
-  new Tagify(input);
+
+  //Système de tags : VIM
+  setTagsBase(new Array());
+
+  const tagContainer = document.querySelector('.tag-container');
+  let monInputTag = document.getElementById('monInputTag');
+
+  //Ajoute la fonction de add des tags quand je press enter.
+  monInputTag.addEventListener('keyup', function(e){
+    if(e.key === 'Enter' && (monInputTag.value != "")){
+      addTag(monInputTag.value);
+    }
+
+    displayTagMatches2();
+  })
+
+
+
+
+  
+
 }
 
 
