@@ -467,8 +467,40 @@ textarea {
   background-color: rgb(207, 124, 124);
 }
 
+#participantsReponse{
+  background-color: rgb(207, 124, 124);
+}
 
-/* TAGS VIM */
+/* PARTICIPANTS */
+
+.participant-container{
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.participant-container .tag {
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  background: #f2f2f2;
+  cursor: default;
+}
+
+.participant-container input{
+  flex: 1;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+  border: 0;
+}
+
+/* TAGS */
 
 .tag-container{
   border: 2px solid #ccc;
@@ -503,7 +535,7 @@ textarea {
   border: 0;
 }
 
-.suggestionTags{
+.suggestion{
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   padding-left: 5px;

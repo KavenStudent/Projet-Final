@@ -128,8 +128,12 @@ function ajouterProjetAffichage(json) {
    <!-- Message input -->
    <div class="form-outline mb-69">
      <label class="form-label" for="participantsProjet">Participants:</label>
-     <textarea class="form-control ftxt" name="participantsProjet" rows="4" placeholder="Patricipants"></textarea>
-     
+      <!-- PARTICIPANTS TAGS -->
+     <div class="participant-container">
+
+        <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
+      </div>
+      <div id='participantsReponse' class="suggestionsDivision"></div>
    </div>
  
    <!-- Email input -->
@@ -140,7 +144,7 @@ function ajouterProjetAffichage(json) {
    </div>
  <!-- Message input -->
     <div class="form-outline mb-69">
-      <label class="form-label" for="tagProjet">tags:</label>
+      <label class="form-label" for="tagProjet">Tags:</label>
 
       <!-- TAGS ICI -->
       <div class="tag-container">
@@ -167,22 +171,22 @@ function ajouterProjetAffichage(json) {
 
  </form>`;
 
+   $('#contenu').html(contenu);
+
   json.tabTags.forEach(element => {
     tagsArray.push(element.nomTag);
   });
 
-  $('#contenu').html(contenu);
-
-  //Système de tags : VIM
+  //Système de tags 
   setTagsBase(new Array());
 
-  const tagContainer = document.querySelector('.tag-container');
+
   let monInputTag = document.getElementById('monInputTag');
 
   //Ajoute la fonction de add des tags quand je press enter.
   monInputTag.addEventListener('keyup', function(e){
     if(e.key === 'Enter' && (monInputTag.value != "")){
-      addTag(monInputTag.value);
+      addTag(monInputTag.value , 'monInputTag' , '.tag-container' , '#tagsReponse', tags, 'tagValueCreate' ,'etiquette');
     }
 
     displayTagMatches2();
@@ -190,8 +194,20 @@ function ajouterProjetAffichage(json) {
 
 
 
+  json.tabParticipants.forEach(element => {
+    participantsArray.push(element);
+  });
 
-  
+  let monInputParticipant = document.getElementById('participantsInput');
+
+  monInputParticipant.addEventListener('keyup', function(e){
+    if(e.key === 'Enter' && (monInputParticipant.value != "")){
+      addTag(monInputParticipant.value, 'participantsInput' , '.participant-container'  , '#participantsReponse' , participants, 'participantValueCreate' ,'participant');
+    }
+
+    displayParticipantsMatches();
+  })
+
 
 }
 

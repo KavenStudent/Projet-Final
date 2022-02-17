@@ -2,6 +2,7 @@
 session_start();
 require_once("projet.php");
 require_once("projetDAOImpl.php");
+require_once("../membre/membreDAOImpl.php");
 //Controller
 $tabRes = array();
 $tabRes['action'] = null;
@@ -50,6 +51,8 @@ function  loadPageAjouterProjetController(){
 
     $tabRes['idMembre'] = $idMembre;
     $tabRes['tabTags'] = $dao->getAllTags();
+    $daoMembre = new MembreDaoImpl();
+    $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
     
 }
 
@@ -62,14 +65,20 @@ function ajouterProjet() {
     $descriptionProjet = $_POST['descriptionProjet'];
     $path ="";
     $prive = true;
-    $participantsProjet =$_POST['participantsProjet'];
+    
     $nbTelechargements = 0;
     $lienProjet =$_POST['lienProjet'];
     $thumbnail = "";
 
-    $tags = array('web', 'js') ;// $_POST['inputTags'];
+    $tagsSTRING = $_POST['tags'];
+    $tags = explode(',',$tagsSTRING);
+
+    $participantsProjet = $_POST['participantsProjet'];
+
     $tabParticipantAvecId = array();
     $tabParticipantSansId ="";
+
+    
     $tabParticipants = explode(',',$participantsProjet);
     foreach($tabParticipants as $part){
         if (preg_match('~[0-9]+~', $part)) {
@@ -78,11 +87,14 @@ function ajouterProjet() {
             $tabParticipantSansId .= $part .",";
         }
     }
-    
+    print_r($tabParticipantAvecId);
+    print_r($tabParticipantSansId);
 
     $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) -1);
 
-    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail);
+    $nomComplet = $dao ->getMembreNameById($idMembre);
+
+    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet);
 
     if($tabRes['action'] == null){
         if($dao -> creerProjet($projet, $tags,  $tabParticipantAvecId)){

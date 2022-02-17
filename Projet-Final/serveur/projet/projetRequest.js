@@ -57,6 +57,8 @@ function ajouterProjetRequete(idMembre){
   var form = new FormData(document.getElementById('ajouterProjetForm'));
   form.append("action", "ajouterProjet");
   form.append("idMembre", idMembre);
+  form.append("tags", getTagsValue('tagValueCreate'));
+  form.append("participantsProjet", getTagsValue('participantValueCreate') );
 
   $.ajax({
     type: "POST",
