@@ -51,8 +51,8 @@ class Modele{
 	}
 
 	function enleverFichier($dossier,$image){
-		if($image!=="default.png"){
-			$rmImg="../$dossier/".$image;
+		if($image!=="defaultProfil.png" && $image!=="defaultThumbnail.png"){
+			$rmImg="./$dossier/".$image;
 			$tabFichiers = glob("../$dossier/*");
 			
 			// parcourir les fichier
@@ -67,7 +67,7 @@ class Modele{
 	}
 	
 	function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){
-		$cheminDossier="../$dossier/";
+		$cheminDossier="./$dossier/";
 		$nomImage=sha1($chaine.time());
 		$image=$fichierDefaut;
 

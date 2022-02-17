@@ -1,5 +1,56 @@
+const tagsArray = [];
+const participantsArray = [];
+
 window.onload = function () {
   showConditions();
+  loadPage();
+  // empeche d'utiliser la touche entrer dans les forms
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
+  //EYE INSCRIPTION
+  const togglePassword = document.querySelector("#togglePassword");
+  const password = document.querySelector("#password");
+
+  togglePassword.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+  //EYE CONFIRM INSCRIPTION 
+  const togglePasswordConfirm = document.querySelector("#togglePasswordConfirm");
+  const confirmPassword = document.querySelector("#confirmPassword");
+
+  togglePasswordConfirm.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
+    confirmPassword.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+
+  //EYE CONNEXION
+  const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
+  const passwordConnexion = document.querySelector("#passwordConnexion");
+
+  togglePasswordConnexion.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = passwordConnexion.getAttribute("type") === "password" ? "text" : "password";
+    passwordConnexion.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
 };
 
 // fonction show terme et conditions
@@ -19,39 +70,71 @@ function showConditions() {
   }
 }
 
-// initialise les toast
-// let initialiser = (message) => {
-//     let textToast = document.getElementById("textToast");
-//     let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-//     let toastList = toastElList.map(function (toastEl) {
-//         return new bootstrap.Toast(toastEl)
-//     })
+// valide le form devenir membre
+function valider() {
+  let myForm = document.getElementById('form-enregistrer-membre');
+  let password = myForm.password.value;
+  let confirmPassword = myForm.confirmPassword.value;
+  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let valide = true;
 
-//     if (message.length > 0) {
-//         textToast.innerHTML = message;
-//         $(".toast-container").css("display", "block");
-//         toastList[0].show();
-//     }
-// }
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-membre').click();
+    valide = false;
 
-function afficherToastMiseAJourReussi(text, header) {
-  let textBody = document.getElementById("toastBody");
-  let headerToast = document.getElementById("headerToast");
-  let headerDivToast = document.getElementById("toastHeader");
-  let toastDiv = document.getElementById("toast");
+  } else if (!(password.trim() === confirmPassword.trim())) {
 
-  textBody.innerHTML = text;
-  textBody.style.color = "black";
-  textBody.style.backgroundColor = "#cac7c7";
+    document.getElementById('msg-confirm-password-erreur').style.display = 'block';
+    valide = false;
 
-  headerToast.innerHTML = header;
-  headerToast.style.color = "black";
+  } else if (!pattern.test(password)) {
 
-  headerDivToast.style.backgroundColor = "#4169E1";
-  toastDiv.style.backgroundColor = "#4169E1";
+    document.getElementById('msg-password-erreur').style.display = 'block';
+    valide = false;
+  }
 
-  $("#toast").toast("show");
-  document.getElementById("toast").scrollIntoView();
+  if (valide) {
+    enregistrerMembre();
+  }
+
+}
+
+// valide le form modifier
+function validerMembreEdit() {
+  let myForm = document.getElementById('membreEditForm');
+  let password = myForm.passwordEdit.value;
+  let confirmPassword = myForm.confirmPasswordEdit.value;
+  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let valide = true;
+
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-membre-edit').click();
+    valide = false;
+
+  } else if (!(password.trim() === confirmPassword.trim())) {
+
+    document.getElementById('msg-confirm-password-erreur-edit').style.display = 'block';
+    valide = false;
+
+  } else if (!pattern.test(password)) {
+
+    document.getElementById('msg-password-erreur-edit').style.display = 'block';
+    valide = false;
+
+  }
+
+  if (valide) {
+    modifierMembre();
+  }
+
+}
+
+
+function afficherSnackbar(text) {
+  var x = document.getElementById("snackbar");
+  x.innerHTML = text;
+  x.className = "show";
+  setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
 
 //Permet de fermer les toasts
@@ -59,3 +142,213 @@ function closeToast() {
   $("#toast").toast("hide");
   $("#toastForm").toast("hide");
 }
+
+// fonction onload Image
+
+var loadFile = function (event) {
+  var output = document.getElementById('output');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function () {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+};
+
+// fonction reset form et Image vide
+
+function resetForm() {
+  setTimeout(function () {
+    var output = document.getElementById('output');
+    output.src = "Projet-Final/serveur/membre/images-profil/defaultProfil.png";
+  }, 0);
+}
+
+
+function findTag(tag, tagsArray) {
+  return tagsArray.filter(t => {
+
+    if (t.toLowerCase().includes(tag.toLowerCase())) {
+      return t;
+    }
+
+  });
+}
+
+function findParticipant(participant, participantsArray){
+    return participantsArray.filter(p => {
+      let nomComplet = p.prenom  + " " +p.nom;
+    if (nomComplet.toLowerCase().includes(participant.toLowerCase())) {
+      return p;
+    }
+
+  });
+}
+
+
+// TAGS SYSTEM
+
+let tags = [];
+let participants = [];
+
+//Setter la liste de tags
+function setTagsBase(originalTags){
+  tags = originalTags;
+}
+
+//Creer un Tag
+function createTag(label, nomDeClasse, classTag){
+  const div = document.createElement('div');
+  div.setAttribute('class', 'tag');
+  div.classList.add(classTag);
+  const span = document.createElement('span');
+  span.setAttribute('class',nomDeClasse);
+  span.innerHTML = label;
+  const closeBtn = document.createElement('i');
+  closeBtn.setAttribute('class', 'material-icons');
+  if(classTag == 'etiquette'){
+    closeBtn.classList.add('btnCloseEtiquette');
+  }else{
+    closeBtn.classList.add('btnCloseParticipant');
+  }
+  
+  closeBtn.setAttribute('data-item', label);
+  closeBtn.innerHTML = 'close';
+
+  // <div class="tag" id="">
+    // <span class="tagValueCreate" >label</span>
+    // <i class="material-icons" data-item='label'>close</i>
+  // </div>
+
+  div.appendChild(span);
+  div.appendChild(closeBtn);
+  return div;
+}
+
+//Permet de prendre toutes les tags présents 
+function getTagsValue(nomDeClasse){
+  let allTags = [].slice.call(document.getElementsByClassName(nomDeClasse));
+  let allTagsValue = new Array();
+  if(allTags != null){
+    allTags.forEach(unSpanTag =>{
+     allTagsValue.push(unSpanTag.innerHTML);
+   })
+  }
+  
+  return allTagsValue;
+}
+
+
+//Ajoute un tag
+function addTag(label, idInput, classContainer, idSuggestionReponse, list ,nomDeClasse ,classTag){
+  if(isLabelExist(label, list)){
+    afficherSnackbar("Le tag est déja là!");
+  }else{
+    list.push(label);
+    addTags(classContainer,idSuggestionReponse, list,nomDeClasse ,classTag);
+    let input= document.getElementById(idInput);
+    input.value = '';
+  }
+}
+
+
+//Ajoute ma liste de tags dans la div
+function addTags(classContainer, idSuggestionReponse, list, nomDeClasse ,classTag){
+    clearTags(classTag);
+    list.slice().reverse().forEach(function(item){
+    const input = createTag(item, nomDeClasse ,classTag);
+    const tagsContainer = document.querySelector(classContainer);
+    tagsContainer.prepend(input);
+    $(idSuggestionReponse).html("");
+    })
+  }
+
+//Clear ma liste de tags
+function clearTags(classTag){
+  let myTag = "."+classTag;
+  document.querySelectorAll(myTag).forEach(function(tag){
+    tag.parentElement.removeChild(tag);
+  });
+}
+
+// Permet de cut un tag parmi la liste de tags
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('btnCloseEtiquette')){
+    const value = e.target.getAttribute('data-item');
+    const index = tags.indexOf(value);
+    tags = [...tags.slice(0, index),  ...tags.slice(index + 1)];
+    addTags('.tag-container',"#tagsReponse", tags, 'tagValueCreate' ,'etiquette');
+  }
+
+  if(e.target.classList.contains('btnCloseParticipant')){
+    const value = e.target.getAttribute('data-item');
+    const index = participants.indexOf(value);
+    participants = [...participants.slice(0, index),  ...participants.slice(index + 1)];
+    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant');
+  }
+})
+
+
+//Permet de Vérifier si le tag est déja dans la list
+function isLabelExist(label, list){
+  let exist = false;
+  if(list.length > 0){
+    list.forEach(function(tag){
+      if(list === label){
+        exist = true;
+      }
+    })
+  }
+  return exist;
+}
+
+//Ajoute des suggestions et add le tag lors du click de la suggestion
+function displayTagMatches2() {
+  let value = document.getElementById('monInputTag').value;
+  let contenu = '';
+  if (value.length > 0) {
+    const matchArray = findTag(value, tagsArray);
+    matchArray.forEach(element => {
+      contenu += `<p class="suggestion" onclick="addTag('${element}', 'monInputTag' , '.tag-container' , '#tagsReponse', tags, 'tagValueCreate' ,'etiquette' )">${element}</p>`;
+    });
+  }
+  $('#tagsReponse').html(contenu);
+}
+
+
+function displayParticipantsMatches(){
+  let value = document.getElementById('participantsInput').value;
+  let contenu = '';
+  if (value.length > 0) {
+    const matchArray =  findParticipant(value, participantsArray);
+    matchArray.forEach(element => {
+      contenu += `<p class="suggestion" onclick="addTag('${element.prenom} ${element.nom} ${element.id}', 'participantsInput', '.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant' )">${element.prenom} ${element.nom} ${element.id}</p>`;
+    });
+  }
+  $('#participantsReponse').html(contenu);
+}
+
+
+
+
+
+
+
+
+
+
+
+function loadPage() {
+
+  var typePage = document.getElementById('typePage').value;
+
+  switch (typePage) {
+    case "visiteur":
+      loadPageAccueil();
+      break;
+    case "admin":
+      loadPageAdmin();
+      break;
+    default:
+      loadMembre(`pageMembre`, typePage);
+  }
+}
+

@@ -16,7 +16,7 @@ class Membre
     private $motDePasse;
     private $role;
 
-    public function __construct(int $id,  string $nom, string $prenom, string $courriel, string $numeroTelephone,
+    public function __construct(int $id,  string $prenom, string $nom,  string $courriel, string $numeroTelephone,
      string $description,int $actif, int $prive, string $imageProfil, int $membrePremium, string $dateFinAbonnement, string $motDePasse, string $role)
     {
         $this->id = $id;
@@ -34,7 +34,7 @@ class Membre
         $this->role = $role;
     }
 
-    public function getid(): int
+    public function getId(): int
     {
         return $this->id;
     }

@@ -8,15 +8,22 @@ function enregistrerMembre() {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
     success: function (reponse) {
       if (reponse.msg != null) {
-        initialiser(reponse.msg); // msg = Email deja utilise
-        $("#modal-Membre").modal("hide");
+        afficherSnackbar(reponse.msg);
+        $("#modalInscription").modal("hide");
       } else if (reponse.idMembre != null) {
         window.location.reload();
       }
     },
-    fail: function (err) {},
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
   });
 }
 
@@ -33,19 +40,25 @@ function connexion() {
       dataType: "json",
       contentType: false,
       processData: false,
+      beforeSend: function () {
+        $('.lds-ring').removeClass('hidden');
+      },
       success: function (reponse) {
         if (reponse.msg != "") {
-          afficherToastMiseAJourReussi(reponse.msg, "Fail");
-          //   initialiser(reponse.msg); // msg = erreur information connexion
+          afficherSnackbar(reponse.msg);
           $("#modalConnexion").modal("hide");
           document.getElementById("form-connexion").reset();
         } else {
-            window.location.reload();
+          window.location.reload();
         }
       },
-      fail: function (err) {},
+      fail: function (err) { },
+      complete: function () {
+        $('.lds-ring').addClass('hidden');
+      },
     });
   }
+
 }
 
 function deconnexion() {
@@ -59,10 +72,125 @@ function deconnexion() {
     dataType: "json",
     contentType: false,
     processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
     success: function (reponse) {
       window.location.reload();
+
       membresVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+  });
+}
+
+
+
+
+function modifierMembre() {
+  var form = new FormData(document.getElementById("membreEditForm"));
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      if (reponse.msg != null) {
+        loadMembre("pageMembre", reponse.idDuMembre);
+        afficherSnackbar(reponse.msg);
+      }
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+  });
+
+}
+
+function loadMembre(pageType, idMembre) {
+  var form = new FormData();
+  form.append("action", "loadMembre");
+  form.append("idMembre", idMembre);
+  form.append("page", pageType);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+}
+
+
+
+function loadPageAccueil() {
+  var form = new FormData();
+  form.append("action", "loadPageAccueil");
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+}
+
+function loadPageAdmin() {
+  var form = new FormData();
+  form.append("action", "loadPageAdmin");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
   });
 }
