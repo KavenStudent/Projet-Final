@@ -25,6 +25,20 @@ window.onload = function () {
     this.classList.toggle("bi-eye");
   });
 
+  //EYE CONFIRM INSCRIPTION 
+  const togglePasswordConfirm = document.querySelector("#togglePasswordConfirm");
+  const confirmPassword = document.querySelector("#confirmPassword");
+
+  togglePasswordConfirm.addEventListener("click", function () {
+  // toggle the type attribute
+    const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
+    confirmPassword.setAttribute("type", type);
+            
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+
   //EYE CONNEXION
   const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
   const passwordConnexion = document.querySelector("#passwordConnexion");
@@ -144,7 +158,7 @@ var loadFile = function (event) {
 function resetForm() {
   setTimeout(function () {
     var output = document.getElementById('output');
-    output.src = "Projet-Final/client/public/images/default-image.png";
+    output.src = "Projet-Final/serveur/membre/images-profil/defaultProfil.png";
   }, 0);
 }
 
@@ -170,7 +184,7 @@ function findParticipant(participant, participantsArray){
 }
 
 
-// TAGS VIM
+// TAGS SYSTEM
 
 let tags = [];
 let participants = [];
@@ -179,7 +193,7 @@ let participants = [];
 function setTagsBase(originalTags){
   tags = originalTags;
 }
-//'tagValueCreate'
+
 //Creer un Tag
 function createTag(label, nomDeClasse, classTag){
   const div = document.createElement('div');
@@ -208,7 +222,7 @@ function createTag(label, nomDeClasse, classTag){
   div.appendChild(closeBtn);
   return div;
 }
-//'tagValueCreate'
+
 //Permet de prendre toutes les tags présents 
 function getTagsValue(nomDeClasse){
   let allTags = [].slice.call(document.getElementsByClassName(nomDeClasse));
@@ -222,7 +236,7 @@ function getTagsValue(nomDeClasse){
   return allTagsValue;
 }
 
-//monInputTag
+
 //Ajoute un tag
 function addTag(label, idInput, classContainer, idSuggestionReponse, list ,nomDeClasse ,classTag){
   if(isLabelExist(label, list)){
@@ -235,7 +249,7 @@ function addTag(label, idInput, classContainer, idSuggestionReponse, list ,nomDe
   }
 }
 
-//'.tag-container' #tagsReponse #parcipantsReponse
+
 //Ajoute ma liste de tags dans la div
 function addTags(classContainer, idSuggestionReponse, list, nomDeClasse ,classTag){
     clearTags(classTag);
@@ -273,7 +287,6 @@ document.addEventListener('click', function(e){
 })
 
 
-//tags participants
 //Permet de Vérifier si le tag est déja dans la list
 function isLabelExist(label, list){
   let exist = false;
@@ -312,7 +325,6 @@ function displayParticipantsMatches(){
   }
   $('#participantsReponse').html(contenu);
 }
-
 
 
 

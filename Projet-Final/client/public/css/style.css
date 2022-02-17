@@ -549,7 +549,7 @@ textarea {
 
 
 /* PASSWORD DIV EYEs */
-.passwordDivInscription{
+.passwordDivInscription, .passwordConfirmDivInscription{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -560,7 +560,7 @@ textarea {
   padding-right: 0.5em;
 }
 
-.passwordCustomInscription{
+.passwordCustomInscription, .passwordConfirmCustomInscription{
   border: 0;
 }
 
