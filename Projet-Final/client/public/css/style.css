@@ -5,6 +5,7 @@ html {
 }
 
 body {
+
   /* background: linear-gradient(#676767, #4169e1ab) fixed; */
 
 }
@@ -104,7 +105,16 @@ textarea {
   color: #4169E1;
 }
 
-
+/* Termes et Conditions */
+.contentConditions {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #cac7c7;
+    border-radius: 5px;
+}
 
 /* SEARCH BAR */
 
@@ -134,6 +144,7 @@ textarea {
   margin: auto;
 }
 
+
 .titreModalInscription {
   font-weight: bolder;
 }
@@ -151,6 +162,7 @@ textarea {
   background-color: rgb(241, 238, 238);
   border: 1px solid rgb(175, 174, 174);
 }
+
 
 .collapsible {
   background-color: #eee;
@@ -186,6 +198,7 @@ textarea {
   display: none;
 }
 
+
 #msg-confirm-password-erreur {
   color: red;
   display: none;
@@ -200,6 +213,7 @@ textarea {
   color: red;
   display: none;
 }
+
 
 .validation {
   display: none;
@@ -364,6 +378,7 @@ textarea {
   background-color: #747474;
 }
 
+
 .editProj .mb-69 {
   /* 
     flex-direction: row;
@@ -450,6 +465,7 @@ textarea {
     transform: rotate(360deg);
   }
 }
+
 
 .lds-ring:before {
   content: '';

@@ -15,6 +15,7 @@ session_start();
             <span class="navbar-toggler-icon"></span>
         </button>
 
+
         <div class="collapse navbar-collapse itemsMobileVersion" id="navbarNavAltMarkup">
 
             <?php
@@ -45,6 +46,7 @@ session_start();
             }
             ?>
         </div>
+
 
 </nav>
 

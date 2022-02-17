@@ -1,3 +1,4 @@
+
 <div id='projetMainDiv' class="container">
     <div id='projetLeftDiv' class="container">
         <img src="Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png" class="img-fluid, img-thumbnail"
@@ -60,3 +61,4 @@
 
     </div>
 </div>
+

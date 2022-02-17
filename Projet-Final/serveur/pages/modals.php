@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content modalCustom">
       <div class="modal-header modalHeader">
-        <h5 class="modal-title titreModalInscription">Inscription</h5>
+        <h5 class="modal-title" id="titreModalInscription">Inscription</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modalCustom">
@@ -32,7 +32,7 @@
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustomUsername" class="form-label">Description</label>
-            <textarea id="description" name="description" class="modalInput" rows="4" cols="50" required></textarea>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea>
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustom03" class="form-label">Mot de passe</label>
@@ -81,12 +81,12 @@
 <!-- modal connexion -->
 <div class="modal fade" id="modalConnexion" tabindex="-1">
   <div class="modal-dialog">
-    <div class="modal-content modalCustom">
-      <div class="modal-header modalHeader">
-        <h5 class="modal-title titreModalInscription">Connexion</h5>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Connexion</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body modalCustom">
+      <div class="modal-body">
         <!-- Form connexion -->
 
         <form class="form-connexion connexionContainer" id="form-connexion">
