@@ -29,5 +29,6 @@ interface ProjetDao
 
     //Tous les tags
     public function getAllTags() : array;
+
 }
 ?>

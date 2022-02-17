@@ -11,7 +11,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT m.idMembre, m.prenom, m.nom, m.courriel, m.sexe, m.dateDeNaissance, c.statut, c.role FROM membres m INNER JOIN connexion c ON m.idMembre = c.idMembre";
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();

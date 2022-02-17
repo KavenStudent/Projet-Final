@@ -1,4 +1,5 @@
 const tagsArray = [];
+const participantsArray = [];
 
 window.onload = function () {
   showConditions();
@@ -158,81 +159,127 @@ function findTag(tag, tagsArray) {
   });
 }
 
+function findParticipant(participant, participantsArray){
+    return participantsArray.filter(p => {
+      let nomComplet = p.prenom  + " " +p.nom;
+    if (nomComplet.toLowerCase().includes(participant.toLowerCase())) {
+      return p;
+    }
+
+  });
+}
+
 
 // TAGS VIM
 
 let tags = [];
+let participants = [];
 
 //Setter la liste de tags
 function setTagsBase(originalTags){
   tags = originalTags;
 }
-
+//'tagValueCreate'
 //Creer un Tag
-function createTag(label){
+function createTag(label, nomDeClasse, classTag){
   const div = document.createElement('div');
   div.setAttribute('class', 'tag');
+  div.classList.add(classTag);
   const span = document.createElement('span');
+  span.setAttribute('class',nomDeClasse);
   span.innerHTML = label;
   const closeBtn = document.createElement('i');
   closeBtn.setAttribute('class', 'material-icons');
+  if(classTag == 'etiquette'){
+    closeBtn.classList.add('btnCloseEtiquette');
+  }else{
+    closeBtn.classList.add('btnCloseParticipant');
+  }
+  
   closeBtn.setAttribute('data-item', label);
   closeBtn.innerHTML = 'close';
+
+  // <div class="tag" id="">
+    // <span class="tagValueCreate" >label</span>
+    // <i class="material-icons" data-item='label'>close</i>
+  // </div>
 
   div.appendChild(span);
   div.appendChild(closeBtn);
   return div;
 }
+//'tagValueCreate'
+//Permet de prendre toutes les tags présents 
+function getTagsValue(nomDeClasse){
+  let allTags = [].slice.call(document.getElementsByClassName(nomDeClasse));
+  let allTagsValue = new Array();
+  if(allTags != null){
+    allTags.forEach(unSpanTag =>{
+     allTagsValue.push(unSpanTag.innerHTML);
+   })
+  }
+  
+  return allTagsValue;
+}
 
-
+//monInputTag
 //Ajoute un tag
-function addTag(label){
-  if(isLabelExist(label)){
+function addTag(label, idInput, classContainer, idSuggestionReponse, list ,nomDeClasse ,classTag){
+  if(isLabelExist(label, list)){
     afficherSnackbar("Le tag est déja là!");
   }else{
-    tags.push(label);
-    addTags();
-    let monInputTag = document.getElementById('monInputTag');
-    monInputTag.value = '';
+    list.push(label);
+    addTags(classContainer,idSuggestionReponse, list,nomDeClasse ,classTag);
+    let input= document.getElementById(idInput);
+    input.value = '';
   }
 }
 
-
+//'.tag-container' #tagsReponse #parcipantsReponse
 //Ajoute ma liste de tags dans la div
-function addTags(){
-    clearTags();
-    tags.slice().reverse().forEach(function(tag){
-    const input = createTag(tag);
-    const tagContainer = document.querySelector('.tag-container');
-    tagContainer.prepend(input);
-    $('#tagsReponse').html("");
+function addTags(classContainer, idSuggestionReponse, list, nomDeClasse ,classTag){
+    clearTags(classTag);
+    list.slice().reverse().forEach(function(item){
+    const input = createTag(item, nomDeClasse ,classTag);
+    const tagsContainer = document.querySelector(classContainer);
+    tagsContainer.prepend(input);
+    $(idSuggestionReponse).html("");
     })
   }
 
 //Clear ma liste de tags
-function clearTags(){
-  document.querySelectorAll('.tag').forEach(function(tag){
+function clearTags(classTag){
+  let myTag = "."+classTag;
+  document.querySelectorAll(myTag).forEach(function(tag){
     tag.parentElement.removeChild(tag);
   });
 }
 
 // Permet de cut un tag parmi la liste de tags
 document.addEventListener('click', function(e){
-  if(e.target.tagName === 'I'){
+  if(e.target.classList.contains('btnCloseEtiquette')){
     const value = e.target.getAttribute('data-item');
     const index = tags.indexOf(value);
     tags = [...tags.slice(0, index),  ...tags.slice(index + 1)];
-    addTags();
-    
+    addTags('.tag-container',"#tagsReponse", tags, 'tagValueCreate' ,'etiquette');
+  }
+
+  if(e.target.classList.contains('btnCloseParticipant')){
+    const value = e.target.getAttribute('data-item');
+    const index = participants.indexOf(value);
+    participants = [...participants.slice(0, index),  ...participants.slice(index + 1)];
+    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant');
   }
 })
 
+
+//tags participants
 //Permet de Vérifier si le tag est déja dans la list
-function isLabelExist(label){
+function isLabelExist(label, list){
   let exist = false;
-  if(tags.length > 0){
-    tags.forEach(function(tag){
-      if(tag === label){
+  if(list.length > 0){
+    list.forEach(function(tag){
+      if(list === label){
         exist = true;
       }
     })
@@ -246,13 +293,27 @@ function displayTagMatches2() {
   let contenu = '';
   if (value.length > 0) {
     const matchArray = findTag(value, tagsArray);
-    console.log(matchArray);
     matchArray.forEach(element => {
-      contenu += `<p class="suggestionTags" onclick="addTag('${element}')">${element}</p>`;
+      contenu += `<p class="suggestion" onclick="addTag('${element}', 'monInputTag' , '.tag-container' , '#tagsReponse', tags, 'tagValueCreate' ,'etiquette' )">${element}</p>`;
     });
   }
   $('#tagsReponse').html(contenu);
 }
+
+
+function displayParticipantsMatches(){
+  let value = document.getElementById('participantsInput').value;
+  let contenu = '';
+  if (value.length > 0) {
+    const matchArray =  findParticipant(value, participantsArray);
+    matchArray.forEach(element => {
+      contenu += `<p class="suggestion" onclick="addTag('${element.prenom} ${element.nom} ${element.id}', 'participantsInput', '.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant' )">${element.prenom} ${element.nom} ${element.id}</p>`;
+    });
+  }
+  $('#participantsReponse').html(contenu);
+}
+
+
 
 
 

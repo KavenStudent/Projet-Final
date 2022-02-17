@@ -124,14 +124,17 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $stmt = $this->executer();
             
 
-            //  TO DO: Terminer l'ajout des participants
             //  Ajouter les participants au projet
             $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
             $idProjet = $this->getLastProjetId();
+            print_r($participants);
             foreach($participants as $part) {
+                print_r($part);
                 //  Ajouter les participants a la table membreprojet
-                $tabPart = explode(' ', $part);   // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+                $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+                print_r($tabPart);  
                 $idMembre = (int) ($tabPart[2]);
+                print_r($idMembre);
                 $this->setRequete($requete);
                 $this->setParams(array(
                     $idMembre, 
@@ -216,5 +219,27 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         return $tab;
     }
 
+
+    public function getMembreNameById(int $idMembre) : string {
+        $nomComplet = "";
+        try{
+            $requete = "SELECT nom, prenom FROM membre WHERE id = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($idMembre));
+            $stmt = $this->executer();
+            if($ligne = $stmt->fetch(PDO::FETCH_OBJ)){
+                $nom = $ligne->nom;
+                $prenom = $ligne->prenom;
+            }
+            $nomComplet = $prenom." ".$nom;
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }finally{
+            unset($stmt);
+            return $nomComplet;
+        }
+    }
+
+    
 }
 ?>
