@@ -127,14 +127,14 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             //  Ajouter les participants au projet
             $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
             $idProjet = $this->getLastProjetId();
-            print_r($participants);
+            
             foreach($participants as $part) {
-                print_r($part);
+                
                 //  Ajouter les participants a la table membreprojet
                 $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
-                print_r($tabPart);  
+                 
                 $idMembre = (int) ($tabPart[2]);
-                print_r($idMembre);
+                
                 $this->setRequete($requete);
                 $this->setParams(array(
                     $idMembre, 

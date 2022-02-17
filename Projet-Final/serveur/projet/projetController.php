@@ -87,8 +87,6 @@ function ajouterProjet() {
             $tabParticipantSansId .= $part .",";
         }
     }
-    print_r($tabParticipantAvecId);
-    print_r($tabParticipantSansId);
 
     $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) -1);
 
