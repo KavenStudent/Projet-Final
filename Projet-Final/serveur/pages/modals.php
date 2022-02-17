@@ -44,7 +44,10 @@
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustom05" class="form-label">Confirmer le mot de passe</label>
-            <input type="password" class="form-control modalInput" id="confirmPassword" required>
+            <div class="passwordConfirmDivInscription">
+              <input type="password" class="form-control modalInput passwordConfirmCustomInscription" id="confirmPassword" required>
+              <i class="bi bi-eye-slash" id="togglePasswordConfirm"></i>
+            </div>
             <span id="msg-confirm-password-erreur">Confirmation invalide</span>
           </div>
           <br>
