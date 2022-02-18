@@ -80,9 +80,9 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function getAllRegisteredParticipantsForProjet(int $idProjet): array {
         try {
             $tab = array();
-            $requete = "SELECT idMembre FROM membreprojet WHERE idProjet = ?";
+            $requete = "SELECT mp.idMembre, me.nom, me.prenom FROM membreprojet mp INNER JOIN membre me ON mp.idMembre = me.id WHERE mp.idProjet = ?;";
             $this->setRequete($requete);
-            $this->setParams(array($idMembre));
+            $this->setParams(array($idProjet));
             $stmt = $this->executer();
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 $tab[] = $ligne;
