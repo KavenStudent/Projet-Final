@@ -341,7 +341,7 @@ function afficherPageAutreMembre(json, listProjet) {
                 myThumbnail = `Projet-Final/serveur/projet/thumbnail/${item.thumbnail}`;
             }
             contenu += ` <!-- CARD -->
-                            <div class="card card-item" onclick="afficherPageAutreProjet(${item.id});">
+                            <div class="card card-item" onclick="loadPageAutreProjet(${item.id});">
                             <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
                             <div class="card-body card-item-body">
                                     <h5 class="card-title">${item.titre}</h5>
