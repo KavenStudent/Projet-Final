@@ -39,23 +39,20 @@ function afficherPageProjet(json) {
                 name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
-            aria-label="Autres participants: ">
-            <li class="list-inline-item">${json.projet.autreParticipant}</li>
-        </ul>`
-  // array.forEach(membreProjet => {
-  //     //mettre participants clickable + autres participants
-  // });
-  contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> 
+            aria-label="Autres participants: ">`
+            // <li class="list-inline-item">${json.projet.autreParticipant}</li>
+      
+  json.tabParticipants.forEach(membreProjet => {
+    contenu+=` <li class="list-inline-item"><a href="javascript:;" onclick="loadMembre('pageMembre', ${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+  });
+  contenu+=` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
+  contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
 
-       <ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Autres participants: ">
-            <li class="list-inline-item"><a href="participant.page">${json.projet.idTag}</a></li>
-            <li class="list-inline-item"><a href="participant.page">Portfolio</a></li>
-            <li class="list-inline-item"><a href="participant.page">Recherche d'emploi</a></li>
-        </ul>`
+       
   // array.forEach(tags => {
   //     //mettre les tags
   // });
-  contenu += `<a href=${json.projet.lienExterne}>
+  contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
         <div class="form-check form-switch">
@@ -138,7 +135,7 @@ function ajouterProjetAffichage(json) {
      <div class="participant-container">
         <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
       </div>
-      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
 
       <div id='participantsReponse' class="suggestionsDivision"></div>
    </div>
