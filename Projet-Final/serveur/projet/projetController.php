@@ -120,8 +120,10 @@ function loadAutreProjet()
 
     $idProjet = $_POST['idProjet'];
 
-    $projet = $dao->getProjet($idProjet);
+    if ($tabRes['action'] == null)
+        $tabRes['action'] = 'autreProjet';
 
+    $projet = $dao->getProjet($idProjet);
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
@@ -129,7 +131,7 @@ function loadAutreProjet()
     );
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
-    $tabRes['action'] = 'autreProjet';
+
 }
 
 echo json_encode($tabRes);

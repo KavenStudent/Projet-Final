@@ -28,7 +28,6 @@ function loadPageAjouterProjet(idMembre) {
   var form = new FormData();
   form.append("action", "loadPageAjouterProjet");
   form.append("idMembre", idMembre);
-
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/projet/projetController.php",
@@ -40,6 +39,7 @@ function loadPageAjouterProjet(idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+
       projetVue(reponse);
 
     },
@@ -126,7 +126,8 @@ function loadPageAutreProjet(idProjet) {
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) { },
+    fail: function (err) {
+    },
     complete: function () {
       $('.lds-ring').addClass('hidden');
     },

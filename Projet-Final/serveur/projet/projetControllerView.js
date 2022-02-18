@@ -195,60 +195,7 @@ function ajouterProjetAffichage(json) {
     tagsArray.push(element.nomTag);
   });
 
-  function afficherPageAutreProjet(json) {
-    let thumbnail;
-    if (json.projet.thumbnail == "") {
-      thumbnail = "defaultThumbnail.png";
-    } else {
-      thumbnail = json.projet.thumbnail;
-    }
-    var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
-   <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
-              alt="Vignette">
-          <div class="d-grid gap-2">
-              <button class="btn btn-primary" type="button">Télécharger</button>
-          </div>
-      </div>
-      <div id='projetRightDiv' class="container">
-          <h1>${json.projet.titre}</h1>
   
-          <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
-                  name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
-  
-          <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
-              aria-label="Autres participants: ">`
-
-    //List participants
-    json.tabParticipants.forEach(membreProjet => {
-      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
-    });
-    contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
-
-    //List tags
-    contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
-    aria-label="Tags: ">`
-
-    json.tabTags.forEach(tagProjet => {
-      contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
-    });
-    contenu += `</ul>`;
-
-    //Description
-    contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
-
-
-    // array.forEach(tags => {
-    //     //mettre les tags
-    // });
-    contenu += `Lien: <a href=${json.projet.lienExterne}>
-              <p class="lead">${json.projet.lienExterne}</p>
-          </a>
-          <div class="form-check form-switch">
-          </div>
-      </div>
-  </div>`;
-    $('#contenu').html(contenu);
-  }
 
 
   //Système de tags 
@@ -292,7 +239,60 @@ function ajouterProjetReussi(idMembre) {
   afficherSnackbar("Projet ajouté avec succès!");
 }
 
+function afficherPageAutreProjet(json) {
+  let thumbnail;
+  if (json.projet.thumbnail == "") {
+    thumbnail = "defaultThumbnail.png";
+  } else {
+    thumbnail = json.projet.thumbnail;
+  }
+  var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+ <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
+            alt="Vignette">
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="button">Télécharger</button>
+        </div>
+    </div>
+    <div id='projetRightDiv' class="container">
+        <h1>${json.projet.titre}</h1>
 
+        <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
+                name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
+
+        <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
+            aria-label="Autres participants: ">`
+
+  //List participants
+  json.tabParticipants.forEach(membreProjet => {
+    contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+  });
+  contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
+
+  //List tags
+  contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
+  aria-label="Tags: ">`
+
+  json.tabTags.forEach(tagProjet => {
+    contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
+  });
+  contenu += `</ul>`;
+
+  //Description
+  contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
+
+
+  // array.forEach(tags => {
+  //     //mettre les tags
+  // });
+  contenu += `Lien: <a href=${json.projet.lienExterne}>
+            <p class="lead">${json.projet.lienExterne}</p>
+        </a>
+        <div class="form-check form-switch">
+        </div>
+    </div>
+</div>`;
+  $('#contenu').html(contenu);
+}
 
 
 
