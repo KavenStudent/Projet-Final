@@ -203,6 +203,11 @@ function setTagsBase(originalTags){
   tags = originalTags;
 }
 
+//Setter la liste de participants
+function setParticipantsBase(originalParticipants){
+  participants = originalParticipants;
+}
+
 //Creer un Tag
 function createTag(label, nomDeClasse, classTag){
   const div = document.createElement('div');
@@ -301,7 +306,7 @@ function isLabelExist(label, list){
   let exist = false;
   if(list.length > 0){
     list.forEach(function(tag){
-      if(list === label){
+      if(tag === label){
         exist = true;
       }
     })

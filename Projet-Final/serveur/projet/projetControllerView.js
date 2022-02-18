@@ -19,9 +19,15 @@ var projetVue=function(response) {
 }
 
 function afficherPageProjet(json) {
+  let thumbnail;
+  if(json.projet.thumbnail == ""){
+    thumbnail = "defaultThumbnail.png";
+  }else{
+    thumbnail = json.projet.thumbnail;
+  }
   var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
- <img src='Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png' class='img-fluid, img-thumbnail'"
-            alt="...">
+ <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
+            alt="Vignette">
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button">Télécharger</button>
         </div>
@@ -130,9 +136,10 @@ function ajouterProjetAffichage(json) {
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
      <div class="participant-container">
-
         <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
       </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
+
       <div id='participantsReponse' class="suggestionsDivision"></div>
    </div>
  
@@ -151,6 +158,7 @@ function ajouterProjetAffichage(json) {
 
         <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
       </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
      <div id='tagsReponse' class="suggestionsDivision"></div>
    </div>
@@ -193,6 +201,7 @@ function ajouterProjetAffichage(json) {
   })
 
 
+  setParticipantsBase(new Array());
 
   json.tabParticipants.forEach(element => {
     participantsArray.push(element);

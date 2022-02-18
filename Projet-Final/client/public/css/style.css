@@ -594,3 +594,10 @@ textarea {
   border: 0;
 }
 
+/* Note tag */
+.noteEnter{
+  font-size: 0.8em;
+  font-style: italic;
+  color: #747474;
+}
+
