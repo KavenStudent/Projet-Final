@@ -145,6 +145,33 @@ function loadMembre(pageType, idMembre) {
 }
 
 
+function loadAutreMembre(idMembre) {
+  var form = new FormData();
+  form.append("action", "loadAutrePageMembre");
+  form.append("idMembre", idMembre);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+}
+
+
 
 function loadPageAccueil() {
   var form = new FormData();

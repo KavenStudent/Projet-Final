@@ -165,10 +165,6 @@ function afficherPageMembre(json, listProjet) {
             <div class="container deuxieme-colonne">
                 <div class="container item1-deuxieme-colonne">
                     <button type="button" onclick="loadPageAjouterProjet(${json.membre.id});" class="btn btn-primary">Nouveau projet</button>
-                    <div class="form-check form-switch item-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
-                    </div>
                 </div>
                 
                 <div class='div-projets'>`;
