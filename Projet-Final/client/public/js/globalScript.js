@@ -153,11 +153,20 @@ var loadFile = function (event) {
   }
 };
 
+// fonction onload Image Thumbnail 
+var loadFileThumbnail = function (event) {
+  var output = document.getElementById('outputThumbnail');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function () {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+};
+
 // fonction reset form et Image vide
 
 function resetForm() {
   setTimeout(function () {
-    var output = document.getElementById('output');
+    var output = document.getElementById('outputThumbnail');
     output.src = "Projet-Final/serveur/membre/images-profil/defaultProfil.png";
   }, 0);
 }

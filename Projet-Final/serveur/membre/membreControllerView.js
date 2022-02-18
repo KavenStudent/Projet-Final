@@ -161,7 +161,7 @@ function afficherPageMembre(json, listProjet) {
             if (item.thumbnail == "") {
                 myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
             } else {
-                myThumbnail = `Projet-Final/serveur/projet/thumbnail/${myThumbnail}`;
+                myThumbnail = `Projet-Final/serveur/projet/thumbnail/${item.thumbnail}`;
             }
             contenu += ` <!-- CARD -->
                             <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">

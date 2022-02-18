@@ -156,11 +156,11 @@ function ajouterProjetAffichage(json) {
    </div>
    <div class="col-md-5 order-md-1 customize">
  
-   <img id="output" src="Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png" class="rounded mx-auto d-block" height="600px" width="600px">
+   <img id="outputThumbnail" src="Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png" class="rounded mx-auto d-block" height="600px" width="600px">
    
  
    <div class="form-outline-inpt inpt">
-   <input class="form-control" type="file" accept="image/*" onchange="loadFile(event)" name='imageVignette' id="imagView">
+   <input class="form-control" type="file" accept="image/*" onchange="loadFileThumbnail(event)" name='imageVignette' id="imagView">
    </div>
  
  </div>

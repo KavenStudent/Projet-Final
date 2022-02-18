@@ -113,13 +113,15 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     }
     public function creerProjet(Projet $projet, array $tags, array $participants): bool {
         try {
-           
+
+            $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
+
             //  Ajoute le projet
             $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail) VALUES(0,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
             $this->setParams(array(
                 $projet->getCreateurId(),$projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->isPrive(),
-                $projet->getAutresParticipants(), $projet->getLienExterne(), $projet->getThumbnail()
+                $projet->getAutresParticipants(), $projet->getLienExterne(), $thumbnail
             ));
             $stmt = $this->executer();
             

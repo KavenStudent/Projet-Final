@@ -67,8 +67,10 @@ function ajouterProjet() {
     $prive = true;
     
     $nbTelechargements = 0;
-    $lienProjet =$_POST['lienProjet'];
-    $thumbnail = "";
+    $lienProjet = $_POST['lienProjet'];
+
+    
+    $thumbnail = "defaultThumbnail.png";
 
     $tagsSTRING = $_POST['tags'];
     $tags = explode(',',$tagsSTRING);
@@ -95,7 +97,7 @@ function ajouterProjet() {
     $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet);
 
     if($tabRes['action'] == null){
-        if($dao -> creerProjet($projet, $tags,  $tabParticipantAvecId)){
+        if($dao -> creerProjet($projet, $tags, $tabParticipantAvecId)){
             $tabRes['action'] = 'AjouterProjetReussi';
             $tabRes['idMembre'] = $idMembre;
         }

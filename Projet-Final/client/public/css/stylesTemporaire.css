@@ -1,8 +1,9 @@
-#output {
+#output , #outputThumbnail {
     height: 20rem;
     width: 20rem;
     border-radius: 50px;
 }
+
 .myRowFile{
     flex-direction: row;
     flex-wrap: wrap;
