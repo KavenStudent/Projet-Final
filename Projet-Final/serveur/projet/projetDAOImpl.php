@@ -97,7 +97,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function getAllTagsForProjet(int $idProjet): array {
         try {
             $tab = array();
-            $requete = "SELECT (SELECT * FROM tag WHERE id = idTag) FROM projettag WHERE idProjet = ?";
+            $requete = "SELECT pt.idTag , t.nomTag FROM projettag pt INNER JOIN tag t ON t.id = pt.idTag WHERE pt.idProjet = ?";
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();

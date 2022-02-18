@@ -40,12 +40,23 @@ function afficherPageProjet(json) {
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
             aria-label="Autres participants: ">`
-            // <li class="list-inline-item">${json.projet.autreParticipant}</li>
-      
+            
+  //List participants
   json.tabParticipants.forEach(membreProjet => {
-    contenu+=` <li class="list-inline-item"><a href="javascript:;" onclick="loadMembre('pageMembre', ${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+    contenu+=` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
   });
   contenu+=` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
+
+   //List tags
+  contenu +=  `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
+  aria-label="Tags: ">`
+
+  json.tabTags.forEach(tagProjet => {
+    contenu+=` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
+  });
+  contenu+=`</ul>`;
+
+  //Description
   contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
 
        
