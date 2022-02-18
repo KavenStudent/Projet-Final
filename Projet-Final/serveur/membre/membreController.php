@@ -192,6 +192,8 @@ function loadPageMembre()
     }
 }
 
+
+
 function loadPageAccueil()
 {
 
@@ -217,6 +219,7 @@ function loadPageAdmin()
     global $tabRes;
     global $dao;
 
+    
     $tabRes['action'] = "pageAdmin";
     //retourne tout les membre
     $tabRes['listeSignalisation'] = $dao->getAllSignalisation();
@@ -226,6 +229,23 @@ function loadAutrePageMembre()
 {
     global $tabRes;
     global $dao;
+
+    $idMembre = $_POST['idMembre'];
+
+    $membre = $dao->getMembre($idMembre);
+
+    $tabRes['membre'] = array(
+        "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+        "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+        "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
+        "membrePremium" => $membre->getMembrePremium()
+    );
+
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+    $tabRes['action'] = 'autreMembre';
+
+
 }
 
 echo json_encode($tabRes);
