@@ -308,4 +308,20 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $tab;
     }
+
+    public function checkAbonnementMembre(int $idMembre): bool
+    {
+        try {
+            $requete = "SELECT membrePremium FROM membre WHERE id = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($idMembre));
+            $stmt = $this->executer();
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+    }
 }

@@ -41,4 +41,6 @@ interface MembreDao
     public function getLastMembreId(): int;
 
     public function getAllSignalisation() : array;
+
+    public function checkAbonnementMembre(int $idMembre): bool;
 }

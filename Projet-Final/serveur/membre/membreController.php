@@ -45,6 +45,9 @@ switch ($action) {
     case "loadPageAdmin":
         loadPageAdmin();
         break;
+    case "loadAutrePageMembre":
+        loadAutrePageMembre();
+        break;
 }
 
 //Enregistre un membre
@@ -193,9 +196,19 @@ function loadPageAccueil()
 {
 
     global $tabRes;
+    global $dao;
 
     if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
+
+        if (isset($_SESSION['membre'])) {
+            $id = (int) isset($_SESSION['membre']);
+            $tabRes['id'] = $id;
+            $tabRes['isSub'] = $dao->checkAbonnementMembre($id);
+            print_r($dao->checkAbonnementMembre($id));
+        } else if (isset($_SESSION['admin'])) {
+            $tabRes['id'] = 'admin';
+        }
     }
 }
 
@@ -209,6 +222,10 @@ function loadPageAdmin()
     $tabRes['listeSignalisation'] = $dao->getAllSignalisation();
 }
 
-
+function loadAutrePageMembre()
+{
+    global $tabRes;
+    global $dao;
+}
 
 echo json_encode($tabRes);
