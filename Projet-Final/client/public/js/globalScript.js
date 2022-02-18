@@ -167,7 +167,7 @@ var loadFileThumbnail = function (event) {
 function resetForm() {
   setTimeout(function () {
     var output = document.getElementById('outputThumbnail');
-    output.src = "Projet-Final/serveur/membre/images-profil/defaultProfil.png";
+    output.src = "Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png";
   }, 0);
 }
 

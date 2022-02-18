@@ -150,7 +150,7 @@ textarea {
 }
 
 .modalHeader {
-  background-color: #148eca;
+  background-color: #476ee0;
   border-bottom: 0.5px solid #5eafd8;
 }
 
@@ -479,11 +479,11 @@ textarea {
 }
 
 #tagsReponse{
-  background-color: rgb(207, 124, 124);
+  background-color: rgb(124, 177, 207);
 }
 
 #participantsReponse{
-  background-color: rgb(207, 124, 124);
+  background-color: rgb(124, 177, 207);
 }
 
 /* PARTICIPANTS */

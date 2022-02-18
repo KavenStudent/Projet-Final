@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content modalCustom">
       <div class="modal-header modalHeader">
-        <h5 class="modal-title" id="titreModalInscription">Inscription</h5>
+        <h5 class="modal-title" id="titreModalInscription"><strong>Inscription</strong></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modalCustom">
@@ -82,8 +82,8 @@
 <div class="modal fade" id="modalConnexion" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Connexion</h5>
+      <div class="modal-header modalHeader">
+        <h5 class="modal-title"><strong>Connexion</strong></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
