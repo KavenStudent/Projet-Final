@@ -32,10 +32,11 @@ function modifierProjet() {
     global $tabRes;
     global $dao;
 
+    $idProjet = $_POST['idProjet'];
     $titreProjet = $_POST['titreProjetEdit'];
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
-    $prive = true;
+    $prive = (int) $_POST['projetPublicEdit'];
 
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
@@ -43,7 +44,7 @@ function modifierProjet() {
 
     $thumbnail = "defaultThumbnail.png";
 
-    $tagsSTRING = $_POST['tags'];
+    $tagsSTRING = $_POST['tagsEdit'];
     $tags = explode(',', $tagsSTRING);
 
     $participantsProjet = $_POST['participantsProjetEdit'];
@@ -63,14 +64,12 @@ function modifierProjet() {
 
     $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) - 1);
 
-    $nomComplet = $dao->getMembreNameById($idMembre);
-
-    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet);
+    $projet = new Projet($idProjet, 0, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, "");
 
     if ($tabRes['action'] == null) {
-        if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
+        if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
             $tabRes['action'] = 'AjouterProjetReussi';
-            $tabRes['idMembre'] = $idMembre;
+            $tabRes['prive'] = $prive;
         }
     }
 }
@@ -90,7 +89,7 @@ function loadPageProjetController()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive()
     );
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);

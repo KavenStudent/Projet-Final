@@ -75,7 +75,7 @@ function afficherPageProjet(json) {
 }
 
 function afficherPageProjetEdit(json) {
-  var contenu = `<form  class="editProj">
+  var contenu = `<form id="formProjetEdit" class="editProj">
 
 
 <div class="form-outline mb-69">
@@ -120,20 +120,24 @@ function afficherPageProjetEdit(json) {
    </div>
 
 <div class="col-md-5 order-md-1 customize">
-<img id="output" src="Projet-Final/client/public/images/${json.projet.thumbnail}" class="rounded mx-auto d-block" height="600px" width="600px">
+<img id="output" src="Projet-Final/serveur/projet/thumbnail/${json.projet.thumbnail}" class="rounded mx-auto d-block" height="600px" width="600px">
 
 
 <div class="form-outline-inpt inpt">
-<input class="form-control" type="file" accept="image/*" onchange="loadFile(event)">
+<input class="form-control" name="thumbnail" type="file" accept="image/*" onchange="loadFile(event)">
 </div>
+<div class="form-check form-switch" id='switchBox'>`;
 
- <div class="form-check form-switch">
-   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" ${json.projet.prive} />
-   <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
-   </div>
-</div>
+  if (json.projet.prive == 0) {
+    contenu += `<input class="form-check-input" type="checkbox" value='0' checked />`;
+    contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='1' />`;
+  } else {
+    contenu += `<input class="form-check-input" type="checkbox" value='1'/>`;
+    contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
+  }
 
-<button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+  contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet public</label>
+  </div></div><button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
 <button type="button" class="btn btn-primary btn-block mb-4" onclick="modifierProjet(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);

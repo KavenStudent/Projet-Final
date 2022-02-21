@@ -81,6 +81,7 @@ class Modele{
 			@unlink($tmp); //effacer le fichier temporaire
 			//Enlever l'ancienne pochette dans le cas de modifier
 			$this->enleverFichier($dossier,$image);
+			print_r($image);
 			$image=$nomImage.$extension;
 		}
 		

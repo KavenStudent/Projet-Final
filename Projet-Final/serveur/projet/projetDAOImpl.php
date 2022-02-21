@@ -187,8 +187,9 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             return $returnValue;
         }
     }
-    public function modifierProjet(Projet $projet)
+    public function modifierProjet(Projet $projet, array $tags, array $tabParticipantAvecId): bool
     {
+        $returnValue = false;
         try {
             // cherche l'image du projet a modifier
             $requete = "SELECT thumbnail FROM projet WHERE id=?";
@@ -198,20 +199,23 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->thumbnail;
 
-            $image = $this->verserFichier("thumbnail", "defaultThumbnail", $ancienneImage, $projet->getTitre());
+            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre());
 
             // modifie dans projet
-            $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,auteParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
+            $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,autreParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
                 $projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->isPrive(),
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $projet->getId()
             ));
             $stmt = $this->executer();
+            $returnValue = true;
         } catch (Exception $e) {
+            $returnValue = false;
             echo $e->getMessage();
         } finally {
             unset($requete);
+            return $returnValue;
         }
     }
     public function telechargerProjet(int $idProjet)
