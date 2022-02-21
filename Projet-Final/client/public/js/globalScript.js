@@ -298,7 +298,7 @@ document.addEventListener('click', function(e){
     participants = [...participants.slice(0, index),  ...participants.slice(index + 1)];
     addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant');
   }
-})
+});
 
 
 //Permet de Vérifier si le tag est déja dans la list

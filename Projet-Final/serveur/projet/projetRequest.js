@@ -56,6 +56,8 @@ function modifierProjet(idProjet) {
   var form = new FormData();
   form.append("action", "modifierProjet");
   form.append("idProjet", idProjet);
+  form.append("tagsEdit", getTagsValue('tagValueCreate'));
+  form.append("participantsProjetEdit", getTagsValue('participantValueCreate'));
 
   $.ajax({
     type: "POST",
