@@ -210,7 +210,7 @@ function loadPageAdmin()
     global $tabRes;
     global $dao;
 
-    
+
     $tabRes['action'] = "pageAdmin";
     //retourne tout les membre
     $tabRes['listeSignalisation'] = $dao->getAllSignalisation();
@@ -235,13 +235,20 @@ function loadAutrePageMembre()
     $daoProjet = new ProjetDaoImpl();
     $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
     $tabRes['action'] = 'autreMembre';
-
-
 }
 
-function loadPageRecherche(){
+function loadPageRecherche()
+{
     global $tabRes;
     $tabRes['action'] = 'loadRecherche';
+}
+function getAllInfoMembreEtProjet()
+{
+    global $tabRes;
+    global $dao;
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['tabProjets'] = $daoProjet->getAllTags();
+    $tabRes['tabMembres'] = $dao->getAllMembre();
 }
 
 echo json_encode($tabRes);
