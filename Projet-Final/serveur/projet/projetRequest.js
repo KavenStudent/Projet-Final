@@ -12,14 +12,14 @@ function loadPageProjet(destination, idProjet) {
     contentType: false,
     processData: false,
     beforeSend: function () {
-      $('.lds-ring').removeClass('hidden');
+      $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) { },
+    fail: function (err) {},
     complete: function () {
-      $('.lds-ring').addClass('hidden');
+      $(".lds-ring").addClass("hidden");
     },
   });
 }
@@ -36,28 +36,24 @@ function loadPageAjouterProjet(idMembre) {
     contentType: false,
     processData: false,
     beforeSend: function () {
-      $('.lds-ring').removeClass('hidden');
+      $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
-
       projetVue(reponse);
-
     },
-    fail: function (err) { },
+    fail: function (err) {},
     complete: function () {
-      $('.lds-ring').addClass('hidden');
+      $(".lds-ring").addClass("hidden");
     },
-
   });
-
 }
 
-function ajouterProjetRequete(idMembre) {
-  var form = new FormData(document.getElementById('ajouterProjetForm'));
-  form.append("action", "ajouterProjet");
-  form.append("idMembre", idMembre);
-  form.append("tags", getTagsValue('tagValueCreate'));
-  form.append("participantsProjet", getTagsValue('participantValueCreate'));
+function modifierProjet(idProjet) {
+  var form = new FormData(document.getElementById("formProjetEdit"));
+  form.append("action", "modifierProjet");
+  form.append("idProjet", idProjet);
+  form.append("tagsEdit", getTagsValue("tagValueCreate"));
+  form.append("participantsProjetEdit", getTagsValue("participantValueCreate"));
 
   $.ajax({
     type: "POST",
@@ -67,19 +63,43 @@ function ajouterProjetRequete(idMembre) {
     contentType: false,
     processData: false,
     beforeSend: function () {
-      $('.lds-ring').removeClass('hidden');
+      $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
       projetVue(reponse);
-
     },
-    fail: function (err) { },
+    fail: function (err) {},
     complete: function () {
-      $('.lds-ring').addClass('hidden');
+      $(".lds-ring").addClass("hidden");
     },
-
   });
+}
 
+function ajouterProjetRequete(idMembre) {
+  var form = new FormData(document.getElementById("ajouterProjetForm"));
+  form.append("action", "ajouterProjet");
+  form.append("idMembre", idMembre);
+  form.append("tags", getTagsValue("tagValueCreate"));
+  form.append("participantsProjet", getTagsValue("participantValueCreate"));
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/projet/projetController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
+    success: function (reponse) {
+      projetVue(reponse);
+    },
+    fail: function (err) {},
+    complete: function () {
+      $(".lds-ring").addClass("hidden");
+    },
+  });
 }
 
 function getAlltags() {
@@ -94,17 +114,15 @@ function getAlltags() {
     contentType: false,
     processData: false,
     beforeSend: function () {
-      $('.lds-ring').removeClass('hidden');
+      $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
       projetVue(reponse);
-
     },
-    fail: function (err) { },
+    fail: function (err) {},
     complete: function () {
-      $('.lds-ring').addClass('hidden');
+      $(".lds-ring").addClass("hidden");
     },
-
   });
 }
 
@@ -121,15 +139,14 @@ function loadPageAutreProjet(idProjet) {
     contentType: false,
     processData: false,
     beforeSend: function () {
-      $('.lds-ring').removeClass('hidden');
+      $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) {
-    },
+    fail: function (err) {},
     complete: function () {
-      $('.lds-ring').addClass('hidden');
+      $(".lds-ring").addClass("hidden");
     },
   });
 }

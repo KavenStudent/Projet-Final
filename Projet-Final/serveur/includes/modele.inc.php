@@ -91,5 +91,3 @@ class Modele{
 		return $this->lastId;
 	}
 }
-
-?>
