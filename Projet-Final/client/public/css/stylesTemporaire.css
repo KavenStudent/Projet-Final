@@ -26,7 +26,7 @@
     padding: 2em 2em 2em 2em;
     margin-top: 2em;
     margin-bottom: 2em;
-    width: 70em;
+    min-width: 30em;
     border-radius: 30px;
 }
 
