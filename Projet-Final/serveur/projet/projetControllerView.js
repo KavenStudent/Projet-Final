@@ -37,7 +37,7 @@ function afficherPageProjet(json) {
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>
 
-        <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
+        <h5><span id="projetCreateurTitle">Createur: </span><a href="javascript:loadAutreMembre(${json.projet.idCreator})" id="projetCreateurContent"
                 name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
@@ -261,7 +261,7 @@ function afficherPageAutreProjet(json) {
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>
 
-        <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
+        <h5><span id="projetCreateurTitle">Createur: </span><a href="javascript:loadAutreMembre(${json.projet.idCreator})" id="projetCreateurContent"
                 name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
