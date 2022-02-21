@@ -1,4 +1,3 @@
-
 var projetVue = function (response) {
   var action = response.action;
   switch (action) {
@@ -18,7 +17,7 @@ var projetVue = function (response) {
       afficherPageAutreProjet(response);
       break;
   }
-}
+};
 
 function afficherPageProjet(json) {
   let thumbnail;
@@ -32,6 +31,7 @@ function afficherPageProjet(json) {
             alt="Vignette">
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button">Télécharger</button>
+            <button class="btn btn-primary" type="button">Modifier le projet</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
@@ -41,26 +41,25 @@ function afficherPageProjet(json) {
                 name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
-            aria-label="Autres participants: ">`
+            aria-label="Autres participants: ">`;
 
   //List participants
-  json.tabParticipants.forEach(membreProjet => {
+  json.tabParticipants.forEach((membreProjet) => {
     contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
   });
   contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
 
   //List tags
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
-  aria-label="Tags: ">`
+  aria-label="Tags: ">`;
 
-  json.tabTags.forEach(tagProjet => {
+  json.tabTags.forEach((tagProjet) => {
     contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
   });
   contenu += `</ul>`;
 
   //Description
   contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
-
 
   // array.forEach(tags => {
   //     //mettre les tags
@@ -72,9 +71,8 @@ function afficherPageProjet(json) {
         </div>
     </div>
 </div>`;
-  $('#contenu').html(contenu);
+  $("#contenu").html(contenu);
 }
-
 
 function afficherPageProjetEdit(json) {
   var contenu = `<form  class="editProj">
@@ -118,11 +116,10 @@ function afficherPageProjetEdit(json) {
 <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
 <button type="submit" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
 </form>`;
-  $('#contenu').html(contenu);
+  $("#contenu").html(contenu);
 }
 
 function ajouterProjetAffichage(json) {
-
   var contenu = `<form id='ajouterProjetForm' class="editProj">
 
     
@@ -189,53 +186,61 @@ function ajouterProjetAffichage(json) {
 
  </form>`;
 
-  $('#contenu').html(contenu);
+  $("#contenu").html(contenu);
 
-  json.tabTags.forEach(element => {
+  json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
 
-  
-
-
-  //Système de tags 
+  //Système de tags
   setTagsBase(new Array());
 
-
-  let monInputTag = document.getElementById('monInputTag');
+  let monInputTag = document.getElementById("monInputTag");
 
   //Ajoute la fonction de add des tags quand je press enter.
-  monInputTag.addEventListener('keyup', function (e) {
-    if (e.key === 'Enter' && (monInputTag.value != "")) {
-      addTag(monInputTag.value, 'monInputTag', '.tag-container', '#tagsReponse', tags, 'tagValueCreate', 'etiquette');
+  monInputTag.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputTag.value != "") {
+      addTag(
+        monInputTag.value,
+        "monInputTag",
+        ".tag-container",
+        "#tagsReponse",
+        tags,
+        "tagValueCreate",
+        "etiquette"
+      );
     }
 
     displayTagMatches2();
-  })
-
+  });
 
   setParticipantsBase(new Array());
 
-  json.tabParticipants.forEach(element => {
+  json.tabParticipants.forEach((element) => {
     participantsArray.push(element);
   });
 
-  let monInputParticipant = document.getElementById('participantsInput');
+  let monInputParticipant = document.getElementById("participantsInput");
 
-  monInputParticipant.addEventListener('keyup', function (e) {
-    if (e.key === 'Enter' && (monInputParticipant.value != "")) {
-      addTag(monInputParticipant.value, 'participantsInput', '.participant-container', '#participantsReponse', participants, 'participantValueCreate', 'participant');
+  monInputParticipant.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputParticipant.value != "") {
+      addTag(
+        monInputParticipant.value,
+        "participantsInput",
+        ".participant-container",
+        "#participantsReponse",
+        participants,
+        "participantValueCreate",
+        "participant"
+      );
     }
 
     displayParticipantsMatches();
-  })
-
-
+  });
 }
 
 function ajouterProjetReussi(idMembre) {
-
-  loadMembre('pageMembre', idMembre);
+  loadMembre("pageMembre", idMembre);
   afficherSnackbar("Projet ajouté avec succès!");
 }
 
@@ -260,26 +265,25 @@ function afficherPageAutreProjet(json) {
                 name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
-            aria-label="Autres participants: ">`
+            aria-label="Autres participants: ">`;
 
   //List participants
-  json.tabParticipants.forEach(membreProjet => {
+  json.tabParticipants.forEach((membreProjet) => {
     contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
   });
   contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
 
   //List tags
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
-  aria-label="Tags: ">`
+  aria-label="Tags: ">`;
 
-  json.tabTags.forEach(tagProjet => {
+  json.tabTags.forEach((tagProjet) => {
     contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
   });
   contenu += `</ul>`;
 
   //Description
   contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
-
 
   // array.forEach(tags => {
   //     //mettre les tags
@@ -291,8 +295,5 @@ function afficherPageAutreProjet(json) {
         </div>
     </div>
 </div>`;
-  $('#contenu').html(contenu);
+  $("#contenu").html(contenu);
 }
-
-
-
