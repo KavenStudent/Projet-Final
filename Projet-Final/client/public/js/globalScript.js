@@ -3,7 +3,7 @@ const participantsArray = [];
 
 window.onload = function () {
   showConditions();
-  loadPage();
+  //loadPage();
   // empeche d'utiliser la touche entrer dans les forms
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
