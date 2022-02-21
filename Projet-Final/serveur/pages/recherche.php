@@ -1,8 +1,7 @@
-<div class="container">
-    <div id='containerRecherche'>
 
-        <div class="list" id='listMembre'></div>
-        <div class="list" id='listMembre'></div>
+<div id='containerRecherche' class="container">
 
-    </div>
+    <div class="list container" id='listMembre'></div>
+    <div class="list container" id='listMembre'></div>
+
 </div>
