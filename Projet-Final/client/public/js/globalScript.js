@@ -3,7 +3,7 @@ const participantsArray = [];
 
 window.onload = function () {
   showConditions();
-  //loadPage();
+  loadPage();
   // empeche d'utiliser la touche entrer dans les forms
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
@@ -17,10 +17,10 @@ window.onload = function () {
   const password = document.querySelector("#password");
 
   togglePassword.addEventListener("click", function () {
-  // toggle the type attribute
+    // toggle the type attribute
     const type = password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
-            
+
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
@@ -30,10 +30,10 @@ window.onload = function () {
   const confirmPassword = document.querySelector("#confirmPassword");
 
   togglePasswordConfirm.addEventListener("click", function () {
-  // toggle the type attribute
+    // toggle the type attribute
     const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
     confirmPassword.setAttribute("type", type);
-            
+
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
@@ -44,10 +44,10 @@ window.onload = function () {
   const passwordConnexion = document.querySelector("#passwordConnexion");
 
   togglePasswordConnexion.addEventListener("click", function () {
-  // toggle the type attribute
+    // toggle the type attribute
     const type = passwordConnexion.getAttribute("type") === "password" ? "text" : "password";
     passwordConnexion.setAttribute("type", type);
-            
+
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
@@ -55,8 +55,14 @@ window.onload = function () {
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
+  $('#searchBar').keyup(function (event) {
+    if (searchBar.value == '') {
+      loadPage();
+    } else {
+      loadPageRecherche();
+    }
+  });
 
-  
 
 
 
@@ -192,9 +198,9 @@ function findTag(tag, tagsArray) {
   });
 }
 
-function findParticipant(participant, participantsArray){
-    return participantsArray.filter(p => {
-      let nomComplet = p.prenom  + " " +p.nom;
+function findParticipant(participant, participantsArray) {
+  return participantsArray.filter(p => {
+    let nomComplet = p.prenom + " " + p.nom;
     if (nomComplet.toLowerCase().includes(participant.toLowerCase())) {
       return p;
     }
@@ -209,37 +215,37 @@ let tags = [];
 let participants = [];
 
 //Setter la liste de tags
-function setTagsBase(originalTags){
+function setTagsBase(originalTags) {
   tags = originalTags;
 }
 
 //Setter la liste de participants
-function setParticipantsBase(originalParticipants){
+function setParticipantsBase(originalParticipants) {
   participants = originalParticipants;
 }
 
 //Creer un Tag
-function createTag(label, nomDeClasse, classTag){
+function createTag(label, nomDeClasse, classTag) {
   const div = document.createElement('div');
   div.setAttribute('class', 'tag');
   div.classList.add(classTag);
   const span = document.createElement('span');
-  span.setAttribute('class',nomDeClasse);
+  span.setAttribute('class', nomDeClasse);
   span.innerHTML = label;
   const closeBtn = document.createElement('i');
   closeBtn.setAttribute('class', 'material-icons');
-  if(classTag == 'etiquette'){
+  if (classTag == 'etiquette') {
     closeBtn.classList.add('btnCloseEtiquette');
-  }else{
+  } else {
     closeBtn.classList.add('btnCloseParticipant');
   }
-  
+
   closeBtn.setAttribute('data-item', label);
   closeBtn.innerHTML = 'close';
 
   // <div class="tag" id="">
-    // <span class="tagValueCreate" >label</span>
-    // <i class="material-icons" data-item='label'>close</i>
+  // <span class="tagValueCreate" >label</span>
+  // <i class="material-icons" data-item='label'>close</i>
   // </div>
 
   div.appendChild(span);
@@ -248,75 +254,75 @@ function createTag(label, nomDeClasse, classTag){
 }
 
 //Permet de prendre toutes les tags présents 
-function getTagsValue(nomDeClasse){
+function getTagsValue(nomDeClasse) {
   let allTags = [].slice.call(document.getElementsByClassName(nomDeClasse));
   let allTagsValue = new Array();
-  if(allTags != null){
-    allTags.forEach(unSpanTag =>{
-     allTagsValue.push(unSpanTag.innerHTML);
-   })
+  if (allTags != null) {
+    allTags.forEach(unSpanTag => {
+      allTagsValue.push(unSpanTag.innerHTML);
+    })
   }
-  
+
   return allTagsValue;
 }
 
 
 //Ajoute un tag
-function addTag(label, idInput, classContainer, idSuggestionReponse, list ,nomDeClasse ,classTag){
-  if(isLabelExist(label, list)){
+function addTag(label, idInput, classContainer, idSuggestionReponse, list, nomDeClasse, classTag) {
+  if (isLabelExist(label, list)) {
     afficherSnackbar("Le tag est déja là!");
-  }else{
+  } else {
     list.push(label);
-    addTags(classContainer,idSuggestionReponse, list,nomDeClasse ,classTag);
-    let input= document.getElementById(idInput);
+    addTags(classContainer, idSuggestionReponse, list, nomDeClasse, classTag);
+    let input = document.getElementById(idInput);
     input.value = '';
   }
 }
 
 
 //Ajoute ma liste de tags dans la div
-function addTags(classContainer, idSuggestionReponse, list, nomDeClasse ,classTag){
-    clearTags(classTag);
-    list.slice().reverse().forEach(function(item){
-    const input = createTag(item, nomDeClasse ,classTag);
+function addTags(classContainer, idSuggestionReponse, list, nomDeClasse, classTag) {
+  clearTags(classTag);
+  list.slice().reverse().forEach(function (item) {
+    const input = createTag(item, nomDeClasse, classTag);
     const tagsContainer = document.querySelector(classContainer);
     tagsContainer.prepend(input);
     $(idSuggestionReponse).html("");
-    })
-  }
+  })
+}
 
 //Clear ma liste de tags
-function clearTags(classTag){
-  let myTag = "."+classTag;
-  document.querySelectorAll(myTag).forEach(function(tag){
+function clearTags(classTag) {
+  let myTag = "." + classTag;
+  document.querySelectorAll(myTag).forEach(function (tag) {
     tag.parentElement.removeChild(tag);
   });
 }
 
 // Permet de cut un tag parmi la liste de tags
-document.addEventListener('click', function(e){
-  if(e.target.classList.contains('btnCloseEtiquette')){
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('btnCloseEtiquette')) {
     const value = e.target.getAttribute('data-item');
     const index = tags.indexOf(value);
-    tags = [...tags.slice(0, index),  ...tags.slice(index + 1)];
-    addTags('.tag-container',"#tagsReponse", tags, 'tagValueCreate' ,'etiquette');
+    tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+    addTags('.tag-container', "#tagsReponse", tags, 'tagValueCreate', 'etiquette');
   }
 
-  if(e.target.classList.contains('btnCloseParticipant')){
+  if (e.target.classList.contains('btnCloseParticipant')) {
     const value = e.target.getAttribute('data-item');
     const index = participants.indexOf(value);
-    participants = [...participants.slice(0, index),  ...participants.slice(index + 1)];
-    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant');
+    participants = [...participants.slice(0, index), ...participants.slice(index + 1)];
+    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate', 'participant');
   }
 })
 
 
 //Permet de Vérifier si le tag est déja dans la list
-function isLabelExist(label, list){
+function isLabelExist(label, list) {
   let exist = false;
-  if(list.length > 0){
-    list.forEach(function(tag){
-      if(tag === label){
+  if (list.length > 0) {
+    list.forEach(function (tag) {
+      if (tag === label) {
         exist = true;
       }
     })
@@ -338,11 +344,11 @@ function displayTagMatches2() {
 }
 
 
-function displayParticipantsMatches(){
+function displayParticipantsMatches() {
   let value = document.getElementById('participantsInput').value;
   let contenu = '';
   if (value.length > 0) {
-    const matchArray =  findParticipant(value, participantsArray);
+    const matchArray = findParticipant(value, participantsArray);
     matchArray.forEach(element => {
       contenu += `<p class="suggestion" onclick="addTag('${element.prenom} ${element.nom} ${element.id}', 'participantsInput', '.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant' )">${element.prenom} ${element.nom} ${element.id}</p>`;
     });
