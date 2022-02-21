@@ -23,9 +23,57 @@ switch ($action) {
     case "loadAutreProjet":
         loadAutreProjet();
         break;
+    case "modifierProjet":
+        modifierProjet();
+        break;
 }
 
+function modifierProjet() {
+    global $tabRes;
+    global $dao;
 
+    $titreProjet = $_POST['titreProjetEdit'];
+    $descriptionProjet = $_POST['descriptionProjetEdit'];
+    $path = "";
+    $prive = true;
+
+    $nbTelechargements = 0;
+    $lienProjet = $_POST['lienProjetEdit'];
+
+
+    $thumbnail = "defaultThumbnail.png";
+
+    $tagsSTRING = $_POST['tags'];
+    $tags = explode(',', $tagsSTRING);
+
+    $participantsProjet = $_POST['participantsProjetEdit'];
+
+    $tabParticipantAvecId = array();
+    $tabParticipantSansId = "";
+
+
+    $tabParticipants = explode(',', $participantsProjet);
+    foreach ($tabParticipants as $part) {
+        if (preg_match('~[0-9]+~', $part)) {
+            $tabParticipantAvecId[] = trim($part);
+        } else {
+            $tabParticipantSansId .= $part . ",";
+        }
+    }
+
+    $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) - 1);
+
+    $nomComplet = $dao->getMembreNameById($idMembre);
+
+    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet);
+
+    if ($tabRes['action'] == null) {
+        if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
+            $tabRes['action'] = 'AjouterProjetReussi';
+            $tabRes['idMembre'] = $idMembre;
+        }
+    }
+}
 
 function loadPageProjetController()
 {

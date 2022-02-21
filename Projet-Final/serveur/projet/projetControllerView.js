@@ -31,7 +31,7 @@ function afficherPageProjet(json) {
             alt="Vignette">
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button">Télécharger</button>
-            <button class="btn btn-primary" type="button">Modifier le projet</button>
+            <button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
@@ -80,24 +80,44 @@ function afficherPageProjetEdit(json) {
 
 <div class="form-outline mb-69">
  <label class="form-label ftxt" for="form6Example3">Titre:</label>
- <input type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}"/>
+ <input name="titreProjetEdit" type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}"/>
 </div>
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example7">Description:</label>
- <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description...">${json.projet.description}</textarea>
+ <textarea name="descriptionProjetEdit" class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description">${json.projet.description}</textarea>
 </div>
 
 <div class="form-outline mb-69">
- <label class="form-label" for="form6Example7">Participants:</label>
- <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants...">${json.projet.autreParticipant}</textarea>
-</div>
+     <label class="form-label" for="participantsProjet">Participants:</label>
+      <!-- PARTICIPANTS TAGS -->
+     <div class="participant-container">
+        <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
+      </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
+
+      <div id='participantsReponse' class="suggestionsDivision"></div>
+   </div>
 
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example5">Lien:</label>
- <input type="url" id="form6Example5" class="form-control" placeholder="Lien..." value="${json.projet.lienExterne}"/>
+ <input name="lienProjetEdit" type="url" id="form6Example5" class="form-control" placeholder="Lien..." value="${json.projet.lienExterne}"/>
 </div>
+
+<!-- Message input -->
+    <div class="form-outline mb-69">
+      <label class="form-label" for="tagProjet">Tags:</label>
+
+      <!-- TAGS ICI -->
+      <div class="tag-container">
+
+        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
+      </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
+    
+     <div id='tagsReponse' class="suggestionsDivision"></div>
+   </div>
 
 <div class="col-md-5 order-md-1 customize">
 <img id="output" src="Projet-Final/client/public/images/${json.projet.thumbnail}" class="rounded mx-auto d-block" height="600px" width="600px">
@@ -114,7 +134,7 @@ function afficherPageProjetEdit(json) {
 </div>
 
 <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
-<button type="submit" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
+<button type="button" class="btn btn-primary btn-block mb-4" onclick="modifierProjet(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);
 }
@@ -150,7 +170,7 @@ function ajouterProjetAffichage(json) {
       <div id='participantsReponse' class="suggestionsDivision"></div>
    </div>
  
-   <!-- Email input -->
+   <!-- Lien input -->
    <div class="form-outline mb-69">
      <label class="form-label" for="lienProjet">Lien:</label>
      <input type="url" name="lienProjet" class="form-control" placeholder="Lien">
