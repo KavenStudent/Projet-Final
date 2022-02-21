@@ -126,17 +126,17 @@ function afficherPageProjetEdit(json) {
 <div class="form-outline-inpt inpt">
 <input class="form-control" name="thumbnail" type="file" accept="image/*" onchange="loadFile(event)">
 </div>
-<div class="form-check form-switch" id='switchBox'>`;
+<div class="form-check form-switch" id='projetSwitchBox'>`;
 
   if (json.projet.prive == 0) {
-    contenu += `<input class="form-check-input" type="checkbox" value='0' checked />`;
+    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='0' checked />`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='1' />`;
   } else {
-    contenu += `<input class="form-check-input" type="checkbox" value='1'/>`;
+    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='1'/>`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
   }
 
-  contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet public</label>
+  contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet prive</label>
   </div></div><button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
 <button type="button" class="btn btn-primary btn-block mb-4" onclick="modifierProjet(${json.projet.id})">Sauvegarder</button>
 </form>`;

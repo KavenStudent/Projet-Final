@@ -37,6 +37,7 @@ function modifierProjet() {
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
     $prive = (int) $_POST['projetPublicEdit'];
+    print_r($prive);
 
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
