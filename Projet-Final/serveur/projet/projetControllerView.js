@@ -256,6 +256,7 @@ function afficherPageAutreProjet(json) {
             alt="Vignette">
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button">Télécharger</button>
+            <button class="btn btn-primary" type="button">Signaler</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">

@@ -315,7 +315,7 @@ function afficherPageAutreMembre(json, listProjet) {
 
 
     contenu += `</div>
-        
+    <button class="btn btn-primary" type="button">Signaler</button>
             </div>
 
             <div class="container deuxieme-colonne">`;
