@@ -69,7 +69,7 @@ function modifierProjet() {
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
             $tabRes['action'] = 'AjouterProjetReussi';
-            $tabRes['prive'] = $prive;
+            $tabRes['idMembre'] = $_SESSION['membre'];
         }
     }
 }
