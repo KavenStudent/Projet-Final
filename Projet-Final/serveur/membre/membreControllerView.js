@@ -391,6 +391,7 @@ function afficherRecherche(){
     let dataMembre = getDataMembre();
     let dataProjet = getDataProjet();
 
+
     let contenu = `<div id='containerRecherche' class="container">
 
     <div class="list container" id='listMembre'>

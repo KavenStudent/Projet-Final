@@ -13,7 +13,8 @@ function getDataProjet(){
 }
 
 function setData(newDataMembres, newDataProjets){
- 
+  dataMembre = new Array();
+  dataProjet = new Array();
   if(newDataMembres != null || newDataMembres.length > 0){
     newDataMembres.forEach(function(membre){
       dataMembre.push(membre);
