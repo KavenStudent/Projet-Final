@@ -225,7 +225,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function getAllProjetsForCards() : array{
         try {
             $tab = array();
-            $requete = "SELECT * FROM projet";
+            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom, m.prenom , m.id  as idMembre FROM projet p INNER JOIN projettag pt ON p.id = pt.idProjet INNER JOIN tag t ON t.id = pt.idTag INNER JOIN membre m ON p.idCreateur = m.id GROUP BY p.id";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
