@@ -387,6 +387,10 @@ function afficherPageAdmin(json) {
 }
 
 function afficherRecherche(){
+
+    let dataMembre = getDataMembre();
+    let dataProjet = getDataProjet();
+
     let contenu = `<div id='containerRecherche' class="container">
 
     <div class="list container" id='listMembre'>
@@ -394,27 +398,44 @@ function afficherRecherche(){
             <p>Avatar</p>
             <p>Nom Complet</p>
             <p>#Id</p>
-        </div>
-        <div class="cardMembreSuggestion">
-            <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/defaultProfil.png">
-            <p class="nomMembreSuggestion">Vim Hoang Nguyen</p>
-            <p class="idMembreSuggestion">#id</p>
-        </div>  
-    </div>
+        </div>`;
+
+    if(dataMembre != null || dataMembre.length > 0){
+        dataMembre.forEach(function(membre){
+            contenu +=`
+            <div class="cardMembreSuggestion">
+                <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
+                <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
+                <p class="idMembreSuggestion"># ${membre.id}</p>
+            </div> `;
+        });
+
+    }
+        
+     
+    contenu +=`</div>`;
 
 
-    <div class="list container" id='listProjet'>
+    contenu += `<div class="list container" id='listProjet'>
         <div class="headerListProjet">
                 <p>Titre</p>
                 <p>Nom Createur</p>
                 <p>#nbTelecharment</p>
-        </div>
-        <div class="cardProjetSuggestion">
-            <p class="titreProjetSuggestion">Ma petite vache mal aux pattes</p>
-            <p class="createurProjetSuggestion">Vim Hoang Nguyen</p>
-            <p class="nombreTelechargement">1264</p>
-        </div>
-    </div>
+        </div>`;
+
+    if(dataProjet != null || dataProjet.length > 0){
+        dataProjet.forEach(function(projet){
+            contenu += `<div class="cardProjetSuggestion">
+            <p class="titreProjetSuggestion">${projet.titre}</p>
+            <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
+            <p class="nombreTelechargement">${projet.nbTelechargement}</p>
+            </div>`;
+        });
+
+    }
+        
+
+   contenu += ` </div>
 
 </div>`;
 
