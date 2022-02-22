@@ -13,8 +13,18 @@ function getDataProjet(){
 }
 
 function setData(newDataMembres, newDataProjets){
-  dataMembre = newDataMembres;
-  dataProjet = newDataProjets;
+ 
+  if(newDataMembres != null || newDataMembres.length > 0){
+    newDataMembres.forEach(function(membre){
+      dataMembre.push(membre);
+    });
+  }
+
+   if(newDataProjets != null || newDataProjets.length > 0){
+    newDataProjets.forEach(function(projet){
+      dataProjet.push(projet);
+    });
+  }
 }
 
 window.onload = function () {

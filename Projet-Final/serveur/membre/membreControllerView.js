@@ -387,7 +387,7 @@ function afficherPageAdmin(json) {
 }
 
 function afficherRecherche(){
-
+    
     let dataMembre = getDataMembre();
     let dataProjet = getDataProjet();
 
