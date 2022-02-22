@@ -28,7 +28,8 @@ switch ($action) {
         break;
 }
 
-function modifierProjet() {
+function modifierProjet()
+{
     global $tabRes;
     global $dao;
 
@@ -37,7 +38,6 @@ function modifierProjet() {
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
     $prive = (int) $_POST['projetPublicEdit'];
-    print_r($prive);
 
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
@@ -69,10 +69,9 @@ function modifierProjet() {
 
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'AjouterProjetReussi';
+            $tabRes['action'] = 'modifierProjetReussi';
             $tabRes['idMembre'] = $_SESSION['membre'];
-        }
-        else {
+        } else {
             $tabRes['test'] = "failed";
         }
     }
@@ -158,7 +157,7 @@ function ajouterProjet()
 
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'AjouterProjetReussi';
+            $tabRes['action'] = 'ajouterProjetReussi';
             $tabRes['idMembre'] = $idMembre;
         }
     }
@@ -182,7 +181,6 @@ function loadAutreProjet()
     );
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
-
 }
 
 echo json_encode($tabRes);

@@ -183,6 +183,7 @@ function afficherPageMembre(json, listProjet) {
                             <div class="card-body card-item-body">
                                     <h5 class="card-title">${item.titre}</h5>
                                     <p class="card-text">${item.description}</p>
+                        
                                 </div>
                             </div>`
         });

@@ -200,11 +200,11 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->thumbnail;
             $ancienPath = $ligne->path;
-            print_r($ancienPath);
 
-            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre().$projet->getCreateurId());
-            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre().$projet->getCreateurId()."fichier");
-            print_r($path);
+
+            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
+            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
+
 
             // modifie dans projet
             $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,autreParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
@@ -227,7 +227,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
     }
 
-    public function getAllProjetsForCards() : array{
+    public function getAllProjetsForCards(): array
+    {
         try {
             $tab = array();
             $requete = "SELECT * FROM projet";

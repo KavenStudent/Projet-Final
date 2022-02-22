@@ -17,7 +17,7 @@ function loadPageProjet(destination, idProjet) {
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },
@@ -41,7 +41,7 @@ function loadPageAjouterProjet(idMembre) {
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },
@@ -67,8 +67,11 @@ function modifierProjet(idProjet) {
     },
     success: function (reponse) {
       projetVue(reponse);
+
     },
-    fail: function (err) {},
+    fail: function (err) {
+
+    },
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },
@@ -95,7 +98,7 @@ function ajouterProjetRequete(idMembre) {
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },
@@ -119,7 +122,7 @@ function getAlltags() {
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },
@@ -144,7 +147,7 @@ function loadPageAutreProjet(idProjet) {
     success: function (reponse) {
       projetVue(reponse);
     },
-    fail: function (err) {},
+    fail: function (err) { },
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },

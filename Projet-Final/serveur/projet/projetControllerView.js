@@ -10,8 +10,11 @@ var projetVue = function (response) {
     case "pageProjetAjouter":
       ajouterProjetAffichage(response);
       break;
-    case "AjouterProjetReussi":
+    case "ajouterProjetReussi":
       ajouterProjetReussi(response.idMembre);
+      break;
+    case  "modifierProjetReussi":
+      modifierProjetReussi(response.idMembre)
       break;
     case "autreProjet":
       afficherPageAutreProjet(response);
@@ -282,7 +285,10 @@ function ajouterProjetReussi(idMembre) {
   loadMembre("pageMembre", idMembre);
   afficherSnackbar("Projet ajouté avec succès!");
 }
-
+function modifierProjetReussi(idMembre) {
+  loadMembre("pageMembre", idMembre);
+  afficherSnackbar("Projet modifié avec succès!");
+}
 function afficherPageAutreProjet(json) {
   let thumbnail;
   if (json.projet.thumbnail == "") {
