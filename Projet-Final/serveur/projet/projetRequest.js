@@ -72,9 +72,8 @@ function ajouterProjetRequete(idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
-      loadJsonRecherhe();
       projetVue(reponse);
-
+      loadJsonRecherhe();
     },
     fail: function (err) { },
     complete: function () {
@@ -148,16 +147,10 @@ function loadJsonRecherhe() {
     dataType: "json",
     contentType: false,
     processData: false,
-    beforeSend: function () {
-      $('.lds-ring').removeClass('hidden');
-    },
     success: function (reponse) {
       setData(reponse.tabMembres, reponse.tabProjets);
     },
     fail: function (err) { },
-    complete: function () {
-      $('.lds-ring').addClass('hidden');
-    },
   });
 }
 

@@ -1,6 +1,7 @@
 const tagsArray = [];
 const participantsArray = [];
 
+// SYSTEME DE RECHERCHE
 let dataMembre = [];
 let dataProjet = [];
 
@@ -52,6 +53,11 @@ function filterDataProjet(input, projet){
   return isExist;
 }
 
+function clearInputSearch(){
+  let searchBar = document.getElementById("searchBar");
+  searchBar.value ="";
+}
+
 function loadData(){
    let dataMembre = getDataMembre();
     let dataProjet = getDataProjet();
@@ -66,7 +72,7 @@ function loadData(){
         
             if(filterDataMembre(input, membre)){
               contenuMembre +=`
-              <div class="cardMembreSuggestion">
+              <div class="cardMembreSuggestion" onclick="loadMembre('pageMembre', ${membre.id});clearInputSearch(); ">
                   <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
                   <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
                   <p class="idMembreSuggestion"># ${membre.id}</p>
@@ -81,7 +87,7 @@ function loadData(){
       if(dataProjet != null || dataProjet.length > 0){
        dataProjet.forEach(function(projet){
          if(filterDataProjet(input, projet)){
-           contenuProjet += `<div class="cardProjetSuggestion">
+           contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageProjet('pageProjet', ${projet.idProjet}); clearInputSearch();">
           <p class="titreProjetSuggestion">${projet.titre}</p>
           <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
           <p class="nombreTelechargement">${projet.nbTelechargement}</p>
@@ -165,15 +171,12 @@ window.onload = function () {
       }else{
         if(firstTime){
           loadData();
+          firstTime = false;
         }
       }
-    
-      
     }
     
   });
-
-
 
 
 
