@@ -1,8 +1,8 @@
 const tagsArray = [];
 const participantsArray = [];
 
-const dataMembre = [];
-const dataProjet = [];
+let dataMembre = [];
+let dataProjet = [];
 
 function getDataMembre(){
   return dataMembre;
@@ -15,18 +15,25 @@ function getDataProjet(){
 function setData(newDataMembres, newDataProjets){
   dataMembre = new Array();
   dataProjet = new Array();
+
+  let searchBar = document.getElementById("searchBar");
+  const input = searchBar.value;
+
   if(newDataMembres != null || newDataMembres.length > 0){
     newDataMembres.forEach(function(membre){
-      dataMembre.push(membre);
+      // if(membre.nom.includes(input) || membre.prenom.includes(input))
+        dataMembre.push(membre);
     });
   }
 
    if(newDataProjets != null || newDataProjets.length > 0){
     newDataProjets.forEach(function(projet){
+      // if(projet.titre.includes(input))
       dataProjet.push(projet);
     });
   }
 }
+
 
 window.onload = function () {
   showConditions();
