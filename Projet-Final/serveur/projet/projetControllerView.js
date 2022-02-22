@@ -59,7 +59,7 @@ function afficherPageProjet(json) {
   aria-label="Tags: ">`;
 
   json.tabTags.forEach((tagProjet) => {
-    contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
+    contenu += ` <li class="list-inline-item">${tagProjet.nomTag}</li>`;
   });
   contenu += `</ul>`;
 
