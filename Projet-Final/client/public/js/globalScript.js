@@ -17,7 +17,7 @@ function setData(newDataMembres, newDataProjets){
   dataProjet = new Array();
 
   let searchBar = document.getElementById("searchBar");
-  const input = searchBar.value;
+  let input = searchBar.value;
 
   if(newDataMembres != null || newDataMembres.length > 0){
     newDataMembres.forEach(function(membre){

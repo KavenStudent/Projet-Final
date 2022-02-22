@@ -237,16 +237,16 @@ function loadPageRecherche(){
     dataType: "json",
     contentType: false,
     processData: false,
-    // beforeSend: function () {
-    //   $('.lds-ring').removeClass('hidden');
-    // },
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
     success: function (reponse) {
       membresVue(reponse);
     },
     fail: function (err) { },
-    // complete: function () {
-    //   $('.lds-ring').addClass('hidden');
-    // },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
 
   });
 }
