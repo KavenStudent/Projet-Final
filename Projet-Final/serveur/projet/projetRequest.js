@@ -15,6 +15,7 @@ function loadPageProjet(destination, idProjet) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       projetVue(reponse);
     },
     fail: function (err) { },
@@ -40,6 +41,7 @@ function loadPageAjouterProjet(idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       projetVue(reponse);
 
     },
@@ -70,6 +72,7 @@ function ajouterProjetRequete(idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       projetVue(reponse);
 
     },
@@ -124,6 +127,7 @@ function loadPageAutreProjet(idProjet) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       projetVue(reponse);
     },
     fail: function (err) { },
