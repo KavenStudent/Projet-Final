@@ -222,6 +222,24 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
     }
 
+    public function getAllProjetsForCards() : array{
+        try {
+            $tab = array();
+            $requete = "SELECT * FROM projet";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+        return $tab;
+    }
+
     public function getAllTags(): array
     {
         try {
