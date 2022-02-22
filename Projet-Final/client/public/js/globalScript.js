@@ -16,22 +16,86 @@ function setData(newDataMembres, newDataProjets){
   dataMembre = new Array();
   dataProjet = new Array();
 
-  let searchBar = document.getElementById("searchBar");
-  let input = searchBar.value;
+
 
   if(newDataMembres != null || newDataMembres.length > 0){
     newDataMembres.forEach(function(membre){
-      // if(membre.nom.includes(input) || membre.prenom.includes(input))
         dataMembre.push(membre);
     });
   }
 
    if(newDataProjets != null || newDataProjets.length > 0){
     newDataProjets.forEach(function(projet){
-      // if(projet.titre.includes(input))
       dataProjet.push(projet);
     });
   }
+}
+
+function filterDataMembre(input, membre){
+  let isExist = false;
+  let nom = membre.nom.toLowerCase();
+  let prenom = membre.prenom.toLowerCase();
+  if(nom.includes(input) || prenom.includes(input)){
+     isExist = true;
+  }
+  return isExist;
+}
+
+function filterDataProjet(input, projet){
+  let isExist = false;
+  let prenomCreateur = projet.prenom.toLowerCase();
+  let nomCreateur = projet.nom.toLowerCase();
+  let tags = projet.tags.toLowerCase();
+  if(prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input)){
+    isExist = true;
+  }
+  return isExist;
+}
+
+function loadData(){
+   let dataMembre = getDataMembre();
+    let dataProjet = getDataProjet();
+    let contenuMembre = '';
+    let contenuProjet = '';
+
+    let searchBar = document.getElementById("searchBar");
+    let input = searchBar.value.toLowerCase();
+
+      if(dataMembre != null || dataMembre.length > 0){
+        dataMembre.forEach(function(membre){
+        
+            if(filterDataMembre(input, membre)){
+              contenuMembre +=`
+              <div class="cardMembreSuggestion">
+                  <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
+                  <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
+                  <p class="idMembreSuggestion"># ${membre.id}</p>
+              </div> `;
+            }
+            
+        });
+
+      }
+
+
+      if(dataProjet != null || dataProjet.length > 0){
+       dataProjet.forEach(function(projet){
+         if(filterDataProjet(input, projet)){
+           contenuProjet += `<div class="cardProjetSuggestion">
+          <p class="titreProjetSuggestion">${projet.titre}</p>
+          <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
+          <p class="nombreTelechargement">${projet.nbTelechargement}</p>
+          </div>`;
+         }
+      });
+
+      }
+
+      console.log(contenuMembre);
+    
+      $('#contenuCardsMembre').html(contenuMembre);
+      $('#contenuCardsProjet').html(contenuProjet);
+       
 }
 
 
@@ -89,12 +153,24 @@ window.onload = function () {
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
+  let firstTime = false;
   $('#searchBar').keyup(function (event) {
     if (searchBar.value == '') {
       loadPage();
+      firstTime = false;
     } else {
-      loadPageRecherche();
+      if(firstTime ==false){
+          loadPageRecherche();
+          firstTime = true;
+      }else{
+        if(firstTime){
+          loadData();
+        }
+      }
+    
+      
     }
+    
   });
 
 

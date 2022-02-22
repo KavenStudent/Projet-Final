@@ -388,8 +388,7 @@ function afficherPageAdmin(json) {
 
 function afficherRecherche(){
     
-    let dataMembre = getDataMembre();
-    let dataProjet = getDataProjet();
+   
 
 
     let contenu = `<div id='containerRecherche' class="container">
@@ -399,20 +398,9 @@ function afficherRecherche(){
             <p>Avatar</p>
             <p>Nom Complet</p>
             <p>#Id</p>
-        </div>`;
-
-    if(dataMembre != null || dataMembre.length > 0){
-        dataMembre.forEach(function(membre){
-            contenu +=`
-            <div class="cardMembreSuggestion">
-                <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
-                <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
-                <p class="idMembreSuggestion"># ${membre.id}</p>
-            </div> `;
-        });
-
-    }
-        
+        </div><div id='contenuCardsMembre'></div>`;
+    
+   
      
     contenu +=`</div>`;
 
@@ -422,23 +410,16 @@ function afficherRecherche(){
                 <p>Titre</p>
                 <p>Nom Createur</p>
                 <p>#nbTelecharment</p>
-        </div>`;
+        </div><div id='contenuCardsProjet'></div>`;
 
-    if(dataProjet != null || dataProjet.length > 0){
-        dataProjet.forEach(function(projet){
-            contenu += `<div class="cardProjetSuggestion">
-            <p class="titreProjetSuggestion">${projet.titre}</p>
-            <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
-            <p class="nombreTelechargement">${projet.nbTelechargement}</p>
-            </div>`;
-        });
-
-    }
+   
         
 
    contenu += ` </div>
 
 </div>`;
 
+
 $('#contenu').html(contenu);
+loadData();
 }
