@@ -13,7 +13,7 @@ var projetVue = function (response) {
     case "ajouterProjetReussi":
       ajouterProjetReussi(response.idMembre);
       break;
-    case  "modifierProjetReussi":
+    case "modifierProjetReussi":
       modifierProjetReussi(response.idMembre)
       break;
     case "autreProjet":
@@ -140,11 +140,11 @@ function afficherPageProjetEdit(json) {
 
 <div class="form-check form-switch" id='projetSwitchBox'>`;
 
-  if (json.projet.prive == 0) {
+  if (json.projet.prive == '0') {
     contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='0' checked />`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='1' />`;
   } else {
-    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='1'/>`;
+    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='1'checked/>`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
   }
 

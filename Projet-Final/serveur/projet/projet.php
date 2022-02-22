@@ -1,5 +1,6 @@
 <?php
-class Projet {
+class Projet
+{
     private $id;
     private $createurId;
     private $titre;
@@ -13,9 +14,19 @@ class Projet {
     private $nomMembre;
 
     // ------------------------------------------------------------Constructeur
-    public function __construct(int $id, int $createurId, string $titre, string $description,
-     string $path, int $prive, string $autresParticipants,
-      int $nbTelechargements, string $lienExterne, string $thumbnail, string $nomMembre) {
+    public function __construct(
+        int $id,
+        int $createurId,
+        string $titre,
+        string $description,
+        string $path,
+        string $prive,
+        string $autresParticipants,
+        int $nbTelechargements,
+        string $lienExterne,
+        string $thumbnail,
+        string $nomMembre
+    ) {
         $this->id = $id;
         $this->createurId = $createurId;
         $this->titre = $titre;
@@ -30,70 +41,88 @@ class Projet {
     }
 
     // ----------------------------------------------------------------Getters
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
-    public function getCreateurId() {
+    public function getCreateurId()
+    {
         return $this->createurId;
     }
-    public function getTitre() {
+    public function getTitre()
+    {
         return $this->titre;
     }
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
-    public function isPrive() {
+    public function isPrive()
+    {
         return $this->prive;
     }
-    public function getAutresParticipants() {
+    public function getAutresParticipants()
+    {
         return $this->autresParticipants;
     }
-    public function getNbTelechargements() {
+    public function getNbTelechargements()
+    {
         return $this->nbTelechargements;
     }
-    public function getLienExterne() {
+    public function getLienExterne()
+    {
         return $this->lienExterne;
     }
-    public function getThumbnail() {
+    public function getThumbnail()
+    {
         return $this->thumbnail;
     }
 
-    public function getNomMembre(){
+    public function getNomMembre()
+    {
         return $this->nomMembre;
     }
-  
+
     //----------------------------------------------------------------Setters
-    public function setTitre(string $titre) {
+    public function setTitre(string $titre)
+    {
         $this->titre = $titre;
     }
-    public function setDescription(string $description) {
+    public function setDescription(string $description)
+    {
         $this->description = $description;
     }
-    public function setPath(string $path) {
+    public function setPath(string $path)
+    {
         $this->path = $path;
     }
-    public function setPrive(bool $prive) {
+    public function setPrive(string $prive)
+    {
         $this->prive = $prive;
     }
-    public function setAutresParticipants(string $autresParticipants) {
+    public function setAutresParticipants(string $autresParticipants)
+    {
         $this->autresParticipants = $autresParticipants;
     }
-    public function setNbTelechargements(string $nbTelechargements) {
+    public function setNbTelechargements(string $nbTelechargements)
+    {
         $this->nbTelechargements = $nbTelechargements;
     }
-    public function setLienExterne(string $lienExterne) {
+    public function setLienExterne(string $lienExterne)
+    {
         $this->lienExterne = $lienExterne;
     }
-    public function setThumbnail(string $thumbnail) {
+    public function setThumbnail(string $thumbnail)
+    {
         $this->thumbnail = $thumbnail;
     }
 
-    public function setNomMembre(string $nomMembre){
+    public function setNomMembre(string $nomMembre)
+    {
         $this->nomMembre = $nomMembre;
     }
 }
-
-?>

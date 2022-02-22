@@ -94,6 +94,7 @@ function loadPageProjetController()
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
         "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(), "path" => $projet->getPath()
     );
+
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
 }
