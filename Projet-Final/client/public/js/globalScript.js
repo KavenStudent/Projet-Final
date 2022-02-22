@@ -1,6 +1,22 @@
 const tagsArray = [];
 const participantsArray = [];
 
+const dataMembre = [];
+const dataProjet = [];
+
+function getDataMembre(){
+  return dataMembre;
+}
+
+function getDataProjet(){
+  return dataProjet;
+}
+
+function setData(newDataMembres, newDataProjets){
+  dataMembre = newDataMembres;
+  dataProjet = newDataProjets;
+}
+
 window.onload = function () {
   showConditions();
   loadPage();
