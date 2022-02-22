@@ -26,6 +26,9 @@ switch ($action) {
     case "modifierProjet":
         modifierProjet();
         break;
+    case "loadJsonRecherhe"
+        loadJsonRecherhe();
+        break;  
 }
 
 function modifierProjet() {
@@ -180,6 +183,13 @@ function loadAutreProjet()
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
 
+}
+
+function loadJsonRecherhe(){
+    global $tabRes;
+    global $dao;
+    $tabRes['tabMembres'];
+    $tabRes['tabProjets'];
 }
 
 echo json_encode($tabRes);
