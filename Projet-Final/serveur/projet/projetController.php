@@ -26,7 +26,7 @@ switch ($action) {
     case "modifierProjet":
         modifierProjet();
         break;
-    case "loadJsonRecherhe"
+    case "loadJsonRecherhe":
         loadJsonRecherhe();
         break;  
 }
@@ -188,8 +188,9 @@ function loadAutreProjet()
 function loadJsonRecherhe(){
     global $tabRes;
     global $dao;
-    $tabRes['tabMembres'];
-    $tabRes['tabProjets'];
+    $daoMembre = new MembreDaoImpl();
+    $tabRes['tabMembres'] =  $daoMembre->getAllMembre();
+    $tabRes['tabProjets'] = $dao->getAllProjetsForCards();
 }
 
 echo json_encode($tabRes);

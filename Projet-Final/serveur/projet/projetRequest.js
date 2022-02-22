@@ -148,7 +148,7 @@ function loadJsonRecherhe() {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
-   
+      setData(reponse.tabMembres, reponse.tabProjets);
     },
     fail: function (err) { },
     complete: function () {
