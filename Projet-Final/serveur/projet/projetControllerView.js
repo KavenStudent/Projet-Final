@@ -126,6 +126,13 @@ function afficherPageProjetEdit(json) {
 <div class="form-outline-inpt inpt">
 <input class="form-control" name="thumbnail" type="file" accept="image/*" onchange="loadFile(event)">
 </div>
+
+<h3>Fichier du projet</h3>
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit">
+   </div>
+   <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
+
 <div class="form-check form-switch" id='projetSwitchBox'>`;
 
   if (json.projet.prive == 0) {

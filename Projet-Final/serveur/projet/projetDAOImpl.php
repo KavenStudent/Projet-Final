@@ -193,20 +193,24 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         $returnValue = false;
         try {
             // cherche l'image du projet a modifier
-            $requete = "SELECT thumbnail FROM projet WHERE id=?";
+            $requete = "SELECT thumbnail, path FROM projet WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array($projet->getId()));
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->thumbnail;
+            $ancienPath = $ligne->path;
+            print_r($ancienPath);
 
-            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre());
+            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre().$projet->getIdCreateur());
+            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre().$projet->getIdCreateur()."fichier");
+            print_r($path);
 
             // modifie dans projet
             $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,autreParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
-                $projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->isPrive(),
+                $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $projet->getId()
             ));
             $stmt = $this->executer();

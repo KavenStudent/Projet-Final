@@ -72,6 +72,9 @@ function modifierProjet() {
             $tabRes['action'] = 'AjouterProjetReussi';
             $tabRes['idMembre'] = $_SESSION['membre'];
         }
+        else {
+            $tabRes['test'] = "failed";
+        }
     }
 }
 
