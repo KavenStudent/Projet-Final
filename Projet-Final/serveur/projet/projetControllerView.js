@@ -30,7 +30,9 @@ function afficherPageProjet(json) {
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">Télécharger</button>
+        <a   class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+        Télécharger
+       </a>
             <button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
         </div>
     </div>
@@ -292,7 +294,9 @@ function afficherPageAutreProjet(json) {
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">Télécharger</button>
+        <a  class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+        Télécharger
+        </a>
             <button class="btn btn-primary" type="button">Signaler</button>
         </div>
     </div>
