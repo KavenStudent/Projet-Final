@@ -202,8 +202,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $ancienPath = $ligne->path;
             print_r($ancienPath);
 
-            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre().$projet->getIdCreateur());
-            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre().$projet->getIdCreateur()."fichier");
+            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre().$projet->getCreateurId());
+            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre().$projet->getCreateurId()."fichier");
             print_r($path);
 
             // modifie dans projet
