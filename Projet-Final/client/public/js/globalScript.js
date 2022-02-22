@@ -51,6 +51,22 @@ window.onload = function () {
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
+
+
+  // SEARCH BAR
+  let searchBar = document.getElementById("searchBar");
+  $('#searchBar').keyup(function (event) {
+    if (searchBar.value == '') {
+      loadPage();
+    } else {
+      loadPageRecherche();
+    }
+  });
+
+
+
+
+
 };
 
 // fonction show terme et conditions

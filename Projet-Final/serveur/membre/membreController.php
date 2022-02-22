@@ -24,18 +24,6 @@ switch ($action) {
     case "tableMembres":
         tableMembres();
         break;
-    case "activerMembre":
-        activerMembre();
-        break;
-    case "desactiverMembre":
-        desactiverMembre();
-        break;
-    case "tableHistoriqueLocation":
-        tableHistoriquesLocation();
-        break;
-    case "tableLocation":
-        tableLocations();
-        break;
     case "loadMembre":
         loadPageMembre();
         break;
@@ -47,6 +35,9 @@ switch ($action) {
         break;
     case "loadAutrePageMembre":
         loadAutrePageMembre();
+        break;
+    case "loadPageRecherche":
+        loadPageRecherche();
         break;
 }
 
@@ -219,7 +210,7 @@ function loadPageAdmin()
     global $tabRes;
     global $dao;
 
-    
+
     $tabRes['action'] = "pageAdmin";
     //retourne tout les membre
     $tabRes['listeSignalisation'] = $dao->getAllSignalisation();
@@ -244,8 +235,20 @@ function loadAutrePageMembre()
     $daoProjet = new ProjetDaoImpl();
     $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
     $tabRes['action'] = 'autreMembre';
+}
 
-
+function loadPageRecherche()
+{
+    global $tabRes;
+    $tabRes['action'] = 'loadRecherche';
+}
+function getAllInfoMembreEtProjet()
+{
+    global $tabRes;
+    global $dao;
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['tabProjets'] = $daoProjet->getAllTags();
+    $tabRes['tabMembres'] = $dao->getAllMembre();
 }
 
 echo json_encode($tabRes);
