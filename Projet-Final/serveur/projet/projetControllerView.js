@@ -201,6 +201,12 @@ function ajouterProjetAffichage(json) {
    <div class="form-outline-inpt inpt">
    <input class="form-control" type="file" accept="image/*" onchange="loadFileThumbnail(event)" name='imageVignette' id="imagView">
    </div>
+
+   <h3>Fichier du projet</h3>
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier">
+   </div>
+   <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
  
  </div>
    <!-- Submit button -->
