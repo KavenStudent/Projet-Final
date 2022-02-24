@@ -43,7 +43,7 @@ function modifierProjet()
     $titreProjet = $_POST['titreProjetEdit'];
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
-    $prive = (int) $_POST['projetPublicEdit'];
+    $prive = $_POST['projetPublicEdit'];
 
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
@@ -103,6 +103,7 @@ function loadPageProjetController()
 
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
+    $tabRes['test'] = $projet->isPrive();
 }
 
 function  loadPageAjouterProjetController()
@@ -190,7 +191,8 @@ function loadAutreProjet()
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
 }
 
-function loadJsonRecherhe(){
+function loadJsonRecherhe()
+{
     global $tabRes;
     global $dao;
     $daoMembre = new MembreDaoImpl();

@@ -138,18 +138,21 @@ function afficherPageProjetEdit(json) {
    </div>
    <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
 
+   <div class="col-sm profilEdit">
 <div class="form-check form-switch" id='projetSwitchBox'>`;
 
-  if (json.projet.prive == "0") {
-    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='0' checked />`;
-    contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='1' />`;
-  } else {
-    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='1'checked/>`;
+  if (json.projet.prive == 0) {
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
+    contenu += `<input class="form-check-input" type="checkbox"  name='projetPublicEdit' value='1' />`;
+  } else {
+    contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
+    contenu += `<input class="form-check-input" type="checkbox"  name='projetPublicEdit' value='1' checked />`;
   }
 
   contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet prive</label>
-  </div></div><button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+  </div>
+ </div>
+  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
 <button type="button" class="btn btn-primary btn-block mb-4" onclick="modifierProjet(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);

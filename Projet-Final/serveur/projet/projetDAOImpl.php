@@ -20,7 +20,10 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
 
-            $requete = "SELECT *, p.description as descriptionProjet, p.id as idProjet FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE p.id = ?";
+            $requete = "SELECT p.id   as idProjet , p.description as descriptionProjet, p.idCreateur, p.titre, p.path , p.prive, 
+            p.autreParticipant, p.nbTelechargement, p.lienExterne, p.thumbnail, m.nom , m.prenom
+            FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE p.id = ?";
+
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();

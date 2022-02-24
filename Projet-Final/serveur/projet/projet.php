@@ -20,7 +20,7 @@ class Projet
         string $titre,
         string $description,
         string $path,
-        string $prive,
+        int $prive,
         string $autresParticipants,
         int $nbTelechargements,
         string $lienExterne,
@@ -41,7 +41,7 @@ class Projet
     }
 
     // ----------------------------------------------------------------Getters
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -61,7 +61,7 @@ class Projet
     {
         return $this->path;
     }
-    public function isPrive(): string
+    public function isPrive(): int
     {
         return $this->prive;
     }
@@ -100,7 +100,7 @@ class Projet
     {
         $this->path = $path;
     }
-    public function setPrive(string $prive)
+    public function setPrive(int $prive)
     {
         $this->prive = $prive;
     }
