@@ -1,7 +1,6 @@
 const tagsArray = [];
 const participantsArray = [];
 
-
 // SYSTEME DE RECHERCHE
 let dataMembre = [];
 let dataProjet = [];
@@ -106,6 +105,7 @@ function loadData(){
        
 }
 
+
 window.onload = function () {
   showConditions();
   loadPage();
@@ -156,6 +156,31 @@ window.onload = function () {
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
+
+
+  // SEARCH BAR
+  let searchBar = document.getElementById("searchBar");
+  let firstTime = false;
+  $('#searchBar').keyup(function (event) {
+    if (searchBar.value == '') {
+      loadPage();
+      firstTime = false;
+    } else {
+      if(firstTime ==false){
+          loadPageRecherche();
+          firstTime = true;
+      }else{
+        if(firstTime){
+          loadData();
+          firstTime = false;
+        }
+      }
+    }
+    
+  });
+
+
+
 };
 
 // fonction show terme et conditions
