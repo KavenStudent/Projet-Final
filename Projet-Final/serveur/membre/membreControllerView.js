@@ -17,9 +17,6 @@ var membresVue = function (reponse) {
         case "autreMembre":
             afficherPageAutreMembre(reponse, reponse.listProjet);
             break;
-        case "loadRecherche":
-            afficherRecherche();
-            break;
     }
 }
 
@@ -385,42 +382,4 @@ function afficherPageAdmin(json) {
     contenu += `</div> </div> </div>`;
 
     $('#contenu').html(contenu);
-}
-
-function afficherRecherche(){
-    
-   
-
-
-    let contenu = `<div id='containerRecherche' class="container">
-
-    <div class="list container" id='listMembre'>
-        <div class="headerListMembre">
-            <p>Avatar</p>
-            <p>Nom Complet</p>
-            <p>#Id</p>
-        </div><div id='contenuCardsMembre'></div>`;
-    
-   
-     
-    contenu +=`</div>`;
-
-
-    contenu += `<div class="list container" id='listProjet'>
-        <div class="headerListProjet">
-                <p>Titre</p>
-                <p>Nom Createur</p>
-                <p>#nbTelecharment</p>
-        </div><div id='contenuCardsProjet'></div>`;
-
-   
-        
-
-   contenu += ` </div>
-
-</div>`;
-
-
-$('#contenu').html(contenu);
-loadData();
 }
