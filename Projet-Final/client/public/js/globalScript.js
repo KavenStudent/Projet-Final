@@ -1,6 +1,111 @@
 const tagsArray = [];
 const participantsArray = [];
 
+// SYSTEME DE RECHERCHE
+let dataMembre = [];
+let dataProjet = [];
+
+function getDataMembre(){
+  return dataMembre;
+}
+
+function getDataProjet(){
+  return dataProjet;
+}
+
+function setData(newDataMembres, newDataProjets){
+  dataMembre = new Array();
+  dataProjet = new Array();
+
+
+
+  if(newDataMembres != null || newDataMembres.length > 0){
+    newDataMembres.forEach(function(membre){
+        dataMembre.push(membre);
+    });
+  }
+
+   if(newDataProjets != null || newDataProjets.length > 0){
+    newDataProjets.forEach(function(projet){
+      dataProjet.push(projet);
+    });
+  }
+}
+
+function filterDataMembre(input, membre){
+  let isExist = false;
+  let nom = membre.nom.toLowerCase();
+  let prenom = membre.prenom.toLowerCase();
+  if(nom.includes(input) || prenom.includes(input)){
+     isExist = true;
+  }
+  return isExist;
+}
+
+function filterDataProjet(input, projet){
+  let isExist = false;
+  let prenomCreateur = projet.prenom.toLowerCase();
+  let nomCreateur = projet.nom.toLowerCase();
+  let tags = projet.tags.toLowerCase();
+  let titre = projet.titre.toLowerCase();
+  if(prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input) || titre.includes(input)){
+    isExist = true;
+  }
+  return isExist;
+}
+
+function clearInputSearch(){
+  let searchBar = document.getElementById("searchBar");
+  searchBar.value ="";
+}
+
+function loadData(){
+   let dataMembre = getDataMembre();
+    let dataProjet = getDataProjet();
+    let contenuMembre = '';
+    let contenuProjet = '';
+
+    let searchBar = document.getElementById("searchBar");
+    let input = searchBar.value.toLowerCase();
+
+      if(dataMembre != null || dataMembre.length > 0){
+        dataMembre.forEach(function(membre){
+        
+            if(filterDataMembre(input, membre)){
+              contenuMembre +=`
+              <div class="cardMembreSuggestion" onclick="loadMembre('pageMembre', ${membre.id});clearInputSearch(); ">
+                  <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
+                  <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
+                  <p class="idMembreSuggestion"># ${membre.id}</p>
+              </div> `;
+            }
+            
+        });
+
+      }
+
+
+      if(dataProjet != null || dataProjet.length > 0){
+       dataProjet.forEach(function(projet){
+         if(filterDataProjet(input, projet)){
+           contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageProjet('pageProjet', ${projet.idProjet}); clearInputSearch();">
+          <p class="titreProjetSuggestion">${projet.titre}</p>
+          <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
+          <p class="nombreTelechargement">${projet.nbTelechargement}</p>
+          </div>`;
+         }
+      });
+
+      }
+
+      console.log(contenuMembre);
+    
+      $('#contenuCardsMembre').html(contenuMembre);
+      $('#contenuCardsProjet').html(contenuProjet);
+       
+}
+
+
 window.onload = function () {
   showConditions();
   loadPage();
@@ -51,6 +156,31 @@ window.onload = function () {
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
+
+
+  // SEARCH BAR
+  let searchBar = document.getElementById("searchBar");
+  let firstTime = false;
+  $('#searchBar').keyup(function (event) {
+    if (searchBar.value == '') {
+      loadPage();
+      firstTime = false;
+    } else {
+      if(firstTime ==false){
+          loadPageRecherche();
+          firstTime = true;
+      }else{
+        if(firstTime){
+          loadData();
+          firstTime = false;
+        }
+      }
+    }
+    
+  });
+
+
+
 };
 
 // fonction show terme et conditions

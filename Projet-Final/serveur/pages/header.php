@@ -21,7 +21,7 @@ session_start();
             <?php
             if (isset($_SESSION['membre'])) {
 
-                echo '<button type="button" ' . 'onclick="loadMembre(`pageMembre`,' . $_SESSION['membre'] . ')"' . ' class="btn btn-light buttonNav">Mon Profil</button>
+                echo '<button type="button" ' . 'onclick="loadMembre(`pageMembre`,' . $_SESSION['membre'] . '); clearInputSearch();"' . ' class="btn btn-light buttonNav">Mon Profil</button>
                 <input type="hidden" id="typePage" value="' . $_SESSION['membre'] . '">  
                 <div id="divAuthentification">
                 <button type="button" class="btn btn-light buttonNav" onclick="deconnexion()">Déconnecter</button>
@@ -30,7 +30,7 @@ session_start();
 
             if (isset($_SESSION['admin'])) {
 
-                echo '<button type="button" onclick="loadPageAdmin();" class="btn btn-light buttonNav">Liste de signalisation</button>
+                echo '<button type="button" onclick="loadPageAdmin(); clearInputSearch();" class="btn btn-light buttonNav">Liste de signalisation</button>
                 <input type="hidden" id="typePage" value="admin">  
                 <div id="divAuthentification">
                 <button type="button" class="btn btn-light buttonNav" onclick="deconnexion()">Déconnecter</button>

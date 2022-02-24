@@ -18,3 +18,97 @@
     margin: auto;
     padding: 10px;
 }
+
+.list{
+    border: 5px solid #4169E1;
+    background-color:#4169e157;
+    overflow-y: auto;
+    max-height:40em;
+    padding: 2em 2em 2em 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    min-width: 10em;
+    border-radius: 15px;
+}
+
+#containerRecherche{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#listMembre, #listProjet{
+    min-width: 15em;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
+.headerListMembre{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    min-width: 20em;
+    min-height: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid black;
+}
+
+
+.headerListProjet{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-weight: bold;
+    min-width: 20em;
+    min-height: 1em;
+    padding: 0.5em;
+    padding-bottom: 0;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid black;
+}
+
+.headerListProjet p{
+ flex: 1;
+}
+
+.cardMembreSuggestion, .cardProjetSuggestion{
+    border: 1px solid black;
+    min-width: 20em;
+    min-height: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: white;
+}
+
+.nomMembreSuggestion, .idMembreSuggestion{
+    color: black;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+ .titreProjetSuggestion, .createurProjetSuggestion, .nombreTelechargement{
+    color: black;
+    font-weight: bold;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.imageProfilMembreSuggestion{
+    max-width: 2em;
+    max-height: 2em;
+}
+
+
