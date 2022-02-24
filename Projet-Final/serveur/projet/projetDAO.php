@@ -25,7 +25,7 @@ interface ProjetDao
     public function modifierProjet(Projet $projet, array $tags, array $participants): bool;
 
     //Télécharge le fichier d'un projet
-    public function telechargerProjet(int $idProjet);
+    public function telechargerProjet(int $idProjet, int $nbTelechargement): bool;
 
     //Tous les tags
     public function getAllTags() : array;

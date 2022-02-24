@@ -226,8 +226,25 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             return $returnValue;
         }
     }
-    public function telechargerProjet(int $idProjet)
+    public function telechargerProjet(int $idProjet, int $nbTelechargement): bool
     {
+        $returnValue = false;
+        try {
+            $newNbTelechargement = $nbTelechargement + 1;
+            $requete = "UPDATE projet SET nbTelechargement=? WHERE id=?";
+            $this->setRequete($requete);
+            $this->setParams(array(
+                $newNbTelechargement, $idProjet
+            ));
+            $stmt = $this->executer();
+            $returnValue = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            $returnValue = false;
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+            return $returnValue;
+        }
     }
 
     public function getAllProjetsForCards(): array
