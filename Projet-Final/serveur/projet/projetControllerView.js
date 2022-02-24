@@ -29,7 +29,7 @@ function afficherPageProjet(json) {
   } else {
     thumbnail = json.projet.thumbnail;
   }
-  var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+  var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
@@ -80,7 +80,7 @@ function afficherPageProjet(json) {
 }
 
 function afficherPageProjetEdit(json) {
-  var contenu = `<form id="formProjetEdit" class="editProj">
+  var contenu = `<div id="contenuRecherche"></div><form id="formProjetEdit" class="editProj">
 
 
 <div class="form-outline mb-69">
@@ -159,7 +159,7 @@ function afficherPageProjetEdit(json) {
 }
 
 function ajouterProjetAffichage(json) {
-  var contenu = `<form id='ajouterProjetForm' class="editProj">
+  var contenu = `<div id="contenuRecherche"></div><form id='ajouterProjetForm' class="editProj">
 
     
     <!-- Text input -->
@@ -299,7 +299,7 @@ function afficherPageAutreProjet(json) {
   } else {
     thumbnail = json.projet.thumbnail;
   }
-  var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+  var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
