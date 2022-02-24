@@ -14,7 +14,7 @@ var projetVue = function (response) {
       ajouterProjetReussi(response.idMembre);
       break;
     case "modifierProjetReussi":
-      modifierProjetReussi(response.idMembre)
+      modifierProjetReussi(response.idMembre);
       break;
     case "autreProjet":
       afficherPageAutreProjet(response);
@@ -33,7 +33,7 @@ function afficherPageProjet(json) {
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
-        <a   class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+        <a onclick="telechargerProjet(${json.projet.id})" class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
         Télécharger
        </a>
             <button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
@@ -140,7 +140,7 @@ function afficherPageProjetEdit(json) {
 
 <div class="form-check form-switch" id='projetSwitchBox'>`;
 
-  if (json.projet.prive == '0') {
+  if (json.projet.prive == "0") {
     contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='0' checked />`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='1' />`;
   } else {

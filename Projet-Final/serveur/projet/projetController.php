@@ -29,6 +29,9 @@ switch ($action) {
     case "loadJsonRecherhe":
         loadJsonRecherhe();
         break;  
+    case "telechargerProjet":
+        telechargerProjet();
+        break;
 }
 
 function modifierProjet()
@@ -193,6 +196,17 @@ function loadJsonRecherhe(){
     $daoMembre = new MembreDaoImpl();
     $tabRes['tabMembres'] =  $daoMembre->getAllMembre();
     $tabRes['tabProjets'] = $dao->getAllProjetsForCards();
+}
+
+function telechargerProjet(){
+    global $tabRes;
+    global $dao;
+
+    $idProjet = $_POST['idProjet'];
+
+    $projet = $dao->getProjet($idProjet);
+
+    $dao->telechargerProjet($projet->getId(), $projet->getNbTelechargements());
 }
 
 echo json_encode($tabRes);
