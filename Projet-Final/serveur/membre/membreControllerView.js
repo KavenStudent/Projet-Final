@@ -411,7 +411,7 @@ function afficherRecherche(){
         <div class="headerListProjet">
                 <p>Titre</p>
                 <p>Nom Createur</p>
-                <p>#nbTelecharment</p>
+                <p>#nbTéléchargement</p>
         </div><div id='contenuCardsProjet'></div>`;
 
    
