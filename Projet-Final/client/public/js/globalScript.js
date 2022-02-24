@@ -17,8 +17,6 @@ function setData(newDataMembres, newDataProjets){
   dataMembre = new Array();
   dataProjet = new Array();
 
-
-
   if(newDataMembres != null || newDataMembres.length > 0){
     newDataMembres.forEach(function(membre){
         dataMembre.push(membre);
@@ -97,8 +95,6 @@ function loadData(){
       });
 
       }
-
-      console.log(contenuMembre);
     
       $('#contenuCardsMembre').html(contenuMembre);
       $('#contenuCardsProjet').html(contenuProjet);
@@ -156,7 +152,6 @@ window.onload = function () {
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
-
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
