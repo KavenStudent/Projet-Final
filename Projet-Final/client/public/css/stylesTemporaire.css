@@ -91,6 +91,7 @@
     padding: 1em;
     margin-bottom: 1em;
     background-color: white;
+    cursor: pointer;
 }
 
 .nomMembreSuggestion, .idMembreSuggestion{

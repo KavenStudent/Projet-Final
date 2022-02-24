@@ -158,28 +158,23 @@ window.onload = function () {
   let isOnRecherchePage = false;
   let isInputEmpty = false;
   $('#searchBar').keyup(function (event) {
-    // Si ya pas de valeur et sur la page de recherche return la page accueil
-    if (searchBar.value == '' && isOnRecherchePage == true){
-      loadPage();
-      isOnRecherchePage = false;
-      isInputEmpty = true;
-    } else{
-      //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
-      if(searchBar.value != '' && isOnRecherchePage == false){
-        loadPageRecherche();
-        isOnRecherchePage = true;
-        isInputEmpty = false;
-      }
 
-      //Si ya une valeur et sur la page de recherche, il load le data
-      if(searchBar.value != '' && isOnRecherchePage == true){
-        loadData();
-        isInputEmpty = false;
-      }
-      
-    }
+  //Si la valeur est vide, elle efface le contenu de Recherche
+  if(searchBar.value == ''){
+    $('#contenuRecherche').html("");
+  }
 
-    
+  //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+  if(searchBar.value != '' && isOnRecherchePage == false){
+    loadPageRecherche();
+    isOnRecherchePage = true;
+  }
+
+  //Si ya une valeur et sur la page de recherche, il load le data
+  if(searchBar.value != '' && isOnRecherchePage == true){
+    loadData();  
+  } 
+
   });
 
 
