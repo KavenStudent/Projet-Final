@@ -73,7 +73,7 @@ function loadData(){
         
             if(filterDataMembre(input, membre)){
               contenuMembre +=`
-              <div class="cardMembreSuggestion" onclick="loadMembre('pageMembre', ${membre.id});clearInputSearch(); ">
+              <div class="cardMembreSuggestion" onclick="loadAutreMembre(${membre.id});clearInputSearch(); ">
                   <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
                   <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
                   <p class="idMembreSuggestion"># ${membre.id}</p>
@@ -88,7 +88,7 @@ function loadData(){
       if(dataProjet != null || dataProjet.length > 0){
        dataProjet.forEach(function(projet){
          if(filterDataProjet(input, projet)){
-           contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageProjet('pageProjet', ${projet.idProjet}); clearInputSearch();">
+           contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageAutreProjet(${projet.idProjet}); clearInputSearch();">
           <p class="titreProjetSuggestion">${projet.titre}</p>
           <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
           <p class="nombreTelechargement">${projet.nbTelechargement}</p>
