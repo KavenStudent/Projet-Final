@@ -31,7 +31,8 @@ switch ($action) {
         break;  
 }
 
-function modifierProjet() {
+function modifierProjet()
+{
     global $tabRes;
     global $dao;
 
@@ -40,7 +41,6 @@ function modifierProjet() {
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
     $prive = (int) $_POST['projetPublicEdit'];
-    print_r($prive);
 
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
@@ -72,8 +72,10 @@ function modifierProjet() {
 
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'AjouterProjetReussi';
+            $tabRes['action'] = 'modifierProjetReussi';
             $tabRes['idMembre'] = $_SESSION['membre'];
+        } else {
+            $tabRes['test'] = "failed";
         }
     }
 }
@@ -93,8 +95,9 @@ function loadPageProjetController()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(), "path" => $projet->getPath()
     );
+
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
 }
@@ -158,7 +161,7 @@ function ajouterProjet()
 
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'AjouterProjetReussi';
+            $tabRes['action'] = 'ajouterProjetReussi';
             $tabRes['idMembre'] = $idMembre;
         }
     }
@@ -178,11 +181,10 @@ function loadAutreProjet()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath()
     );
     $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
-
 }
 
 function loadJsonRecherhe(){

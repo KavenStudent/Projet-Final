@@ -10,8 +10,11 @@ var projetVue = function (response) {
     case "pageProjetAjouter":
       ajouterProjetAffichage(response);
       break;
-    case "AjouterProjetReussi":
+    case "ajouterProjetReussi":
       ajouterProjetReussi(response.idMembre);
+      break;
+    case "modifierProjetReussi":
+      modifierProjetReussi(response.idMembre)
       break;
     case "autreProjet":
       afficherPageAutreProjet(response);
@@ -30,7 +33,9 @@ function afficherPageProjet(json) {
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">Télécharger</button>
+        <a   class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+        Télécharger
+       </a>
             <button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
         </div>
     </div>
@@ -54,7 +59,7 @@ function afficherPageProjet(json) {
   aria-label="Tags: ">`;
 
   json.tabTags.forEach((tagProjet) => {
-    contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
+    contenu += ` <li class="list-inline-item">${tagProjet.nomTag}</li>`;
   });
   contenu += `</ul>`;
 
@@ -126,13 +131,20 @@ function afficherPageProjetEdit(json) {
 <div class="form-outline-inpt inpt">
 <input class="form-control" name="thumbnail" type="file" accept="image/*" onchange="loadFile(event)">
 </div>
+
+<h3>Fichier du projet</h3>
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit">
+   </div>
+   <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
+
 <div class="form-check form-switch" id='projetSwitchBox'>`;
 
-  if (json.projet.prive == 0) {
+  if (json.projet.prive == '0') {
     contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='0' checked />`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='1' />`;
   } else {
-    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='1'/>`;
+    contenu += `<input class="form-check-input" type="checkbox" name='projetPublicEdit' value='1'checked/>`;
     contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
   }
 
@@ -201,6 +213,12 @@ function ajouterProjetAffichage(json) {
    <div class="form-outline-inpt inpt">
    <input class="form-control" type="file" accept="image/*" onchange="loadFileThumbnail(event)" name='imageVignette' id="imagView">
    </div>
+
+   <h3>Fichier du projet</h3>
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier">
+   </div>
+   <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
  
  </div>
    <!-- Submit button -->
@@ -267,7 +285,10 @@ function ajouterProjetReussi(idMembre) {
   loadMembre("pageMembre", idMembre);
   afficherSnackbar("Projet ajouté avec succès!");
 }
-
+function modifierProjetReussi(idMembre) {
+  loadMembre("pageMembre", idMembre);
+  afficherSnackbar("Projet modifié avec succès!");
+}
 function afficherPageAutreProjet(json) {
   let thumbnail;
   if (json.projet.thumbnail == "") {
@@ -279,7 +300,9 @@ function afficherPageAutreProjet(json) {
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">Télécharger</button>
+        <a  class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+        Télécharger
+        </a>
             <button class="btn btn-primary" type="button">Signaler</button>
         </div>
     </div>

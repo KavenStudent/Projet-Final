@@ -130,12 +130,13 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         try {
 
             $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
+            $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
             //  Ajoute le projet
             $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail) VALUES(0,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
             $this->setParams(array(
-                $projet->getCreateurId(), $projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->isPrive(),
+                $projet->getCreateurId(), $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $thumbnail
             ));
             $stmt = $this->executer();
@@ -192,20 +193,24 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         $returnValue = false;
         try {
             // cherche l'image du projet a modifier
-            $requete = "SELECT thumbnail FROM projet WHERE id=?";
+            $requete = "SELECT thumbnail, path FROM projet WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array($projet->getId()));
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->thumbnail;
+            $ancienPath = $ligne->path;
 
-            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre());
+
+            $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
+            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
+
 
             // modifie dans projet
             $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,autreParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
-                $projet->getTitre(), $projet->getDescription(), $projet->getPath(), $projet->isPrive(),
+                $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $projet->getId()
             ));
             $stmt = $this->executer();
@@ -222,7 +227,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
     }
 
-    public function getAllProjetsForCards() : array{
+    public function getAllProjetsForCards(): array
+    {
         try {
             $tab = array();
             $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre FROM projet p INNER JOIN projettag pt ON p.id = pt.idProjet INNER JOIN tag t ON t.id = pt.idTag INNER JOIN membre m ON p.idCreateur = m.id GROUP BY p.id";
