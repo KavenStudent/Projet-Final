@@ -480,10 +480,12 @@ textarea {
 
 #tagsReponse{
   background-color: rgb(124, 177, 207);
+  cursor: pointer;
 }
 
 #participantsReponse{
   background-color: rgb(124, 177, 207);
+  cursor: pointer;
 }
 
 /* PARTICIPANTS */
