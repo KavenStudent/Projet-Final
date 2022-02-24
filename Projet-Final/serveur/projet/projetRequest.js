@@ -149,11 +149,11 @@ function loadJsonRecherhe() {
     processData: false,
     success: function (reponse) {
       projetVue(reponse);
+      setData(reponse.tabMembres, reponse.tabProjets);
     },
     fail: function (err) { },
     complete: function () {
       $(".lds-ring").addClass("hidden");
-      setData(reponse.tabMembres, reponse.tabProjets);
     },
     fail: function (err) { },
   });
