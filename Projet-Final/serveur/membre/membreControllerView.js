@@ -387,6 +387,10 @@ function afficherPageAdmin(json) {
 }
 
 function afficherRecherche(){
+    
+   
+
+
     let contenu = `<div id='containerRecherche' class="container">
 
     <div class="list container" id='listMembre'>
@@ -394,29 +398,28 @@ function afficherRecherche(){
             <p>Avatar</p>
             <p>Nom Complet</p>
             <p>#Id</p>
-        </div>
-        <div class="cardMembreSuggestion">
-            <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/defaultProfil.png">
-            <p class="nomMembreSuggestion">Vim Hoang Nguyen</p>
-            <p class="idMembreSuggestion">#id</p>
-        </div>  
-    </div>
+        </div><div id='contenuCardsMembre'></div>`;
+    
+   
+     
+    contenu +=`</div>`;
 
 
-    <div class="list container" id='listProjet'>
+    contenu += `<div class="list container" id='listProjet'>
         <div class="headerListProjet">
                 <p>Titre</p>
                 <p>Nom Createur</p>
                 <p>#nbTelecharment</p>
-        </div>
-        <div class="cardProjetSuggestion">
-            <p class="titreProjetSuggestion">Ma petite vache mal aux pattes</p>
-            <p class="createurProjetSuggestion">Vim Hoang Nguyen</p>
-            <p class="nombreTelechargement">1264</p>
-        </div>
-    </div>
+        </div><div id='contenuCardsProjet'></div>`;
+
+   
+        
+
+   contenu += ` </div>
 
 </div>`;
 
+
 $('#contenu').html(contenu);
+loadData();
 }

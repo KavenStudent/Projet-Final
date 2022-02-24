@@ -193,7 +193,7 @@ function loadPageAccueil()
 
     if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
-
+        
         if (isset($_SESSION['membre'])) {
             $id = (int) isset($_SESSION['membre']);
             $tabRes['id'] = $id;
@@ -241,14 +241,6 @@ function loadPageRecherche()
 {
     global $tabRes;
     $tabRes['action'] = 'loadRecherche';
-}
-function getAllInfoMembreEtProjet()
-{
-    global $tabRes;
-    global $dao;
-    $daoProjet = new ProjetDaoImpl();
-    $tabRes['tabProjets'] = $daoProjet->getAllTags();
-    $tabRes['tabMembres'] = $dao->getAllMembre();
 }
 
 echo json_encode($tabRes);

@@ -134,6 +134,7 @@ function loadMembre(pageType, idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       membresVue(reponse);
     },
     fail: function (err) { },
@@ -161,6 +162,7 @@ function loadAutreMembre(idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       membresVue(reponse);
     },
     fail: function (err) { },
@@ -187,6 +189,7 @@ function loadPageAccueil() {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       membresVue(reponse);
     },
     fail: function (err) { },
@@ -212,6 +215,7 @@ function loadPageAdmin() {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       membresVue(reponse);
     },
     fail: function (err) { },
