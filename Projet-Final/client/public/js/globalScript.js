@@ -1,5 +1,6 @@
 const tagsArray = [];
 const participantsArray = [];
+let firstLoad = false;
 
 // SYSTEME DE RECHERCHE
 let dataMembre = [];
@@ -156,13 +157,13 @@ window.onload = function () {
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
-  let firstLoad = false;
+  
   $('#searchBar').keyup(function (event) {
     //Si la valeur est vide, elle efface le contenu de Recherche
-    if(searchBar.value == '' || searchBar.value == null){
+    if(searchBar.value == '' || searchBar.value === null){
       $('#contenuRecherche').html("");
       firstLoad = false;
-      console.log();
+      console.log("Je suis vide");
     }
 
     //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
