@@ -1,5 +1,6 @@
 const tagsArray = [];
 const participantsArray = [];
+let firstLoad = false;
 
 // SYSTEME DE RECHERCHE
 let dataMembre = [];
@@ -16,8 +17,6 @@ function getDataProjet(){
 function setData(newDataMembres, newDataProjets){
   dataMembre = new Array();
   dataProjet = new Array();
-
-
 
   if(newDataMembres != null || newDataMembres.length > 0){
     newDataMembres.forEach(function(membre){
@@ -57,6 +56,7 @@ function filterDataProjet(input, projet){
 function clearInputSearch(){
   let searchBar = document.getElementById("searchBar");
   searchBar.value ="";
+  firstLoad = false;
 }
 
 function loadData(){
@@ -97,8 +97,6 @@ function loadData(){
       });
 
       }
-
-      console.log(contenuMembre);
     
       $('#contenuCardsMembre').html(contenuMembre);
       $('#contenuCardsProjet').html(contenuProjet);
@@ -157,28 +155,29 @@ window.onload = function () {
     this.classList.toggle("bi-eye");
   });
 
-
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
-  let firstTime = false;
+  
   $('#searchBar').keyup(function (event) {
-    if (searchBar.value == '') {
-      loadPage();
-      firstTime = false;
-    } else {
-      if(firstTime ==false){
-          loadPageRecherche();
-          firstTime = true;
-      }else{
-        if(firstTime){
-          loadData();
-          firstTime = false;
-        }
-      }
+    //Si la valeur est vide, elle efface le contenu de Recherche
+    if(searchBar.value == '' || searchBar.value === null){
+      $('#contenuRecherche').html("");
+      firstLoad = false;
+      console.log("Je suis vide");
     }
-    
-  });
 
+    //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+    if(searchBar.value != '' && firstLoad === false){
+      firstLoad = true;
+      loadPageRecherche();
+    }
+
+    //Si ya une valeur et sur la page de recherche, il load le data
+    if(searchBar.value != '' && firstLoad === true){
+      loadData();
+    } 
+
+  });
 
 
 };

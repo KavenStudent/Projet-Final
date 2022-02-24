@@ -9,7 +9,7 @@ session_start();
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
 
-        <img class="logoNav" src='Projet-Final/client/public/images/logoFinale.png' onclick="loadPageAccueil();">
+        <img class="logoNav" src='Projet-Final/client/public/images/logoFinale.png' onclick="loadPageAccueil();clearInputSearch();">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 
             <span class="navbar-toggler-icon"></span>
