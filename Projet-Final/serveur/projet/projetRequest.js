@@ -146,6 +146,7 @@ function loadPageAutreProjet(idProjet) {
     },
     success: function (reponse) {
       projetVue(reponse);
+      setData(reponse.tabMembres, reponse.tabProjets);
     },
     fail: function (err) { },
     complete: function () {
