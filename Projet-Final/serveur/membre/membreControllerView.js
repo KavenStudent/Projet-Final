@@ -24,7 +24,7 @@ var membresVue = function (reponse) {
 }
 
 function afficherPageAccueil(json) {
-    let contenu = ` <div class="container marketing customized-front-page-container">
+    let contenu = ` <div id="contenuRecherche"></div> <div class="container marketing customized-front-page-container">
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
       <div class="col-lg-4 customized-item">
@@ -138,7 +138,7 @@ function afficherPageAccueil(json) {
 function afficherPageMembre(json, listProjet) {
 
 
-    let contenu = `<div class="container big-container">
+    let contenu = `<div id="contenuRecherche"></div><div class="container big-container">
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
@@ -202,7 +202,7 @@ function afficherPageMembre(json, listProjet) {
 
 function afficherPageMembreEdit(json) {
 
-    let contenu = `<div class="container" id='containerEdit'>
+    let contenu = `<div id="contenuRecherche"></div><div class="container" id='containerEdit'>
         <form id='membreEditForm' name="membre-edit">
     
             <input type='hidden' name='idMembre' value="${json.membre.id}">
@@ -297,7 +297,7 @@ function afficherPageMembreEdit(json) {
 function afficherPageAutreMembre(json, listProjet) {
 
 
-    let contenu = `<div class="container big-container">
+    let contenu = `<div id="contenuRecherche"></div><div class="container big-container">
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
@@ -365,7 +365,7 @@ function afficherPageAutreMembre(json, listProjet) {
 
 function afficherPageAdmin(json) {
 
-    let contenu = `<div id="adminContainer">
+    let contenu = `<div id="contenuRecherche"></div><div id="adminContainer">
     <div id="report">
         <div class="card myReportCard">`;
 
@@ -421,6 +421,6 @@ function afficherRecherche(){
 </div>`;
 
 
-$('#contenu').html(contenu);
+$('#contenuRecherche').html(contenu);
 loadData();
 }
