@@ -37,6 +37,8 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+    border-bottom: 1px solid black;
+    margin-bottom: 1em;
 }
 
 #listMembre, #listProjet{
@@ -91,6 +93,7 @@
     padding: 1em;
     margin-bottom: 1em;
     background-color: white;
+    cursor: pointer;
 }
 
 .nomMembreSuggestion, .idMembreSuggestion{
