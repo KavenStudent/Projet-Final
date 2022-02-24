@@ -155,25 +155,32 @@ window.onload = function () {
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
-  let firstTime = false;
+  let isOnRecherchePage = false;
+  let isInputEmpty = false;
   $('#searchBar').keyup(function (event) {
-    if (searchBar.value == '') {
+    // Si ya pas de valeur et sur la page de recherche return la page accueil
+    if (searchBar.value == '' && isOnRecherchePage == true){
       loadPage();
-      firstTime = false;
-    } else {
-      if(firstTime ==false){
-          loadPageRecherche();
-          firstTime = true;
-      }else{
-        if(firstTime){
-          loadData();
-          firstTime = false;
-        }
+      isOnRecherchePage = false;
+      isInputEmpty = true;
+    } else{
+      //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+      if(searchBar.value != '' && isOnRecherchePage == false){
+        loadPageRecherche();
+        isOnRecherchePage = true;
+        isInputEmpty = false;
       }
+
+      //Si ya une valeur et sur la page de recherche, il load le data
+      if(searchBar.value != '' && isOnRecherchePage == true){
+        loadData();
+        isInputEmpty = false;
+      }
+      
     }
+
     
   });
-
 
 
 };
