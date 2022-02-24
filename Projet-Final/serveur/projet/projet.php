@@ -41,48 +41,48 @@ class Projet
     }
 
     // ----------------------------------------------------------------Getters
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
-    public function getCreateurId()
+    public function getCreateurId(): int
     {
         return $this->createurId;
     }
-    public function getTitre()
+    public function getTitre(): string
     {
         return $this->titre;
     }
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
-    public function isPrive()
+    public function isPrive(): string
     {
         return $this->prive;
     }
-    public function getAutresParticipants()
+    public function getAutresParticipants(): string
     {
         return $this->autresParticipants;
     }
-    public function getNbTelechargements()
+    public function getNbTelechargements(): int
     {
         return $this->nbTelechargements;
     }
-    public function getLienExterne()
+    public function getLienExterne(): string
     {
         return $this->lienExterne;
     }
-    public function getThumbnail()
+    public function getThumbnail(): string
     {
         return $this->thumbnail;
     }
 
-    public function getNomMembre()
+    public function getNomMembre(): string
     {
         return $this->nomMembre;
     }
