@@ -90,6 +90,27 @@ function modifierProjet(idProjet) {
   form.append("idProjet", idProjet);
   form.append("tagsEdit", getTagsValue("tagValueCreate"));
   form.append("participantsProjetEdit", getTagsValue("participantValueCreate"));
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/projet/projetController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      projetVue(reponse);
+      loadJsonRecherhe();
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
 }
 
 function getAlltags() {
