@@ -84,6 +84,14 @@ function ajouterProjetRequete(idMembre) {
 
 }
 
+function modifierProjet(idProjet) {
+  var form = new FormData(document.getElementById("formProjetEdit"));
+  form.append("action", "modifierProjet");
+  form.append("idProjet", idProjet);
+  form.append("tagsEdit", getTagsValue("tagValueCreate"));
+  form.append("participantsProjetEdit", getTagsValue("participantValueCreate"));
+}
+
 function getAlltags() {
   var form = new FormData();
   form.append("action", "getAllTags");
