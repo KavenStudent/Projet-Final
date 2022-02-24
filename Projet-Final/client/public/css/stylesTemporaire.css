@@ -37,6 +37,8 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+    border-bottom: 1px solid black;
+    margin-bottom: 1em;
 }
 
 #listMembre, #listProjet{

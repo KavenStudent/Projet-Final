@@ -416,9 +416,9 @@ function afficherRecherche(){
    
         
 
-   contenu += ` </div>
+   contenu += ` </div></div>`;
 
-</div>`;
+
 
 
 $('#contenuRecherche').html(contenu);

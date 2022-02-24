@@ -55,6 +55,7 @@ function filterDataProjet(input, projet){
 function clearInputSearch(){
   let searchBar = document.getElementById("searchBar");
   searchBar.value ="";
+  firstLoad = false;
 }
 
 function loadData(){
@@ -155,25 +156,25 @@ window.onload = function () {
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
-  let isOnRecherchePage = false;
-  let isInputEmpty = false;
+  let firstLoad = false;
   $('#searchBar').keyup(function (event) {
+    //Si la valeur est vide, elle efface le contenu de Recherche
+    if(searchBar.value == '' || searchBar.value == null){
+      $('#contenuRecherche').html("");
+      firstLoad = false;
+      console.log();
+    }
 
-  //Si la valeur est vide, elle efface le contenu de Recherche
-  if(searchBar.value == ''){
-    $('#contenuRecherche').html("");
-  }
+    //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+    if(searchBar.value != '' && firstLoad === false){
+      firstLoad = true;
+      loadPageRecherche();
+    }
 
-  //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
-  if(searchBar.value != '' && isOnRecherchePage == false){
-    loadPageRecherche();
-    isOnRecherchePage = true;
-  }
-
-  //Si ya une valeur et sur la page de recherche, il load le data
-  if(searchBar.value != '' && isOnRecherchePage == true){
-    loadData();  
-  } 
+    //Si ya une valeur et sur la page de recherche, il load le data
+    if(searchBar.value != '' && firstLoad === true){
+      loadData();
+    } 
 
   });
 
