@@ -47,7 +47,8 @@ function filterDataProjet(input, projet){
   let prenomCreateur = projet.prenom.toLowerCase();
   let nomCreateur = projet.nom.toLowerCase();
   let tags = projet.tags.toLowerCase();
-  if(prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input)){
+  let titre = projet.titre.toLowerCase();
+  if(prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input) || titre.includes(input)){
     isExist = true;
   }
   return isExist;
