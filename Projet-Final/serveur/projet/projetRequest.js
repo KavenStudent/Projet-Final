@@ -181,10 +181,6 @@ function loadJsonRecherhe() {
       setData(reponse.tabMembres, reponse.tabProjets);
     },
     fail: function (err) { },
-    complete: function () {
-      $(".lds-ring").addClass("hidden");
-    },
-    fail: function (err) { },
   });
 }
 
