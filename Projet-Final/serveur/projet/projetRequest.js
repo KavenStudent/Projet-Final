@@ -219,6 +219,7 @@ function supprimerProjet(idProjet, idMembre) {
       $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
+      // alert("success");
       projetVue(reponse);
       loadJsonRecherhe();
     },

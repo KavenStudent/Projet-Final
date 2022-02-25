@@ -223,8 +223,8 @@ function supprimerProjet() {
     global $tabRes;
     global $dao;
 
-    $idProjet = $_POST['idProjet'];
-    $idMembre = $_POST['idMembre'];
+    $idProjet = (int) $_POST['idProjet'];
+    $idMembre = (int) $_POST['idMembre'];
 
     $projet = $dao->supprimerProjet($idProjet);
 

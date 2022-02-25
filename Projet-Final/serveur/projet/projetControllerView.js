@@ -20,7 +20,7 @@ var projetVue = function (response) {
       afficherPageAutreProjet(response);
       break;
     case "supprimerProjet":
-      supprimerProjet(response.idMembre);
+      supprimerProjetReussi(response.idMembre);
       break;
   }
 };
@@ -110,9 +110,8 @@ function afficherPageProjetEdit(json) {
     contenu += `<div class="tag participant">
       <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
       <i class="material-icons btnCloseParticipant" data-item='${participant.prenom} ${participant.nom} ${participant.idMembre}'>close</i>
-    </div>`
+    </div>`;
   });
-
 
   contenu += `<input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
   </div>
@@ -305,16 +304,12 @@ function ajouterProjetAffichage(json) {
 
   $("#contenu").html(contenu);
 
-  
-
-
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
 
   //Système de tags
   setTagsBase(new Array());
-
 
   let monInputTag = document.getElementById("monInputTag");
 
