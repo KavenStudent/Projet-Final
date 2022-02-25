@@ -90,15 +90,16 @@ function afficherPageProjet(json) {
 function afficherPageProjetEdit(json) {
   var contenu = `<div id="contenuRecherche"></div><form id="formProjetEdit" class="editProj">
 
+  <input type="submit" id="validation-form-projet-edit" class="validation" />
 
 <div class="form-outline mb-69">
  <label class="form-label ftxt" for="form6Example3">Titre:</label>
- <input name="titreProjetEdit" type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}"/>
+ <input name="titreProjetEdit" type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}" required/>
 </div>
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example7">Description:</label>
- <textarea name="descriptionProjetEdit" class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description">${json.projet.description}</textarea>
+ <textarea name="descriptionProjetEdit" class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description" required>${json.projet.description}</textarea>
 </div>
 
 <div class="form-outline mb-69">
@@ -175,7 +176,7 @@ function afficherPageProjetEdit(json) {
   </div>
  </div>
   <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
-<button type="button" class="btn btn-primary btn-block mb-4" onclick="modifierProjet(${json.projet.id})">Sauvegarder</button>
+<button type="button" class="btn btn-primary btn-block mb-4" onclick="validerProjetEdit(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);
 
@@ -233,11 +234,12 @@ function afficherPageProjetEdit(json) {
 function ajouterProjetAffichage(json) {
   var contenu = `<div id="contenuRecherche"></div><form id='ajouterProjetForm' class="editProj">
 
-    
+  <input type="submit" id="validation-form-projet-create" class="validation" />
+
     <!-- Text input -->
    <div class="form-outline mb-69">
      <label class="form-label ftxt" for="titreProjet">Titre:</label>
-     <input type="text" name="titreProjet" class="form-control" placeholder="Titre">
+     <input type="text" name="titreProjet" class="form-control" placeholder="Titre" required>
      
    </div>
  
@@ -245,7 +247,7 @@ function ajouterProjetAffichage(json) {
    <!-- Message input -->
    <div class="form-outline mb-69">
      <label class="form-label" for="descriptionProjet">Description:</label>
-     <textarea class="form-control ftxt" name="descriptionProjet" rows="4" placeholder="Description"></textarea>
+     <textarea class="form-control ftxt" name="descriptionProjet" rows="4" placeholder="Description" required></textarea>
      
    </div>
  
@@ -299,7 +301,7 @@ function ajouterProjetAffichage(json) {
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
    <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
-   <button type="button" onclick="ajouterProjetRequete(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
+   <button type="button" onclick="validerProjetCreate(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
 
  </form>`;
 

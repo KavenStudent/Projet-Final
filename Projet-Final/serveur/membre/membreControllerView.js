@@ -206,7 +206,8 @@ function afficherPageMembreEdit(json) {
         <form id='membreEditForm' name="membre-edit">
     
             <input type='hidden' name='idMembre' value="${json.membre.id}">
-            <input type="hidden" name="action" value="modifierMembre">
+            <input type="hidden" name="action" value="modifierMembre">formProjetEditformProjetEdit
+            
             <input type="submit" id="validation-form-membre-edit" class="validation" />
     
             <!-- 2 column grid layout with text inputs for the first and last names -->
