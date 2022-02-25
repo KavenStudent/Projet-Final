@@ -161,6 +161,56 @@ function afficherPageProjetEdit(json) {
 <button type="button" class="btn btn-primary btn-block mb-4" onclick="modifierProjet(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);
+
+  json.tabTags.forEach((element) => {
+    tagsArray.push(element.nomTag);
+  });
+
+  //Système de tags
+  setTagsBase(new Array());
+
+  let monInputTag = document.getElementById("monInputTag");
+
+  //Ajoute la fonction de add des tags quand je press enter.
+  monInputTag.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputTag.value != "") {
+      addTag(
+        monInputTag.value,
+        "monInputTag",
+        ".tag-container",
+        "#tagsReponse",
+        tags,
+        "tagValueCreate",
+        "etiquette"
+      );
+    }
+
+    displayTagMatches2();
+  });
+
+  setParticipantsBase(new Array());
+
+  json.tabParticipants.forEach((element) => {
+    participantsArray.push(element);
+  });
+
+  let monInputParticipant = document.getElementById("participantsInput");
+
+  monInputParticipant.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputParticipant.value != "") {
+      addTag(
+        monInputParticipant.value,
+        "participantsInput",
+        ".participant-container",
+        "#participantsReponse",
+        participants,
+        "participantValueCreate",
+        "participant"
+      );
+    }
+
+    displayParticipantsMatches();
+  });
 }
 
 function ajouterProjetAffichage(json) {
