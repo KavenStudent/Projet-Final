@@ -191,7 +191,6 @@ function afficherPageMembre(json, listProjet) {
                                     </div>
                                 </div>`;
             }
-            
         });
     }
 
