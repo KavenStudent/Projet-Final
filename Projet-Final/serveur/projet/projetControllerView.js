@@ -109,7 +109,7 @@ function afficherPageProjetEdit(json) {
   json.tabParticipantsProjet.forEach((participant) => {
     contenu += `<div class="tag participant">
       <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
-      <i class="material-icons btnCloseParticipant" data-item='${participant.prenom} ${participant.nom} ${participant.idMembre}'>close</i>
+      <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
     </div>`;
   });
 
@@ -134,7 +134,7 @@ function afficherPageProjetEdit(json) {
   json.tabTagsProjet.forEach((tags) => {
     contenu += `<div class="tag etiquette">
     <span class="tagValueCreate" >${tags.nomTag}</span>
-    <i class="material-icons btnCloseEtiquette" data-item='${tags.nomTag}'>close</i>
+    <i class="material-icons btnCloseEtiquette" data-item="${tags.nomTag}">close</i>
   </div>`;
   });
 
@@ -185,7 +185,7 @@ function afficherPageProjetEdit(json) {
   });
 
   //Système de tags
-  setTagsBase(json.tabTagsProjet);
+  setTagsBase();
 
   let monInputTag = document.getElementById("monInputTag");
 
@@ -207,7 +207,7 @@ function afficherPageProjetEdit(json) {
   });
 
   setParticipantsArray(new Array());
-  setParticipantsBase(json.tabParticipantsProjet);
+  setParticipantsBase();
 
   json.tabParticipants.forEach((element) => {
     participantsArray.push(element);

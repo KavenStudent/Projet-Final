@@ -351,13 +351,17 @@ let tags = [];
 let participants = [];
 
 //Setter la liste de tags
-function setTagsBase(originalTags) {
-  tags = originalTags;
+function setTagsBase() {
+  getTagsValue('tagValueCreate').forEach(function(item){
+    tags.push(item);
+  })
 }
 
 //Setter la liste de participants
-function setParticipantsBase(originalParticipants) {
-  participants = originalParticipants;
+function setParticipantsBase() {
+  getTagsValue('participantValueCreate').forEach(function(item){
+    participants.push(item);
+  })
 }
 
 //Creer un Tag
