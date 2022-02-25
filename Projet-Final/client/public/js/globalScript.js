@@ -1,6 +1,14 @@
-const tagsArray = [];
-const participantsArray = [];
+let tagsArray = [];
+let participantsArray = [];
 let firstLoad = false;
+
+function setTagsArray(newArray){
+ tagsArray = newArray;
+}
+
+function setParticipantsArray(newArray){
+ participantsArray = newArray;
+}
 
 // SYSTEME DE RECHERCHE
 let dataMembre = [];
