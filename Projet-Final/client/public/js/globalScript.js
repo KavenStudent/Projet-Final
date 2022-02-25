@@ -371,9 +371,14 @@ function createTag(label, nomDeClasse, classTag) {
   closeBtn.setAttribute('data-item', label);
   closeBtn.innerHTML = 'close';
 
-  // <div class="tag" id="">
+  // <div class="tag etiquette">
   // <span class="tagValueCreate" >label</span>
-  // <i class="material-icons" data-item='label'>close</i>
+  // <i class="material-icons btnCloseEtiquette" data-item='label'>close</i>
+  // </div>
+
+  // <div class="tag participant">
+  // <span class="participantValueCreate" >label</span>
+  // <i class="material-icons btnCloseParticipant" data-item='label'>close</i>
   // </div>
 
   div.appendChild(span);
