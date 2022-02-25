@@ -14,101 +14,101 @@ function setParticipantsArray(newArray){
 let dataMembre = [];
 let dataProjet = [];
 
-function getDataMembre(){
+function getDataMembre() {
   return dataMembre;
 }
 
-function getDataProjet(){
+function getDataProjet() {
   return dataProjet;
 }
 
-function setData(newDataMembres, newDataProjets){
+function setData(newDataMembres, newDataProjets) {
   dataMembre = new Array();
   dataProjet = new Array();
 
-  if(newDataMembres != null || newDataMembres.length > 0){
-    newDataMembres.forEach(function(membre){
-        dataMembre.push(membre);
+  if (newDataMembres != null || newDataMembres.length > 0) {
+    newDataMembres.forEach(function (membre) {
+      dataMembre.push(membre);
     });
   }
 
-   if(newDataProjets != null || newDataProjets.length > 0){
-    newDataProjets.forEach(function(projet){
+  if (newDataProjets != null || newDataProjets.length > 0) {
+    newDataProjets.forEach(function (projet) {
       dataProjet.push(projet);
     });
   }
 }
 
-function filterDataMembre(input, membre){
+function filterDataMembre(input, membre) {
   let isExist = false;
   let nom = membre.nom.toLowerCase();
   let prenom = membre.prenom.toLowerCase();
-  if(nom.includes(input) || prenom.includes(input)){
-     isExist = true;
-  }
-  return isExist;
-}
-
-function filterDataProjet(input, projet){
-  let isExist = false;
-  let prenomCreateur = projet.prenom.toLowerCase();
-  let nomCreateur = projet.nom.toLowerCase();
-  let tags = projet.tags.toLowerCase();
-  let titre = projet.titre.toLowerCase();
-  if(prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input) || titre.includes(input)){
+  if (nom.includes(input) || prenom.includes(input)) {
     isExist = true;
   }
   return isExist;
 }
 
-function clearInputSearch(){
+function filterDataProjet(input, projet) {
+  let isExist = false;
+  let prenomCreateur = projet.prenom.toLowerCase();
+  let nomCreateur = projet.nom.toLowerCase();
+  let tags = projet.tags.toLowerCase();
+  let titre = projet.titre.toLowerCase();
+  if (prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input) || titre.includes(input)) {
+    isExist = true;
+  }
+  return isExist;
+}
+
+function clearInputSearch() {
   let searchBar = document.getElementById("searchBar");
-  searchBar.value ="";
+  searchBar.value = "";
   firstLoad = false;
 }
 
-function loadData(){
-   let dataMembre = getDataMembre();
-    let dataProjet = getDataProjet();
-    let contenuMembre = '';
-    let contenuProjet = '';
+function loadData() {
+  let dataMembre = getDataMembre();
+  let dataProjet = getDataProjet();
+  let contenuMembre = '';
+  let contenuProjet = '';
 
-    let searchBar = document.getElementById("searchBar");
-    let input = searchBar.value.toLowerCase();
+  let searchBar = document.getElementById("searchBar");
+  let input = searchBar.value.toLowerCase();
 
-      if(dataMembre != null || dataMembre.length > 0){
-        dataMembre.forEach(function(membre){
-        
-            if(filterDataMembre(input, membre)){
-              contenuMembre +=`
+  if (dataMembre != null || dataMembre.length > 0) {
+    dataMembre.forEach(function (membre) {
+
+      if (filterDataMembre(input, membre)) {
+        contenuMembre += `
               <div class="cardMembreSuggestion" onclick="loadAutreMembre(${membre.id});clearInputSearch(); ">
                   <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
                   <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
                   <p class="idMembreSuggestion"># ${membre.id}</p>
               </div> `;
-            }
-            
-        });
-
       }
 
+    });
 
-      if(dataProjet != null || dataProjet.length > 0){
-       dataProjet.forEach(function(projet){
-         if(filterDataProjet(input, projet)){
-           contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageAutreProjet(${projet.idProjet}); clearInputSearch();">
+  }
+
+
+  if (dataProjet != null || dataProjet.length > 0) {
+    dataProjet.forEach(function (projet) {
+      if (filterDataProjet(input, projet)) {
+        contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageAutreProjet(${projet.idProjet}); clearInputSearch();">
           <p class="titreProjetSuggestion">${projet.titre}</p>
           <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
           <p class="nombreTelechargement">${projet.nbTelechargement}</p>
           </div>`;
-         }
-      });
-
       }
-    
-      $('#contenuCardsMembre').html(contenuMembre);
-      $('#contenuCardsProjet').html(contenuProjet);
-       
+    });
+
+  }
+
+  $('#contenuCardsMembre').html(contenuMembre);
+  $('#contenuCardsProjet').html(contenuProjet);
+
 }
 
 
@@ -165,25 +165,25 @@ window.onload = function () {
 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
-  
+
   $('#searchBar').keyup(function (event) {
     //Si la valeur est vide, elle efface le contenu de Recherche
-    if(searchBar.value == '' || searchBar.value === null){
+    if (searchBar.value == '' || searchBar.value === null) {
       $('#contenuRecherche').html("");
       firstLoad = false;
       console.log("Je suis vide");
     }
 
     //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
-    if(searchBar.value != '' && firstLoad === false){
+    if (searchBar.value != '' && firstLoad === false) {
       firstLoad = true;
       loadPageRecherche();
     }
 
     //Si ya une valeur et sur la page de recherche, il load le data
-    if(searchBar.value != '' && firstLoad === true){
+    if (searchBar.value != '' && firstLoad === true) {
       loadData();
-    } 
+    }
 
   });
 
@@ -193,16 +193,16 @@ window.onload = function () {
 function tagCliquable(input) {
   console.log('test');
   document.getElementById("searchBar").value = input;
-   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
-   if(input != '' && firstLoad === false){
+  //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+  if (input != '' && firstLoad === false) {
     firstLoad = true;
     loadPageRecherche();
   }
 
   //Si ya une valeur et sur la page de recherche, il load le data
-  if(input != '' && firstLoad === true){
+  if (input != '' && firstLoad === true) {
     loadData();
-  } 
+  }
 };
 
 // fonction show terme et conditions
@@ -251,7 +251,7 @@ function valider() {
 
 }
 
-// valide le form modifier
+// valide le form modifier membre
 function validerMembreEdit() {
   let myForm = document.getElementById('membreEditForm');
   let password = myForm.passwordEdit.value;
@@ -281,6 +281,39 @@ function validerMembreEdit() {
 
 }
 
+// valide le form creer projet
+function validerProjetCreate(idProjet) {
+  let myForm = document.getElementById('ajouterProjetForm');
+  let valide = true;
+
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-projet-create').click();
+    valide = false;
+
+  }
+
+  if (valide) {
+    ajouterProjetRequete(idProjet);
+  }
+
+}
+
+// valide le form modifier projet
+function validerProjetEdit(idProjet) {
+  let myForm = document.getElementById('formProjetEdit');
+  let valide = true;
+
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-projet-edit').click();
+    valide = false;
+
+  }
+
+  if (valide) {
+    modifierProjet(idProjet);
+  }
+
+}
 
 function afficherSnackbar(text) {
   var x = document.getElementById("snackbar");
