@@ -19,6 +19,9 @@ var projetVue = function (response) {
     case "autreProjet":
       afficherPageAutreProjet(response);
       break;
+    case "supprimerProjet":
+      supprimerProjet(reponse.idMembre);
+      break;
   }
 };
 
@@ -406,4 +409,9 @@ function afficherPageAutreProjet(json) {
     </div>
 </div>`;
   $("#contenu").html(contenu);
+}
+
+function supprimerProjetReussi(idMembre) {
+  loadMembre("pageMembre", idMembre);
+  afficherSnackbar("Projet supprimé avec succès!");
 }
