@@ -393,10 +393,6 @@ function afficherPageAdmin(json) {
 }
 
 function afficherRecherche() {
-
-
-
-
     let contenu = `<div id='containerRecherche' class="container">
 
     <div class="list container" id='listMembre'>
@@ -406,10 +402,7 @@ function afficherRecherche() {
             <p>#Id</p>
         </div><div id='contenuCardsMembre'></div>`;
 
-
-
     contenu += `</div>`;
-
 
     contenu += `<div class="list container" id='listProjet'>
         <div class="headerListProjet">
@@ -417,14 +410,7 @@ function afficherRecherche() {
                 <p>Nom Createur</p>
                 <p>#nbTéléchargement</p>
         </div><div id='contenuCardsProjet'></div>`;
-
-
-
-
     contenu += ` </div></div>`;
-
-
-
 
     $('#contenuRecherche').html(contenu);
     loadData();
