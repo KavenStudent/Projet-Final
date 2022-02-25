@@ -54,7 +54,7 @@ function afficherPageProjet(json) {
             aria-label="Autres participants: ">`;
 
   //List participants
-  json.tabParticipants.forEach((membreProjet) => {
+  json.tabParticipantsProjet.forEach((membreProjet) => {
     contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
   });
   contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
@@ -63,7 +63,7 @@ function afficherPageProjet(json) {
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
   aria-label="Tags: ">`;
 
-  json.tabTags.forEach((tagProjet) => {
+  json.tabTagsProjet.forEach((tagProjet) => {
     contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
   });
   contenu += `</ul>`;
@@ -378,7 +378,7 @@ function afficherPageAutreProjet(json) {
             aria-label="Autres participants: ">`;
 
   //List participants
-  json.tabParticipants.forEach((membreProjet) => {
+  json.tabParticipantsProjet.forEach((membreProjet) => {
     contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
   });
   contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
@@ -387,7 +387,7 @@ function afficherPageAutreProjet(json) {
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
   aria-label="Tags: ">`;
 
-  json.tabTags.forEach((tagProjet) => {
+  json.tabTagsProjet.forEach((tagProjet) => {
     contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
   });
   contenu += `</ul>`;

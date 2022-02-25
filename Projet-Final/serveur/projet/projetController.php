@@ -101,9 +101,13 @@ function loadPageProjetController()
         "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(), "path" => $projet->getPath()
     );
 
-    $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
-    $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
+    $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
+    $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
     $tabRes['test'] = $projet->isPrive();
+    
+    $tabRes['tabTags'] = $dao->getAllTags();
+    $daoMembre = new MembreDaoImpl();
+    $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
 }
 
 function  loadPageAjouterProjetController()
@@ -187,8 +191,8 @@ function loadAutreProjet()
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
         "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath()
     );
-    $tabRes['tabParticipants'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
-    $tabRes['tabTags'] = $dao->getAllTagsForProjet($idProjet);
+    $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
+    $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
 }
 
 function loadJsonRecherhe()
