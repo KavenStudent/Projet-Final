@@ -69,8 +69,8 @@ function ajouterProjetRequete(idMembre) {
       $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
-      projetVue(reponse);
       loadJsonRecherhe();
+      projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
@@ -97,8 +97,8 @@ function modifierProjet(idProjet) {
       $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
-      projetVue(reponse);
       loadJsonRecherhe();
+      projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
@@ -192,8 +192,8 @@ function telechargerProjet(idProjet) {
       $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
-      projetVue(reponse);
       loadJsonRecherhe();
+      projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
@@ -220,8 +220,8 @@ function supprimerProjet(idProjet, idMembre) {
     },
     success: function (reponse) {
       // alert("success");
-      projetVue(reponse);
       loadJsonRecherhe();
+      projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
