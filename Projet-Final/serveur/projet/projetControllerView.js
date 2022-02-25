@@ -185,7 +185,7 @@ function afficherPageProjetEdit(json) {
   });
 
   //Système de tags
-  setTagsBase(new Array());
+  setTagsBase(json.tabTagsProjet);
 
   let monInputTag = document.getElementById("monInputTag");
 
@@ -207,7 +207,7 @@ function afficherPageProjetEdit(json) {
   });
 
   setParticipantsArray(new Array());
-  setParticipantsBase(new Array());
+  setParticipantsBase(json.tabParticipantsProjet);
 
   json.tabParticipants.forEach((element) => {
     participantsArray.push(element);
