@@ -20,7 +20,7 @@ var projetVue = function (response) {
       afficherPageAutreProjet(response);
       break;
     case "supprimerProjet":
-      supprimerProjet(reponse.idMembre);
+      supprimerProjet(response.idMembre);
       break;
   }
 };
@@ -104,16 +104,24 @@ function afficherPageProjetEdit(json) {
 <div class="form-outline mb-69">
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
-     <div class="participant-container">
-        <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
-      </div>
-      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
+     <div class="participant-container">`
 
-      <div id='participantsReponse' class="suggestionsDivision"></div>
-   </div>
+  json.tabParticipantsProjet.forEach((participant) => {
+    contenu += `<div class="tag participant">
+      <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
+      <i class="material-icons btnCloseParticipant" data-item='${participant.prenom} ${participant.nom} ${participant.idMembre}'>close</i>
+    </div>`
+  });
 
 
-<div class="form-outline mb-69">
+  contenu += `<input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  </div>
+  <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
+
+  <div id='participantsReponse' class="suggestionsDivision"></div> </div>
+
+
+      <div class="form-outline mb-69">
  <label class="form-label" for="form6Example5">Lien:</label>
  <input name="lienProjetEdit" type="url" id="form6Example5" class="form-control" placeholder="Lien..." value="${json.projet.lienExterne}"/>
 </div>
@@ -123,9 +131,15 @@ function afficherPageProjetEdit(json) {
       <label class="form-label" for="tagProjet">Tags:</label>
 
       <!-- TAGS ICI -->
-      <div class="tag-container">
+      <div class="tag-container">`
+  json.tabTagsProjet.forEach((tags) => {
+    contenu += `<div class="tag etiquette">
+    <span class="tagValueCreate" >${tags.nomTag}</span>
+    <i class="material-icons btnCloseEtiquette" data-item='${tags.nomTag}'>close</i>
+  </div>`;
+  });
 
-        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
