@@ -315,13 +315,15 @@ function ajouterProjetAffichage(json) {
  </form>`;
 
   $("#contenu").html(contenu);
+
   setTagsArray(new Array());
+
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
 
   //Système de tags
-  setTagsBase(new Array());
+  clearTagsBase();
 
   let monInputTag = document.getElementById("monInputTag");
 
@@ -342,7 +344,7 @@ function ajouterProjetAffichage(json) {
     displayTagMatches2();
   });
   setParticipantsArray(new Array());
-  setParticipantsBase(new Array());
+  clearParticipantsBase();
 
   json.tabParticipants.forEach((element) => {
     participantsArray.push(element);
