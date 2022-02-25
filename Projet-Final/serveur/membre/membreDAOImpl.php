@@ -11,7 +11,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre";
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
@@ -307,5 +307,21 @@ class MembreDaoImpl extends Modele implements MembreDao
             unset($requete);
         }
         return $tab;
+    }
+
+    public function checkAbonnementMembre(int $idMembre): bool
+    {
+        try {
+            $requete = "SELECT membrePremium FROM membre WHERE id = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($idMembre));
+            $stmt = $this->executer();
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
     }
 }

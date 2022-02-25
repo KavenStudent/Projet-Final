@@ -22,13 +22,15 @@ interface ProjetDao
     public function creerProjet(Projet $projet, array $tags, array $participants): bool;
 
     //Modifie un projet donné
-    public function modifierProjet(Projet $projet);
+    public function modifierProjet(Projet $projet, array $tags, array $participants): bool;
 
     //Télécharge le fichier d'un projet
-    public function telechargerProjet(int $idProjet);
+    public function telechargerProjet(int $idProjet, int $nbTelechargement): bool;
 
     //Tous les tags
     public function getAllTags() : array;
+
+    public function supprimerProjet(int $idProjet): bool;
 
 }
 ?>

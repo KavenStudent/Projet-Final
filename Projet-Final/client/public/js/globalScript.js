@@ -1,5 +1,116 @@
-const tagsArray = [];
-const participantsArray = [];
+let tagsArray = [];
+let participantsArray = [];
+let firstLoad = false;
+
+function setTagsArray(newArray){
+ tagsArray = newArray;
+}
+
+function setParticipantsArray(newArray){
+ participantsArray = newArray;
+}
+
+// SYSTEME DE RECHERCHE
+let dataMembre = [];
+let dataProjet = [];
+
+function getDataMembre() {
+  return dataMembre;
+}
+
+function getDataProjet() {
+  return dataProjet;
+}
+
+function setData(newDataMembres, newDataProjets) {
+  dataMembre = new Array();
+  dataProjet = new Array();
+
+  if (newDataMembres != null || newDataMembres.length > 0) {
+    newDataMembres.forEach(function (membre) {
+      dataMembre.push(membre);
+    });
+  }
+
+  if (newDataProjets != null || newDataProjets.length > 0) {
+    newDataProjets.forEach(function (projet) {
+      dataProjet.push(projet);
+    });
+  }
+}
+
+function filterDataMembre(input, membre) {
+  let isExist = false;
+  let nom = membre.nom.toLowerCase();
+  let prenom = membre.prenom.toLowerCase();
+  if (nom.includes(input) || prenom.includes(input)) {
+    isExist = true;
+  }
+  return isExist;
+}
+
+function filterDataProjet(input, projet) {
+  let isExist = false;
+  let prenomCreateur = projet.prenom.toLowerCase();
+  let nomCreateur = projet.nom.toLowerCase();
+  let tags = projet.tags.toLowerCase();
+  let titre = projet.titre.toLowerCase();
+  if (prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input) || titre.includes(input)) {
+    isExist = true;
+  }
+  return isExist;
+}
+
+function clearInputSearch() {
+  let searchBar = document.getElementById("searchBar");
+  searchBar.value = "";
+  firstLoad = false;
+}
+
+function loadData() {
+  let dataMembre = getDataMembre();
+  let dataProjet = getDataProjet();
+  let contenuMembre = '';
+  let contenuProjet = '';
+
+  let searchBar = document.getElementById("searchBar");
+  let input = searchBar.value.toLowerCase();
+
+  if (dataMembre != null || dataMembre.length > 0) {
+    dataMembre.forEach(function (membre) {
+
+      if (filterDataMembre(input, membre) && membre.prive !=1) {
+        contenuMembre += `
+              <div class="cardMembreSuggestion" onclick="loadAutreMembre(${membre.id});clearInputSearch(); ">
+                  <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
+                  <p class="nomMembreSuggestion">${membre.prenom} ${membre.nom}</p>
+                  <p class="idMembreSuggestion"># ${membre.id}</p>
+              </div> `;
+      }
+
+    });
+
+  }
+
+
+  if (dataProjet != null || dataProjet.length > 0) {
+    dataProjet.forEach(function (projet) {
+      if (filterDataProjet(input, projet) && projet.prive !=1) {
+        contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageAutreProjet(${projet.idProjet}); clearInputSearch();">
+          <p class="titreProjetSuggestion">${projet.titre}</p>
+          <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
+          <p class="nombreTelechargement">${projet.nbTelechargement}</p>
+          </div>`;
+      }
+    });
+
+  }
+
+  $('#contenuCardsMembre').html(contenuMembre);
+  $('#contenuCardsProjet').html(contenuProjet);
+
+}
+
 
 window.onload = function () {
   showConditions();
@@ -17,10 +128,10 @@ window.onload = function () {
   const password = document.querySelector("#password");
 
   togglePassword.addEventListener("click", function () {
-  // toggle the type attribute
+    // toggle the type attribute
     const type = password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
-            
+
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
@@ -30,10 +141,10 @@ window.onload = function () {
   const confirmPassword = document.querySelector("#confirmPassword");
 
   togglePasswordConfirm.addEventListener("click", function () {
-  // toggle the type attribute
+    // toggle the type attribute
     const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
     confirmPassword.setAttribute("type", type);
-            
+
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
@@ -44,13 +155,54 @@ window.onload = function () {
   const passwordConnexion = document.querySelector("#passwordConnexion");
 
   togglePasswordConnexion.addEventListener("click", function () {
-  // toggle the type attribute
+    // toggle the type attribute
     const type = passwordConnexion.getAttribute("type") === "password" ? "text" : "password";
     passwordConnexion.setAttribute("type", type);
-            
+
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
+
+  // SEARCH BAR
+  let searchBar = document.getElementById("searchBar");
+
+  $('#searchBar').keyup(function (event) {
+    //Si la valeur est vide, elle efface le contenu de Recherche
+    if (searchBar.value == '' || searchBar.value === null) {
+      $('#contenuRecherche').html("");
+      firstLoad = false;
+      console.log("Je suis vide");
+    }
+
+    //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+    if (searchBar.value != '' && firstLoad === false) {
+      firstLoad = true;
+      loadPageRecherche();
+    }
+
+    //Si ya une valeur et sur la page de recherche, il load le data
+    if (searchBar.value != '' && firstLoad === true) {
+      loadData();
+    }
+
+  });
+
+
+};
+
+function tagCliquable(input) {
+  console.log('test');
+  document.getElementById("searchBar").value = input;
+  //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+  if (input != '' && firstLoad === false) {
+    firstLoad = true;
+    loadPageRecherche();
+  }
+
+  //Si ya une valeur et sur la page de recherche, il load le data
+  if (input != '' && firstLoad === true) {
+    loadData();
+  }
 };
 
 // fonction show terme et conditions
@@ -99,7 +251,7 @@ function valider() {
 
 }
 
-// valide le form modifier
+// valide le form modifier membre
 function validerMembreEdit() {
   let myForm = document.getElementById('membreEditForm');
   let password = myForm.passwordEdit.value;
@@ -129,6 +281,39 @@ function validerMembreEdit() {
 
 }
 
+// valide le form creer projet
+function validerProjetCreate(idProjet) {
+  let myForm = document.getElementById('ajouterProjetForm');
+  let valide = true;
+
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-projet-create').click();
+    valide = false;
+
+  }
+
+  if (valide) {
+    ajouterProjetRequete(idProjet);
+  }
+
+}
+
+// valide le form modifier projet
+function validerProjetEdit(idProjet) {
+  let myForm = document.getElementById('formProjetEdit');
+  let valide = true;
+
+  if (!myForm.checkValidity()) {
+    document.getElementById('validation-form-projet-edit').click();
+    valide = false;
+
+  }
+
+  if (valide) {
+    modifierProjet(idProjet);
+  }
+
+}
 
 function afficherSnackbar(text) {
   var x = document.getElementById("snackbar");
@@ -153,12 +338,21 @@ var loadFile = function (event) {
   }
 };
 
+// fonction onload Image Thumbnail 
+var loadFileThumbnail = function (event) {
+  var output = document.getElementById('outputThumbnail');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function () {
+    URL.revokeObjectURL(output.src) // free memory
+  }
+};
+
 // fonction reset form et Image vide
 
 function resetForm() {
   setTimeout(function () {
-    var output = document.getElementById('output');
-    output.src = "Projet-Final/serveur/membre/images-profil/defaultProfil.png";
+    var output = document.getElementById('outputThumbnail');
+    output.src = "Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png";
   }, 0);
 }
 
@@ -173,9 +367,9 @@ function findTag(tag, tagsArray) {
   });
 }
 
-function findParticipant(participant, participantsArray){
-    return participantsArray.filter(p => {
-      let nomComplet = p.prenom  + " " +p.nom;
+function findParticipant(participant, participantsArray) {
+  return participantsArray.filter(p => {
+    let nomComplet = p.prenom + " " + p.nom;
     if (nomComplet.toLowerCase().includes(participant.toLowerCase())) {
       return p;
     }
@@ -190,32 +384,46 @@ let tags = [];
 let participants = [];
 
 //Setter la liste de tags
-function setTagsBase(originalTags){
-  tags = originalTags;
+function setTagsBase() {
+  getTagsValue('tagValueCreate').forEach(function(item){
+    tags.push(item);
+  })
+}
+
+//Setter la liste de participants
+function setParticipantsBase() {
+  getTagsValue('participantValueCreate').forEach(function(item){
+    participants.push(item);
+  })
 }
 
 //Creer un Tag
-function createTag(label, nomDeClasse, classTag){
+function createTag(label, nomDeClasse, classTag) {
   const div = document.createElement('div');
   div.setAttribute('class', 'tag');
   div.classList.add(classTag);
   const span = document.createElement('span');
-  span.setAttribute('class',nomDeClasse);
+  span.setAttribute('class', nomDeClasse);
   span.innerHTML = label;
   const closeBtn = document.createElement('i');
   closeBtn.setAttribute('class', 'material-icons');
-  if(classTag == 'etiquette'){
+  if (classTag == 'etiquette') {
     closeBtn.classList.add('btnCloseEtiquette');
-  }else{
+  } else {
     closeBtn.classList.add('btnCloseParticipant');
   }
-  
+
   closeBtn.setAttribute('data-item', label);
   closeBtn.innerHTML = 'close';
 
-  // <div class="tag" id="">
-    // <span class="tagValueCreate" >label</span>
-    // <i class="material-icons" data-item='label'>close</i>
+  // <div class="tag etiquette">
+  // <span class="tagValueCreate" >label</span>
+  // <i class="material-icons btnCloseEtiquette" data-item='label'>close</i>
+  // </div>
+
+  // <div class="tag participant">
+  // <span class="participantValueCreate" >label</span>
+  // <i class="material-icons btnCloseParticipant" data-item='label'>close</i>
   // </div>
 
   div.appendChild(span);
@@ -224,75 +432,75 @@ function createTag(label, nomDeClasse, classTag){
 }
 
 //Permet de prendre toutes les tags présents 
-function getTagsValue(nomDeClasse){
+function getTagsValue(nomDeClasse) {
   let allTags = [].slice.call(document.getElementsByClassName(nomDeClasse));
   let allTagsValue = new Array();
-  if(allTags != null){
-    allTags.forEach(unSpanTag =>{
-     allTagsValue.push(unSpanTag.innerHTML);
-   })
+  if (allTags != null) {
+    allTags.forEach(unSpanTag => {
+      allTagsValue.push(unSpanTag.innerHTML);
+    })
   }
-  
+
   return allTagsValue;
 }
 
 
 //Ajoute un tag
-function addTag(label, idInput, classContainer, idSuggestionReponse, list ,nomDeClasse ,classTag){
-  if(isLabelExist(label, list)){
+function addTag(label, idInput, classContainer, idSuggestionReponse, list, nomDeClasse, classTag) {
+  if (isLabelExist(label, list)) {
     afficherSnackbar("Le tag est déja là!");
-  }else{
+  } else {
     list.push(label);
-    addTags(classContainer,idSuggestionReponse, list,nomDeClasse ,classTag);
-    let input= document.getElementById(idInput);
+    addTags(classContainer, idSuggestionReponse, list, nomDeClasse, classTag);
+    let input = document.getElementById(idInput);
     input.value = '';
   }
 }
 
 
 //Ajoute ma liste de tags dans la div
-function addTags(classContainer, idSuggestionReponse, list, nomDeClasse ,classTag){
-    clearTags(classTag);
-    list.slice().reverse().forEach(function(item){
-    const input = createTag(item, nomDeClasse ,classTag);
+function addTags(classContainer, idSuggestionReponse, list, nomDeClasse, classTag) {
+  clearTags(classTag);
+  list.slice().reverse().forEach(function (item) {
+    const input = createTag(item, nomDeClasse, classTag);
     const tagsContainer = document.querySelector(classContainer);
     tagsContainer.prepend(input);
     $(idSuggestionReponse).html("");
-    })
-  }
+  })
+}
 
 //Clear ma liste de tags
-function clearTags(classTag){
-  let myTag = "."+classTag;
-  document.querySelectorAll(myTag).forEach(function(tag){
+function clearTags(classTag) {
+  let myTag = "." + classTag;
+  document.querySelectorAll(myTag).forEach(function (tag) {
     tag.parentElement.removeChild(tag);
   });
 }
 
 // Permet de cut un tag parmi la liste de tags
-document.addEventListener('click', function(e){
-  if(e.target.classList.contains('btnCloseEtiquette')){
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('btnCloseEtiquette')) {
     const value = e.target.getAttribute('data-item');
     const index = tags.indexOf(value);
-    tags = [...tags.slice(0, index),  ...tags.slice(index + 1)];
-    addTags('.tag-container',"#tagsReponse", tags, 'tagValueCreate' ,'etiquette');
+    tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+    addTags('.tag-container', "#tagsReponse", tags, 'tagValueCreate', 'etiquette');
   }
 
-  if(e.target.classList.contains('btnCloseParticipant')){
+  if (e.target.classList.contains('btnCloseParticipant')) {
     const value = e.target.getAttribute('data-item');
     const index = participants.indexOf(value);
-    participants = [...participants.slice(0, index),  ...participants.slice(index + 1)];
-    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant');
+    participants = [...participants.slice(0, index), ...participants.slice(index + 1)];
+    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate', 'participant');
   }
-})
+});
 
 
 //Permet de Vérifier si le tag est déja dans la list
-function isLabelExist(label, list){
+function isLabelExist(label, list) {
   let exist = false;
-  if(list.length > 0){
-    list.forEach(function(tag){
-      if(list === label){
+  if (list.length > 0) {
+    list.forEach(function (tag) {
+      if (tag === label) {
         exist = true;
       }
     })
@@ -314,11 +522,11 @@ function displayTagMatches2() {
 }
 
 
-function displayParticipantsMatches(){
+function displayParticipantsMatches() {
   let value = document.getElementById('participantsInput').value;
   let contenu = '';
   if (value.length > 0) {
-    const matchArray =  findParticipant(value, participantsArray);
+    const matchArray = findParticipant(value, participantsArray);
     matchArray.forEach(element => {
       contenu += `<p class="suggestion" onclick="addTag('${element.prenom} ${element.nom} ${element.id}', 'participantsInput', '.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant' )">${element.prenom} ${element.nom} ${element.id}</p>`;
     });

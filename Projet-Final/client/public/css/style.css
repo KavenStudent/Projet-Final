@@ -4,21 +4,13 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-
-  /* background: linear-gradient(#676767, #4169e1ab) fixed; */
-
-}
-
 button {
   border-radius: 5px;
 }
 
 input {
   padding-left: 1em;
-  
 }
-
 
 textarea {
   max-width: 100%;
@@ -27,7 +19,7 @@ textarea {
 
 /* NAV BAR */
 .navbar-custom {
-  background-color: #4169E1;
+  background-color: #4169e1;
   color: black;
   border-bottom: 1px solid #6f89d6;
   margin: 0;
@@ -36,7 +28,6 @@ textarea {
 .text-color {
   color: black;
 }
-
 
 .divNavContenu {
   display: flex;
@@ -59,7 +50,6 @@ textarea {
   border-radius: 5px;
   cursor: pointer;
 }
-
 
 /* snackbar */
 #snackbar {
@@ -89,7 +79,6 @@ textarea {
     display: flex;
     margin-top: 1em;
   }
-
 }
 
 /* TITRE DU SITE */
@@ -102,18 +91,18 @@ textarea {
 }
 
 .premiereLettre {
-  color: #4169E1;
+  color: #4169e1;
 }
 
 /* Termes et Conditions */
 .contentConditions {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #cac7c7;
-    border-radius: 5px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #cac7c7;
+  border-radius: 5px;
 }
 
 /* SEARCH BAR */
@@ -129,9 +118,8 @@ textarea {
   width: 50em;
   border-radius: 20px;
   border-width: 5px;
-  border-color: #4169E1;
+  border-color: #4169e1;
 }
-
 
 /* MODAL INSCRIPTION */
 .modalCustom {
@@ -144,13 +132,12 @@ textarea {
   margin: auto;
 }
 
-
 .titreModalInscription {
   font-weight: bolder;
 }
 
 .modalHeader {
-  background-color: #148eca;
+  background-color: #476ee0;
   border-bottom: 0.5px solid #5eafd8;
 }
 
@@ -162,7 +149,6 @@ textarea {
   background-color: rgb(241, 238, 238);
   border: 1px solid rgb(175, 174, 174);
 }
-
 
 .collapsible {
   background-color: #eee;
@@ -198,7 +184,6 @@ textarea {
   display: none;
 }
 
-
 #msg-confirm-password-erreur {
   color: red;
   display: none;
@@ -214,19 +199,18 @@ textarea {
   display: none;
 }
 
-
 .validation {
   display: none;
 }
 
 /* MODAL CONNEXION */
 
-.connexionContainer{
+.connexionContainer {
   display: flex;
   flex-direction: column;
 }
 
-.inputConnexion{
+.inputConnexion {
   border: 1px solid rgb(175, 174, 174);
 }
 
@@ -247,11 +231,10 @@ textarea {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-
 }
 
 .customized-colorHR {
-  background-color: #4169E1;
+  background-color: #4169e1;
 }
 
 .details {
@@ -267,7 +250,7 @@ textarea {
 }
 
 .case-abonnement {
-  border: 1px solid #4169E1;
+  border: 1px solid #4169e1;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -288,13 +271,13 @@ textarea {
   height: 2em;
   width: 10em;
   border-radius: 50px;
-  border: 2px solid #C0C0C0;
+  border: 2px solid #c0c0c0;
   line-height: 5px;
   transition: 0.6s;
 }
 
 #sign-button:hover {
-  background-color: #4169E1;
+  background-color: #4169e1;
   color: white;
 }
 
@@ -303,18 +286,15 @@ textarea {
   height: 2em;
   width: 10em;
   border-radius: 50px;
-  border: 2px solid #FDD017;
+  border: 2px solid #fdd017;
   line-height: 5px;
   transition: 0.6s;
 }
 
 #upgrade-button:hover {
-  background-color: #4169E1;
+  background-color: #4169e1;
   color: white;
 }
-
-
-
 
 /* FOOTER */
 .customized-footer {
@@ -343,19 +323,16 @@ textarea {
   margin-bottom: 1em;
 }
 
-
 .editProj {
   padding-left: 3rem;
   padding-right: 3rem;
   font-weight: bold;
-
 }
 
 .editProj img {
   padding-top: 1em;
   padding-bottom: 1em;
   flex: 1;
-
 }
 
 .editProj .customize {
@@ -371,7 +348,6 @@ textarea {
   flex: 1;
   padding-top: 1em;
   padding-bottom: 1em;
-
 }
 
 .editProj .canBtn {
@@ -390,13 +366,11 @@ textarea {
     padding: 0.3em;
   } */
 
-
 .footerTxt {
   font-weight: bold;
   color: black;
   flex: 1;
 }
-
 
 .emailFooter {
   flex: 1;
@@ -404,7 +378,6 @@ textarea {
   color: black;
   padding-bottom: 1em;
 }
-
 
 /* LOAD ANIMATION */
 .lds-ring {
@@ -425,10 +398,10 @@ textarea {
   width: 64px;
   height: 64px;
   /* margin: 8px; */
-  border: 8px solid #4169E1;
+  border: 8px solid #4169e1;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #4169E1 transparent transparent transparent;
+  border-color: #4169e1 transparent transparent transparent;
 
   position: fixed;
   z-index: 999999;
@@ -440,7 +413,6 @@ textarea {
   right: 0;
   width: 50px;
   height: 50px;
-
 }
 
 .lds-ring div:nth-child(1) {
@@ -465,9 +437,8 @@ textarea {
   }
 }
 
-
 .lds-ring:before {
-  content: '';
+  content: "";
   display: block;
   position: fixed;
   top: 0;
@@ -478,17 +449,19 @@ textarea {
   z-index: 999999;
 }
 
-#tagsReponse{
-  background-color: rgb(207, 124, 124);
+#tagsReponse {
+  background-color: rgb(124, 177, 207);
+  cursor: pointer;
 }
 
-#participantsReponse{
-  background-color: rgb(207, 124, 124);
+#participantsReponse {
+  background-color: rgb(124, 177, 207);
+  cursor: pointer;
 }
 
 /* PARTICIPANTS */
 
-.participant-container{
+.participant-container {
   border: 2px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -507,7 +480,7 @@ textarea {
   cursor: default;
 }
 
-.participant-container input{
+.participant-container input {
   flex: 1;
   font-size: 16px;
   padding: 5px;
@@ -517,7 +490,7 @@ textarea {
 
 /* TAGS */
 
-.tag-container{
+.tag-container {
   border: 2px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -542,7 +515,7 @@ textarea {
   cursor: pointer;
 }
 
-.tag-container input{
+.tag-container input {
   flex: 1;
   font-size: 16px;
   padding: 5px;
@@ -550,21 +523,20 @@ textarea {
   border: 0;
 }
 
-.suggestion{
+.suggestion {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   padding-left: 5px;
 }
 
-
-.suggestionsDivision{
+.suggestionsDivision {
   border-radius: 3px;
   padding-left: 5px;
 }
 
-
 /* PASSWORD DIV EYEs */
-.passwordDivInscription, .passwordConfirmDivInscription{
+.passwordDivInscription,
+.passwordConfirmDivInscription {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -575,11 +547,12 @@ textarea {
   padding-right: 0.5em;
 }
 
-.passwordCustomInscription, .passwordConfirmCustomInscription{
+.passwordCustomInscription,
+.passwordConfirmCustomInscription {
   border: 0;
 }
 
-.passwordDivConnexion{
+.passwordDivConnexion {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -590,7 +563,22 @@ textarea {
   padding-right: 0.5em;
 }
 
-.passwordCustomConnexion{
+.passwordCustomConnexion {
   border: 0;
 }
 
+/* Note tag */
+.noteEnter {
+  font-size: 0.8em;
+  font-style: italic;
+  color: #747474;
+}
+
+.memberLink:link {
+  color: red;
+}
+
+/* visited link */
+.memberLink:visited {
+  color: red;
+}

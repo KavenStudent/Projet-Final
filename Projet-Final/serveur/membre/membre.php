@@ -93,11 +93,11 @@ class Membre
         $this->actif = $actif;
     }
 
-    public function getPrive(): string
+    public function getPrive(): int
     {
         return $this->prive;
     }
-    public function setPrive(string $prive)
+    public function setPrive(int $prive)
     {
         $this->prive = $prive;
     }

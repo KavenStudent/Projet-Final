@@ -134,6 +134,35 @@ function loadMembre(pageType, idMembre) {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+}
+
+
+function loadAutreMembre(idMembre) {
+  var form = new FormData();
+  form.append("action", "loadAutrePageMembre");
+  form.append("idMembre", idMembre);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      loadJsonRecherhe();
       membresVue(reponse);
     },
     fail: function (err) { },
@@ -160,6 +189,7 @@ function loadPageAccueil() {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      loadJsonRecherhe();
       membresVue(reponse);
     },
     fail: function (err) { },
@@ -173,6 +203,32 @@ function loadPageAccueil() {
 function loadPageAdmin() {
   var form = new FormData();
   form.append("action", "loadPageAdmin");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      loadJsonRecherhe();
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+}
+
+function loadPageRecherche(){
+  var form = new FormData();
+  form.append("action", "loadPageRecherche");
 
   $.ajax({
     type: "POST",

@@ -1,119 +1,254 @@
-
-var projetVue=function(response) {
-    var action=response.action;
-    switch(action){
-        case "pageProjet" : 
-        afficherPageProjet(response);
-        break;
-        case "pageProjetEdit" : 
-        afficherPageProjetEdit(response);
-        break;
-        case "pageProjetAjouter" :
-        ajouterProjetAffichage(response);
-        break;
-        case "AjouterProjetReussi" : 
-        ajouterProjetReussi(response.idMembre);
-        break;
-        
-    }
-}
+var projetVue = function (response) {
+  var action = response.action;
+  switch (action) {
+    case "pageProjet":
+      afficherPageProjet(response);
+      break;
+    case "pageProjetEdit":
+      afficherPageProjetEdit(response);
+      break;
+    case "pageProjetAjouter":
+      ajouterProjetAffichage(response);
+      break;
+    case "ajouterProjetReussi":
+      ajouterProjetReussi(response.idMembre);
+      break;
+    case "modifierProjetReussi":
+      modifierProjetReussi(response.idMembre);
+      break;
+    case "autreProjet":
+      afficherPageAutreProjet(response);
+      break;
+    case "supprimerProjet":
+      supprimerProjetReussi(response.idMembre);
+      break;
+  }
+};
 
 function afficherPageProjet(json) {
-  var contenu = `<div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
- <img src='Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png' class='img-fluid, img-thumbnail'"
-            alt="...">
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">Télécharger</button>
-        </div>
+  let thumbnail;
+  if (json.projet.thumbnail == "") {
+    thumbnail = "defaultThumbnail.png";
+  } else {
+    thumbnail = json.projet.thumbnail;
+  }
+  var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+ <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
+            alt="Vignette">
+        <div class="d-grid gap-2">`;
+
+  if (json.projet.path.length > 0) {
+    contenu += `<a onclick="telechargerProjet(${json.projet.id})" class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+          Télécharger
+         </a>`;
+  }
+
+  contenu += `<button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
+            <button class="btn btn-danger" type="button" onclick="supprimerProjet(${json.projet.id}, ${json.projet.idCreator})">Supprimer</button>    
+  </div>
     </div>
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>
 
-        <h5><span id="projetCreateurTitle">Createur: </span><a href="mon profil.page" id="projetCreateurContent"
+        <h5><span id="projetCreateurTitle">Createur: </span><a href="javascript:loadAutreMembre(${json.projet.idCreator})" id="projetCreateurContent"
                 name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
         <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
-            aria-label="Autres participants: ">
-            <li class="list-inline-item">${json.projet.autreParticipant}</li>
-        </ul>`
-  // array.forEach(membreProjet => {
-  //     //mettre participants clickable + autres participants
-  // });
-  contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> 
+            aria-label="Autres participants: ">`;
 
-       <ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Autres participants: ">
-            <li class="list-inline-item"><a href="participant.page">${json.projet.idTag}</a></li>
-            <li class="list-inline-item"><a href="participant.page">Portfolio</a></li>
-            <li class="list-inline-item"><a href="participant.page">Recherche d'emploi</a></li>
-        </ul>`
+  //List participants
+  json.tabParticipantsProjet.forEach((membreProjet) => {
+    if (membreProjet.prive != 1) {
+      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+    } else {
+      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="afficherSnackbar('Ce membre est privé')" class="memberLink">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+    }
+  });
+  let partArray = json.projet.autreParticipant.split(",");
+  partArray.forEach((participant) => {
+    contenu += ` <li class="list-inline-item">${participant}</li>`;
+  });
+
+  //List tags
+  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
+  aria-label="Tags: ">`;
+
+  json.tabTagsProjet.forEach((tagProjet) => {
+    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
+  });
+  contenu += `</ul>`;
+
+  //Description
+  contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
+
   // array.forEach(tags => {
   //     //mettre les tags
   // });
-  contenu += `<a href=${json.projet.lienExterne}>
+  contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
         <div class="form-check form-switch">
         </div>
     </div>
 </div>`;
-  $('#contenu').html(contenu);
+  $("#contenu").html(contenu);
 }
 
-
 function afficherPageProjetEdit(json) {
-  var contenu = `<form  class="editProj">
+  var contenu = `<div id="contenuRecherche"></div><form id="formProjetEdit" class="editProj">
 
+  <input type="submit" id="validation-form-projet-edit" class="validation" />
 
 <div class="form-outline mb-69">
  <label class="form-label ftxt" for="form6Example3">Titre:</label>
- <input type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}"/>
+ <input name="titreProjetEdit" type="text" id="form6Example3" class="form-control" placeholder="Example" value="${json.projet.titre}" required/>
 </div>
 
 <div class="form-outline mb-69">
  <label class="form-label" for="form6Example7">Description:</label>
- <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description...">${json.projet.description}</textarea>
+ <textarea name="descriptionProjetEdit" class="form-control ftxt" id="form6Example7" rows="4" placeholder="Description" required>${json.projet.description}</textarea>
 </div>
 
 <div class="form-outline mb-69">
- <label class="form-label" for="form6Example7">Participants:</label>
- <textarea class="form-control ftxt" id="form6Example7" rows="4" placeholder="Patricipants...">${json.projet.autreParticipant}</textarea>
-</div>
+     <label class="form-label" for="participantsProjet">Participants:</label>
+      <!-- PARTICIPANTS TAGS -->
+     <div class="participant-container">`;
+
+  json.tabParticipantsProjet.forEach((participant) => {
+    contenu += `<div class="tag participant">
+      <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
+      <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
+    </div>`;
+  });
+
+  contenu += `<input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  </div>
+  <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
+
+  <div id='participantsReponse' class="suggestionsDivision"></div> </div>
 
 
-<div class="form-outline mb-69">
+      <div class="form-outline mb-69">
  <label class="form-label" for="form6Example5">Lien:</label>
- <input type="url" id="form6Example5" class="form-control" placeholder="Lien..." value="${json.projet.lienExterne}"/>
+ <input name="lienProjetEdit" type="url" id="form6Example5" class="form-control" placeholder="Lien..." value="${json.projet.lienExterne}"/>
 </div>
+
+<!-- Message input -->
+    <div class="form-outline mb-69">
+      <label class="form-label" for="tagProjet">Tags:</label>
+
+      <!-- TAGS ICI -->
+      <div class="tag-container">`;
+  json.tabTagsProjet.forEach((tags) => {
+    contenu += `<div class="tag etiquette">
+    <span class="tagValueCreate" >${tags.nomTag}</span>
+    <i class="material-icons btnCloseEtiquette" data-item="${tags.nomTag}">close</i>
+  </div>`;
+  });
+
+  contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+      </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
+    
+     <div id='tagsReponse' class="suggestionsDivision"></div>
+   </div>
 
 <div class="col-md-5 order-md-1 customize">
-<img id="output" src="Projet-Final/client/public/images/${json.projet.thumbnail}" class="rounded mx-auto d-block" height="600px" width="600px">
+<img id="output" src="Projet-Final/serveur/projet/thumbnail/${json.projet.thumbnail}" class="rounded mx-auto d-block" height="600px" width="600px">
 
 
 <div class="form-outline-inpt inpt">
-<input class="form-control" type="file" accept="image/*" onchange="loadFile(event)">
+<input class="form-control" name="thumbnail" type="file" accept="image/*" onchange="loadFile(event)">
 </div>
 
- <div class="form-check form-switch">
-   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" ${json.projet.prive} />
-   <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
+<h3>Fichier du projet</h3>
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit">
    </div>
-</div>
+   <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
 
-<button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
-<button type="submit" class="btn btn-primary btn-block mb-4">Sauvegarder</button>
+   <div class="col-sm profilEdit">
+<div class="form-check form-switch" id='projetSwitchBox'>`;
+
+  if (json.projet.prive == 0) {
+    contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
+    contenu += `<input class="form-check-input" type="checkbox"  name='projetPublicEdit' value='1' />`;
+  } else {
+    contenu += `<input class="form-check-input" type="hidden"  name='projetPublicEdit' value='0' />`;
+    contenu += `<input class="form-check-input" type="checkbox"  name='projetPublicEdit' value='1' checked />`;
+  }
+
+  contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet prive</label>
+  </div>
+ </div>
+  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+<button type="button" class="btn btn-primary btn-block mb-4" onclick="validerProjetEdit(${json.projet.id})">Sauvegarder</button>
 </form>`;
-  $('#contenu').html(contenu);
+  $("#contenu").html(contenu);
+
+  setTagsArray(new Array());
+
+  json.tabTags.forEach((element) => {
+    tagsArray.push(element.nomTag);
+  });
+
+  //Système de tags
+  setTagsBase();
+
+  let monInputTag = document.getElementById("monInputTag");
+
+  //Ajoute la fonction de add des tags quand je press enter.
+  monInputTag.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputTag.value != "") {
+      addTag(
+        monInputTag.value,
+        "monInputTag",
+        ".tag-container",
+        "#tagsReponse",
+        tags,
+        "tagValueCreate",
+        "etiquette"
+      );
+    }
+
+    displayTagMatches2();
+  });
+
+  setParticipantsArray(new Array());
+  setParticipantsBase();
+
+  json.tabParticipants.forEach((element) => {
+    participantsArray.push(element);
+  });
+
+  let monInputParticipant = document.getElementById("participantsInput");
+
+  monInputParticipant.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputParticipant.value != "") {
+      addTag(
+        monInputParticipant.value,
+        "participantsInput",
+        ".participant-container",
+        "#participantsReponse",
+        participants,
+        "participantValueCreate",
+        "participant"
+      );
+    }
+
+    displayParticipantsMatches();
+  });
 }
 
 function ajouterProjetAffichage(json) {
+  var contenu = `<div id="contenuRecherche"></div><form id='ajouterProjetForm' class="editProj">
 
-  var contenu = `<form id='ajouterProjetForm' class="editProj">
+  <input type="submit" id="validation-form-projet-create" class="validation" />
 
-    
     <!-- Text input -->
    <div class="form-outline mb-69">
      <label class="form-label ftxt" for="titreProjet">Titre:</label>
-     <input type="text" name="titreProjet" class="form-control" placeholder="Titre">
+     <input type="text" name="titreProjet" class="form-control" placeholder="Titre" required>
      
    </div>
  
@@ -121,7 +256,7 @@ function ajouterProjetAffichage(json) {
    <!-- Message input -->
    <div class="form-outline mb-69">
      <label class="form-label" for="descriptionProjet">Description:</label>
-     <textarea class="form-control ftxt" name="descriptionProjet" rows="4" placeholder="Description"></textarea>
+     <textarea class="form-control ftxt" name="descriptionProjet" rows="4" placeholder="Description" required></textarea>
      
    </div>
  
@@ -130,13 +265,14 @@ function ajouterProjetAffichage(json) {
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
      <div class="participant-container">
-
-        <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
+        <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
+
       <div id='participantsReponse' class="suggestionsDivision"></div>
    </div>
  
-   <!-- Email input -->
+   <!-- Lien input -->
    <div class="form-outline mb-69">
      <label class="form-label" for="lienProjet">Lien:</label>
      <input type="url" name="lienProjet" class="form-control" placeholder="Lien">
@@ -149,75 +285,158 @@ function ajouterProjetAffichage(json) {
       <!-- TAGS ICI -->
       <div class="tag-container">
 
-        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" />
+        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
+      <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
      <div id='tagsReponse' class="suggestionsDivision"></div>
    </div>
    <div class="col-md-5 order-md-1 customize">
  
-   <img id="output" src="Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png" class="rounded mx-auto d-block" height="600px" width="600px">
+   <img id="outputThumbnail" src="Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png" class="rounded mx-auto d-block" height="600px" width="600px">
    
  
    <div class="form-outline-inpt inpt">
-   <input class="form-control" type="file" accept="image/*" onchange="loadFile(event)" name='imageVignette' id="imagView">
+   <input class="form-control" type="file" accept="image/*" onchange="loadFileThumbnail(event)" name='imageVignette' id="imagView">
    </div>
+
+   <h3>Fichier du projet</h3>
+   <div class="form-outline-inpt inpt">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier">
+   </div>
+   <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
  
  </div>
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
    <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
-   <button type="button" onclick="ajouterProjetRequete(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
+   <button type="button" onclick="validerProjetCreate(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
 
  </form>`;
 
-   $('#contenu').html(contenu);
-
-  json.tabTags.forEach(element => {
+  $("#contenu").html(contenu);
+  setTagsArray(new Array());
+  json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
 
-  //Système de tags 
+  //Système de tags
   setTagsBase(new Array());
 
-
-  let monInputTag = document.getElementById('monInputTag');
+  let monInputTag = document.getElementById("monInputTag");
 
   //Ajoute la fonction de add des tags quand je press enter.
-  monInputTag.addEventListener('keyup', function(e){
-    if(e.key === 'Enter' && (monInputTag.value != "")){
-      addTag(monInputTag.value , 'monInputTag' , '.tag-container' , '#tagsReponse', tags, 'tagValueCreate' ,'etiquette');
+  monInputTag.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputTag.value != "") {
+      addTag(
+        monInputTag.value,
+        "monInputTag",
+        ".tag-container",
+        "#tagsReponse",
+        tags,
+        "tagValueCreate",
+        "etiquette"
+      );
     }
 
     displayTagMatches2();
-  })
+  });
+  setParticipantsArray(new Array());
+  setParticipantsBase(new Array());
 
-
-
-  json.tabParticipants.forEach(element => {
+  json.tabParticipants.forEach((element) => {
     participantsArray.push(element);
   });
 
-  let monInputParticipant = document.getElementById('participantsInput');
+  let monInputParticipant = document.getElementById("participantsInput");
 
-  monInputParticipant.addEventListener('keyup', function(e){
-    if(e.key === 'Enter' && (monInputParticipant.value != "")){
-      addTag(monInputParticipant.value, 'participantsInput' , '.participant-container'  , '#participantsReponse' , participants, 'participantValueCreate' ,'participant');
+  monInputParticipant.addEventListener("keyup", function (e) {
+    if (e.key === "Enter" && monInputParticipant.value != "") {
+      addTag(
+        monInputParticipant.value,
+        "participantsInput",
+        ".participant-container",
+        "#participantsReponse",
+        participants,
+        "participantValueCreate",
+        "participant"
+      );
     }
 
     displayParticipantsMatches();
-  })
-
-
+  });
 }
 
-function ajouterProjetReussi(idMembre){
-
-  loadMembre('pageMembre', idMembre);
+function ajouterProjetReussi(idMembre) {
+  loadMembre("pageMembre", idMembre);
   afficherSnackbar("Projet ajouté avec succès!");
 }
+function modifierProjetReussi(idMembre) {
+  loadMembre("pageMembre", idMembre);
+  afficherSnackbar("Projet modifié avec succès!");
+}
+function afficherPageAutreProjet(json) {
+  let thumbnail;
+  if (json.projet.thumbnail == "") {
+    thumbnail = "defaultThumbnail.png";
+  } else {
+    thumbnail = json.projet.thumbnail;
+  }
+  var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+ <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
+            alt="Vignette">
+        <div class="d-grid gap-2">`;
 
+  if (json.projet.path.length > 0) {
+    contenu += `<a  class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+          Télécharger
+          </a>`;
+  }
 
+  contenu += `<button class="btn btn-primary" type="button">Signaler</button>
+        </div>
+    </div>
+    <div id='projetRightDiv' class="container">
+        <h1>${json.projet.titre}</h1>
 
+        <h5><span id="projetCreateurTitle">Createur: </span><a href="javascript:loadAutreMembre(${json.projet.idCreator})" id="projetCreateurContent"
+                name="projetCreateurContent">${json.projet.nomComplet}</a></h5>
 
+        <ul id="projetParticipantDiv" name="projetParticipantDiv" class="list-inline"
+            aria-label="Autres participants: ">`;
 
+  //List participants
+  json.tabParticipantsProjet.forEach((membreProjet) => {
+    contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+  });
+  contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
+
+  //List tags
+  contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
+  aria-label="Tags: ">`;
+
+  json.tabTagsProjet.forEach((tagProjet) => {
+    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
+  });
+  contenu += `</ul>`;
+
+  //Description
+  contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
+
+  // array.forEach(tags => {
+  //     //mettre les tags
+  // });
+  contenu += `Lien: <a href=${json.projet.lienExterne}>
+            <p class="lead">${json.projet.lienExterne}</p>
+        </a>
+        <div class="form-check form-switch">
+        </div>
+    </div>
+</div>`;
+  $("#contenu").html(contenu);
+}
+
+function supprimerProjetReussi(idMembre) {
+  loadMembre("pageMembre", idMembre);
+  afficherSnackbar("Projet supprimé avec succès!");
+}

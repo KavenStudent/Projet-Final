@@ -24,18 +24,6 @@ switch ($action) {
     case "tableMembres":
         tableMembres();
         break;
-    case "activerMembre":
-        activerMembre();
-        break;
-    case "desactiverMembre":
-        desactiverMembre();
-        break;
-    case "tableHistoriqueLocation":
-        tableHistoriquesLocation();
-        break;
-    case "tableLocation":
-        tableLocations();
-        break;
     case "loadMembre":
         loadPageMembre();
         break;
@@ -44,6 +32,12 @@ switch ($action) {
         break;
     case "loadPageAdmin":
         loadPageAdmin();
+        break;
+    case "loadAutrePageMembre":
+        loadAutrePageMembre();
+        break;
+    case "loadPageRecherche":
+        loadPageRecherche();
         break;
 }
 
@@ -189,13 +183,25 @@ function loadPageMembre()
     }
 }
 
+
+
 function loadPageAccueil()
 {
 
     global $tabRes;
+    global $dao;
 
     if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
+        
+        if (isset($_SESSION['membre'])) {
+            $id = (int) isset($_SESSION['membre']);
+            $tabRes['id'] = $id;
+            $tabRes['isSub'] = $dao->checkAbonnementMembre($id);
+            print_r($dao->checkAbonnementMembre($id));
+        } else if (isset($_SESSION['admin'])) {
+            $tabRes['id'] = 'admin';
+        }
     }
 }
 
@@ -204,11 +210,37 @@ function loadPageAdmin()
     global $tabRes;
     global $dao;
 
+
     $tabRes['action'] = "pageAdmin";
     //retourne tout les membre
     $tabRes['listeSignalisation'] = $dao->getAllSignalisation();
 }
 
+function loadAutrePageMembre()
+{
+    global $tabRes;
+    global $dao;
 
+    $idMembre = $_POST['idMembre'];
+
+    $membre = $dao->getMembre($idMembre);
+
+    $tabRes['membre'] = array(
+        "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+        "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+        "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
+        "membrePremium" => $membre->getMembrePremium()
+    );
+
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+    $tabRes['action'] = 'autreMembre';
+}
+
+function loadPageRecherche()
+{
+    global $tabRes;
+    $tabRes['action'] = 'loadRecherche';
+}
 
 echo json_encode($tabRes);
