@@ -59,7 +59,7 @@ function afficherPageProjet(json) {
   aria-label="Tags: ">`;
 
   json.tabTags.forEach((tagProjet) => {
-    contenu += ` <li class="list-inline-item">${tagProjet.nomTag}</li>`;
+    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
   });
   contenu += `</ul>`;
 
@@ -329,7 +329,7 @@ function afficherPageAutreProjet(json) {
   aria-label="Tags: ">`;
 
   json.tabTags.forEach((tagProjet) => {
-    contenu += ` <li class="list-inline-item">${tagProjet.nomTag},</li>`;
+    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
   });
   contenu += `</ul>`;
 

@@ -182,6 +182,21 @@ window.onload = function () {
 
 };
 
+function tagCliquable(input) {
+  console.log('test');
+  document.getElementById("searchBar").value = input;
+   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
+   if(input != '' && firstLoad === false){
+    firstLoad = true;
+    loadPageRecherche();
+  }
+
+  //Si ya une valeur et sur la page de recherche, il load le data
+  if(input != '' && firstLoad === true){
+    loadData();
+  } 
+};
+
 // fonction show terme et conditions
 function showConditions() {
   var coll = document.getElementsByClassName("collapsible");
