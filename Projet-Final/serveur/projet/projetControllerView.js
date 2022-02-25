@@ -305,12 +305,16 @@ function ajouterProjetAffichage(json) {
 
   $("#contenu").html(contenu);
 
+  
+
+
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
 
   //Système de tags
   setTagsBase(new Array());
+
 
   let monInputTag = document.getElementById("monInputTag");
 
