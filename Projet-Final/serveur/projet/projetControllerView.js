@@ -41,7 +41,8 @@ function afficherPageProjet(json) {
   }
 
   contenu += `<button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
-        </div>
+            <button class="btn btn-danger" type="button" onclick="supprimerProjet(${json.projet.id})">Supprimer</button>      
+  </div>
     </div>
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>
