@@ -32,6 +32,9 @@ switch ($action) {
     case "telechargerProjet":
         telechargerProjet();
         break;
+    case "supprimerProjet":
+        supprimerProjet();
+        break;
 
 }
 
@@ -225,7 +228,7 @@ function supprimerProjet() {
 
     $projet = $dao->supprimerProjet($idProjet);
 
-    if($tabRes['action'] = null) {
+    if($tabRes['action'] == null) {
         $tabRes['action'] = 'supprimerProjet';
         $tabRes['idMembre'] = $idMembre;
     }

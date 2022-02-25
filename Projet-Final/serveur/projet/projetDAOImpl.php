@@ -314,7 +314,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();
-            $returnValue = $stmt->fetch(PDO::FETCH_OBJ);
+            $returnValue = true;
         } catch (Exception $e) {
             $returnValue = false;
             echo $e->getMessage();
