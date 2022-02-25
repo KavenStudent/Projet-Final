@@ -32,11 +32,15 @@ function afficherPageProjet(json) {
   var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
-        <div class="d-grid gap-2">
-        <a onclick="telechargerProjet(${json.projet.id})" class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
-        Télécharger
-       </a>
-            <button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
+        <div class="d-grid gap-2">`;
+
+  if (json.projet.path.length > 0) {
+    contenu += `<a onclick="telechargerProjet(${json.projet.id})" class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+          Télécharger
+         </a>`;
+  }
+
+  contenu += `<button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
@@ -302,11 +306,15 @@ function afficherPageAutreProjet(json) {
   var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
-        <div class="d-grid gap-2">
-        <a  class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
-        Télécharger
-        </a>
-            <button class="btn btn-primary" type="button">Signaler</button>
+        <div class="d-grid gap-2">`;
+
+  if (json.projet.path.length > 0) {
+    contenu += `<a  class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+          Télécharger
+          </a>`;
+  }
+
+  contenu += `<button class="btn btn-primary" type="button">Signaler</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
