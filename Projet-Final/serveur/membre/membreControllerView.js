@@ -174,23 +174,21 @@ function afficherPageMembre(json, listProjet) {
     // src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
     if (listProjet != null) {
         listProjet.forEach(function (item) {
-            if(item.prive != 1){
-                let myThumbnail;
-                if (item.thumbnail == "") {
-                    myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
-                } else {
-                    myThumbnail = `Projet-Final/serveur/projet/thumbnail/${item.thumbnail}`;
-                }
-                contenu += ` <!-- CARD -->
-                                <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
-                                <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
-                                <div class="card-body card-item-body">
-                                        <h5 class="card-title">${item.titre}</h5>
-                                        <p class="card-text">${item.description}</p>
-                            
-                                    </div>
-                                </div>`;
+            let myThumbnail;
+            if (item.thumbnail == "") {
+                myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
+            } else {
+                myThumbnail = `Projet-Final/serveur/projet/thumbnail/${item.thumbnail}`;
             }
+            contenu += ` <!-- CARD -->
+                            <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
+                            <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
+                            <div class="card-body card-item-body">
+                                    <h5 class="card-title">${item.titre}</h5>
+                                    <p class="card-text">${item.description}</p>
+                        
+                                </div>
+                            </div>`;
         });
     }
 
@@ -342,20 +340,23 @@ function afficherPageAutreMembre(json, listProjet) {
     // src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
     if (listProjet != null) {
         listProjet.forEach(function (item) {
-            let myThumbnail;
-            if (item.thumbnail == "") {
-                myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
-            } else {
-                myThumbnail = `Projet-Final/serveur/projet/thumbnail/${item.thumbnail}`;
+            if(item.prive != 1){
+                let myThumbnail;
+                if (item.thumbnail == "") {
+                    myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
+                } else {
+                    myThumbnail = `Projet-Final/serveur/projet/thumbnail/${item.thumbnail}`;
+                }
+                contenu += ` <!-- CARD -->
+                                <div class="card card-item" onclick="loadPageAutreProjet(${item.id});">
+                                <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
+                                <div class="card-body card-item-body">
+                                        <h5 class="card-title">${item.titre}</h5>
+                                        <p class="card-text">${item.description}</p>
+                                    </div>
+                                </div>`;
             }
-            contenu += ` <!-- CARD -->
-                            <div class="card card-item" onclick="loadPageAutreProjet(${item.id});">
-                            <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
-                            <div class="card-body card-item-body">
-                                    <h5 class="card-title">${item.titre}</h5>
-                                    <p class="card-text">${item.description}</p>
-                                </div>
-                            </div>`
+            
         });
     }
 
