@@ -79,7 +79,7 @@ function loadData() {
   if (dataMembre != null || dataMembre.length > 0) {
     dataMembre.forEach(function (membre) {
 
-      if (filterDataMembre(input, membre)) {
+      if (filterDataMembre(input, membre) && membre.prive !=1) {
         contenuMembre += `
               <div class="cardMembreSuggestion" onclick="loadAutreMembre(${membre.id});clearInputSearch(); ">
                   <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
@@ -95,7 +95,7 @@ function loadData() {
 
   if (dataProjet != null || dataProjet.length > 0) {
     dataProjet.forEach(function (projet) {
-      if (filterDataProjet(input, projet)) {
+      if (filterDataProjet(input, projet) && projet.prive !=1) {
         contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageAutreProjet(${projet.idProjet}); clearInputSearch();">
           <p class="titreProjetSuggestion">${projet.titre}</p>
           <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
