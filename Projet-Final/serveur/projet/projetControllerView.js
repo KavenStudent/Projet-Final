@@ -60,10 +60,13 @@ function afficherPageProjet(json) {
   json.tabParticipantsProjet.forEach((membreProjet) => {
     contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
   });
-  contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
+  let partArray = json.projet.autreParticipant.split(",");
+  partArray.forEach((participant) => {
+    contenu += ` <li class="list-inline-item">${participant}</li>`;
+  });
 
   //List tags
-  contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
+  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
   aria-label="Tags: ">`;
 
   json.tabTagsProjet.forEach((tagProjet) => {
@@ -180,7 +183,7 @@ function afficherPageProjetEdit(json) {
   $("#contenu").html(contenu);
 
   setTagsArray(new Array());
-  
+
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
@@ -308,7 +311,7 @@ function ajouterProjetAffichage(json) {
  </form>`;
 
   $("#contenu").html(contenu);
-setTagsArray(new Array());
+  setTagsArray(new Array());
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
@@ -334,7 +337,7 @@ setTagsArray(new Array());
 
     displayTagMatches2();
   });
-setParticipantsArray(new Array());
+  setParticipantsArray(new Array());
   setParticipantsBase(new Array());
 
   json.tabParticipants.forEach((element) => {
