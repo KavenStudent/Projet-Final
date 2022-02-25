@@ -15,11 +15,11 @@
 
           <div class="col-md-8 itemInput">
             <label for="validationCustom01" class="form-label">Prénom</label>
-            <input type="text" class="form-control modalInput" id="prenom" name="prenom" required>
+            <input type="text" class="form-control modalInput" id="prenom" name="prenom" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" required>
           </div>
           <div class="col-md-8 itemInput">
             <label for="validationCustom02" class="form-label">Nom</label>
-            <input type="text" class="form-control modalInput" id="nom" name="nom" required>
+            <input type="text" class="form-control modalInput" id="nom" name="nom" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" required>
           </div>
 
           <div class="col-md-8 itemInput">
