@@ -397,6 +397,15 @@ function setParticipantsBase() {
   })
 }
 
+//Clear les tags ou participants
+function clearTagsBase(){
+  tags = new Array();
+}
+
+function clearParticipantsBase(){
+  participants = new Array();
+}
+
 //Creer un Tag
 function createTag(label, nomDeClasse, classTag) {
   const div = document.createElement('div');

@@ -139,7 +139,7 @@ function ajouterProjet()
     $titreProjet = $_POST['titreProjet'];
     $descriptionProjet = $_POST['descriptionProjet'];
     $path = "";
-    $prive = true;
+    $prive = false;
 
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjet'];
