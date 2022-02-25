@@ -104,7 +104,7 @@ function afficherPageProjetEdit(json) {
 <div class="form-outline mb-69">
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
-     <div class="participant-container">`
+     <div class="participant-container">`;
 
   json.tabParticipantsProjet.forEach((participant) => {
     contenu += `<div class="tag participant">
@@ -131,7 +131,7 @@ function afficherPageProjetEdit(json) {
       <label class="form-label" for="tagProjet">Tags:</label>
 
       <!-- TAGS ICI -->
-      <div class="tag-container">`
+      <div class="tag-container">`;
   json.tabTagsProjet.forEach((tags) => {
     contenu += `<div class="tag etiquette">
     <span class="tagValueCreate" >${tags.nomTag}</span>
@@ -139,7 +139,7 @@ function afficherPageProjetEdit(json) {
   </div>`;
   });
 
-  `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
