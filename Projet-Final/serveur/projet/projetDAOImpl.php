@@ -306,4 +306,21 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             return $nomComplet;
         }
     }
+
+    public function supprimerProjet(int $idProjet): bool {
+        $returnValue = false;
+        try {
+            $requete = "DELETE FROM projet WHERE id = ?;";
+            $this->setRequete($requete);
+            $this->setParams(array($idProjet));
+            $stmt = $this->executer();
+            $returnValue = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            $returnValue = false;
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+            return $returnValue;
+        }
+    }
 }
