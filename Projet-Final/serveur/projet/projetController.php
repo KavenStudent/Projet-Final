@@ -32,6 +32,10 @@ switch ($action) {
     case "telechargerProjet":
         telechargerProjet();
         break;
+    case "supprimerProjet":
+        supprimerProjet();
+        break;
+
 }
 
 function modifierProjet()
@@ -213,6 +217,22 @@ function telechargerProjet(){
     $projet = $dao->getProjet($idProjet);
 
     $dao->telechargerProjet($projet->getId(), $projet->getNbTelechargements());
+}
+
+function supprimerProjet() {
+    global $tabRes;
+    global $dao;
+
+    $idProjet = $_POST['idProjet'];
+    $idMembre = $_POST['idMembre'];
+
+    $projet = $dao->supprimerProjet($idProjet);
+
+    if($tabRes['action'] == null) {
+        $tabRes['action'] = 'supprimerProjet';
+        $tabRes['idMembre'] = $idMembre;
+    }
+    
 }
 
 echo json_encode($tabRes);

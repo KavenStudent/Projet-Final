@@ -30,5 +30,7 @@ interface ProjetDao
     //Tous les tags
     public function getAllTags() : array;
 
+    public function supprimerProjet(int $idProjet): bool;
+
 }
 ?>
