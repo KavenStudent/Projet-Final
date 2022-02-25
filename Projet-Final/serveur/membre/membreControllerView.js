@@ -153,14 +153,14 @@ function afficherPageMembre(json, listProjet) {
                     <label><strong>Statut :</strong> <span>`;
 
     if (json.membre.membrePremium == 0) {
-        contenu += `non-abonné`;
+        contenu += `non-abonné </span></label>`;
     } else if (json.membre.membrePremium == 1) {
-        contenu += `Abonné`;
+        contenu += `Abonné </span></label>
+        <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>`;
     }
 
 
-    contenu += `</span></label>  <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>
-                <!-- Content here -->
+    contenu += ` <!-- Content here -->
                 </div>
                 <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id});' class="btn btn-primary">Editer</button>
             </div>
@@ -275,7 +275,7 @@ function afficherPageMembreEdit(json) {
     else {
         contenu += `<input class="form-check-input" type="hidden"  name='profilPublic' value='0' />`;
         contenu += `<input class="form-check-input" type="checkbox"  name='profilPublic' value='1' checked />`;
-        
+
     }
 
     contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Privé</label>
@@ -388,9 +388,9 @@ function afficherPageAdmin(json) {
     $('#contenu').html(contenu);
 }
 
-function afficherRecherche(){
-    
-   
+function afficherRecherche() {
+
+
 
 
     let contenu = `<div id='containerRecherche' class="container">
@@ -401,10 +401,10 @@ function afficherRecherche(){
             <p>Nom Complet</p>
             <p>#Id</p>
         </div><div id='contenuCardsMembre'></div>`;
-    
-   
-     
-    contenu +=`</div>`;
+
+
+
+    contenu += `</div>`;
 
 
     contenu += `<div class="list container" id='listProjet'>
@@ -414,14 +414,14 @@ function afficherRecherche(){
                 <p>#nbTéléchargement</p>
         </div><div id='contenuCardsProjet'></div>`;
 
-   
-        
-
-   contenu += ` </div></div>`;
 
 
 
+    contenu += ` </div></div>`;
 
-$('#contenuRecherche').html(contenu);
-loadData();
+
+
+
+    $('#contenuRecherche').html(contenu);
+    loadData();
 }
