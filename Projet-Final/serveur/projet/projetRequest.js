@@ -201,3 +201,30 @@ function telechargerProjet(idProjet) {
     },
   });
 }
+
+function supprimerProjet(idProjet, idMembre) {
+  var form = new FormData();
+  form.append("action", "supprimerProjet");
+  form.append("idProjet", idProjet);
+  form.append("idMembre", idMembre);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/projet/projetController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
+    success: function (reponse) {
+      projetVue(reponse);
+      loadJsonRecherhe();
+    },
+    fail: function (err) {},
+    complete: function () {
+      $(".lds-ring").addClass("hidden");
+    },
+  });
+}
