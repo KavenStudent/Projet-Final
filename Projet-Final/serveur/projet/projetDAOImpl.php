@@ -96,7 +96,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $tab = array();
-            $requete = "SELECT mp.idMembre, me.nom, me.prenom FROM membreprojet mp INNER JOIN membre me ON mp.idMembre = me.id WHERE mp.idProjet = ?;";
+            $requete = "SELECT mp.idMembre, me.nom, me.prenom, me.prive FROM membreprojet mp INNER JOIN membre me ON mp.idMembre = me.id WHERE mp.idProjet = ?;";
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();
@@ -128,6 +128,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         }
         return $tab;
     }
+    
     public function creerProjet(Projet $projet, array $tags, array $participants): bool
     {
         try {
