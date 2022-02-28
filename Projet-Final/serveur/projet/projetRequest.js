@@ -21,6 +21,7 @@ function loadPageProjet(destination, idProjet) {
     fail: function (err) {},
     complete: function () {
       $(".lds-ring").addClass("hidden");
+    
     },
   });
 }
@@ -75,7 +76,6 @@ function ajouterProjetRequete(idMembre) {
     },
     fail: function (err) {},
     complete: function () {
-      afficherSnackbar("Projet ajouté avec succès!");
     },
   });
 }
@@ -104,7 +104,6 @@ function modifierProjet(idProjet) {
     },
     fail: function (err) {},
     complete: function () {
-      afficherSnackbar("Projet modifié avec succès!");
     },
   });
 }
@@ -227,7 +226,6 @@ function supprimerProjet(idProjet, idMembre) {
     },
     fail: function (err) {},
     complete: function () {
-      afficherSnackbar("Projet supprimé avec succès!");
     },
   });
 }

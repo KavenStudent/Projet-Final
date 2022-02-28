@@ -117,7 +117,7 @@ function modifierMembre() {
 
 }
 
-function loadMembre(pageType, idMembre) {
+function loadMembre(pageType, idMembre, msg) {
   var form = new FormData();
   form.append("action", "loadMembre");
   form.append("idMembre", idMembre);
@@ -140,6 +140,8 @@ function loadMembre(pageType, idMembre) {
     fail: function (err) { },
     complete: function () {
       $('.lds-ring').addClass('hidden');
+      if (msg.length > 0)
+      afficherSnackbar(msg);
     },
 
   });

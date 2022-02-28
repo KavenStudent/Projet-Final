@@ -311,7 +311,7 @@ function afficherSnackbar(text) {
   x.className = "show";
   setTimeout(function () {
     x.className = x.className.replace("show", "");
-  }, 12000);
+  }, 3000);
 }
 
 //Permet de fermer les toasts
