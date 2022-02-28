@@ -2,12 +2,12 @@ let tagsArray = [];
 let participantsArray = [];
 let firstLoad = false;
 
-function setTagsArray(newArray){
- tagsArray = newArray;
+function setTagsArray(newArray) {
+  tagsArray = newArray;
 }
 
-function setParticipantsArray(newArray){
- participantsArray = newArray;
+function setParticipantsArray(newArray) {
+  participantsArray = newArray;
 }
 
 // SYSTEME DE RECHERCHE
@@ -55,7 +55,12 @@ function filterDataProjet(input, projet) {
   let nomCreateur = projet.nom.toLowerCase();
   let tags = projet.tags.toLowerCase();
   let titre = projet.titre.toLowerCase();
-  if (prenomCreateur.includes(input) || nomCreateur.includes(input) || tags.includes(input) || titre.includes(input)) {
+  if (
+    prenomCreateur.includes(input) ||
+    nomCreateur.includes(input) ||
+    tags.includes(input) ||
+    titre.includes(input)
+  ) {
     isExist = true;
   }
   return isExist;
@@ -70,16 +75,15 @@ function clearInputSearch() {
 function loadData() {
   let dataMembre = getDataMembre();
   let dataProjet = getDataProjet();
-  let contenuMembre = '';
-  let contenuProjet = '';
+  let contenuMembre = "";
+  let contenuProjet = "";
 
   let searchBar = document.getElementById("searchBar");
   let input = searchBar.value.toLowerCase();
 
   if (dataMembre != null || dataMembre.length > 0) {
     dataMembre.forEach(function (membre) {
-
-      if (filterDataMembre(input, membre) && membre.prive !=1) {
+      if (filterDataMembre(input, membre) && membre.prive != 1) {
         contenuMembre += `
               <div class="cardMembreSuggestion" onclick="loadAutreMembre(${membre.id});clearInputSearch(); ">
                   <img class="imageProfilMembreSuggestion" src="Projet-Final/serveur/membre/images-profil/${membre.imageProfil}">
@@ -87,15 +91,12 @@ function loadData() {
                   <p class="idMembreSuggestion"># ${membre.id}</p>
               </div> `;
       }
-
     });
-
   }
-
 
   if (dataProjet != null || dataProjet.length > 0) {
     dataProjet.forEach(function (projet) {
-      if (filterDataProjet(input, projet) && projet.prive !=1) {
+      if (filterDataProjet(input, projet) && projet.prive != 1) {
         contenuProjet += `<div class="cardProjetSuggestion" onclick="loadPageAutreProjet(${projet.idProjet}); clearInputSearch();">
           <p class="titreProjetSuggestion">${projet.titre}</p>
           <p class="createurProjetSuggestion">${projet.prenom} ${projet.nom}</p>
@@ -103,14 +104,11 @@ function loadData() {
           </div>`;
       }
     });
-
   }
 
-  $('#contenuCardsMembre').html(contenuMembre);
-  $('#contenuCardsProjet').html(contenuProjet);
-
+  $("#contenuCardsMembre").html(contenuMembre);
+  $("#contenuCardsProjet").html(contenuProjet);
 }
-
 
 window.onload = function () {
   showConditions();
@@ -129,34 +127,42 @@ window.onload = function () {
 
   togglePassword.addEventListener("click", function () {
     // toggle the type attribute
-    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    const type =
+      password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
 
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
 
-  //EYE CONFIRM INSCRIPTION 
-  const togglePasswordConfirm = document.querySelector("#togglePasswordConfirm");
+  //EYE CONFIRM INSCRIPTION
+  const togglePasswordConfirm = document.querySelector(
+    "#togglePasswordConfirm"
+  );
   const confirmPassword = document.querySelector("#confirmPassword");
 
   togglePasswordConfirm.addEventListener("click", function () {
     // toggle the type attribute
-    const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
+    const type =
+      confirmPassword.getAttribute("type") === "password" ? "text" : "password";
     confirmPassword.setAttribute("type", type);
 
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
 
-
   //EYE CONNEXION
-  const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
+  const togglePasswordConnexion = document.querySelector(
+    "#togglePasswordConnexion"
+  );
   const passwordConnexion = document.querySelector("#passwordConnexion");
 
   togglePasswordConnexion.addEventListener("click", function () {
     // toggle the type attribute
-    const type = passwordConnexion.getAttribute("type") === "password" ? "text" : "password";
+    const type =
+      passwordConnexion.getAttribute("type") === "password"
+        ? "text"
+        : "password";
     passwordConnexion.setAttribute("type", type);
 
     // toggle the icon
@@ -166,44 +172,41 @@ window.onload = function () {
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
 
-  $('#searchBar').keyup(function (event) {
+  $("#searchBar").keyup(function (event) {
     //Si la valeur est vide, elle efface le contenu de Recherche
-    if (searchBar.value == '' || searchBar.value === null) {
-      $('#contenuRecherche').html("");
+    if (searchBar.value == "" || searchBar.value === null) {
+      $("#contenuRecherche").html("");
       firstLoad = false;
       console.log("Je suis vide");
     }
 
     //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
-    if (searchBar.value != '' && firstLoad === false) {
+    if (searchBar.value != "" && firstLoad === false) {
       firstLoad = true;
       loadPageRecherche();
     }
 
     //Si ya une valeur et sur la page de recherche, il load le data
-    if (searchBar.value != '' && firstLoad === true) {
+    if (searchBar.value != "" && firstLoad === true) {
       loadData();
     }
-
   });
-
-
 };
 
 function tagCliquable(input) {
-  console.log('test');
+  console.log("test");
   document.getElementById("searchBar").value = input;
   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
-  if (input != '' && firstLoad === false) {
+  if (input != "" && firstLoad === false) {
     firstLoad = true;
     loadPageRecherche();
   }
 
   //Si ya une valeur et sur la page de recherche, il load le data
-  if (input != '' && firstLoad === true) {
+  if (input != "" && firstLoad === true) {
     loadData();
   }
-};
+}
 
 // fonction show terme et conditions
 function showConditions() {
@@ -224,102 +227,91 @@ function showConditions() {
 
 // valide le form devenir membre
 function valider() {
-  let myForm = document.getElementById('form-enregistrer-membre');
+  let myForm = document.getElementById("form-enregistrer-membre");
   let password = myForm.password.value;
   let confirmPassword = myForm.confirmPassword.value;
   let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
-    document.getElementById('validation-form-membre').click();
+    document.getElementById("validation-form-membre").click();
     valide = false;
-
   } else if (!(password.trim() === confirmPassword.trim())) {
-
-    document.getElementById('msg-confirm-password-erreur').style.display = 'block';
+    document.getElementById("msg-confirm-password-erreur").style.display =
+      "block";
     valide = false;
-
   } else if (!pattern.test(password)) {
-
-    document.getElementById('msg-password-erreur').style.display = 'block';
+    document.getElementById("msg-password-erreur").style.display = "block";
     valide = false;
   }
 
   if (valide) {
     enregistrerMembre();
   }
-
 }
 
 // valide le form modifier membre
 function validerMembreEdit() {
-  let myForm = document.getElementById('membreEditForm');
+  let myForm = document.getElementById("membreEditForm");
   let password = myForm.passwordEdit.value;
   let confirmPassword = myForm.confirmPasswordEdit.value;
   let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
-    document.getElementById('validation-form-membre-edit').click();
+    document.getElementById("validation-form-membre-edit").click();
     valide = false;
-
   } else if (!(password.trim() === confirmPassword.trim())) {
-
-    document.getElementById('msg-confirm-password-erreur-edit').style.display = 'block';
+    document.getElementById("msg-confirm-password-erreur-edit").style.display =
+      "block";
     valide = false;
-
   } else if (!pattern.test(password)) {
-
-    document.getElementById('msg-password-erreur-edit').style.display = 'block';
+    document.getElementById("msg-password-erreur-edit").style.display = "block";
     valide = false;
-
   }
 
   if (valide) {
     modifierMembre();
   }
-
 }
 
 // valide le form creer projet
 function validerProjetCreate(idProjet) {
-  let myForm = document.getElementById('ajouterProjetForm');
+  let myForm = document.getElementById("ajouterProjetForm");
   let valide = true;
 
   if (!myForm.checkValidity()) {
-    document.getElementById('validation-form-projet-create').click();
+    document.getElementById("validation-form-projet-create").click();
     valide = false;
-
   }
 
   if (valide) {
     ajouterProjetRequete(idProjet);
   }
-
 }
 
 // valide le form modifier projet
 function validerProjetEdit(idProjet) {
-  let myForm = document.getElementById('formProjetEdit');
+  let myForm = document.getElementById("formProjetEdit");
   let valide = true;
 
   if (!myForm.checkValidity()) {
-    document.getElementById('validation-form-projet-edit').click();
+    document.getElementById("validation-form-projet-edit").click();
     valide = false;
-
   }
 
   if (valide) {
     modifierProjet(idProjet);
   }
-
 }
 
 function afficherSnackbar(text) {
   var x = document.getElementById("snackbar");
   x.innerHTML = text;
   x.className = "show";
-  setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
 }
 
 //Permet de fermer les toasts
@@ -331,52 +323,47 @@ function closeToast() {
 // fonction onload Image
 
 var loadFile = function (event) {
-  var output = document.getElementById('output');
+  var output = document.getElementById("output");
   output.src = URL.createObjectURL(event.target.files[0]);
   output.onload = function () {
-    URL.revokeObjectURL(output.src) // free memory
-  }
+    URL.revokeObjectURL(output.src); // free memory
+  };
 };
 
-// fonction onload Image Thumbnail 
+// fonction onload Image Thumbnail
 var loadFileThumbnail = function (event) {
-  var output = document.getElementById('outputThumbnail');
+  var output = document.getElementById("outputThumbnail");
   output.src = URL.createObjectURL(event.target.files[0]);
   output.onload = function () {
-    URL.revokeObjectURL(output.src) // free memory
-  }
+    URL.revokeObjectURL(output.src); // free memory
+  };
 };
 
 // fonction reset form et Image vide
 
 function resetForm() {
   setTimeout(function () {
-    var output = document.getElementById('outputThumbnail');
+    var output = document.getElementById("outputThumbnail");
     output.src = "Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png";
   }, 0);
 }
 
-
 function findTag(tag, tagsArray) {
-  return tagsArray.filter(t => {
-
+  return tagsArray.filter((t) => {
     if (t.toLowerCase().includes(tag.toLowerCase())) {
       return t;
     }
-
   });
 }
 
 function findParticipant(participant, participantsArray) {
-  return participantsArray.filter(p => {
+  return participantsArray.filter((p) => {
     let nomComplet = p.prenom + " " + p.nom;
     if (nomComplet.toLowerCase().includes(participant.toLowerCase())) {
       return p;
     }
-
   });
 }
-
 
 // TAGS SYSTEM
 
@@ -385,45 +372,45 @@ let participants = [];
 
 //Setter la liste de tags
 function setTagsBase() {
-  getTagsValue('tagValueCreate').forEach(function(item){
+  getTagsValue("tagValueCreate").forEach(function (item) {
     tags.push(item);
-  })
+  });
 }
 
 //Setter la liste de participants
 function setParticipantsBase() {
-  getTagsValue('participantValueCreate').forEach(function(item){
+  getTagsValue("participantValueCreate").forEach(function (item) {
     participants.push(item);
-  })
+  });
 }
 
 //Clear les tags ou participants
-function clearTagsBase(){
+function clearTagsBase() {
   tags = new Array();
 }
 
-function clearParticipantsBase(){
+function clearParticipantsBase() {
   participants = new Array();
 }
 
 //Creer un Tag
 function createTag(label, nomDeClasse, classTag) {
-  const div = document.createElement('div');
-  div.setAttribute('class', 'tag');
+  const div = document.createElement("div");
+  div.setAttribute("class", "tag");
   div.classList.add(classTag);
-  const span = document.createElement('span');
-  span.setAttribute('class', nomDeClasse);
+  const span = document.createElement("span");
+  span.setAttribute("class", nomDeClasse);
   span.innerHTML = label;
-  const closeBtn = document.createElement('i');
-  closeBtn.setAttribute('class', 'material-icons');
-  if (classTag == 'etiquette') {
-    closeBtn.classList.add('btnCloseEtiquette');
+  const closeBtn = document.createElement("i");
+  closeBtn.setAttribute("class", "material-icons");
+  if (classTag == "etiquette") {
+    closeBtn.classList.add("btnCloseEtiquette");
   } else {
-    closeBtn.classList.add('btnCloseParticipant');
+    closeBtn.classList.add("btnCloseParticipant");
   }
 
-  closeBtn.setAttribute('data-item', label);
-  closeBtn.innerHTML = 'close';
+  closeBtn.setAttribute("data-item", label);
+  closeBtn.innerHTML = "close";
 
   // <div class="tag etiquette">
   // <span class="tagValueCreate" >label</span>
@@ -440,42 +427,57 @@ function createTag(label, nomDeClasse, classTag) {
   return div;
 }
 
-//Permet de prendre toutes les tags présents 
+//Permet de prendre toutes les tags présents
 function getTagsValue(nomDeClasse) {
   let allTags = [].slice.call(document.getElementsByClassName(nomDeClasse));
   let allTagsValue = new Array();
   if (allTags != null) {
-    allTags.forEach(unSpanTag => {
+    allTags.forEach((unSpanTag) => {
       allTagsValue.push(unSpanTag.innerHTML);
-    })
+    });
   }
 
   return allTagsValue;
 }
 
-
 //Ajoute un tag
-function addTag(label, idInput, classContainer, idSuggestionReponse, list, nomDeClasse, classTag) {
+function addTag(
+  label,
+  idInput,
+  classContainer,
+  idSuggestionReponse,
+  list,
+  nomDeClasse,
+  classTag
+) {
   if (isLabelExist(label, list)) {
     afficherSnackbar("Le tag est déja là!");
   } else {
     list.push(label);
     addTags(classContainer, idSuggestionReponse, list, nomDeClasse, classTag);
     let input = document.getElementById(idInput);
-    input.value = '';
+    input.value = "";
   }
 }
 
-
 //Ajoute ma liste de tags dans la div
-function addTags(classContainer, idSuggestionReponse, list, nomDeClasse, classTag) {
+function addTags(
+  classContainer,
+  idSuggestionReponse,
+  list,
+  nomDeClasse,
+  classTag
+) {
   clearTags(classTag);
-  list.slice().reverse().forEach(function (item) {
-    const input = createTag(item, nomDeClasse, classTag);
-    const tagsContainer = document.querySelector(classContainer);
-    tagsContainer.prepend(input);
-    $(idSuggestionReponse).html("");
-  })
+  list
+    .slice()
+    .reverse()
+    .forEach(function (item) {
+      const input = createTag(item, nomDeClasse, classTag);
+      const tagsContainer = document.querySelector(classContainer);
+      tagsContainer.prepend(input);
+      $(idSuggestionReponse).html("");
+    });
 }
 
 //Clear ma liste de tags
@@ -487,22 +489,36 @@ function clearTags(classTag) {
 }
 
 // Permet de cut un tag parmi la liste de tags
-document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('btnCloseEtiquette')) {
-    const value = e.target.getAttribute('data-item');
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("btnCloseEtiquette")) {
+    const value = e.target.getAttribute("data-item");
     const index = tags.indexOf(value);
     tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
-    addTags('.tag-container', "#tagsReponse", tags, 'tagValueCreate', 'etiquette');
+    addTags(
+      ".tag-container",
+      "#tagsReponse",
+      tags,
+      "tagValueCreate",
+      "etiquette"
+    );
   }
 
-  if (e.target.classList.contains('btnCloseParticipant')) {
-    const value = e.target.getAttribute('data-item');
+  if (e.target.classList.contains("btnCloseParticipant")) {
+    const value = e.target.getAttribute("data-item");
     const index = participants.indexOf(value);
-    participants = [...participants.slice(0, index), ...participants.slice(index + 1)];
-    addTags('.participant-container', '#participantsReponse', participants, 'participantValueCreate', 'participant');
+    participants = [
+      ...participants.slice(0, index),
+      ...participants.slice(index + 1),
+    ];
+    addTags(
+      ".participant-container",
+      "#participantsReponse",
+      participants,
+      "participantValueCreate",
+      "participant"
+    );
   }
 });
-
 
 //Permet de Vérifier si le tag est déja dans la list
 function isLabelExist(label, list) {
@@ -512,50 +528,38 @@ function isLabelExist(label, list) {
       if (tag === label) {
         exist = true;
       }
-    })
+    });
   }
   return exist;
 }
 
 //Ajoute des suggestions et add le tag lors du click de la suggestion
 function displayTagMatches2() {
-  let value = document.getElementById('monInputTag').value;
-  let contenu = '';
+  let value = document.getElementById("monInputTag").value;
+  let contenu = "";
   if (value.length > 0) {
     const matchArray = findTag(value, tagsArray);
-    matchArray.forEach(element => {
+    matchArray.forEach((element) => {
       contenu += `<p class="suggestion" onclick="addTag('${element}', 'monInputTag' , '.tag-container' , '#tagsReponse', tags, 'tagValueCreate' ,'etiquette' )">${element}</p>`;
     });
   }
-  $('#tagsReponse').html(contenu);
+  $("#tagsReponse").html(contenu);
 }
 
-
 function displayParticipantsMatches() {
-  let value = document.getElementById('participantsInput').value;
-  let contenu = '';
+  let value = document.getElementById("participantsInput").value;
+  let contenu = "";
   if (value.length > 0) {
     const matchArray = findParticipant(value, participantsArray);
-    matchArray.forEach(element => {
+    matchArray.forEach((element) => {
       contenu += `<p class="suggestion" onclick="addTag('${element.prenom} ${element.nom} ${element.id}', 'participantsInput', '.participant-container', '#participantsReponse', participants, 'participantValueCreate' ,'participant' )">${element.prenom} ${element.nom} ${element.id}</p>`;
     });
   }
-  $('#participantsReponse').html(contenu);
+  $("#participantsReponse").html(contenu);
 }
 
-
-
-
-
-
-
-
-
-
-
 function loadPage() {
-
-  var typePage = document.getElementById('typePage').value;
+  var typePage = document.getElementById("typePage").value;
 
   switch (typePage) {
     case "visiteur":
@@ -568,4 +572,3 @@ function loadPage() {
       loadMembre(`pageMembre`, typePage);
   }
 }
-

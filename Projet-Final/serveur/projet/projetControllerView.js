@@ -122,14 +122,13 @@ function afficherPageProjetEdit(json) {
   });
 
   if (json.projet.autreParticipant != null) {
-    json.projet.autreParticipant.split(',').forEach((participant) => {
+    json.projet.autreParticipant.split(",").forEach((participant) => {
       contenu += `<div class="tag participant">
         <span class="participantValueCreate" >${participant}</span>
         <i class="material-icons btnCloseParticipant" data-item="${participant}">close</i>
       </div>`;
     });
   }
-
 
   contenu += `<input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
   </div>
@@ -230,7 +229,6 @@ function afficherPageProjetEdit(json) {
   json.tabParticipants.forEach((element) => {
     participantsArray.push(element);
   });
-
 
   let monInputParticipant = document.getElementById("participantsInput");
 
@@ -381,12 +379,10 @@ function ajouterProjetAffichage(json) {
 }
 
 function ajouterProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre);
-  afficherSnackbar("Projet ajouté avec succès!");
+  loadMembre("pageMembre", idMembre, "Projet ajouté avec succès");
 }
 function modifierProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre);
-  afficherSnackbar("Projet modifié avec succès!");
+  loadMembre("pageMembre", idMembre, "Projet modifié avec succès");
 }
 function afficherPageAutreProjet(json) {
   let thumbnail;
@@ -458,6 +454,5 @@ function afficherPageAutreProjet(json) {
 }
 
 function supprimerProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre);
-  afficherSnackbar("Projet supprimé avec succès!");
+  loadMembre("pageMembre", idMembre, "Projet supprimé avec succès");
 }
