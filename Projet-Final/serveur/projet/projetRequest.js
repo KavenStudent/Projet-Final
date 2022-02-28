@@ -37,17 +37,18 @@ function loadPageAjouterProjet(idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
-    beforeSend: function () {
-      $(".lds-ring").removeClass("hidden");
-    },
+    // beforeSend: function () {
+    //   $(".lds-ring").removeClass("hidden");
+    // },
     success: function (reponse) {
       loadJsonRecherhe();
       projetVue(reponse);
     },
-    fail: function (err) {},
-    complete: function () {
-      $(".lds-ring").addClass("hidden");
-    },
+    fail: function (err) {}
+    // ,
+    // complete: function () {
+    //   $(".lds-ring").addClass("hidden");
+    // },
   });
 }
 
@@ -65,17 +66,18 @@ function ajouterProjetRequete(idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
-    beforeSend: function () {
-      $(".lds-ring").removeClass("hidden");
-    },
+    // beforeSend: function () {
+    //   $(".lds-ring").removeClass("hidden");
+    // },
     success: function (reponse) {
       loadJsonRecherhe();
       projetVue(reponse);
     },
-    fail: function (err) {},
-    complete: function () {
-      $(".lds-ring").addClass("hidden");
-    },
+    fail: function (err) {}
+    // ,
+    // complete: function () {
+    //   $(".lds-ring").addClass("hidden");
+    // },
   });
 }
 
@@ -215,17 +217,18 @@ function supprimerProjet(idProjet, idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
-    beforeSend: function () {
-      $(".lds-ring").removeClass("hidden");
-    },
+    // beforeSend: function () {
+    //   $(".lds-ring").removeClass("hidden");
+    // },
     success: function (reponse) {
       // alert("success");
       loadJsonRecherhe();
       projetVue(reponse);
     },
-    fail: function (err) {},
-    complete: function () {
-      $(".lds-ring").addClass("hidden");
-    },
+    fail: function (err) {}
+    // ,
+    // complete: function () {
+    //   $(".lds-ring").addClass("hidden");
+    // },
   });
 }
