@@ -87,7 +87,7 @@ function afficherPageProjet(json) {
   contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
-        <div class="form-check form-switch">
+    
         </div>
     </div>
 </div>`;
