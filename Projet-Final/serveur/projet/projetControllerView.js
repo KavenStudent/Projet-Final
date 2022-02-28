@@ -379,10 +379,10 @@ function ajouterProjetAffichage(json) {
 }
 
 function ajouterProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre);
+  loadMembre("pageMembre", idMembre, "Projet ajouter avec succes");
 }
 function modifierProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre);
+  loadMembre("pageMembre", idMembre, "Projet modifier avec succes");
 }
 function afficherPageAutreProjet(json) {
   let thumbnail;
@@ -454,5 +454,5 @@ function afficherPageAutreProjet(json) {
 }
 
 function supprimerProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre);
+  loadMembre("pageMembre", idMembre, "Projet supprimer avec succes");
 }

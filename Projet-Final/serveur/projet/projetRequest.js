@@ -21,6 +21,7 @@ function loadPageProjet(destination, idProjet) {
     fail: function (err) {},
     complete: function () {
       $(".lds-ring").addClass("hidden");
+    
     },
   });
 }
