@@ -21,7 +21,6 @@ function loadPageProjet(destination, idProjet) {
     fail: function (err) {},
     complete: function () {
       $(".lds-ring").addClass("hidden");
-    
     },
   });
 }
@@ -71,11 +70,11 @@ function ajouterProjetRequete(idMembre) {
     },
     success: function (reponse) {
       loadJsonRecherhe();
-      $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
+      $(".lds-ring").addClass("hidden");
     },
   });
 }
@@ -99,11 +98,11 @@ function modifierProjet(idProjet) {
     },
     success: function (reponse) {
       loadJsonRecherhe();
-      $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
+      $(".lds-ring").addClass("hidden");
     },
   });
 }
@@ -220,12 +219,13 @@ function supprimerProjet(idProjet, idMembre) {
       $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
+      // alert("success");
       loadJsonRecherhe();
-      $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
     fail: function (err) {},
     complete: function () {
+      $(".lds-ring").addClass("hidden");
     },
   });
 }
