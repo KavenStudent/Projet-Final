@@ -123,7 +123,7 @@ function afficherPageProjetEdit(json) {
   }
   
 
-  if (json.projet.autreParticipant != null && json.projet.autreParticipant != "") {
+  if (json.projet.autreParticipant != null && json.projet.autreParticipant.trim() != "") {
     json.projet.autreParticipant.split(",").forEach((participant) => {
       contenu += `<div class="tag participant">
         <span class="participantValueCreate" >${participant}</span>
