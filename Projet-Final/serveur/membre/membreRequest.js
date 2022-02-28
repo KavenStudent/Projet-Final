@@ -140,8 +140,8 @@ function loadMembre(pageType, idMembre, msg) {
     fail: function (err) { },
     complete: function () {
       $('.lds-ring').addClass('hidden');
-      if (reponse.msg != "")
-      afficherSnackbar(reponse.msg);
+      if (msg.length > 0)
+      afficherSnackbar(msg);
     },
 
   });
