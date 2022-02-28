@@ -162,7 +162,7 @@ function afficherPageMembre(json, listProjet) {
 
     contenu += ` <!-- Content here -->
                 </div>
-                <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id});' class="btn btn-primary">Editer</button>
+                <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id},'');' class="btn btn-primary">Editer</button>
             </div>
 
             <div class="container deuxieme-colonne">

@@ -113,15 +113,17 @@ function afficherPageProjetEdit(json) {
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
      <div class="participant-container">`;
-
-  json.tabParticipantsProjet.forEach((participant) => {
+  if(json.tabParticipantsProjet != null || json.tabParticipantsProjet.length > 0){
+    json.tabParticipantsProjet.forEach((participant) => {
     contenu += `<div class="tag participant">
       <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
       <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
     </div>`;
-  });
+    });
+  }
+  
 
-  if (json.projet.autreParticipant != null) {
+  if (json.projet.autreParticipant != null && json.projet.autreParticipant.trim() != "") {
     json.projet.autreParticipant.split(",").forEach((participant) => {
       contenu += `<div class="tag participant">
         <span class="participantValueCreate" >${participant}</span>
@@ -148,12 +150,15 @@ function afficherPageProjetEdit(json) {
 
       <!-- TAGS ICI -->
       <div class="tag-container">`;
-  json.tabTagsProjet.forEach((tags) => {
+  if(json.tabTagsProjet != null && json.tabTagsProjet != ""){
+    json.tabTagsProjet.forEach((tags) => {
     contenu += `<div class="tag etiquette">
     <span class="tagValueCreate" >${tags.nomTag}</span>
     <i class="material-icons btnCloseEtiquette" data-item="${tags.nomTag}">close</i>
-  </div>`;
-  });
+    </div>`;
+    });
+  }
+  
 
   contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
@@ -318,7 +323,7 @@ function ajouterProjetAffichage(json) {
  </div>
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
-   <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
+   <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre}, '')" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
    <button type="button" onclick="validerProjetCreate(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
 
  </form>`;

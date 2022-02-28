@@ -147,15 +147,25 @@ function ajouterProjet()
     $thumbnail = "defaultThumbnail.png";
 
     $tagsSTRING = $_POST['tags'];
-    $tags = explode(',', $tagsSTRING);
+    if(strlen($tagsSTRING) > 0) {
+        $tags = explode(',', $tagsSTRING);
+    }
+    else {
+        $tags = array();
+    }
+    
 
     $participantsProjet = $_POST['participantsProjet'];
 
     $tabParticipantAvecId = array();
     $tabParticipantSansId = "";
 
-
-    $tabParticipants = explode(',', $participantsProjet);
+    if (strlen($participantsProjet) > 0){
+        $tabParticipants = explode(',', $participantsProjet);
+    }
+    else {
+        $tabParticipants = array();
+    }
     foreach ($tabParticipants as $part) {
         if (preg_match('~[0-9]+~', $part)) {
             $tabParticipantAvecId[] = trim($part);

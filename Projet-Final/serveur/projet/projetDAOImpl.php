@@ -132,7 +132,6 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function creerProjet(Projet $projet, array $tags, array $participants): bool
     {
         try {
-
             $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
             $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
@@ -145,44 +144,47 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             ));
             $stmt = $this->executer();
 
-
-            //  Ajouter les participants au projet
-            $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
             $idProjet = $this->getLastProjetId();
+            //  Ajouter les participants au projet
+            if(count($participants) > 0){
+                $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
+                foreach ($participants as $part) {
 
-            foreach ($participants as $part) {
-
-                //  Ajouter les participants a la table membreprojet
-                $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
-
-                $idMembre = (int) ($tabPart[2]);
-
-                $this->setRequete($requete);
-                $this->setParams(array(
-                    $idMembre,
-                    $idProjet
-                ));
-
-                $this->executer();
+                    //  Ajouter les participants a la table membreprojet
+                    $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+    
+                    $idMembre = (int) ($tabPart[2]);
+    
+                    $this->setRequete($requete);
+                    $this->setParams(array(
+                        $idMembre,
+                        $idProjet
+                    ));
+    
+                    $this->executer();
+                }
             }
-
+            
+            if (count($tags) > 0){
+                foreach ($tags as $tag) {
+                    //  Inserer le tag dans la liste de tag s'il n'existe pas deja
+                    $requete = "INSERT INTO tag SELECT * FROM (SELECT 0 as id, ? as nomTag) as new_value
+                    WHERE NOT EXISTS (
+                        SELECT nomTag FROM tag WHERE nomTag = ?
+                    );";
+                    $this->setRequete($requete);
+                    $this->setParams(array($tag, $tag));
+                    $stmt = $this->executer();
+    
+                    //  Ajouter les tags a la table projettag
+                    $requete = "INSERT INTO projettag VALUES (?, (SELECT id FROM tag WHERE nomTag = ?))";
+                    $this->setRequete($requete);
+                    $this->setParams(array($idProjet, $tag));
+                    $stmt = $this->executer();
+                }
+            }
             //  Ajouter les tags au projet
-            foreach ($tags as $tag) {
-                //  Inserer le tag dans la liste de tag s'il n'existe pas deja
-                $requete = "INSERT INTO tag SELECT * FROM (SELECT 0 as id, ? as nomTag) as new_value
-                WHERE NOT EXISTS (
-                    SELECT nomTag FROM tag WHERE nomTag = ?
-                );";
-                $this->setRequete($requete);
-                $this->setParams(array($tag, $tag));
-                $stmt = $this->executer();
-
-                //  Ajouter les tags a la table projettag
-                $requete = "INSERT INTO projettag VALUES (?, (SELECT id FROM tag WHERE nomTag = ?))";
-                $this->setRequete($requete);
-                $this->setParams(array($idProjet, $tag));
-                $stmt = $this->executer();
-            }
+            
             $returnValue = true;
         } catch (Exception $e) {
             echo $e->getMessage();
