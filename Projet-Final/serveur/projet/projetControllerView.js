@@ -87,7 +87,7 @@ function afficherPageProjet(json) {
   contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
-        <div class="form-check form-switch">
+    
         </div>
     </div>
 </div>`;
@@ -426,11 +426,13 @@ function afficherPageAutreProjet(json) {
       contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="afficherSnackbar('Ce membre est privé')" class="memberLink">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
     }
   });
+
   let partArray = json.projet.autreParticipant.split(",");
   partArray.forEach((participant) => {
     contenu += ` <li class="list-inline-item">${participant}</li>`;
   });
 
+  contenu += `</ul>`;
   //List tags
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
   aria-label="Tags: ">`;
@@ -449,7 +451,6 @@ function afficherPageAutreProjet(json) {
   contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
-        <div class="form-check form-switch">
         </div>
     </div>
 </div>`;
