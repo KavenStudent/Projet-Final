@@ -121,8 +121,8 @@ function afficherPageProjetEdit(json) {
     </div>`;
   });
 
-  if(json.autreParticipant != null){
-     json.autreParticipant.forEach((participant) => {
+  if(json.projet.autreParticipant != null){
+     json.projet.autreParticipant.split(',').forEach((participant) => {
      contenu += `<div class="tag participant">
         <span class="participantValueCreate" >${participant}</span>
         <i class="material-icons btnCloseParticipant" data-item="${participant}">close</i>
