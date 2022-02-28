@@ -426,11 +426,13 @@ function afficherPageAutreProjet(json) {
       contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="afficherSnackbar('Ce membre est privé')" class="memberLink">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
     }
   });
+
   let partArray = json.projet.autreParticipant.split(",");
   partArray.forEach((participant) => {
     contenu += ` <li class="list-inline-item">${participant}</li>`;
   });
 
+  contenu += `</ul>`;
   //List tags
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
   aria-label="Tags: ">`;
