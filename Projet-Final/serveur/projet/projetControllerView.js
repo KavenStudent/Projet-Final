@@ -87,7 +87,7 @@ function afficherPageProjet(json) {
   contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
-        <div class="form-check form-switch">
+    
         </div>
     </div>
 </div>`;
@@ -120,6 +120,16 @@ function afficherPageProjetEdit(json) {
       <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
     </div>`;
   });
+
+  if (json.projet.autreParticipant != null) {
+    json.projet.autreParticipant.split(',').forEach((participant) => {
+      contenu += `<div class="tag participant">
+        <span class="participantValueCreate" >${participant}</span>
+        <i class="material-icons btnCloseParticipant" data-item="${participant}">close</i>
+      </div>`;
+    });
+  }
+
 
   contenu += `<input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
   </div>
@@ -214,12 +224,13 @@ function afficherPageProjetEdit(json) {
     displayTagMatches2();
   });
 
-  setParticipantsArray(new Array());
+  clearParticipantsBase();
   setParticipantsBase();
 
   json.tabParticipants.forEach((element) => {
     participantsArray.push(element);
   });
+
 
   let monInputParticipant = document.getElementById("participantsInput");
 
@@ -409,10 +420,19 @@ function afficherPageAutreProjet(json) {
 
   //List participants
   json.tabParticipantsProjet.forEach((membreProjet) => {
-    contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+    if (membreProjet.prive != 1) {
+      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+    } else {
+      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="afficherSnackbar('Ce membre est privé')" class="memberLink">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+    }
   });
-  contenu += ` <li class="list-inline-item">${json.projet.autreParticipant}</li> </ul>`;
 
+  let partArray = json.projet.autreParticipant.split(",");
+  partArray.forEach((participant) => {
+    contenu += ` <li class="list-inline-item">${participant}</li>`;
+  });
+
+  contenu += `</ul>`;
   //List tags
   contenu += `<ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
   aria-label="Tags: ">`;
@@ -431,7 +451,6 @@ function afficherPageAutreProjet(json) {
   contenu += `Lien: <a href=${json.projet.lienExterne}>
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
-        <div class="form-check form-switch">
         </div>
     </div>
 </div>`;
