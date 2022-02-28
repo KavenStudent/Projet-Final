@@ -120,6 +120,7 @@ function afficherPageProjetEdit(json) {
       <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
     </div>`;
   });
+  
   if(json.autreParticipant != null){
      json.autreParticipant.forEach((participant) => {
      contenu += `<div class="tag participant">
