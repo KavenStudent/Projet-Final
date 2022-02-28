@@ -44,8 +44,7 @@ function loadPageAjouterProjet(idMembre) {
       loadJsonRecherhe();
       projetVue(reponse);
     },
-    fail: function (err) {}
-    ,
+    fail: function (err) {},
     complete: function () {
       $(".lds-ring").addClass("hidden");
     },
@@ -66,18 +65,18 @@ function ajouterProjetRequete(idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
-    // beforeSend: function () {
-    //   $(".lds-ring").removeClass("hidden");
-    // },
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
     success: function (reponse) {
       loadJsonRecherhe();
+      $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
-    fail: function (err) {}
-    // ,
-    // complete: function () {
-    //   $(".lds-ring").addClass("hidden");
-    // },
+    fail: function (err) {},
+    complete: function () {
+      afficherSnackbar("Projet ajouté avec succès!");
+    },
   });
 }
 
@@ -95,18 +94,18 @@ function modifierProjet(idProjet) {
     dataType: "json",
     contentType: false,
     processData: false,
-    // beforeSend: function () {
-    //   $(".lds-ring").removeClass("hidden");
-    // },
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
     success: function (reponse) {
       loadJsonRecherhe();
+      $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
-    fail: function (err) {}
-    // ,
-    // complete: function () {
-    //   $(".lds-ring").addClass("hidden");
-    // },
+    fail: function (err) {},
+    complete: function () {
+      afficherSnackbar("Projet modifié avec succès!");
+    },
   });
 }
 
@@ -218,18 +217,17 @@ function supprimerProjet(idProjet, idMembre) {
     dataType: "json",
     contentType: false,
     processData: false,
-    // beforeSend: function () {
-    //   $(".lds-ring").removeClass("hidden");
-    // },
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
     success: function (reponse) {
-      // alert("success");
       loadJsonRecherhe();
+      $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
-    fail: function (err) {}
-    // ,
-    // complete: function () {
-    //   $(".lds-ring").addClass("hidden");
-    // },
+    fail: function (err) {},
+    complete: function () {
+      afficherSnackbar("Projet supprimé avec succès!");
+    },
   });
 }
