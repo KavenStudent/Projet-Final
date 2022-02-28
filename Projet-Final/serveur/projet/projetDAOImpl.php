@@ -204,21 +204,70 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->thumbnail;
             $ancienPath = $ligne->path;
-
+            $idProjet = $projet->getId();
 
             $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
             $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
-
 
             // modifie dans projet
             $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,autreParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
                 $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
-                $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $projet->getId()
+                $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $idProjet
             ));
             $stmt = $this->executer();
             $returnValue = true;
+
+            //  Supprime les participants deja existants
+            $requete = "DELETE FROM membreprojet WHERE idProjet = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($idProjet));
+            $stmt = $this->executer();
+
+            //  Ajouter les participants au projet
+            $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
+
+            foreach ($tabParticipantAvecId as $part) {
+
+                //  Ajouter les participants a la table membreprojet
+                $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+
+                $idMembre = (int) ($tabPart[2]);
+
+                $this->setRequete($requete);
+                $this->setParams(array(
+                    $idMembre,
+                    $idProjet
+                ));
+
+                $this->executer();
+            }
+
+            // Supprime les tags qui existent deja dans le projet
+            $requete = "DELETE FROM projettag WHERE idProjet = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($idProjet));
+            $stmt = $this->executer();
+
+            //  Ajouter les tags au projet
+            foreach ($tags as $tag) {
+                //  Inserer le tag dans la liste de tag s'il n'existe pas deja
+                $requete = "INSERT INTO tag SELECT * FROM (SELECT 0 as id, ? as nomTag) as new_value
+                WHERE NOT EXISTS (
+                    SELECT nomTag FROM tag WHERE nomTag = ?
+                );";
+                $this->setRequete($requete);
+                $this->setParams(array($tag, $tag));
+                $stmt = $this->executer();
+
+                //  Ajouter les tags a la table projettag
+                $requete = "INSERT INTO projettag VALUES (?, (SELECT id FROM tag WHERE nomTag = ?))";
+                $this->setRequete($requete);
+                $this->setParams(array($idProjet, $tag));
+                $stmt = $this->executer();
+            }
+
         } catch (Exception $e) {
             $returnValue = false;
             echo $e->getMessage();
@@ -271,7 +320,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $tab = array();
-            $requete = "SELECT * FROM tag ";
+            $requete = "SELECT * FROM tag";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
@@ -311,7 +360,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     public function supprimerProjet(int $idProjet): bool {
         $returnValue = false;
         try {
-            $requete = "DELETE FROM projet WHERE id = ?;";
+            $requete = "DELETE FROM projet WHERE id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idProjet));
             $stmt = $this->executer();
