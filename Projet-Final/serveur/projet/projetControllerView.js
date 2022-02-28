@@ -323,7 +323,7 @@ function ajouterProjetAffichage(json) {
  </div>
    <!-- Submit button -->
    <button type="reset" onclick="resetForm();" class="btn btn-primary btn-block mb-4 canBtn">Réinitialiser les champs</button>
-   <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre})" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
+   <button type="button" onclick="loadMembre('pageMembre', ${json.idMembre}, '')" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
    <button type="button" onclick="validerProjetCreate(${json.idMembre})" class="btn btn-primary btn-block mb-4">Ajouter</button>
 
  </form>`;
