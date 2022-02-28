@@ -222,19 +222,23 @@ function loadAutrePageMembre()
     global $dao;
 
     $idMembre = $_POST['idMembre'];
-
+    $idMembreConnecter = $_SESSION['membre'];
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+    if($idMembre == $idMembreConnecter){
+        $tabRes['action'] = 'pageMembre';
+    }else{
+        $tabRes['action'] = 'autreMembre';
+    }
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
     $membre = $dao->getMembre($idMembre);
-
     $tabRes['membre'] = array(
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
         "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
         "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
         "membrePremium" => $membre->getMembrePremium()
     );
-
-    $daoProjet = new ProjetDaoImpl();
-    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
-    $tabRes['action'] = 'autreMembre';
 }
 
 function loadPageRecherche()
