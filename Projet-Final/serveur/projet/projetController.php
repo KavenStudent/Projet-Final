@@ -28,14 +28,13 @@ switch ($action) {
         break;
     case "loadJsonRecherhe":
         loadJsonRecherhe();
-        break;  
+        break;
     case "telechargerProjet":
         telechargerProjet();
         break;
     case "supprimerProjet":
         supprimerProjet();
         break;
-
 }
 
 function modifierProjet()
@@ -79,7 +78,6 @@ function modifierProjet()
 
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['participants'] = $tabParticipantAvecId;
             $tabRes['action'] = 'modifierProjetReussi';
             $tabRes['idMembre'] = $_SESSION['membre'];
         } else {
@@ -109,7 +107,7 @@ function loadPageProjetController()
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
     $tabRes['test'] = $projet->isPrive();
-    
+
     $tabRes['tabTags'] = $dao->getAllTags();
     $daoMembre = new MembreDaoImpl();
     $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
@@ -209,7 +207,8 @@ function loadJsonRecherhe()
     $tabRes['tabProjets'] = $dao->getAllProjetsForCards();
 }
 
-function telechargerProjet(){
+function telechargerProjet()
+{
     global $tabRes;
     global $dao;
 
@@ -220,7 +219,8 @@ function telechargerProjet(){
     $dao->telechargerProjet($projet->getId(), $projet->getNbTelechargements());
 }
 
-function supprimerProjet() {
+function supprimerProjet()
+{
     global $tabRes;
     global $dao;
 
@@ -229,11 +229,10 @@ function supprimerProjet() {
 
     $projet = $dao->supprimerProjet($idProjet);
 
-    if($tabRes['action'] == null) {
+    if ($tabRes['action'] == null) {
         $tabRes['action'] = 'supprimerProjet';
         $tabRes['idMembre'] = $idMembre;
     }
-    
 }
 
 echo json_encode($tabRes);
