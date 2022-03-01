@@ -193,7 +193,7 @@ function loadPageAccueil()
 
     if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
-        
+
         if (isset($_SESSION['membre'])) {
             $id = (int) isset($_SESSION['membre']);
             $tabRes['id'] = $id;
@@ -222,12 +222,14 @@ function loadAutrePageMembre()
     global $dao;
 
     $idMembre = $_POST['idMembre'];
-    $idMembreConnecter = $_SESSION['membre'];
+    if (isset($_SESSION['membre'])) {
+        $idMembreConnecter = $_SESSION['membre'];
+    }
     $daoProjet = new ProjetDaoImpl();
     $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
-    if($idMembre == $idMembreConnecter){
+    if (isset($_SESSION['membre']) && $idMembre == $idMembreConnecter) {
         $tabRes['action'] = 'pageMembre';
-    }else{
+    } else {
         $tabRes['action'] = 'autreMembre';
     }
     $daoProjet = new ProjetDaoImpl();
