@@ -536,7 +536,7 @@ textarea {
 
 /* PASSWORD DIV EYEs */
 .passwordDivInscription,
-.passwordConfirmDivInscription {
+.passwordConfirmDivInscription, .passwordDivModification, .passwordDivModificationConfirm {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -548,7 +548,7 @@ textarea {
 }
 
 .passwordCustomInscription,
-.passwordConfirmCustomInscription {
+.passwordConfirmCustomInscription, .passwordCustomModification, .passwordCustomModificationConfirm {
   border: 0;
 }
 

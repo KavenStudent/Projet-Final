@@ -162,7 +162,7 @@ function afficherPageMembre(json, listProjet) {
 
     contenu += ` <!-- Content here -->
                 </div>
-                <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id},'');' class="btn btn-primary">Editer</button>
+                <button type="button" onclick='loadMembre( "pageMembreEdit" ,${json.membre.id},"");' class="btn btn-primary">Editer</button>
             </div>
 
             <div class="container deuxieme-colonne">
@@ -247,12 +247,18 @@ function afficherPageMembreEdit(json) {
     
             <div class="form-outline mb-4">
                 <label for="validationCustom03" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control modalInput" id="passwordEdit" name="passwordEdit" value="${json.membre.motDePasse}" required>
+                <div class="passwordDivModification">
+                    <input type="password" class="form-control modalInput passwordCustomModification" id="passwordEdit" name="passwordEdit" value="${json.membre.motDePasse}" required>
+                    <i class="bi bi-eye-slash" id="togglePasswordModification"></i>
+                </div>
                 <span id="msg-password-erreur-edit">Le mot de passe doit contenir au moins 8 charactères </span>
             </div>
             <div class="form-outline mb-4">
                 <label for="validationCustom05" class="form-label">Confirmer le mot de passe</label>
-                <input type="password" class="form-control modalInput" id="confirmPasswordEdit" value="${json.membre.motDePasse}" required>
+                <div class="passwordDivModificationConfirm">
+                    <input type="password" class="form-control modalInput passwordCustomModificationConfirm" id="confirmPasswordEdit" value="${json.membre.motDePasse}" required>
+                    <i class="bi bi-eye-slash" id="togglePasswordModificationConfirmation"></i>
+                </div>
                 <span id="msg-confirm-password-erreur-edit">Confirmation invalide</span>
             </div>
             <!-- 3 column grid layout with preview, upload and visibile -->
@@ -294,6 +300,7 @@ function afficherPageMembreEdit(json) {
     
     `;
     $('#contenu').html(contenu);
+    setEyesDansFormEdit();
 }
 
 function afficherPageAutreMembre(json, listProjet) {

@@ -136,9 +136,7 @@ window.onload = function () {
   });
 
   //EYE CONFIRM INSCRIPTION
-  const togglePasswordConfirm = document.querySelector(
-    "#togglePasswordConfirm"
-  );
+  const togglePasswordConfirm = document.querySelector("#togglePasswordConfirm");
   const confirmPassword = document.querySelector("#confirmPassword");
 
   togglePasswordConfirm.addEventListener("click", function () {
@@ -152,9 +150,7 @@ window.onload = function () {
   });
 
   //EYE CONNEXION
-  const togglePasswordConnexion = document.querySelector(
-    "#togglePasswordConnexion"
-  );
+  const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
   const passwordConnexion = document.querySelector("#passwordConnexion");
 
   togglePasswordConnexion.addEventListener("click", function () {
@@ -169,6 +165,7 @@ window.onload = function () {
     this.classList.toggle("bi-eye");
   });
 
+ 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
 
@@ -192,6 +189,45 @@ window.onload = function () {
     }
   });
 };
+
+function setEyesDansFormEdit() {
+   //EYE DANS FORM MODFICATION
+  const togglePasswordModification = document.querySelector(
+    "#togglePasswordModification"
+  );
+  const passwordModification = document.querySelector("#passwordEdit");
+
+  togglePasswordModification.addEventListener("click", function () {
+    // toggle the type attribute
+    const type =
+      passwordModification.getAttribute("type") === "password"
+        ? "text"
+        : "password";
+    passwordModification.setAttribute("type", type);
+
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+  //EYE DANS FORM MODFICATION CONFIRMATION
+  const togglePasswordModificationConfirmation = document.querySelector(
+    "#togglePasswordModificationConfirmation"
+  );
+  const passwordModificationConfirmation = document.querySelector("#confirmPasswordEdit");
+
+  togglePasswordModificationConfirmation.addEventListener("click", function () {
+    // toggle the type attribute
+    const type =
+      passwordModificationConfirmation.getAttribute("type") === "password"
+        ? "text"
+        : "password";
+    passwordModificationConfirmation.setAttribute("type", type);
+
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+}
 
 function tagCliquable(input) {
   console.log("test");
