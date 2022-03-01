@@ -306,7 +306,57 @@ function afficherPageMembreEdit(json) {
 function afficherPageAutreMembre(json, listProjet) {
 
 
-    let contenu = `<div id="contenuRecherche"></div><div class="container big-container">
+    let contenu = `
+
+    
+     <div class="modal fade" id="modalSignaler" tabindex="-1">
+    
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modalHeader">
+                    <h5 class="modal-title"><strong>Signalisation</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"> 
+                     
+    
+                    <form class="form-connexion connexionContainer" id="form-signaler">
+    
+                        <input type="hidden" name="action" value="signaler">
+    
+                        <div class="myInput">
+                            <label for="pages" class="form-label">Raison</label>
+                            <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
+                        </div> 
+    
+                        <div id='list-projet'>`;
+                        
+                        // list projet
+                        listProjet.forEach((projet) => {
+                            contenu+= `
+                            <div class="col-sm">
+                                <input class="form-check-input" type="radio" name="projetRadio" value="${projet.id}" id="projetRadio">
+                                <label class="form-check-label" for="projetRadio">${projet.titre}</label>
+                            </div>`;
+                        });
+                       
+    
+                        contenu+= `</div>
+                                <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="">Signaler</button>
+                        </div>
+                    </form>
+    
+                    
+                </div>
+    
+            </div>
+        </div>
+    </div> 
+  </div> 
+    
+    
+    <div id="contenuRecherche"></div><div class="container big-container">
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">

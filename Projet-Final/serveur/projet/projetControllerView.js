@@ -453,8 +453,8 @@ function afficherPageAutreProjet(json) {
                       
                         contenu+= `
                         <div class="col-sm">
-                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked disabled>
-                          <label class="form-check-label" for="flexRadioDefault1">${json.projet.titre}</label>
+                          <input class="form-check-input" type="radio" name="projetRadio" id="projetRadio" value="${json.projet.id}" checked disabled>
+                          <label class="form-check-label" for="projetRadio">${json.projet.titre}</label>
                         </div>`;
                       
                           
