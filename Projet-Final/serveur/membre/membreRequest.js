@@ -252,3 +252,29 @@ function loadPageRecherche(){
 
   });
 }
+
+function addSignalerRequete(){
+  var form = new FormData(document.getElementById('form-signaler'));
+  form.append("action", "ajouterSignalisation");
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('.lds-ring').removeClass('hidden');
+    },
+    success: function (reponse) {
+      membresVue(reponse);
+    },
+    fail: function (err) { },
+    complete: function () {
+      $('.lds-ring').addClass('hidden');
+    },
+
+  });
+
+}
