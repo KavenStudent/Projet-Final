@@ -127,7 +127,7 @@
         <h5 class="modal-title titreModalInscription">Raisons</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body modalCustom">
+      <div class="modal-body modalCustom divSignalisation">
 
         <div class="card descCard">
           <div class="card-header">
