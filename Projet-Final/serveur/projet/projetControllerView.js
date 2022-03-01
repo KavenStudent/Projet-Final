@@ -426,7 +426,55 @@ function afficherPageAutreProjet(json) {
   } else {
     thumbnail = json.projet.thumbnail;
   }
-  var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+  var contenu = `<!-- modal signalisation -->
+  <div class="modal fade" id="modalSignaler" tabindex="-1">
+  
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header modalHeader">
+                  <h5 class="modal-title"><strong>Signalisation</strong></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <!-- Form signaler -->
+  
+                  <form class="form-connexion connexionContainer" id="form-signaler">
+  
+                      <input type="hidden" name="action" value="signaler">
+  
+                      <div class="myInput">
+                          <label for="pages" class="form-label">Raison</label>
+                          <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
+                      </div>
+  
+                      <!-- La liste des projets -->
+                      <div id='list-projet'>`;
+  
+                      
+                        contenu+= `
+                        <div class="col-sm">
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked disabled>
+                          <label class="form-check-label" for="flexRadioDefault1">${json.projet.titre}</label>
+                        </div>`;
+                      
+                          
+
+                    contenu+=`</div>
+  
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" onclick="">Signaler</button>
+                      </div>
+                  </form>
+  
+                  <!-- Form signaler -->
+              </div>
+  
+          </div>
+      </div>
+  </div>
+  </div> <!-- fin modal signalisation -->`
+
+  contenu+=`<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">`;

@@ -144,7 +144,7 @@
 <!-- modal signalisation administrateur-->
 
 <!-- modal signalisation -->
-<div class="modal fade" id="modalSignaler" tabindex="-1">
+<!-- <div class="modal fade" id="modalSignaler" tabindex="-1">
 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -152,20 +152,20 @@
                 <h5 class="modal-title"><strong>Signalisation</strong></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"> -->
                 <!-- Form signaler -->
 
-                <form class="form-connexion connexionContainer" id="form-signaler">
+                <!-- <form class="form-connexion connexionContainer" id="form-signaler">
 
                     <input type="hidden" name="action" value="signaler">
 
                     <div class="myInput">
                         <label for="pages" class="form-label">Raison</label>
                         <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
-                    </div>
+                    </div> -->
 
                     <!-- La liste des projets -->
-                    <div id='list-projet'>
+                    <!-- <div id='list-projet'>
 
                         <div class="col-sm">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -176,12 +176,12 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" onclick="">Signaler</button>
                     </div>
-                </form>
+                </form> -->
 
                 <!-- Form signaler -->
-            </div>
+            <!-- </div>
 
         </div>
     </div>
-</div>
-</div> <!-- fin modal signalisation -->
+</div> -->
+<!-- </div> fin modal signalisation -->
