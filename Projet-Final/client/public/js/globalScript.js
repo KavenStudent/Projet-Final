@@ -136,7 +136,9 @@ window.onload = function () {
   });
 
   //EYE CONFIRM INSCRIPTION
-  const togglePasswordConfirm = document.querySelector("#togglePasswordConfirm");
+  const togglePasswordConfirm = document.querySelector(
+    "#togglePasswordConfirm"
+  );
   const confirmPassword = document.querySelector("#confirmPassword");
 
   togglePasswordConfirm.addEventListener("click", function () {
@@ -150,7 +152,9 @@ window.onload = function () {
   });
 
   //EYE CONNEXION
-  const togglePasswordConnexion = document.querySelector("#togglePasswordConnexion");
+  const togglePasswordConnexion = document.querySelector(
+    "#togglePasswordConnexion"
+  );
   const passwordConnexion = document.querySelector("#passwordConnexion");
 
   togglePasswordConnexion.addEventListener("click", function () {
@@ -165,7 +169,6 @@ window.onload = function () {
     this.classList.toggle("bi-eye");
   });
 
- 
   // SEARCH BAR
   let searchBar = document.getElementById("searchBar");
 
@@ -191,7 +194,7 @@ window.onload = function () {
 };
 
 function setEyesDansFormEdit() {
-   //EYE DANS FORM MODFICATION
+  //EYE DANS FORM MODFICATION
   const togglePasswordModification = document.querySelector(
     "#togglePasswordModification"
   );
@@ -213,7 +216,9 @@ function setEyesDansFormEdit() {
   const togglePasswordModificationConfirmation = document.querySelector(
     "#togglePasswordModificationConfirmation"
   );
-  const passwordModificationConfirmation = document.querySelector("#confirmPasswordEdit");
+  const passwordModificationConfirmation = document.querySelector(
+    "#confirmPasswordEdit"
+  );
 
   togglePasswordModificationConfirmation.addEventListener("click", function () {
     // toggle the type attribute
@@ -226,7 +231,6 @@ function setEyesDansFormEdit() {
     // toggle the icon
     this.classList.toggle("bi-eye");
   });
-
 }
 
 function tagCliquable(input) {

@@ -32,7 +32,30 @@ function afficherPageProjet(json) {
   } else {
     thumbnail = json.projet.thumbnail;
   }
-  var contenu = `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+  var contenu = `<!-- modal confirmation supression de projet -->
+  <div class="modal fade" id="modalConfirmationSupprProj" tabindex="-1">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header modalHeader">
+                  <h5 class="modal-title"><strong>Supprimer projet</strong></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <!-- Form confirmation -->
+  
+                  <p>Êtes vous certains de vouloir supprimer ce projet? Cette action est irréversible</p>
+  
+                      <div class="modal-footer">
+                          <button data-bs-dismiss="modal" id="projetSupprSubmit" type="button" class="btn btn-primary" onclick="supprimerProjet(${json.projet.id}, ${json.projet.idCreator})">Confirmer</button>
+                      </div>
+  
+                  <!-- Fin form confirmation -->
+              </div>
+  
+          </div>
+      </div>
+  </div> <!-- Fin modal confirmation -->
+  <div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">`;
@@ -44,7 +67,7 @@ function afficherPageProjet(json) {
   }
 
   contenu += `<button class="btn btn-primary" type="button" onclick="loadPageProjet('pageProjetEdit', ${json.projet.id})">Modifier le projet</button>
-            <button class="btn btn-danger" type="button" onclick="supprimerProjet(${json.projet.id}, ${json.projet.idCreator})">Supprimer</button>    
+            <button data-bs-toggle="modal" data-bs-target="#modalConfirmationSupprProj" class="btn btn-danger" type="button">Supprimer</button>    
   </div>
     </div>
     <div id='projetRightDiv' class="container">
@@ -113,17 +136,22 @@ function afficherPageProjetEdit(json) {
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
      <div class="participant-container">`;
-  if(json.tabParticipantsProjet != null || json.tabParticipantsProjet.length > 0){
+  if (
+    json.tabParticipantsProjet != null ||
+    json.tabParticipantsProjet.length > 0
+  ) {
     json.tabParticipantsProjet.forEach((participant) => {
-    contenu += `<div class="tag participant">
+      contenu += `<div class="tag participant">
       <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
       <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
     </div>`;
     });
   }
-  
 
-  if (json.projet.autreParticipant != null && json.projet.autreParticipant.trim() != "") {
+  if (
+    json.projet.autreParticipant != null &&
+    json.projet.autreParticipant.trim() != ""
+  ) {
     json.projet.autreParticipant.split(",").forEach((participant) => {
       contenu += `<div class="tag participant">
         <span class="participantValueCreate" >${participant}</span>
@@ -150,15 +178,14 @@ function afficherPageProjetEdit(json) {
 
       <!-- TAGS ICI -->
       <div class="tag-container">`;
-  if(json.tabTagsProjet != null && json.tabTagsProjet != ""){
+  if (json.tabTagsProjet != null && json.tabTagsProjet != "") {
     json.tabTagsProjet.forEach((tags) => {
-    contenu += `<div class="tag etiquette">
+      contenu += `<div class="tag etiquette">
     <span class="tagValueCreate" >${tags.nomTag}</span>
     <i class="material-icons btnCloseEtiquette" data-item="${tags.nomTag}">close</i>
     </div>`;
     });
   }
-  
 
   contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
