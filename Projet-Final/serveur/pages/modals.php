@@ -129,15 +129,14 @@
       </div>
       <div class="modal-body modalCustom divSignalisation">
 
-
-
       </div>
 
     </div>
   </div>
-</div> <!-- modal signalisation -->
+</div> 
+<!-- modal signalisation administrateur-->
 
-<!-- modal signalisation administrateur -->
+<!-- modal signalisation -->
 <div class="modal fade" id="modalSignaler" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -176,4 +175,4 @@
 
     </div>
   </div>
-</div> <!-- fin modal signalisation administrateur -->
+</div> <!-- fin modal signalisation -->
