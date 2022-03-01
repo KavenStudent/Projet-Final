@@ -340,7 +340,7 @@ function afficherPageAutreMembre(json, listProjet) {
     // src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
     if (listProjet != null) {
         listProjet.forEach(function (item) {
-            if(item.prive != 1){
+            if (item.prive != 1) {
                 let myThumbnail;
                 if (item.thumbnail == "") {
                     myThumbnail = `https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp`;
@@ -356,7 +356,7 @@ function afficherPageAutreMembre(json, listProjet) {
                                     </div>
                                 </div>`;
             }
-            
+
         });
     }
 
@@ -377,8 +377,9 @@ function afficherPageAdmin(json) {
     for (let i = 0; i < json.listeSignalisation.length; i++) {
         contenu += `<div class="card-body">
                 <div id="card-contenu">
-                    <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage">
-                    <h5>${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom}</h5>
+                    <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage" 
+                    onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">
+                    <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom}</h5>
                     <h5 data-bs-toggle="modal" data-bs-target="#modalSignalisation">${json.listeSignalisation[i].nb} signalisations</h5>
                 </div>
 

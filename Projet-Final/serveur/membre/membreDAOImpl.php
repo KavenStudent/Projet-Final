@@ -293,7 +293,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT membre.imageProfil, membre.prenom, membre.nom, COUNT(*) as nb FROM signalisation inner JOIN membre
+            $requete = "SELECT membre.id as idMembre, membre.imageProfil, membre.prenom, membre.nom, COUNT(*) as nb FROM signalisation inner JOIN membre
              ON idMembre = membre.id GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
             $this->setRequete($requete);
             $this->setParams(array());
