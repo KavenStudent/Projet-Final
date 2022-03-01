@@ -32,5 +32,5 @@ interface ProjetDao
 
     public function supprimerProjet(int $idProjet): bool;
 
+    public function getAllRaisonForMembre(int $idMembre): array;
 }
-?>

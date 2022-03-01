@@ -39,8 +39,9 @@ h5:hover {
     cursor: pointer;
 }
 
-.descCard {
+.descriptionCard {
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .divSignalisation {

@@ -22,6 +22,9 @@ var projetVue = function (response) {
     case "supprimerProjet":
       supprimerProjetReussi(response.idMembre);
       break;
+    case "afficherRaison":
+      afficherModalRaison(response);
+      break;
   }
 };
 
@@ -434,7 +437,7 @@ function afficherPageAutreProjet(json) {
           </a>`;
   }
 
-  contenu += `<button class="btn btn-primary" type="button">Signaler</button>
+  contenu += `<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
@@ -487,4 +490,24 @@ function afficherPageAutreProjet(json) {
 
 function supprimerProjetReussi(idMembre) {
   loadMembre("pageMembre", idMembre, "Projet supprimé avec succès");
+}
+
+function afficherModalRaison(json) {
+  let contenu = "";
+
+  json.tabRaison.forEach((raison) => {
+    contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">
+   <div class="card-header">
+   ${raison.titre} #${raison.idProjet}
+   </div>
+   <div class="card-body">
+
+     <p>${raison.description}</p>
+
+   </div>
+ </div>`;
+  });
+
+  $(".divSignalisation").html(contenu);
+  $("#modalSignalisation").modal("show");
 }
