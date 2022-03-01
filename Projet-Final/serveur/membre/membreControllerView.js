@@ -328,7 +328,7 @@ function afficherPageAutreMembre(json, listProjet) {
 
 
     contenu += `</div>
-    <button class="btn btn-primary" type="button">Signaler</button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>
             </div>
 
             <div class="container deuxieme-colonne">`;
