@@ -171,10 +171,19 @@
         <form class="form-connexion connexionContainer" id="form-signaler">
 
           <input type="hidden" name="action" value="signaler">
-          <!-- <input type="submit" id="validation-signaler" class="validation"> -->
+
           <div class="myInput">
             <label for="pages" class="form-label">Raison</label>
             <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
+          </div>
+
+          <!-- La liste des projets -->
+          <div id='list-projet'>
+         
+            <div class="col-sm">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">test</label>
+            </div>
           </div>
 
           <div class="modal-footer">
