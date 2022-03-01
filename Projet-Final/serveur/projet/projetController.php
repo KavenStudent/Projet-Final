@@ -35,6 +35,9 @@ switch ($action) {
     case "supprimerProjet":
         supprimerProjet();
         break;
+    case "afficherRaison": 
+        afficherRaison();
+        break;
 }
 
 function modifierProjet()
@@ -243,6 +246,17 @@ function supprimerProjet()
         $tabRes['action'] = 'supprimerProjet';
         $tabRes['idMembre'] = $idMembre;
     }
+}
+
+function afficherRaison() {
+
+    global $tabRes;
+    global $dao;
+
+    $idMembre = $_POST['idMembre'];
+
+    $tabRes['tabRaison'] = $dao->getAllRaisonForMembre($idMembre);
+    $tabRes['action'] = 'afficherRaison';
 }
 
 echo json_encode($tabRes);

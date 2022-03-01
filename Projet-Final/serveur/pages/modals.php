@@ -129,27 +129,7 @@
       </div>
       <div class="modal-body modalCustom divSignalisation">
 
-        <div class="card descCard">
-          <div class="card-header">
-            nom projet
-          </div>
-          <div class="card-body">
 
-            <p>raison</p>
-
-          </div>
-        </div>
-
-        <div class="card descCard">
-          <div class="card-header">
-            nom projet
-          </div>
-          <div class="card-body">
-
-            <p>raison</p>
-
-          </div>
-        </div>
 
       </div>
 

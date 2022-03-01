@@ -22,6 +22,9 @@ var projetVue = function (response) {
     case "supprimerProjet":
       supprimerProjetReussi(response.idMembre);
       break;
+    case "afficherRaison":
+      afficherModalRaison(response);
+      break;
   }
 };
 
@@ -113,15 +116,15 @@ function afficherPageProjetEdit(json) {
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
      <div class="participant-container">`;
-  if(json.tabParticipantsProjet != null || json.tabParticipantsProjet.length > 0){
+  if (json.tabParticipantsProjet != null || json.tabParticipantsProjet.length > 0) {
     json.tabParticipantsProjet.forEach((participant) => {
-    contenu += `<div class="tag participant">
+      contenu += `<div class="tag participant">
       <span class="participantValueCreate" >${participant.prenom} ${participant.nom} ${participant.idMembre}</span>
       <i class="material-icons btnCloseParticipant" data-item="${participant.prenom} ${participant.nom} ${participant.idMembre}">close</i>
     </div>`;
     });
   }
-  
+
 
   if (json.projet.autreParticipant != null && json.projet.autreParticipant.trim() != "") {
     json.projet.autreParticipant.split(",").forEach((participant) => {
@@ -150,15 +153,15 @@ function afficherPageProjetEdit(json) {
 
       <!-- TAGS ICI -->
       <div class="tag-container">`;
-  if(json.tabTagsProjet != null && json.tabTagsProjet != ""){
+  if (json.tabTagsProjet != null && json.tabTagsProjet != "") {
     json.tabTagsProjet.forEach((tags) => {
-    contenu += `<div class="tag etiquette">
+      contenu += `<div class="tag etiquette">
     <span class="tagValueCreate" >${tags.nomTag}</span>
     <i class="material-icons btnCloseEtiquette" data-item="${tags.nomTag}">close</i>
     </div>`;
     });
   }
-  
+
 
   contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
       </div>
@@ -460,4 +463,24 @@ function afficherPageAutreProjet(json) {
 
 function supprimerProjetReussi(idMembre) {
   loadMembre("pageMembre", idMembre, "Projet supprimé avec succès");
+}
+
+function afficherModalRaison(json) {
+  let contenu = '';
+
+  json.tabRaison.forEach((raison) => {
+    contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">
+   <div class="card-header">
+   ${raison.titre} #${raison.idProjet}
+   </div>
+   <div class="card-body">
+
+     <p>${raison.description}</p>
+
+   </div>
+ </div>`;
+  });
+
+  $(".divSignalisation").html(contenu);
+  $('#modalSignalisation').modal('show');
 }
