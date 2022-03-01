@@ -119,7 +119,7 @@
   </div>
 </div> <!-- Fin modal connexion -->
 
-<!-- modal signalisation -->
+<!-- modal signalisation administrateur -->
 <div class="modal fade" id="modalSignalisation" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content modalCustom">
@@ -156,3 +156,35 @@
     </div>
   </div>
 </div> <!-- modal signalisation -->
+
+<!-- modal signalisation administrateur -->
+<div class="modal fade" id="modalSignaler" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modalHeader">
+        <h5 class="modal-title"><strong>Signalisation</strong></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form signaler -->
+
+        <form class="form-connexion connexionContainer" id="form-signaler">
+
+          <input type="hidden" name="action" value="signaler">
+          <!-- <input type="submit" id="validation-signaler" class="validation"> -->
+          <div class="myInput">
+            <label for="pages" class="form-label">Raison</label>
+            <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="">Signaler</button>
+          </div>
+        </form>
+
+        <!-- Form signaler -->
+      </div>
+
+    </div>
+  </div>
+</div> <!-- fin modal signalisation administrateur -->
