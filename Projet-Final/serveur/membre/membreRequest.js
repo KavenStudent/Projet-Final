@@ -253,7 +253,7 @@ function loadPageRecherche(){
   });
 }
 
-function addSignalerRequete(){
+function ajouterSignalerRequete(){
   var form = new FormData(document.getElementById('form-signaler'));
   form.append("action", "ajouterSignalisation");
 
