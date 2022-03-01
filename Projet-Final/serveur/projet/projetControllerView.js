@@ -407,7 +407,7 @@ function afficherPageAutreProjet(json) {
           </a>`;
   }
 
-  contenu += `<button class="btn btn-primary" type="button">Signaler</button>
+  contenu += `<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>
         </div>
     </div>
     <div id='projetRightDiv' class="container">
