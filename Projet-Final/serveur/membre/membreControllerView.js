@@ -387,7 +387,7 @@ function afficherPageAdmin(json) {
                     <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage" 
                     onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">
                     <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom}</h5>
-                    <h5 data-bs-toggle="modal" data-bs-target="#modalSignalisation">${json.listeSignalisation[i].nb} signalisations</h5>
+                    <h5 onclick="afficherRaison(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].nb} signalisations</h5>
                 </div>
 
             </div>`;
