@@ -137,6 +137,7 @@ function loadPageAutreProjet(idProjet) {
   form.append("action", "loadAutreProjet");
   form.append("idProjet", idProjet);
 
+  $('#modalSignalisation').modal('hide');
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/projet/projetController.php",

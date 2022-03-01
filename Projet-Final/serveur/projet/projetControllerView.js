@@ -469,9 +469,9 @@ function afficherModalRaison(json) {
   let contenu = '';
 
   json.tabRaison.forEach((raison) => {
-    contenu += `  <div class="card descCard">
+    contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">
    <div class="card-header">
-   ${raison.titre}
+   ${raison.titre} #${raison.idProjet}
    </div>
    <div class="card-body">
 
