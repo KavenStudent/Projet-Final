@@ -186,7 +186,7 @@ function afficherPageMembre(json, listProjet) {
             }
             contenu += ` <!-- CARD -->
                             <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
-                            <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
+                            <img src="${myThumbnail}" class="card-img-top thumbnail-in-Card" alt="Fissure in Sandstone"/>
                             <div class="card-body card-item-body">
                                     <h5 class="card-title">${item.titre}</h5>
                                     <p class="card-text">${item.description}</p>
