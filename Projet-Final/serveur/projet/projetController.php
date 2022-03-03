@@ -35,8 +35,11 @@ switch ($action) {
     case "supprimerProjet":
         supprimerProjet();
         break;
-    case "afficherRaison": 
+    case "afficherRaison":
         afficherRaison();
+        break;
+    case "adminCacherProjet":
+        adminCacherProjet();
         break;
 }
 
@@ -150,23 +153,21 @@ function ajouterProjet()
     $thumbnail = "defaultThumbnail.png";
 
     $tagsSTRING = $_POST['tags'];
-    if(strlen($tagsSTRING) > 0) {
+    if (strlen($tagsSTRING) > 0) {
         $tags = explode(',', $tagsSTRING);
-    }
-    else {
+    } else {
         $tags = array();
     }
-    
+
 
     $participantsProjet = $_POST['participantsProjet'];
 
     $tabParticipantAvecId = array();
     $tabParticipantSansId = "";
 
-    if (strlen($participantsProjet) > 0){
+    if (strlen($participantsProjet) > 0) {
         $tabParticipants = explode(',', $participantsProjet);
-    }
-    else {
+    } else {
         $tabParticipants = array();
     }
     foreach ($tabParticipants as $part) {
@@ -205,7 +206,7 @@ function loadAutreProjet()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(), "prive" => $projet->isPrive()
     );
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
@@ -248,7 +249,8 @@ function supprimerProjet()
     }
 }
 
-function afficherRaison() {
+function afficherRaison()
+{
 
     global $tabRes;
     global $dao;
@@ -257,6 +259,30 @@ function afficherRaison() {
 
     $tabRes['tabRaison'] = $dao->getAllRaisonForMembre($idMembre);
     $tabRes['action'] = 'afficherRaison';
+}
+
+function adminCacherProjet()
+{
+    global $tabRes;
+    global $dao;
+
+    $idProjet = $_POST['idProjet'];
+    $valeur = $_POST['valeur'];
+
+    $dao->adminCacherProjet($idProjet, $valeur);
+
+    if ($tabRes['action'] == null)
+    $tabRes['action'] = 'autreProjet';
+    
+    $projet = $dao->getProjet($idProjet);
+    $tabRes['projet'] = array(
+        "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
+        "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(), "prive" => $projet->isPrive()
+    );
+    $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
+    $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
+    $tabRes['msg'] = 'Changement effectué';
 }
 
 echo json_encode($tabRes);

@@ -256,3 +256,31 @@ function afficherRaison(idMembre) {
     },
   });
 }
+
+function adminCacherProjet(idProjet, valeur) {
+  var form = new FormData();
+  form.append("action", "adminCacherProjet");
+  form.append("idProjet", idProjet);
+  form.append("valeur", valeur);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/projet/projetController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
+    success: function (reponse) {
+      loadJsonRecherhe();
+      $(".lds-ring").addClass("hidden");
+      projetVue(reponse);
+      afficherSnackbar(reponse.msg);
+    },
+    fail: function (err) { },
+    complete: function () {
+    },
+  });
+}
