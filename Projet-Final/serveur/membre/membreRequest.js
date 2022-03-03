@@ -267,11 +267,15 @@ function ajouterSignalerRequete(){
     beforeSend: function () {
       $('.lds-ring').removeClass('hidden');
     },
-    success: function () {
+    success: function (reponse) {
+      console.log('succes');
       membresVue(reponse);
     },
-    fail: function (err) { },
+    fail: function (err) { 
+      console.log('fail');
+    },
     complete: function () {
+      console.log('complete');
       $('.lds-ring').addClass('hidden');
     },
 

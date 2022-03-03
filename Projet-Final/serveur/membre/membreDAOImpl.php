@@ -331,18 +331,17 @@ class MembreDaoImpl extends Modele implements MembreDao
     public function addSignalement(int $idMembre, int $idProjet, string $description): bool {
         $resultat = false;
         try{
-            if($idProjet == -1){
+            if($idProjet == -1) {
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, NULL, ?)";
                 $this-> setRequete($requete);
                 $this-> setParams(array($idMembre, $description));
-                $resultat = true;
             }else{
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, ?, ?)";
                 $this-> setRequete($requete);
                 $this-> setParams(array($idMembre, $idProjet, $description));
-                $resultat = true;
             }
             $this->executer();
+            $resultat = true;
             
         }catch(Exception $e){
             echo $e->getMessage();
