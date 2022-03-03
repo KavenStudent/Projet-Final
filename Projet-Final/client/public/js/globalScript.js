@@ -177,7 +177,6 @@ window.onload = function () {
     if (searchBar.value == "" || searchBar.value === null) {
       $("#contenuRecherche").html("");
       firstLoad = false;
-      console.log("Je suis vide");
     }
 
     //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
@@ -234,7 +233,7 @@ function setEyesDansFormEdit() {
 }
 
 function tagCliquable(input) {
-  console.log("test");
+
   document.getElementById("searchBar").value = input;
   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
   if (input != "" && firstLoad === false) {
