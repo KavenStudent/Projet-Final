@@ -56,13 +56,14 @@ function enregistrerMembre()
     $description = $_POST['description'];
     $actif = 1;
     $prive = 0;
+    $adminLock = 0;
     $imageProfil = "defaultProfil.png";
     $membrePremium = 0;
     $dateFinAbonnement = "";
     $password = $_POST['password'];
     $role = "M";
 
-    $unMembre = new Membre(0, $prenom, $nom,  $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $unMembre = new Membre(0, $prenom, $nom,  $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role, $adminLock);
 
     // couriel deja utilisé existant
     if ($dao->verifierCourriel($courriel)) {
@@ -113,6 +114,7 @@ function modifierMembre()
     $numeroTelephone = $_POST['numeroTelephoneEdit'];
     $description = $_POST['descriptionEdit'];
     $actif = 1;
+    $adminLock = 0;
     $prive = (int) $_POST['profilPublic'];
     // $prive =  $_POST['isPublic'];
     $imageProfil = "";
@@ -123,7 +125,7 @@ function modifierMembre()
 
     $tabRes['test'] =  $prive;
 
-    $unMembre = new Membre($id, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $unMembre = new Membre($id, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role, $adminLock);
 
     // couriel deja utilisé existant
     if ($dao->verifierCourrielModifier($courriel, $id)) {
@@ -169,7 +171,7 @@ function loadPageMembre()
             "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
             "description" => $membre->getDescription(), "actif" => $membre->getActif(), "prive" => $membre->getPrive(), "imageProfil" => $membre->getImageProfil(),
             "membrePremium" => $membre->getMembrePremium(), "dateFinAbonnement" => $membre->getDateFinAbonnement(),
-            "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole()
+            "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole(), "adminLock" => $membre->getAdminLock()
         );
         switch ($page) {
             case 'pageMembre':
@@ -242,7 +244,7 @@ function loadAutrePageMembre()
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
         "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
         "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
-        "membrePremium" => $membre->getMembrePremium()
+        "membrePremium" => $membre->getMembrePremium(), "adminLock" => $membre->getAdminLock()
     );
 }
 
@@ -262,11 +264,11 @@ function ajouterSignalisation()
     if (isset($_POST['projetRadio'])) {
         $idProjet = $_POST['projetRadio'];
         print('test1');
-    }else{
+    } else {
         $idProjet = -1;
         print('test2');
     }
-    
+
     $dao->addSignalement($idMembre, $idProjet, $description);
     $tabRes['action'] = 'ajouterSignalisation';
 }

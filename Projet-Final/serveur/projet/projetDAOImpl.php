@@ -137,11 +137,11 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
             //  Ajoute le projet
-            $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail) VALUES(0,?,?,?,?,?,?,?,?)";
+            $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail, adminLock) VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
             $this->setParams(array(
                 $projet->getCreateurId(), $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
-                $projet->getAutresParticipants(), $projet->getLienExterne(), $thumbnail
+                $projet->getAutresParticipants(), $projet->getLienExterne(), $thumbnail, $projet->getAdminLock()
             ));
             $stmt = $this->executer();
 
