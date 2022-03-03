@@ -15,10 +15,24 @@ class Membre
     private $dateFinAbonnement;
     private $motDePasse;
     private $role;
+    private $adminLock;
 
-    public function __construct(int $id,  string $prenom, string $nom,  string $courriel, string $numeroTelephone,
-     string $description,int $actif, int $prive, string $imageProfil, int $membrePremium, string $dateFinAbonnement, string $motDePasse, string $role)
-    {
+    public function __construct(
+        int $id,
+        string $prenom,
+        string $nom,
+        string $courriel,
+        string $numeroTelephone,
+        string $description,
+        int $actif,
+        int $prive,
+        string $imageProfil,
+        int $membrePremium,
+        string $dateFinAbonnement,
+        string $motDePasse,
+        string $role,
+        int $adminLock
+    ) {
         $this->id = $id;
         $this->prenom = $prenom;
         $this->nom = $nom;
@@ -32,6 +46,7 @@ class Membre
         $this->dateFinAbonnement = $dateFinAbonnement;
         $this->motDePasse = $motDePasse;
         $this->role = $role;
+        $this->adminLock = $adminLock;
     }
 
     public function getId(): int
@@ -138,8 +153,16 @@ class Membre
     {
         $this->motDePasse = $motDePasse;
     }
-    public function getRole() {
+    public function getRole()
+    {
         return $this->role;
     }
+    public function getAdminLock(): int
+    {
+        return $this->adminLock;
+    }
+    public function setAdminLock(int $adminLock)
+    {
+        $this->adminLock = $adminLock;
+    }
 }
-?>
