@@ -191,8 +191,8 @@ function afficherPageMembre(json, listProjet) {
                             <div class="card card-item" onclick="loadPageProjet('pageProjet','${item.id}');">
                             <img src="${myThumbnail}" class="card-img-top thumbnail-in-Card" alt="Fissure in Sandstone"/>
                             <div class="card-body card-item-body">
-                                    <h5 class="card-title">${item.titre}</h5>
-                                    <p class="card-text">${item.description}</p>
+                                    <h5 class="card-title card-title-item">${item.titre}</h5>
+                                    <p class="card-text card-text-item">${item.description}</p>
                         
                                 </div>
                             </div>`;
@@ -368,7 +368,7 @@ function afficherPageAutreMembre(json, listProjet) {
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
-                
+
                     <label><strong>Identifiant:</strong> <span>#${json.membre.id}</span></label>
 
                     <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
@@ -417,10 +417,10 @@ function afficherPageAutreMembre(json, listProjet) {
                 }
                 contenu += ` <!-- CARD -->
                                 <div class="card card-item" onclick="loadPageAutreProjet(${item.id});">
-                                <img src="${myThumbnail}" class="card-img-top" alt="Fissure in Sandstone"/>
+                                <img src="${myThumbnail}" class="card-img-top thumbnail-in-Card" alt="Fissure in Sandstone"/>
                                 <div class="card-body card-item-body">
-                                        <h5 class="card-title">${item.titre}</h5>
-                                        <p class="card-text">${item.description}</p>
+                                        <h5 class="card-title card-title-item">${item.titre}</h5>
+                                        <p class="card-text card-text-item">${item.description}</p>
                                     </div>
                                 </div>`;
             }
