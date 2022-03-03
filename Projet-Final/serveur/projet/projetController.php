@@ -53,7 +53,7 @@ function modifierProjet()
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
     $prive = $_POST['projetPublicEdit'];
-
+    $adminLock = 0;
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
 
@@ -80,7 +80,7 @@ function modifierProjet()
 
     $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) - 1);
 
-    $projet = new Projet($idProjet, 0, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, "");
+    $projet = new Projet($idProjet, 0, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, "", $adminLock);
 
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
@@ -107,7 +107,8 @@ function loadPageProjetController()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(), "path" => $projet->getPath()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(),
+        "path" => $projet->getPath(), "adminLock" => $projet->getAdminLock()
     );
 
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
@@ -145,7 +146,7 @@ function ajouterProjet()
     $descriptionProjet = $_POST['descriptionProjet'];
     $path = "";
     $prive = false;
-
+    $adminLock = 0;
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjet'];
 
@@ -182,7 +183,7 @@ function ajouterProjet()
 
     $nomComplet = $dao->getMembreNameById($idMembre);
 
-    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet);
+    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet, $adminLock);
 
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
@@ -206,7 +207,8 @@ function loadAutreProjet()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(), "prive" => $projet->isPrive()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(),
+        "prive" => $projet->isPrive(), "adminLock" => $projet->getAdminLock()
     );
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
@@ -272,13 +274,14 @@ function adminCacherProjet()
     $dao->adminCacherProjet($idProjet, $valeur);
 
     if ($tabRes['action'] == null)
-    $tabRes['action'] = 'autreProjet';
-    
+        $tabRes['action'] = 'autreProjet';
+
     $projet = $dao->getProjet($idProjet);
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(), "prive" => $projet->isPrive()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(),
+        "prive" => $projet->isPrive(), "adminLock" => $projet->getAdminLock()
     );
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);

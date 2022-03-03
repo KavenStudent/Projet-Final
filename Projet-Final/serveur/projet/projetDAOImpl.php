@@ -21,7 +21,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         try {
 
             $requete = "SELECT p.id   as idProjet , p.description as descriptionProjet, p.idCreateur, p.titre, p.path , p.prive, 
-            p.autreParticipant, p.nbTelechargement, p.lienExterne, p.thumbnail, m.nom , m.prenom
+            p.autreParticipant, p.nbTelechargement, p.lienExterne, p.thumbnail, m.nom , m.prenom, p.adminLock
             FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE p.id = ?";
 
             $this->setRequete($requete);
@@ -47,7 +47,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                     $ligne->nbTelechargement,
                     $ligne->lienExterne,
                     $ligne->thumbnail,
-                    $nomComplet
+                    $nomComplet,
+                    $ligne->adminLock
                 );
             }
         } catch (Exception $e) {
@@ -199,7 +200,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         $returnValue = false;
         try {
             // cherche l'image du projet a modifier
-            $requete = "SELECT thumbnail, path FROM projet WHERE id=?";
+            $requete = "SELECT thumbnail, adminLock, path FROM projet WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array($projet->getId()));
             $stmt = $this->executer();
@@ -207,15 +208,22 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $ancienneImage = $ligne->thumbnail;
             $ancienPath = $ligne->path;
             $idProjet = $projet->getId();
+            $adminLock = $ligne->adminLock;
 
             $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
             $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
+
+            if ($adminLock) {
+                $prive = $adminLock;
+            } else {
+                $prive = $projet->isPrive();
+            }
 
             // modifie dans projet
             $requete = "UPDATE projet SET titre=?,description=?,path=?,prive=?,autreParticipant=?,lienExterne=?,thumbnail=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
-                $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
+                $projet->getTitre(), $projet->getDescription(), $path, $prive,
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $idProjet
             ));
             $stmt = $this->executer();
@@ -399,9 +407,9 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         $returnValue = false;
         try {
-            $requete = "UPDATE projet SET prive=? WHERE id = ?";
+            $requete = "UPDATE projet SET prive=?, adminLock=? WHERE id = ?";
             $this->setRequete($requete);
-            $this->setParams(array($valeur, $idProjet));
+            $this->setParams(array($valeur, $valeur, $idProjet));
             $stmt = $this->executer();
             $returnValue = true;
         } catch (Exception $e) {
