@@ -12,6 +12,7 @@ class Projet
     private $lienExterne;
     private $thumbnail;
     private $nomMembre;
+    private $adminLock;
 
     // ------------------------------------------------------------Constructeur
     public function __construct(
@@ -25,7 +26,8 @@ class Projet
         int $nbTelechargements,
         string $lienExterne,
         string $thumbnail,
-        string $nomMembre
+        string $nomMembre,
+        int $adminLock
     ) {
         $this->id = $id;
         $this->createurId = $createurId;
@@ -38,6 +40,7 @@ class Projet
         $this->lienExterne = $lienExterne;
         $this->thumbnail = $thumbnail;
         $this->nomMembre = $nomMembre;
+        $this->adminLock = $adminLock;
     }
 
     // ----------------------------------------------------------------Getters
@@ -86,7 +89,10 @@ class Projet
     {
         return $this->nomMembre;
     }
-
+    public function getAdminLock(): int
+    {
+        return $this->adminLock;
+    }
     //----------------------------------------------------------------Setters
     public function setTitre(string $titre)
     {
@@ -120,9 +126,12 @@ class Projet
     {
         $this->thumbnail = $thumbnail;
     }
-
     public function setNomMembre(string $nomMembre)
     {
         $this->nomMembre = $nomMembre;
+    }
+    public function setAdminLock(int $adminLock)
+    {
+        $this->adminLock = $adminLock;
     }
 }
