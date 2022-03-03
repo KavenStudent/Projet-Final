@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 03 mars 2022 à 19:40
+-- Généré le :  jeu. 03 mars 2022 à 19:43
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -76,17 +76,18 @@ CREATE TABLE `membre` (
   `prive` int(1) NOT NULL DEFAULT '0',
   `imageProfil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `membrePremium` int(1) NOT NULL DEFAULT '0',
-  `dateFinAbonnement` date DEFAULT NULL
+  `dateFinAbonnement` date DEFAULT NULL,
+  `adminLock` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`) VALUES
-(3, 'Birtz', 'Joanie', 'joanie.birtz@gmail.com', '4506299345', 'Etudiant infomatique', 0, '9052da0252f46f3deb318fca271842930873f5bb.png', 0, NULL),
-(4, 'Birtz', 'Joanie', 'lilou@gmail.com', '4384061207', 'test', 0, 'defaultProfil.png', 0, NULL),
-(5, 'Nicolas', 'Vim', 'vim@gmail.com', '4384061207', ' trÃ¨s trÃ¨s humble', 1, 'defaultProfil.png', 0, NULL);
+INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`, `adminLock`) VALUES
+(3, 'Birtz', 'Joanie', 'joanie.birtz@gmail.com', '4506299345', 'Etudiant infomatique', 0, '9052da0252f46f3deb318fca271842930873f5bb.png', 0, NULL, 0),
+(4, 'Birtz', 'Joanie', 'lilou@gmail.com', '4384061207', 'test', 0, 'defaultProfil.png', 0, NULL, 0),
+(5, 'Nicolas', 'Vim', 'vim@gmail.com', '4384061207', ' trÃ¨s trÃ¨s humble', 1, 'defaultProfil.png', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
