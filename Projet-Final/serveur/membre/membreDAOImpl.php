@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 require_once("membre.php");
 require_once("membreDAO.php");
 require_once("../includes/modele.inc.php");
@@ -325,16 +328,19 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
     }
 
-    public function addSignalement(int $idMembre, int $idProjet, string $description): bool{
+    public function addSignalement(int $idMembre, int $idProjet, string $description): bool {
+        $resultat = false;
         try{
-            if($idProjet == null){
+            if($idProjet == -1){
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, NULL, ?)";
                 $this-> setRequete($requete);
                 $this-> setParams(array($idMembre, $description));
+                $resultat = true;
             }else{
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, ?, ?)";
                 $this-> setRequete($requete);
                 $this-> setParams(array($idMembre, $idProjet, $description));
+                $resultat = true;
             }
             $this->executer();
             
@@ -342,6 +348,7 @@ class MembreDaoImpl extends Modele implements MembreDao
             echo $e->getMessage();
         }finally{
             unset($requete);
+            return $resultat;
         }
     }
 }

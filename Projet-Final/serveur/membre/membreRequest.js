@@ -267,7 +267,7 @@ function ajouterSignalerRequete(){
     beforeSend: function () {
       $('.lds-ring').removeClass('hidden');
     },
-    success: function (reponse) {
+    success: function () {
       membresVue(reponse);
     },
     fail: function (err) { },

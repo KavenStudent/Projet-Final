@@ -20,6 +20,9 @@ var membresVue = function (reponse) {
         case "loadRecherche":
             afficherRecherche();
             break;
+        case "ajouterSignalisation":
+            ajouterSignalisation();
+            break;
     }
 }
 
@@ -322,11 +325,11 @@ function afficherPageAutreMembre(json, listProjet) {
     
                     <form class="form-connexion connexionContainer" id="form-signaler">
     
-                        <input type="hidden" name="action" value="signaler">
+                        <input type="hidden" name="idMembre" value="${json.membre.id}">
     
                         <div class="myInput">
                             <label for="pages" class="form-label">Raison</label>
-                            <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
+                            <textarea id="raison-input" name="description" rows="4" cols="50" required></textarea>
                         </div> 
     
                         <div id='list-projet'>`;
@@ -336,14 +339,14 @@ function afficherPageAutreMembre(json, listProjet) {
                             contenu+= `
                             <div class="col-sm">
                                 <input class="form-check-input" type="radio" name="projetRadio" value="${projet.id}" id="projetRadio">
-                                <label class="form-check-label" for="projetRadio">${projet.titre}</label>
+                                <label class="form-check-label" name="titre" for="projetRadio">${projet.titre}</label>
                             </div>`;
                         });
                        
     
                         contenu+= `</div>
                                 <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="">Signaler</button>
+                            <button type="button" class="btn btn-primary" onclick="ajouterSignalerRequete()">Signaler</button>
                         </div>
                     </form>
     
@@ -472,4 +475,11 @@ function afficherRecherche() {
 
     $('#contenuRecherche').html(contenu);
     loadData();
+}
+
+function ajouterSignalisation(){
+    console.log('test');
+    $("#modalSignaler").modal('hide');
+    $('#form-signaler')[0].reset();
+    afficherSnackbar('Signalement ajouté avec succès');
 }

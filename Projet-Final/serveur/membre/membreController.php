@@ -39,6 +39,9 @@ switch ($action) {
     case "loadPageRecherche":
         loadPageRecherche();
         break;
+    case "ajouterSignalisation":
+        ajouterSignalisation();
+        break;
 }
 
 //Enregistre un membre
@@ -247,6 +250,24 @@ function loadPageRecherche()
 {
     global $tabRes;
     $tabRes['action'] = 'loadRecherche';
+}
+
+function ajouterSignalisation()
+{
+    global $tabRes;
+    global $dao;
+    $idMembre = $_POST['idMembre'];
+    $description = $_POST['description'];
+    if (isset($_POST['projetRadio'])) {
+        $idProjet = $_POST['projetRadio'];
+        print('test1');
+    }else{
+        $idProjet = -1;
+        print('test2');
+    }
+    
+    $dao->addSignalement($idMembre, $idProjet, $description);
+    $tabRes['action'] = 'ajouterSignalisation';
 }
 
 echo json_encode($tabRes);
