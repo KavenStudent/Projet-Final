@@ -114,4 +114,10 @@
     max-height: 2em;
 }
 
+.thumbnail-in-Card{
+    max-height: 15em;
+    padding: 1em;
+    border-bottom: 1px solid #000000;
+}
+
 

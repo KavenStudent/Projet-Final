@@ -263,10 +263,8 @@ function ajouterSignalisation()
     
     if (isset($_POST['projetRadio'])) {
         $idProjet = $_POST['projetRadio'];
-        print('test1');
     } else {
         $idProjet = -1;
-        print('test2');
     }
 
     $dao->addSignalement($idMembre, $idProjet, $description);
