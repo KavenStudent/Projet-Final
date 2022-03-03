@@ -270,7 +270,8 @@ class MembreDaoImpl extends Modele implements MembreDao
                     $ligne->membrePremium,
                     $laDate,
                     $ligne->motDePasse,
-                    $ligne->role
+                    $ligne->role,
+                    $ligne->adminLock
                 );
             }
         } catch (Exception $e) {
