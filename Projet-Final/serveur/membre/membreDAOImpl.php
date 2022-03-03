@@ -61,12 +61,9 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             // enregistre dans membre
-            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?,?)";
+            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array(
-                $Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(),
-                $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null, $Membre->getAdminLock()
-            ));
+            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
             $stmt = $this->executer();
             $lastId = $this->getLastId();
             // enregistre dans connexion
@@ -124,29 +121,22 @@ class MembreDaoImpl extends Modele implements MembreDao
         try {
 
             // cherche l'image du film a modifier
-            $requete = "SELECT imageProfil, adminLock FROM membre WHERE id=?";
+            $requete = "SELECT imageProfil FROM membre WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array($Membre->getId()));
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->imageProfil;
-            $adminLock = $ligne->adminLock;
+
 
             $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom() . $Membre->getPrenom());
-
-
-            if ($adminLock) {
-                $prive = $adminLock;
-            } else {
-                $prive = $Membre->getPrive();
-            }
 
             // modifie dans membre
             $requete = "UPDATE membre SET nom=?,prenom=?,courriel=?,numeroTelephone=?,description=?,prive=?,imageProfil=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
                 $Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(),
-                $Membre->getDescription(), $prive, $image, $Membre->getId()
+                $Membre->getDescription(), $Membre->getPrive(), $image, $Membre->getId()
             ));
             $stmt = $this->executer();
 
@@ -249,7 +239,7 @@ class MembreDaoImpl extends Modele implements MembreDao
         try {
             $requete = "SELECT m.id, m.nom, m.prenom, m.courriel, m.numeroTelephone,
              m.description, c.actif, m.prive, m.imageProfil, m.membrePremium, 
-            m.dateFinAbonnement, c.motDePasse, c.role, c.actif , m.adminLock
+            m.dateFinAbonnement, c.motDePasse, c.role, c.actif
              FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
@@ -280,8 +270,7 @@ class MembreDaoImpl extends Modele implements MembreDao
                     $ligne->membrePremium,
                     $laDate,
                     $ligne->motDePasse,
-                    $ligne->role,
-                    $ligne->adminLock
+                    $ligne->role
                 );
             }
         } catch (Exception $e) {
@@ -339,25 +328,24 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
     }
 
-    public function addSignalement(int $idMembre, int $idProjet, string $description): bool
-    {
+    public function addSignalement(int $idMembre, int $idProjet, string $description): bool {
         $resultat = false;
-        try {
-            if ($idProjet == -1) {
+        try{
+            if($idProjet == -1) {
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, NULL, ?)";
-                $this->setRequete($requete);
-                $this->setParams(array($idMembre, $description));
-                $resultat = true;
-            } else {
+                $this-> setRequete($requete);
+                $this-> setParams(array($idMembre, $description));
+            }else{
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, ?, ?)";
-                $this->setRequete($requete);
-                $this->setParams(array($idMembre, $idProjet, $description));
-                $resultat = true;
+                $this-> setRequete($requete);
+                $this-> setParams(array($idMembre, $idProjet, $description));
             }
             $this->executer();
-        } catch (Exception $e) {
+            $resultat = true;
+            
+        }catch(Exception $e){
             echo $e->getMessage();
-        } finally {
+        }finally{
             unset($requete);
             return $resultat;
         }

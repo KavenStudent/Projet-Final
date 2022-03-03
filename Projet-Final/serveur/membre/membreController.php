@@ -260,6 +260,7 @@ function ajouterSignalisation()
     global $dao;
     $idMembre = $_POST['idMembre'];
     $description = $_POST['description'];
+    
     if (isset($_POST['projetRadio'])) {
         $idProjet = $_POST['projetRadio'];
         print('test1');

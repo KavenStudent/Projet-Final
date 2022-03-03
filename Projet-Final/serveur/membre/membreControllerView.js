@@ -21,6 +21,7 @@ var membresVue = function (reponse) {
             afficherRecherche();
             break;
         case "ajouterSignalisation":
+            console.log("Entre dans la vue");
             ajouterSignalisationVue();
             break;
     }
@@ -344,7 +345,8 @@ function afficherPageAutreMembre(json, listProjet) {
                         });
                        
     
-                        contenu+= `</div>
+                        contenu+= `
+                             </div>
                                 <div class="modal-footer">
                             <button type="button" class="btn btn-primary" onclick="ajouterSignalerRequete()">Signaler</button>
                         </div>
@@ -478,7 +480,6 @@ function afficherRecherche() {
 }
 
 function ajouterSignalisationVue(){
-    console.log('test');
     $("#modalSignaler").modal('hide');
     $('#form-signaler')[0].reset();
     afficherSnackbar('Signalement ajouté avec succès');
