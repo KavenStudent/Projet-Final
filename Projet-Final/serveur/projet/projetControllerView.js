@@ -440,11 +440,11 @@ function afficherPageAutreProjet(json) {
   
                   <form class="form-connexion connexionContainer" id="form-signaler">
   
-                      <input type="hidden" name="action" value="signaler">
+                    <input type="hidden" name="idMembre" value="${json.projet.idCreator}">
   
                       <div class="myInput">
                           <label for="pages" class="form-label">Raison</label>
-                          <textarea id="raison-input" name="raison" rows="4" cols="50" required></textarea>
+                          <textarea id="raison-input" name="description" rows="4" cols="50" required></textarea>
                       </div>
   
                       <!-- La liste des projets -->
@@ -453,8 +453,8 @@ function afficherPageAutreProjet(json) {
                       
                         contenu+= `
                         <div class="col-sm">
-                          <input class="form-check-input" type="radio" name="projetRadio" id="projetRadio" value="${json.projet.id}" checked disabled>
-                          <label class="form-check-label" for="projetRadio">${json.projet.titre}</label>
+                          <input class="form-check-input" type="radio" name="projetRadio" id="projetRadio" value="${json.projet.id}" checked>
+                          <label class="form-check-label" for="projetRadio" name="titre">${json.projet.titre}</label>
                         </div>`;
                       
                           
@@ -462,7 +462,7 @@ function afficherPageAutreProjet(json) {
                     contenu+=`</div>
   
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" onclick="">Signaler</button>
+                          <button type="button" class="btn btn-primary" onclick="ajouterSignalerRequete()">Signaler</button>
                       </div>
                   </form>
   
