@@ -485,8 +485,19 @@ function afficherPageAutreProjet(json) {
           </a>`;
   }
 
-  contenu += `<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>
-        </div>
+  if(document.getElementById('typePage').value === 'admin'){
+    if(json.projet.prive == 1){
+      contenu += `<button class="btn btn-danger" type="button" onclick="adminCacherProjet(${json.projet.id}, 0)">Rendre visible le projet</button>`;
+    } else {
+      contenu += `<button class="btn btn-danger" type="button" onclick="adminCacherProjet(${json.projet.id}, 1)">Cacher le projet</button>`;
+    }
+    
+  }else {
+    contenu += `<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>`;
+  }
+  
+ 
+  contenu +=`</div>
     </div>
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>

@@ -394,4 +394,22 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         }
         return $tab;
     }
+
+    public function adminCacherProjet(int $idProjet, int $valeur): bool
+    {
+        $returnValue = false;
+        try {
+            $requete = "UPDATE projet SET prive=? WHERE id = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($valeur, $idProjet));
+            $stmt = $this->executer();
+            $returnValue = true;
+        } catch (Exception $e) {
+            $returnValue = false;
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+            return $returnValue;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //Interface MembreDao
 interface ProjetDao
@@ -28,9 +28,11 @@ interface ProjetDao
     public function telechargerProjet(int $idProjet, int $nbTelechargement): bool;
 
     //Tous les tags
-    public function getAllTags() : array;
+    public function getAllTags(): array;
 
     public function supprimerProjet(int $idProjet): bool;
 
     public function getAllRaisonForMembre(int $idMembre): array;
+
+    public function adminCacherProjet(int $idProjet, int $valeur): bool;
 }
