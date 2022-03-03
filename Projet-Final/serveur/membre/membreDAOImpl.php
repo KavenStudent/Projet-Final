@@ -342,6 +342,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         $resultat = false;
         try {
+
             if ($idProjet == -1) {
                 $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, NULL, ?)";
                 $this->setRequete($requete);
