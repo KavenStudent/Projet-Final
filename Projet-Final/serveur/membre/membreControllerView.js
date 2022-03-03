@@ -337,18 +337,18 @@ function afficherPageAutreMembre(json, listProjet) {
                         </div> 
     
                         <div id='list-projet'>`;
-                        
-                        // list projet
-                        listProjet.forEach((projet) => {
-                            contenu+= `
+
+    // list projet
+    listProjet.forEach((projet) => {
+        contenu += `
                             <div class="col-sm">
                                 <input class="form-check-input" type="radio" name="projetRadio" value="${projet.id}" id="projetRadio">
                                 <label class="form-check-label" name="titre" for="projetRadio">${projet.titre}</label>
                             </div>`;
-                        });
-                       
-    
-                        contenu+= `
+    });
+
+
+    contenu += `
                              </div>
                                 <div class="modal-footer">
                             <button type="button" class="btn btn-primary" onclick="ajouterSignalerRequete()">Signaler</button>
@@ -447,7 +447,7 @@ function afficherPageAdmin(json) {
                 <div id="card-contenu">
                     <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage" 
                     onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">
-                    <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom}</h5>
+                    <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom} #${json.listeSignalisation[i].idMembre}</h5>
                     <h5 onclick="afficherRaison(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].nb} signalisations</h5>
                 </div>
 
@@ -485,7 +485,7 @@ function afficherRecherche() {
     loadData();
 }
 
-function ajouterSignalisationVue(){
+function ajouterSignalisationVue() {
     $("#modalSignaler").modal('hide');
     $('#form-signaler')[0].reset();
     afficherSnackbar('Signalement ajouté avec succès');
