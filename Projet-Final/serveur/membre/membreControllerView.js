@@ -21,7 +21,7 @@ var membresVue = function (reponse) {
             afficherRecherche();
             break;
         case "ajouterSignalisation":
-            ajouterSignalisation();
+            ajouterSignalisationVue();
             break;
     }
 }
@@ -477,7 +477,7 @@ function afficherRecherche() {
     loadData();
 }
 
-function ajouterSignalisation(){
+function ajouterSignalisationVue(){
     console.log('test');
     $("#modalSignaler").modal('hide');
     $('#form-signaler')[0].reset();
