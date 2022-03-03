@@ -146,7 +146,10 @@ function afficherPageMembre(json, listProjet) {
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
-                    <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
+
+                    <label><strong>Identifiant:</strong> <span>#${json.membre.id}</span></label>
+
+                    <label><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     
                     <label><strong>Courriel:</strong> <span>${json.membre.courriel}</span></label>
                     
@@ -365,6 +368,9 @@ function afficherPageAutreMembre(json, listProjet) {
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
+                
+                    <label><strong>Identifiant:</strong> <span>#${json.membre.id}</span></label>
+
                     <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     
                     <label><strong>Courriel:</strong> <span>${json.membre.courriel}</span></label>
