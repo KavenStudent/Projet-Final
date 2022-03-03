@@ -529,9 +529,11 @@ function afficherPageAutreProjet(json) {
   aria-label="Tags: ">`;
 
   json.tabTagsProjet.forEach((tagProjet) => {
-    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a>,</li>`;
+    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
   });
+  contenu = contenu.substring(0, contenu.length -7) + "</li>";
   contenu += `</ul>`;
+
 
   //Description
   contenu += `  <p id="projetDescription" name="projetDescription">${json.projet.description}</p> `;
