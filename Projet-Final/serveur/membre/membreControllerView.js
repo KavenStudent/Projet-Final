@@ -28,7 +28,33 @@ var membresVue = function (reponse) {
 }
 
 function afficherPageAccueil(json) {
-    let contenu = ` <div id="contenuRecherche"></div> <div class="container marketing customized-front-page-container">
+    let contenu = ` <div id="contenuRecherche"></div>
+
+    <!-- partie paiment -->
+		<!-- canvas panier paypal-->
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+			<div class="offcanvas-header">
+				<h3 id="offcanvasRightLabel">Contenu de votre panier</h3>
+				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+
+			<div class="offcanvas-body">
+
+				<div id="panier">
+
+				</div>
+
+				<div id="total">
+
+				</div>
+
+				<div id="paypal-button-container">
+
+				</div>
+			</div>
+		</div>
+
+    <div class="container marketing customized-front-page-container">
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
       <div class="col-lg-4 customized-item">
@@ -116,7 +142,7 @@ function afficherPageAccueil(json) {
                 <li>Les informations de contacts incluses</li>
                 <li>Un portfolio "ILLIMITÉ"</li>
             </ul>
-            <button id='upgrade-button'>Upgrade</button>
+            <button id='upgrade-button' onclick='afficheSlidePayment()'>Upgrade</button>
         </div>`;
 
     } else if (Number.isInteger(json.id) && json.isSub == false) {
@@ -128,7 +154,7 @@ function afficherPageAccueil(json) {
                 <li>Les informations de contacts incluses</li>
                 <li>Un portfolio "ILLIMITÉ"</li>
             </ul>
-            <button id='upgrade-button'>Upgrade</button>
+            <button id='upgrade-button' onclick='afficheSlidePayment()'>Upgrade</button>
         </div>`;
     }
 
