@@ -258,7 +258,6 @@ textarea {
   justify-content: center;
   align-items: center;
   width: 15em;
-  height: 15em;
   padding: 1em;
 }
 
@@ -536,7 +535,9 @@ textarea {
 
 /* PASSWORD DIV EYEs */
 .passwordDivInscription,
-.passwordConfirmDivInscription, .passwordDivModification, .passwordDivModificationConfirm {
+.passwordConfirmDivInscription,
+.passwordDivModification,
+.passwordDivModificationConfirm {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -548,7 +549,9 @@ textarea {
 }
 
 .passwordCustomInscription,
-.passwordConfirmCustomInscription, .passwordCustomModification, .passwordCustomModificationConfirm {
+.passwordConfirmCustomInscription,
+.passwordCustomModification,
+.passwordCustomModificationConfirm {
   border: 0;
 }
 
@@ -583,7 +586,7 @@ textarea {
   color: red;
 }
 
-.upgrade-button-membre{
+.upgrade-button-membre {
   align-self: center;
 }
 
