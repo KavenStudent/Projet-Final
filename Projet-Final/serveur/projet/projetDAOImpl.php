@@ -197,7 +197,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     }
     public function modifierProjet(Projet $projet, array $tags, array $tabParticipantAvecId): bool
     {
-        $returnValue = false;
+        $returnValue = true;
         try {
             // cherche l'image du projet a modifier
             $requete = "SELECT thumbnail, adminLock, path FROM projet WHERE id=?";
@@ -215,6 +215,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
 
             if ($adminLock) {
                 $prive = $adminLock;
+                $returnValue = false;
             } else {
                 $prive = $projet->isPrive();
             }
@@ -227,7 +228,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $idProjet
             ));
             $stmt = $this->executer();
-            $returnValue = true;
+            
 
             //  Supprime les participants deja existants
             $requete = "DELETE FROM membreprojet WHERE idProjet = ?";

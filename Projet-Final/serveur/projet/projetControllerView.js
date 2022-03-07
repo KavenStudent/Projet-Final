@@ -10,21 +10,14 @@ var projetVue = function (response) {
     case "pageProjetAjouter":
       ajouterProjetAffichage(response);
       break;
-    case "ajouterProjetReussi":
-      ajouterProjetReussi(response.idMembre);
-      break;
-    case "modifierProjetReussi":
-      modifierProjetReussi(response.idMembre);
-      break;
     case "autreProjet":
       afficherPageAutreProjet(response);
-      break;
-    case "supprimerProjet":
-      supprimerProjetReussi(response.idMembre);
       break;
     case "afficherRaison":
       afficherModalRaison(response);
       break;
+    case "redirigerPageMembre":
+      redirigerPageMembre(response.idMembre, response.message);
   }
 };
 
@@ -46,7 +39,7 @@ function afficherPageProjet(json) {
               <div class="modal-body">
                   <!-- Form confirmation -->
   
-                  <p>Êtes vous certains de vouloir supprimer ce projet? Cette action est irréversible</p>
+                  <p>Êtes vous certains de vouloir supprimer ce projet? Cette action est irréversible.</p>
   
                       <div class="modal-footer">
                           <button data-bs-dismiss="modal" id="projetSupprSubmit" type="button" class="btn btn-primary" onclick="supprimerProjet(${json.projet.id}, ${json.projet.idCreator})">Confirmer</button>
@@ -413,13 +406,6 @@ function ajouterProjetAffichage(json) {
     displayParticipantsMatches();
   });
 }
-
-function ajouterProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre, "Projet ajouté avec succès");
-}
-function modifierProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre, "Projet modifié avec succès");
-}
 function afficherPageAutreProjet(json) {
   let thumbnail;
   if (json.projet.thumbnail == "") {
@@ -450,17 +436,14 @@ function afficherPageAutreProjet(json) {
   
                       <!-- La liste des projets -->
                       <div id='list-projet'>`;
-  
-                      
-                        contenu+= `
+
+  contenu += `
                         <div class="col-sm">
                           <input class="form-check-input" type="radio" name="projetRadio" id="projetRadio" value="${json.projet.id}" checked>
                           <label class="form-check-label" for="projetRadio" name="titre">${json.projet.titre}</label>
                         </div>`;
-                      
-                          
 
-                    contenu+=`</div>
+  contenu += `</div>
   
                       <div class="modal-footer">
                           <button type="button" class="btn btn-primary" onclick="ajouterSignalerRequete()">Signaler</button>
@@ -473,9 +456,9 @@ function afficherPageAutreProjet(json) {
           </div>
       </div>
   </div>
-  </div> <!-- fin modal signalisation -->`
+  </div> <!-- fin modal signalisation -->`;
 
-  contenu+=`<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
+  contenu += `<div id="contenuRecherche"></div><div id='projetMainDiv' class="container"> <div id="projetLeftDiv" class="container"> 
  <img src='Projet-Final/serveur/projet/thumbnail/${thumbnail}' class='img-fluid, img-thumbnail'"
             alt="Vignette">
         <div class="d-grid gap-2">`;
@@ -486,19 +469,17 @@ function afficherPageAutreProjet(json) {
           </a>`;
   }
 
-  if(document.getElementById('typePage').value === 'admin'){
-    if(json.projet.prive == 1){
+  if (document.getElementById("typePage").value === "admin") {
+    if (json.projet.prive == 1) {
       contenu += `<button class="btn btn-danger" type="button" onclick="adminCacherProjet(${json.projet.id}, 0)">Rendre visible le projet</button>`;
     } else {
       contenu += `<button class="btn btn-danger" type="button" onclick="adminCacherProjet(${json.projet.id}, 1)">Cacher le projet</button>`;
     }
-    
-  }else {
+  } else {
     contenu += `<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>`;
   }
-  
- 
-  contenu +=`</div>
+
+  contenu += `</div>
     </div>
     <div id='projetRightDiv' class="container">
         <h1>${json.projet.titre}</h1>
@@ -550,8 +531,8 @@ function afficherPageAutreProjet(json) {
   $("#contenu").html(contenu);
 }
 
-function supprimerProjetReussi(idMembre) {
-  loadMembre("pageMembre", idMembre, "Projet supprimé avec succès");
+function redirigerPageMembre(idMembre, message) {
+  loadMembre("pageMembre", idMembre, message);
 }
 
 function afficherModalRaison(json) {

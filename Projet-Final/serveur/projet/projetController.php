@@ -84,11 +84,12 @@ function modifierProjet()
 
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'modifierProjetReussi';
-            $tabRes['idMembre'] = $_SESSION['membre'];
+            $tabRes['message'] = "Projet modifié avec succès";
         } else {
-            $tabRes['test'] = "failed";
+            $tabRes['message'] = "Une erreur s'est produite lors de la modification de votre projet. Un administrateur pourrait l'avoir suspendu. Veuillez contacter le responsable du site.";
         }
+        $tabRes['action'] = "redirigerPageMembre";
+        $tabRes['idMembre'] = $_SESSION['membre'];
     }
 }
 
@@ -187,8 +188,9 @@ function ajouterProjet()
 
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'ajouterProjetReussi';
+            $tabRes['action'] = 'redirigerPageMembre';
             $tabRes['idMembre'] = $idMembre;
+            $tabRes['message'] = "Projet ajouté avec succès";
         }
     }
 }
@@ -246,8 +248,9 @@ function supprimerProjet()
     $projet = $dao->supprimerProjet($idProjet);
 
     if ($tabRes['action'] == null) {
-        $tabRes['action'] = 'supprimerProjet';
+        $tabRes['action'] = 'redirigerPageMembre';
         $tabRes['idMembre'] = $idMembre;
+        $tabRes['message'] = "Projet supprimé avec succès";
     }
 }
 
