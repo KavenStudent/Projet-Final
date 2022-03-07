@@ -582,3 +582,7 @@ textarea {
 .memberLink:visited {
   color: red;
 }
+
+.upgrade-button-membre{
+  align-self: center;
+}

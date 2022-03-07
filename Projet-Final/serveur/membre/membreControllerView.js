@@ -28,7 +28,33 @@ var membresVue = function (reponse) {
 }
 
 function afficherPageAccueil(json) {
-    let contenu = ` <div id="contenuRecherche"></div> <div class="container marketing customized-front-page-container">
+    let contenu = ` <div id="contenuRecherche"></div>
+
+    <!-- partie paiment -->
+		<!-- canvas panier paypal-->
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+			<div class="offcanvas-header">
+				<h3 id="offcanvasRightLabel">Contenu de votre panier</h3>
+				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+
+			<div class="offcanvas-body">
+
+				<div id="panier">
+
+				</div>
+
+				<div id="total">
+
+				</div>
+
+				<div id="paypal-button-container">
+
+				</div>
+			</div>
+		</div>
+
+    <div class="container marketing customized-front-page-container">
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
       <div class="col-lg-4 customized-item">
@@ -116,7 +142,7 @@ function afficherPageAccueil(json) {
                 <li>Les informations de contacts incluses</li>
                 <li>Un portfolio "ILLIMITÉ"</li>
             </ul>
-            <button id='upgrade-button'>Upgrade</button>
+            <button id='upgrade-button' data-bs-toggle="modal" data-bs-target="#modalConnexion">Upgrade</button>
         </div>`;
 
     } else if (Number.isInteger(json.id) && json.isSub == false) {
@@ -128,7 +154,7 @@ function afficherPageAccueil(json) {
                 <li>Les informations de contacts incluses</li>
                 <li>Un portfolio "ILLIMITÉ"</li>
             </ul>
-            <button id='upgrade-button'>Upgrade</button>
+            <button id='upgrade-button' onclick='afficheSlidePayment()'>Upgrade</button>
         </div>`;
     }
 
@@ -141,13 +167,40 @@ function afficherPageAccueil(json) {
 
 function afficherPageMembre(json, listProjet) {
 
+    
 
-    let contenu = `<div id="contenuRecherche"></div><div class="container big-container">
+
+    let contenu = ` <!-- partie paiment -->
+    <!-- canvas panier paypal-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h3 id="offcanvasRightLabel">Contenu de votre panier</h3>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            <div id="panier">
+
+            </div>
+
+            <div id="total">
+
+            </div>
+
+            <div id="paypal-button-container">
+
+            </div>
+        </div>
+    </div>
+    
+    
+    <div id="contenuRecherche"></div><div class="container big-container">
             <div class="premiere-colonne">
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
 
-                    <label><strong>Identifiant:</strong> <span>#${json.membre.id}</span></label>
+                    <label><strong>Numéro identifiant:</strong> <span>${json.membre.id}</span></label>
 
                     <label><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     
@@ -160,7 +213,8 @@ function afficherPageMembre(json, listProjet) {
                     <label><strong>Statut :</strong> <span>`;
 
     if (json.membre.membrePremium == 0) {
-        contenu += `non-abonné </span></label>`;
+        contenu += `non-abonné </span></label> 
+        <button id="upgrade-button" class="upgrade-button-membre" onclick="afficheSlidePayment();">Upgrade</button>`;
     } else if (json.membre.membrePremium == 1) {
         contenu += `Abonné </span></label>
         <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>`;
@@ -369,7 +423,7 @@ function afficherPageAutreMembre(json, listProjet) {
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
 
-                    <label><strong>Identifiant:</strong> <span>#${json.membre.id}</span></label>
+                    <label><strong>Numéro identifiant:</strong> <span>${json.membre.id}</span></label>
 
                     <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     

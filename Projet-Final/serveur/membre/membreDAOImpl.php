@@ -28,6 +28,26 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $tab;
     }
+
+    public function getAllMembreSuggestion(): array
+    {
+        try {
+            $tab = array();
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.prive = 0";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+        return $tab;
+    }
+
     public function getAllMembreRecherche(string $par, string $valeurPar): array
     {
         try {
