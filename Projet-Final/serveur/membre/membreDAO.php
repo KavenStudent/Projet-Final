@@ -5,6 +5,8 @@ interface MembreDao
     //Retourne tout les membres
     public function getAllMembre(): array;
 
+    public function getAllMembreSuggestion(): array;
+
     //Retourne tout les membres avec de recherhce
     public function getAllMembreRecherche(string $par, string $valeurPar): array;
 

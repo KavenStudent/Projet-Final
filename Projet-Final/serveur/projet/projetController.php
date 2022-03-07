@@ -221,7 +221,7 @@ function loadJsonRecherhe()
     global $tabRes;
     global $dao;
     $daoMembre = new MembreDaoImpl();
-    $tabRes['tabMembres'] =  $daoMembre->getAllMembre();
+    $tabRes['tabMembres'] =  $daoMembre->getAllMembreSuggestion();
     $tabRes['tabProjets'] = $dao->getAllProjetsForCards();
 }
 
