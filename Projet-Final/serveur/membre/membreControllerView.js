@@ -549,8 +549,9 @@ function afficherPageAdmin(json) {
 
 function afficherRecherche() {
     let contenu = `<div id='containerRecherche' class="container">
-
+    
     <div class="list container" id='listMembre'>
+        <p class="titreMembres">Membres</p>
         <div class="headerListMembre">
             <p>Avatar</p>
             <p>Nom Complet</p>
@@ -560,6 +561,7 @@ function afficherRecherche() {
     contenu += `</div>`;
 
     contenu += `<div class="list container" id='listProjet'>
+        <p class="titreProjets">Projets</p>
         <div class="headerListProjet">
                 <p>Titre</p>
                 <p>Nom Createur</p>

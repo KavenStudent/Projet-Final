@@ -76,26 +76,32 @@ function afficherPageProjet(json) {
             aria-label="Autres participants: ">`;
 
   //List participants
-  json.tabParticipantsProjet.forEach((membreProjet) => {
-    if (membreProjet.prive != 1) {
-      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
-    } else {
-      contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="afficherSnackbar('Ce membre est privé')" class="memberLink">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
-    }
-  });
+  if(json.tabParticipantsProjet.length >0){
+    json.tabParticipantsProjet.forEach((membreProjet) => {
+      if (membreProjet.prive != 1) {
+        contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+      } else {
+        contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="afficherSnackbar('Ce membre est privé')" class="memberLink">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
+      }
+    });
+  }
+  
   let partArray = json.projet.autreParticipant.split(",");
   partArray.forEach((participant) => {
     contenu += ` <li class="list-inline-item">${participant}</li>`;
   });
 
   //List tags
-  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline"
-  aria-label="Tags: ">`;
+  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags:">`;
 
-  json.tabTagsProjet.forEach((tagProjet) => {
-    contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
-  });
-  contenu = contenu.substring(0, contenu.length -7) + "</li>";
+  if(json.tabTagsProjet.length > 0){
+    json.tabTagsProjet.forEach((tagProjet) => {
+      contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
+    });
+    contenu = contenu.substring(0, contenu.length - 7) + "</li>";
+  }
+  
+  
   contenu += `</ul>`;
 
   //Description

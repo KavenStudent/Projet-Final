@@ -20,29 +20,33 @@
 }
 
 .list{
-    border: 5px solid #4169E1;
-    background-color:#4169e157;
+    border: 1px solid black;
+    /* background-color:#4169e157; */
     overflow-y: auto;
     max-height:40em;
-    padding: 2em 2em 2em 2em;
+    min-height: 17em;
+    padding: 0em 2em 0em 2em;
     margin-top: 2em;
     margin-bottom: 2em;
     min-width: 10em;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 
 #containerRecherche{
+    border: 5px solid #4169E1;
+    background-color:#4169e157;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
+    border-radius: 5px;
     margin-bottom: 1em;
 }
 
 #listMembre, #listProjet{
-    min-width: 15em;
+    min-width: 25em;
     flex:1;
     display: flex;
     flex-direction: column;
@@ -72,7 +76,8 @@
     font-weight: bold;
     min-width: 20em;
     min-height: 1em;
-    padding: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     padding-bottom: 0;
     margin-bottom: 0.5em;
     border-bottom: 1px solid black;
@@ -86,6 +91,7 @@
     border: 1px solid black;
     min-width: 20em;
     min-height: 3em;
+    max-height: 3em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -94,6 +100,7 @@
     margin-bottom: 1em;
     background-color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .nomMembreSuggestion, .idMembreSuggestion{
