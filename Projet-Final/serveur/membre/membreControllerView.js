@@ -49,7 +49,7 @@ function afficherPageAccueil(json) {
 				</div>
 
 				<div id="paypal-button-container">
-                        
+
 				</div>
 			</div>
 		</div>
