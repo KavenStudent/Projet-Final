@@ -2,7 +2,6 @@ const PRIX_ABONNEMENT = 4.99;
 
 function afficherPaypal(){
     
-
     item = {
       prix: PRIX_ABONNEMENT,
       abonnement_creation: Date.now(),

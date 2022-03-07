@@ -11,6 +11,7 @@ switch ($action) {
 
 
 function payer(){
+    global $tabRes;
     
 }
 
