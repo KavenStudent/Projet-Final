@@ -361,4 +361,22 @@ class MembreDaoImpl extends Modele implements MembreDao
             return $resultat;
         }
     }
+
+    public function adminCacherMembre(int $idMembre, int $valeur): bool
+    {
+        $returnValue = false;
+        try {
+            $requete = "UPDATE membre SET prive=?, adminLock=? WHERE id = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($valeur, $valeur, $idMembre));
+            $stmt = $this->executer();
+            $returnValue = true;
+        } catch (Exception $e) {
+            $returnValue = false;
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+            return $returnValue;
+        }
+    }
 }

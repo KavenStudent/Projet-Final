@@ -1,4 +1,4 @@
-<?php 
+<?php
 //Interface MembreDao
 interface MembreDao
 {
@@ -40,7 +40,9 @@ interface MembreDao
 
     public function getLastMembreId(): int;
 
-    public function getAllSignalisation() : array;
+    public function getAllSignalisation(): array;
 
     public function checkAbonnementMembre(int $idMembre): bool;
+
+    public function adminCacherMembre(int $idMembre, int $valeur): bool;
 }

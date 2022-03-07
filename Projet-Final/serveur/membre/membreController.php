@@ -42,6 +42,9 @@ switch ($action) {
     case "ajouterSignalisation":
         ajouterSignalisation();
         break;
+    case "adminCacherMembre":
+        adminCacherMembre();
+        break;
 }
 
 //Enregistre un membre
@@ -244,7 +247,8 @@ function loadAutrePageMembre()
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
         "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
         "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
-        "membrePremium" => $membre->getMembrePremium(), "adminLock" => $membre->getAdminLock()
+        "membrePremium" => $membre->getMembrePremium(), "adminLock" => $membre->getAdminLock(),
+        "prive" => $membre->getPrive()
     );
 }
 
@@ -260,7 +264,7 @@ function ajouterSignalisation()
     global $dao;
     $idMembre = $_POST['idMembre'];
     $description = $_POST['description'];
-    
+
     if (isset($_POST['projetRadio'])) {
         $idProjet = $_POST['projetRadio'];
     } else {
@@ -269,6 +273,32 @@ function ajouterSignalisation()
 
     $dao->addSignalement($idMembre, $idProjet, $description);
     $tabRes['action'] = 'ajouterSignalisation';
+}
+
+function adminCacherMembre()
+{
+    global $tabRes;
+    global $dao;
+
+    $idMembre = $_POST['idMembre'];
+    $valeur = $_POST['valeur'];
+
+    $dao->adminCacherMembre($idMembre, $valeur);
+
+    if ($tabRes['action'] == null)
+        $tabRes['action'] = 'autreMembre';
+
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+    $membre = $dao->getMembre($idMembre);
+    $tabRes['membre'] = array(
+        "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+        "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+        "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
+        "membrePremium" => $membre->getMembrePremium(), "adminLock" => $membre->getAdminLock(),
+        "prive" => $membre->getPrive()
+    );
+    $tabRes['msg'] = 'Changement effectué';
 }
 
 echo json_encode($tabRes);

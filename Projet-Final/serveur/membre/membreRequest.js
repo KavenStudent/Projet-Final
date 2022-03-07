@@ -282,3 +282,31 @@ function ajouterSignalerRequete(){
   });
 
 }
+
+function adminCacherMembre(idMembre, valeur){
+  var form = new FormData();
+  form.append("action", "adminCacherMembre");
+  form.append("idMembre", idMembre);
+  form.append("valeur", valeur);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
+    success: function (reponse) {
+      loadJsonRecherhe();
+      $(".lds-ring").addClass("hidden");
+      membresVue(reponse);
+      afficherSnackbar(reponse.msg);
+    },
+    fail: function (err) { },
+    complete: function () {
+    },
+  });
+}
