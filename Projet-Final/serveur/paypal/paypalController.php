@@ -3,14 +3,15 @@
 $tabRes = array();
 $tabRes['action'] = null;
 $action = $_POST['action'];
+
 switch ($action) {
     case "payer":
-        payer();
+        payer($_POST['item']);
         break;
 }
 
 
-function payer(){
+function payer($item){
     global $tabRes;
     
 }
