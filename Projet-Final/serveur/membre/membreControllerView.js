@@ -445,24 +445,49 @@ function afficherPageAutreMembre(json, listProjet) {
 
 function afficherPageAdmin(json) {
 
-    let contenu = `<div id="contenuRecherche"></div><div id="adminContainer">
-    <div id="report">
-        <div class="card myReportCard">`;
+    let contenu = `<div id="contenuRecherche"></div><div id="adminContainer" class="container">
+    <div class="separator"><h4> Profils non suspendus</h4>  
+    <div class="report">  
+      `;
 
     for (let i = 0; i < json.listeSignalisation.length; i++) {
-        contenu += `<div class="card-body">
-                <div id="card-contenu">
-                    <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage" 
-                    onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">
-                    <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom} #${json.listeSignalisation[i].idMembre}</h5>
-                    <h5 onclick="afficherRaison(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].nb} signalisations</h5>
-                </div>
+        if (json.listeSignalisation[i].adminLock == 0) {
+            contenu += ` <div class="card myReportCard">
+            <div class="card-body">
+            <div id="card-contenu">
+                <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage" 
+                onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">
+                <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom} #${json.listeSignalisation[i].idMembre}</h5>
+                <h5 onclick="afficherRaison(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].nb} signalisations</h5>
+            </div>
 
-            </div>`;
+        </div>
+        </div>`;
+        }
+
 
     }
+    contenu += `</div></div> 
+    <div class="separator"><h4> Profils suspendus</h4>  
+    <div class="report">`;
+
+    for (let i = 0; i < json.listeSignalisation.length; i++) {
+        if (json.listeSignalisation[i].adminLock == 1) {
+            contenu += `<div class="card myReportCard">
+            <div class="card-body">
+            <div id="card-contenu">
+                <img id='image-profil-report' src="Projet-Final/serveur/membre/images-profil/${json.listeSignalisation[i].imageProfil}" class="img-thumbnail" alt="profilImage" 
+                onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">
+                <h5 onclick="loadAutreMembre(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].prenom} ${json.listeSignalisation[i].nom} #${json.listeSignalisation[i].idMembre}</h5>
+                <h5 onclick="afficherRaison(${json.listeSignalisation[i].idMembre})">${json.listeSignalisation[i].nb} signalisations</h5>
+            </div>
+
+        </div>
+        </div>`;
+        }
 
 
+    }
     contenu += `</div> </div> </div>`;
 
     $('#contenu').html(contenu);

@@ -155,8 +155,6 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getActif(), $Membre->getId()));
             $stmt = $this->executer();
-
-            
         } catch (Exception $e) {
             echo $e->getMessage();
             $result = false;
@@ -307,8 +305,8 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT membre.id as idMembre, membre.imageProfil, membre.prenom, membre.nom, COUNT(*) as nb FROM signalisation inner JOIN membre
-             ON idMembre = membre.id GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
+            $requete = "SELECT membre.id as idMembre, membre.imageProfil, membre.prenom, membre.nom, membre.adminLock, COUNT(*) as nb FROM signalisation inner JOIN membre
+            ON idMembre = membre.id GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
