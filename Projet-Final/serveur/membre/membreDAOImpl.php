@@ -122,7 +122,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     public function modifierMembre(Membre $Membre, $dossier): bool
     {
         try {
-
+            $result = true;
             // cherche l'image du film a modifier
             $requete = "SELECT imageProfil, adminLock FROM membre WHERE id=?";
             $this->setRequete($requete);
@@ -136,6 +136,7 @@ class MembreDaoImpl extends Modele implements MembreDao
 
             if ($adminLock) {
                 $prive = $adminLock;
+                $result = false;
             } else {
                 $prive = $Membre->getPrive();
             }
@@ -155,7 +156,7 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setParams(array($Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getActif(), $Membre->getId()));
             $stmt = $this->executer();
 
-            $result = true;
+            
         } catch (Exception $e) {
             echo $e->getMessage();
             $result = false;

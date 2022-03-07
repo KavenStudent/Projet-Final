@@ -137,9 +137,15 @@ function modifierMembre()
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
     } else {
         //modifie le membre
-        $dao->modifierMembre($unMembre, "images-profil");
+        if($dao->modifierMembre($unMembre, "images-profil")) {
+            $tabRes['msg'] = "Profil mis à jour";
+        }
+        else {
+            $tabRes['msg'] = "Une erreur s'est produite. Un administrateur pourrait avour suspendu votre profil. Veuillez contacter le responsable du site.";
+        }
+        
         $tabRes['idDuMembre'] = $_SESSION['membre'];
-        $tabRes['msg'] = "Profil à jour";
+        
     }
 }
 
