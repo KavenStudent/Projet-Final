@@ -615,4 +615,5 @@ function loadPage() {
 function afficheSlidePayment(){
   let bsOffcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
 	bsOffcanvas.show(); // affiche le canvas du panier
+  afficherPaypal();
 }
