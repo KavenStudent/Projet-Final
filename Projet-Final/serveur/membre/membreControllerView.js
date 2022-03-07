@@ -387,21 +387,28 @@ function afficherPageAutreMembre(json, listProjet) {
         contenu += `Abonné`;
     }
 
-
-    contenu += `</div>
-    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>
-            </div>
-
-            <div class="container deuxieme-colonne">`;
-
-    // pour admin
     if (document.getElementById('typePage').value === "admin") {
-        contenu += `  <div class="container item1-deuxieme-colonne">
-                <div class="form-check form-switch item-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Visibilite</label>
+
+        if (json.membre.prive == 1) {
+            contenu += `</div>
+            <button class="btn btn-danger" type="button" onclick="adminCacherMembre(${json.membre.id}, 0)">Rendre visible le membre</button>
+                    </div>
+        
+                    <div class="container deuxieme-colonne">  `;
+        } else {
+            contenu += `</div>
+            <button class="btn btn-danger" type="button" onclick="adminCacherMembre(${json.membre.id}, 1)">Cacher le membre</button>
+                    </div>
+        
+                    <div class="container deuxieme-colonne">  `;
+        }
+
+    } else {
+        contenu += `</div>
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalSignaler">Signaler</button>
                 </div>
-            </div>`;
+    
+                <div class="container deuxieme-colonne">`
     }
 
     contenu += ` <div class='div-projets'>`;
