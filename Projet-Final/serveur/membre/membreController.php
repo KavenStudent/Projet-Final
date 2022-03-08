@@ -45,6 +45,9 @@ switch ($action) {
     case "adminCacherMembre":
         adminCacherMembre();
         break;
+    case "devenirPremium":
+        devenirPremium();
+        break;
 }
 
 //Enregistre un membre
@@ -137,15 +140,13 @@ function modifierMembre()
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
     } else {
         //modifie le membre
-        if($dao->modifierMembre($unMembre, "images-profil")) {
+        if ($dao->modifierMembre($unMembre, "images-profil")) {
             $tabRes['msg'] = "Profil mis à jour";
-        }
-        else {
+        } else {
             $tabRes['msg'] = "Une erreur s'est produite. Un administrateur pourrait avour suspendu votre profil. Veuillez contacter le responsable du site.";
         }
-        
+
         $tabRes['idDuMembre'] = $_SESSION['membre'];
-        
     }
 }
 
@@ -305,6 +306,34 @@ function adminCacherMembre()
         "prive" => $membre->getPrive()
     );
     $tabRes['msg'] = 'Changement effectué';
+}
+
+function devenirPremium()
+{
+    global $tabRes;
+    global $dao;
+
+    $idMembre = $_POST['idMembre'];
+
+    $result = $dao->devenirPremium($idMembre);
+
+    $membre = $dao->getMembre($idMembre);
+
+    $tabRes['membre'] = array(
+        "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+        "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+        "description" => $membre->getDescription(), "actif" => $membre->getActif(), "prive" => $membre->getPrive(), "imageProfil" => $membre->getImageProfil(),
+        "membrePremium" => $membre->getMembrePremium(), "dateFinAbonnement" => $membre->getDateFinAbonnement(),
+        "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole(), "adminLock" => $membre->getAdminLock()
+    );
+    $tabRes['action'] = "pageMembre";
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+    if ($result) {
+        $tabRes['msg'] = "Paiement effectué";
+    } else {
+        $tabRes['msg'] = "Erreur de paiement";
+    }
 }
 
 echo json_encode($tabRes);

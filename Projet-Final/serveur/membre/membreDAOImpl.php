@@ -240,7 +240,22 @@ class MembreDaoImpl extends Modele implements MembreDao
 
     public function devenirPremium(int $idMembre): bool
     {
-        return true;
+        try {
+            $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
+            $today = strtotime(date("Y-m-d"));
+            $dateFin  = date("Y-m-d", strtotime("+1 month", $today));
+
+            $this->setRequete($requete);
+            $this->setParams(array(1, $dateFin, $idMembre));
+            $stmt = $this->executer();
+            $result = true;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            $result = false;
+        } finally {
+            unset($requete);
+            return $result;
+        }
     }
 
     public function afficherHistoriqueAbonnement(int $idMembre): array

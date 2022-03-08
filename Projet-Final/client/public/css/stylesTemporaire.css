@@ -28,8 +28,8 @@
     padding: 0em 2em 0em 2em;
     margin-top: 2em;
     margin-bottom: 2em;
-    min-width: 10em;
     border-radius: 5px;
+    min-width: 20em;
 }
 
 #containerRecherche{
@@ -39,14 +39,15 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
-    flex-wrap: wrap;
+    
     /* border-bottom: 1px solid black; */
     border-radius: 5px;
     margin-bottom: 1em;
+    overflow-x: auto;
 }
 
 #listMembre, #listProjet{
-    min-width: 25em;
+   
     flex:1;
     display: flex;
     flex-direction: column;
@@ -89,24 +90,37 @@
 
 .cardMembreSuggestion, .cardProjetSuggestion{
     border: 1px solid black;
-    min-width: 20em;
     min-height: 3em;
     max-height: 3em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     margin-bottom: 1em;
     background-color: white;
     cursor: pointer;
     border-radius: 5px;
+    flex-wrap: wrap;
+    min-width: 20em;
+}
+
+@media only screen and (max-width: 990px) {
+    .list{
+        overflow-x: scroll;
+    }
+    #containerRecherche{
+        flex-wrap: wrap;
+    }
+    
 }
 
 .nomMembreSuggestion, .idMembreSuggestion{
     color: black;
     font-weight: bold;
     margin-bottom: 0;
+    word-wrap: break-word;
 }
 
  .titreProjetSuggestion, .createurProjetSuggestion, .nombreTelechargement{
@@ -114,6 +128,7 @@
     font-weight: bold;
     margin-bottom: 0;
     flex: 1;
+    word-wrap: break-word;
 }
 
 .imageProfilMembreSuggestion{
