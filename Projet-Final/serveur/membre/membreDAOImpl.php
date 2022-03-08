@@ -363,8 +363,9 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
-
-            return $stmt->fetch(PDO::FETCH_OBJ);
+            $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+            
+            return $ligne->membrePremium;
         } catch (Exception $e) {
             echo $e->getMessage();
         } finally {
