@@ -199,7 +199,32 @@ class MembreDaoImpl extends Modele implements MembreDao
 
                     //si c'est un membre
                     if ($membre->role === "M") {
-                        $_SESSION['membre'] = $membre->idMembre;
+
+                        $idMembre = $membre->idMembre;
+                        $_SESSION['membre'] = $idMembre;
+
+                        $requete = "SELECT * FROM membre WHERE id=?";
+                        $this->setRequete($requete);
+                        $this->setParams(array($idMembre));
+                        $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+                        $dateFin = $ligne->dateFinAbonnement;
+                        // print_r($dateFin);
+                        if (!is_null($dateFin)) {
+                            $tabToday = explode("-", date("Y-m-d"));
+                            $tFin = explode("-", $dateFin);
+                            print_r($tabToday);
+                            print_r($tFin);
+                            $diff = mktime(0, 0, 0, $tFin[1], $tFin[2], $tFin[0]) -
+                                mktime(0, 0, 0, $tabToday[1], $tabToday[2], $tabToday[0]);
+
+                            if ($diff <= 0) {
+                                $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
+                                $this->setRequete($requete);
+                                $this->setParams(array(0, null, $idMembre));
+                                $stmt = $this->executer();
+                                $msgErreur = "Votre abonnement est expire";
+                            }
+                        }
                     } else if ($membre->role === "A") {
                         $_SESSION['admin'] = $membre->idMembre;
                     }
@@ -364,7 +389,7 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
-            
+
             return $ligne->membrePremium;
         } catch (Exception $e) {
             echo $e->getMessage();
