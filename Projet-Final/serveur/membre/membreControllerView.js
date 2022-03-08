@@ -160,7 +160,6 @@ function afficherPageAccueil(json) {
 }
 
 function afficherPageMembre(json, listProjet) {
-
   let contenu = ` <!-- partie paiment -->
     <!-- canvas panier paypal-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -541,7 +540,7 @@ function afficherRecherche() {
         <div class="headerListProjet">
                 <p>Titre</p>
                 <p>Nom Createur</p>
-                <p>#nbTéléchargement</p>
+                <p>Nb Téléchargement</p>
         </div><div id='contenuCardsProjet'></div>`;
   contenu += ` </div></div>`;
 
