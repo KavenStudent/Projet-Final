@@ -140,8 +140,8 @@ function loadMembre(pageType, idMembre, msg) {
     fail: function (err) { },
     complete: function () {
       $('.lds-ring').addClass('hidden');
-      if (msg != undefined && msg.length > 0 )
-      afficherSnackbar(msg);
+      if (msg != undefined && msg.length > 0)
+        afficherSnackbar(msg);
     },
 
   });
@@ -228,7 +228,7 @@ function loadPageAdmin() {
   });
 }
 
-function loadPageRecherche(){
+function loadPageRecherche() {
   var form = new FormData();
   form.append("action", "loadPageRecherche");
 
@@ -253,7 +253,7 @@ function loadPageRecherche(){
   });
 }
 
-function ajouterSignalerRequete(){
+function ajouterSignalerRequete() {
   var form = new FormData(document.getElementById('form-signaler'));
   form.append("action", "ajouterSignalisation");
 
@@ -271,7 +271,7 @@ function ajouterSignalerRequete(){
       console.log('succes');
       membresVue(reponse);
     },
-    fail: function (err) { 
+    fail: function (err) {
       console.log('fail');
     },
     complete: function () {
@@ -283,11 +283,39 @@ function ajouterSignalerRequete(){
 
 }
 
-function adminCacherMembre(idMembre, valeur){
+function adminCacherMembre(idMembre, valeur) {
   var form = new FormData();
   form.append("action", "adminCacherMembre");
   form.append("idMembre", idMembre);
   form.append("valeur", valeur);
+
+  $.ajax({
+    type: "POST",
+    url: "./Projet-Final/serveur/membre/membreController.php",
+    data: form,
+    dataType: "json",
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $(".lds-ring").removeClass("hidden");
+    },
+    success: function (reponse) {
+      loadJsonRecherhe();
+      $(".lds-ring").addClass("hidden");
+      membresVue(reponse);
+      afficherSnackbar(reponse.msg);
+    },
+    fail: function (err) { },
+    complete: function () {
+    },
+  });
+}
+
+function devenirPremium() {
+  var form = new FormData();
+  form.append("action", "devenirPremium");
+  form.append("idMembre", document.getElementById("typePage").value);
+
 
   $.ajax({
     type: "POST",

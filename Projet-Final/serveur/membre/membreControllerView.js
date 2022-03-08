@@ -40,13 +40,13 @@ function afficherPageAccueil(json) {
 
 			<div class="offcanvas-body">
 
-				<div id="panier">
+                <div id="panier">
+                <p>Abonnement 1 mois : 4,99$</p>
+                </div>
 
-				</div>
-
-				<div id="total">
-
-				</div>
+                <div id="total">
+                <p>Total : 4,99$</p>
+                </div>
 
 				<div id="paypal-button-container">
 
@@ -167,7 +167,7 @@ function afficherPageAccueil(json) {
 
 function afficherPageMembre(json, listProjet) {
 
-    
+
 
 
     let contenu = ` <!-- partie paiment -->
@@ -181,11 +181,11 @@ function afficherPageMembre(json, listProjet) {
         <div class="offcanvas-body">
 
             <div id="panier">
-
+            <p>Abonnement 1 mois : 4,99$</p>
             </div>
 
             <div id="total">
-
+            <p>Total : 4,99$</p>
             </div>
 
             <div id="paypal-button-container">
