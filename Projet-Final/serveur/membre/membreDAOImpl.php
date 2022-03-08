@@ -206,14 +206,15 @@ class MembreDaoImpl extends Modele implements MembreDao
                         $requete = "SELECT * FROM membre WHERE id=?";
                         $this->setRequete($requete);
                         $this->setParams(array($idMembre));
+                        $stmt = $this->executer();
                         $ligne = $stmt->fetch(PDO::FETCH_OBJ);
                         $dateFin = $ligne->dateFinAbonnement;
-                        // print_r($dateFin);
+                        // print($dateFin);
                         if (!is_null($dateFin)) {
                             $tabToday = explode("-", date("Y-m-d"));
                             $tFin = explode("-", $dateFin);
-                            print_r($tabToday);
-                            print_r($tFin);
+                            // print_r($tabToday);
+                            // print_r($tFin);
                             $diff = mktime(0, 0, 0, $tFin[1], $tFin[2], $tFin[0]) -
                                 mktime(0, 0, 0, $tabToday[1], $tabToday[2], $tabToday[0]);
 
