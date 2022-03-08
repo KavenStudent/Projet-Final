@@ -223,7 +223,7 @@ class MembreDaoImpl extends Modele implements MembreDao
                                 $this->setRequete($requete);
                                 $this->setParams(array(0, null, $idMembre));
                                 $stmt = $this->executer();
-                                $msgErreur = "Votre abonnement est expire";
+                                $msgErreur = "Votre abonnement est expiré!";
                             }
                         }
                     } else if ($membre->role === "A") {
