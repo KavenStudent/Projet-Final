@@ -58,23 +58,21 @@ function afficherPageAccueil(json) {
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
       <div class="col-lg-4 customized-item">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+      <img class="imageFrontPage logo" src="Projet-Final/client/public/images/eyes_logo.jpg" class="img-thumbnail" alt="...">
         <h2>Vision</h2>
         <p>Nous rêvions d'un réseau social permettant de facilement visualiser le portfolio de nos membres. Plus besoin de passer des heures à créer un site web. Vous pouvez maintenant faire un portfolio en quelques cliques!</p>
-        <p class="details"><a class="btn btn-primary" href="#">détails »</a></p>
       </div><!-- /.col-lg-4 -->
 
       <div class="col-lg-4 customized-item">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+      <img class="imageFrontPage logo" src="Projet-Final/client/public/images/about.png" class="img-thumbnail" alt="...">
         <h2>À propros de nous</h2>
         <p>Notre équipe est formé de cinq étudiants en informatique au Collège Ahuntsic. Ce projet était originalement notre projet de fin d'études.</p>
       </div><!-- /.col-lg-4 -->
 
       <div class="col-lg-4 customized-item">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+      <img class="imageFrontPage logo" src="Projet-Final/client/public/images/cible.png" class="img-thumbnail" alt="...">
         <h2>Mission</h2>
         <p>Nous cherchons à centraliser le processus création et de visualisation d'un portfolio. Créer un seul endroit ou employeurs et employés peuvent facilement gérer l'image de leurs compétences.<!--Ils seront capable de montrer à des employeurs les compétences qui ont développées tout au long de leur vie --></p>
-        <p class="details"><a class="btn btn-primary" href="#">détails  »</a></p>
       </div><!-- /.col-lg-4 -->
 
     </div><!-- /.row -->
@@ -102,8 +100,7 @@ function afficherPageAccueil(json) {
         <p class="lead">Commencez par vous connecter (ou vous créer un compte). Une fois sur votre page de membre, cliquez sur le bouton "Nouveau projet" et renseignez tous les champs. Il peut être bénéfique de détailler sur quelles parties du projet vous avez travaillés si vous n'étiez pas le seul contributeur. Une fois le projet créé, la liste de projets de votre portfolio sera affiché sur votre page de profil.</p>
       </div>
       <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
+      <img class="imageFrontPage" src="Projet-Final/client/public/images/CapturePorfolio.PNG" class="img-thumbnail" alt="...">
       </div>
     </div>
 
@@ -115,7 +112,7 @@ function afficherPageAccueil(json) {
         <p class="lead">Notre site peut être navigué sur mobile! Le site est dynamique et facile à utiliser. Vous pouvez naviguer confortablement avec des appareils de n'importe quel format.</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      <img class="imageFrontPage" src="Projet-Final/client/public/images/phone.png" class="img-thumbnail" alt="...">
 
       </div>
     </div>
@@ -127,7 +124,7 @@ function afficherPageAccueil(json) {
     contenu += ` <div id='abonnement-free' class='case-abonnement'>
             <p class="titreAbonnementCase">GRATUIT</p>
             <ul>
-              <li>Informations de profil complète</li>
+              <li>Informations de profil complètes</li>
               <li>Fichiers de projet de taille limité à 8MB</li>
               <li>Portfolio limité à 3 projets</li>
             </ul>
@@ -136,7 +133,7 @@ function afficherPageAccueil(json) {
         <div id='abonnement-premium' class='case-abonnement'>
             <p class="titreAbonnementCase">ABONNEMENT</p>
             <ul>
-              <li>Informations de profil complète</li>
+              <li>Informations de profil complètes</li>
               <li>Fichiers de projet de taille illimité</li>
               <li>Portfolio de taille illimité</li>
             </ul>
@@ -147,7 +144,7 @@ function afficherPageAccueil(json) {
         <div id='abonnement-premium' class='case-abonnement'>
             <p class="titreAbonnementCase">ABONNEMENT</p>
             <ul>
-              <li>Informations de profil complète</li>
+              <li>Informations de profil complètes</li>
               <li>Fichiers de projet de taille illimité</li>
               <li>Portfolio de taille illimité</li>
             </ul>
