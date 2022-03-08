@@ -57,10 +57,8 @@
                     </div>
                     <br>
                     <div class="col-md-8 itemInput">
-                        <button type="button" class="collapsible">Termes et conditions</button>
-                        <div class="contentConditions">
-                            <p>Inserer termes et conditions</p>
-                        </div>
+                       <a href="https://www.termsandconditionsgenerator.com/live.php?token=kw2Cf0iJKV2r3NpoKbr74CdX7EHp4gzr" target="_blank"><button type="button" class="collapsible">Termes et conditions</button></a>
+
                     </div>
 
                     <div class="col-8 itemInput">
