@@ -1,43 +1,33 @@
 const PRIX_ABONNEMENT = 4.99;
 
-function afficherPaypal(){
+function afficherPaypal() {
     cleanButtons();
     item = {
-      prix: PRIX_ABONNEMENT,
-      abonnement_creation: Date.now(),
+        prix: PRIX_ABONNEMENT,
+        abonnement_creation: Date.now(),
     }
-    
+
     paypal.Buttons({
-      createOrder: function (data, actions) {
-          // This function sets up the details of the transaction, including the amount and line item details.
-          return actions.order.create({
-              purchase_units: [{
-                  amount: {
-                      value: PRIX_ABONNEMENT
-                  }
-              }]
-          });
-      },
-      onApprove: function () {
+        createOrder: function (data, actions) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: PRIX_ABONNEMENT
+                    }
+                }]
+            });
+        },
+        onApprove: function () {
 
-          $.ajax({
-              type: 'POST',
-              url: './Projet-Final/serveur/paypal/paypalController.php',
-              data: {"action": 'payer', "item": item},
-              dataType: 'json',
-              success: function (reponse) {
-                  // viderPanier();
-                  // initialiser(reponse.msg);
-              },
-              fail: function (err) {}
-          });
+            devenirPremium();
 
-      }
-  }).render('#paypal-button-container');
-    
-  }
+        }
+    }).render('#paypal-button-container');
 
-  function cleanButtons(){
+}
+
+function cleanButtons() {
     let divPaypalButtons = document.getElementById('paypal-button-container');
     divPaypalButtons.innerHTML = "";
-  }
+}
