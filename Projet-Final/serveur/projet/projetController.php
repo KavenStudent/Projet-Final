@@ -195,6 +195,42 @@ function ajouterProjet()
     }
 }
 
+
+
+    $participantsProjet = $_POST['participantsProjet'];
+
+    $tabParticipantAvecId = array();
+    $tabParticipantSansId = "";
+
+    if (strlen($participantsProjet) > 0) {
+        $tabParticipants = explode(',', $participantsProjet);
+    } else {
+        $tabParticipants = array();
+    }
+    foreach ($tabParticipants as $part) {
+        if (preg_match('~[0-9]+~', $part)) {
+            $tabParticipantAvecId[] = trim($part);
+        } else {
+            $tabParticipantSansId .= $part . ",";
+        }
+    }
+
+
+    $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) - 1);
+
+    $nomComplet = $dao->getMembreNameById($idMembre);
+
+    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet, $adminLock);
+
+    if ($tabRes['action'] == null) {
+        if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
+            $tabRes['action'] = 'redirigerPageMembre';
+            $tabRes['idMembre'] = $idMembre;
+            $tabRes['message'] = "Projet ajouté avec succès";
+        }
+    }
+}
+
 function loadAutreProjet()
 {
     global $tabRes;

@@ -93,6 +93,27 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         }
         return $tab;
     }
+
+    public function getCountProjetsForMembre(int $idMembre): array
+    {
+        try {
+            $tab = array();
+            $requete = "SELECT COUNT(p.id) IF(m.membrePremium = 1, 'TRUE', 'FALSE' ) FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE idCreateur = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($idMembre));
+            $stmt = $this->executer();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+        return $tab;
+    }
+
+
     public function getAllRegisteredParticipantsForProjet(int $idProjet): array
     {
         try {
