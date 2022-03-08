@@ -590,17 +590,21 @@ textarea {
   align-self: center;
 }
 
-
-.titreMembres{
+.titreMembres {
   align-self: center;
   font-size: 2.5em;
-  color: #4169E1;
+  color: #4169e1;
   font-weight: bold;
 }
 
-.titreProjets{
+.titreProjets {
   align-self: center;
   font-size: 2.5em;
-  color: #4169E1;
+  color: #4169e1;
   font-weight: bold;
+}
+
+.imageFrontPage {
+  width: 100%;
+  height: 100%;
 }
