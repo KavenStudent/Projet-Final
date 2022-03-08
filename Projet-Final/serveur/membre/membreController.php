@@ -210,10 +210,9 @@ function loadPageAccueil()
         $tabRes['action'] = 'pageAccueil';
 
         if (isset($_SESSION['membre'])) {
-            $id = (int) isset($_SESSION['membre']);
+            $id = (int) $_SESSION['membre'];
             $tabRes['id'] = $id;
             $tabRes['isSub'] = $dao->checkAbonnementMembre($id);
-            print_r($dao->checkAbonnementMembre($id));
         } else if (isset($_SESSION['admin'])) {
             $tabRes['id'] = 'admin';
         }
