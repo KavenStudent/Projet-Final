@@ -241,7 +241,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     public function devenirPremium(int $idMembre): bool
     {
         try {
-            $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE idMembre=?";
+            $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
             $today = strtotime(date("Y-m-d"));
             $dateFin  = date("Y-m-d", strtotime("+1 month", $today));
 
