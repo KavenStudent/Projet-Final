@@ -19,9 +19,7 @@ function afficherPaypal() {
             });
         },
         onApprove: function () {
-
             devenirPremium();
-            sendEmail();
         }
     }).render('#paypal-button-container');
 
