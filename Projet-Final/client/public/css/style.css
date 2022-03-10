@@ -599,12 +599,17 @@ textarea {
   height: 100%;
 }
 .logo{
-  width: 13em;
-  height: 9em;
+  width: 130px;
+  height: 100px;
   margin-bottom: 30;
 }
 .logoEyes{
-  width: 15em;
-  height: 9em;
+  width: 140px;
+  height: 100px;
+  margin-bottom: 30;
+}
+.logoTarget{
+  width: 100px;
+  height: 100px;
   margin-bottom: 30;
 }
