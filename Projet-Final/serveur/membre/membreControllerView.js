@@ -70,7 +70,7 @@ function afficherPageAccueil(json) {
       </div><!-- /.col-lg-4 -->
 
       <div class="col-lg-4 customized-item">
-      <img class="imageFrontPage logo" src="Projet-Final/client/public/images/cible.png" class="img-thumbnail" alt="...">
+      <img class="imageFrontPage logoTarget" src="Projet-Final/client/public/images/target.png" class="img-thumbnail" alt="...">
         <h2>Mission</h2>
         <p>Nous cherchons à centraliser le processus création et de visualisation d'un portfolio. Créer un seul endroit ou employeurs et employés peuvent facilement gérer l'image de leurs compétences.<!--Ils seront capable de montrer à des employeurs les compétences qui ont développées tout au long de leur vie --></p>
       </div><!-- /.col-lg-4 -->
