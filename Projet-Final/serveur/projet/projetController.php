@@ -186,13 +186,18 @@ function ajouterProjet()
 
     $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet, $adminLock);
 
+    
+
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'redirigerPageMembre';
-            $tabRes['idMembre'] = $idMembre;
             $tabRes['message'] = "Projet ajouté avec succès";
+        }else {
+            $tabRes['message'] = "Une erreur s'est produite. Vous pourriez avoir atteint votre limite de projet.";
         }
+        $tabRes['action'] = 'redirigerPageMembre';
+        $tabRes['idMembre'] = $idMembre;
     }
+  
 }
 
 function loadAutreProjet()

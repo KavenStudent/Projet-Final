@@ -136,6 +136,18 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
             $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
+            $requete = "SELECT COUNT(p.id) as nbProjets , m.membrePremium FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE idCreateur = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($projet->getCreateurId()));
+            $stmt = $this->executer();
+
+            $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+            if($ligne->nbProjets >=3 && !$ligne->membrePremium){
+                $returnValue = false;
+            }
+            else{
+
+           
             //  Ajoute le projet
             $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail, adminLock) VALUES(0,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
@@ -187,6 +199,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             //  Ajouter les tags au projet
 
             $returnValue = true;
+        }
+        
         } catch (Exception $e) {
             echo $e->getMessage();
             $returnValue = false;
