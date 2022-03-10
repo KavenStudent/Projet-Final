@@ -32,7 +32,7 @@ interface MembreDao
     public function mettreProfilPrive(int $prive, int $idMembre): bool;
 
     // Paie l'abonnement du membre pour devenir premium
-    public function devenirPremium(int $idMembre): bool;
+    public function devenirPremium(int $idMembre): array;
 
     //Affiche l'historique d'abonnement
     public function afficherHistoriqueAbonnement(int $idMembre): array;

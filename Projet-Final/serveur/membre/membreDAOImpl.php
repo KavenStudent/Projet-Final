@@ -262,23 +262,38 @@ class MembreDaoImpl extends Modele implements MembreDao
         return true;
     }
 
-    public function devenirPremium(int $idMembre): bool
+    public function devenirPremium(int $idMembre): array
     {
         try {
+            $tab = array();
             $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
-            $today = strtotime(date("Y-m-d"));
-            $dateFin  = date("Y-m-d", strtotime("+1 month", $today));
+            $today = date("Y-m-d");
+            $dateFin  = date("Y-m-d", strtotime("+1 month", strtotime($today)));
 
             $this->setRequete($requete);
             $this->setParams(array(1, $dateFin, $idMembre));
             $stmt = $this->executer();
-            $result = true;
+
+            $todayDate = date("Y-m-d");
+            $requete = "INSERT INTO historiquepaiement VALUES(0,?,?,?)";
+            $this->setRequete($requete);
+            $this->setParams(array(4.99, $today, $idMembre));
+            $stmt = $this->executer();
+
+            $requete = "SELECT h.id, h.cout, h.date, h.idMembre, m.courriel, m.prenom, m.nom, m.dateFinAbonnement
+            FROM historiquepaiement h INNER JOIN membre m ON h.idMembre = m.id ORDER BY h.id DESC LIMIT 1";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+            return $tab;
         } catch (Exception $e) {
             echo $e->getMessage();
-            $result = false;
         } finally {
             unset($requete);
-            return $result;
         }
     }
 
@@ -429,6 +444,8 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($valeur, $valeur, $idMembre));
             $stmt = $this->executer();
+
+
             $returnValue = true;
         } catch (Exception $e) {
             $returnValue = false;

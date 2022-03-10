@@ -314,10 +314,8 @@ function devenirPremium()
 
     $idMembre = $_POST['idMembre'];
 
-    $result = $dao->devenirPremium($idMembre);
-
+    $tabRes['facture'] = $dao->devenirPremium($idMembre);
     $membre = $dao->getMembre($idMembre);
-
     $tabRes['membre'] = array(
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
         "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
@@ -328,11 +326,8 @@ function devenirPremium()
     $tabRes['action'] = "pageMembre";
     $daoProjet = new ProjetDaoImpl();
     $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
-    if ($result) {
-        $tabRes['msg'] = "Paiement effectué";
-    } else {
-        $tabRes['msg'] = "Erreur de paiement";
-    }
+
+    $tabRes['msg'] = "Paiement effectué";
 }
 
 echo json_encode($tabRes);
