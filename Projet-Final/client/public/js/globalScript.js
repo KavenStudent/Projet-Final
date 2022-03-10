@@ -612,8 +612,24 @@ function loadPage() {
   }
 }
 
-function afficheSlidePayment(){
+function afficheSlidePayment(receiver){
   let bsOffcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
 	bsOffcanvas.show(); // affiche le canvas du panier
-  afficherPaypal();
+  afficherPaypal(receiver);
+}
+
+function sendEmail(receiver) {
+
+  Email.send({
+    Host: "smtp.mailtrap.io",
+    Username: "6ba83244c793a7",
+    Password: "a0b79b0e94a6fb",
+    To: receiver,
+    From: "projeturanus@gmail.com",
+    Subject: "Sending Email using javascript",
+    Body: "Well that was easy!!",
+  })
+  .then(function (message) {
+      alert("mail sent successfully")
+  });
 }

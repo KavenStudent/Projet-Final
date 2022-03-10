@@ -204,7 +204,7 @@ function afficherPageMembre(json, listProjet) {
 
   if (json.membre.membrePremium == 0) {
     contenu += `non-abonné </span></label> 
-        <button id="upgrade-button" class="upgrade-button-membre" onclick="afficheSlidePayment();">Upgrade</button>`;
+        <button id="upgrade-button" class="upgrade-button-membre" onclick="afficheSlidePayment(${json.membre.courriel});">Upgrade</button>`;
   } else if (json.membre.membrePremium == 1) {
     contenu += `Abonné </span></label>
         <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>`;
@@ -255,7 +255,7 @@ function afficherPageMembreEdit(json) {
         <form id='membreEditForm' name="membre-edit">
     
             <input type='hidden' name='idMembre' value="${json.membre.id}">
-            <input type="hidden" name="action" value="modifierMembre">formProjetEditformProjetEdit
+            <input type="hidden" name="action" value="modifierMembre">
             
             <input type="submit" id="validation-form-membre-edit" class="validation" />
     
