@@ -148,7 +148,7 @@ function afficherPageAccueil(json) {
               <li>Fichiers de projet de taille illimité</li>
               <li>Portfolio de taille illimité</li>
             </ul>
-            <button id='upgrade-button' onclick='afficheSlidePayment()'>Upgrade</button>
+            <button id='upgrade-button' onclick='afficheSlidePayment(projeturanus@gmail.com)'>Upgrade</button>
         </div>`;
   }
 
