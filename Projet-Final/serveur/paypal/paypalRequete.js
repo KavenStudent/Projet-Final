@@ -1,6 +1,6 @@
 const PRIX_ABONNEMENT = 4.99;
 
-function afficherPaypal(receiver) {
+function afficherPaypal() {
     cleanButtons();
     item = {
         prix: PRIX_ABONNEMENT,
@@ -21,7 +21,7 @@ function afficherPaypal(receiver) {
         onApprove: function () {
 
             devenirPremium();
-            sendEmail(receiver);
+            sendEmail();
         }
     }).render('#paypal-button-container');
 

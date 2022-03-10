@@ -148,7 +148,8 @@ function afficherPageAccueil(json) {
               <li>Fichiers de projet de taille illimité</li>
               <li>Portfolio de taille illimité</li>
             </ul>
-            <button id='upgrade-button' onclick='afficheSlidePayment(${json.facture.courriel})'>Upgrade</button>
+            <button id='upgrade-button' onclick='afficheSlidePayment();'>Upgrade</button>
+            
         </div>`;
   }
 
@@ -204,7 +205,7 @@ function afficherPageMembre(json, listProjet) {
 
   if (json.membre.membrePremium == 0) {
     contenu += `non-abonné </span></label> 
-        <button id="upgrade-button" class="upgrade-button-membre" onclick="afficheSlidePayment(${json.membre.courriel});">Upgrade</button>`;
+        <button id="upgrade-button" class="upgrade-button-membre" onclick="afficheSlidePayment();">Upgrade</button><button id='upgrade-button' onclick='sendEmail(${json.membre.courriel});'>EMAILED</button>`;
   } else if (json.membre.membrePremium == 1) {
     contenu += `Abonné </span></label>
         <label><strong>Date fin d'abonnement :</strong> <span>${json.membre.dateFinAbonnement}</span></label>`;
