@@ -330,6 +330,7 @@ function devenirPremium() {
     success: function (reponse) {
       loadJsonRecherhe();
       $(".lds-ring").addClass("hidden");
+      $('#offcanvasRight').offcanvas('hide');
       membresVue(reponse);
       afficherSnackbar(reponse.msg);
     },
