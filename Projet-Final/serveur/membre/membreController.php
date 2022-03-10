@@ -315,7 +315,8 @@ function devenirPremium()
 
     $idMembre = $_POST['idMembre'];
 
-    $tabRes['facture'] = $dao->devenirPremium($idMembre);
+    $facture = $dao->devenirPremium($idMembre);
+
     $membre = $dao->getMembre($idMembre);
     $tabRes['membre'] = array(
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
@@ -329,6 +330,13 @@ function devenirPremium()
     $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
 
     $tabRes['msg'] = "Paiement effectué";
+
+    $to = $facture['courriel'];
+    $subject = "Paiement";
+    $txt = "Vous êtes abonné!";
+    $headers = "From: projeturanus@gmail.com";
+
+    mail($to,$subject,$txt,$headers);
 }
 
 echo json_encode($tabRes);
