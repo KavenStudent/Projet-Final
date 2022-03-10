@@ -600,5 +600,11 @@ textarea {
 }
 .logo{
   width: 13em;
-  height: 10em;
+  height: 9em;
+  margin-bottom: 30;
+}
+.logoEyes{
+  width: 15em;
+  height: 9em;
+  margin-bottom: 30;
 }

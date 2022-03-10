@@ -58,7 +58,7 @@ function afficherPageAccueil(json) {
     <!-- Three columns of text below the carousel -->
     <div class="row d-flex customized-row">
       <div class="col-lg-4 customized-item">
-      <img class="imageFrontPage logo" src="Projet-Final/client/public/images/eyes_logo.jpg" class="img-thumbnail" alt="...">
+      <img class="imageFrontPage logoEyes" src="Projet-Final/client/public/images/eyes_logo.png" class="img-thumbnail" alt="...">
         <h2>Vision</h2>
         <p>Nous rêvions d'un réseau social permettant de facilement visualiser le portfolio de nos membres. Plus besoin de passer des heures à créer un site web. Vous pouvez maintenant faire un portfolio en quelques cliques!</p>
       </div><!-- /.col-lg-4 -->
