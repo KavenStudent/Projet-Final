@@ -35,6 +35,12 @@ switch ($action) {
     case "supprimerProjet":
         supprimerProjet();
         break;
+    case "afficherRaison":
+        afficherRaison();
+        break;
+    case "adminCacherProjet":
+        adminCacherProjet();
+        break;
 }
 
 function modifierProjet()
@@ -47,7 +53,7 @@ function modifierProjet()
     $descriptionProjet = $_POST['descriptionProjetEdit'];
     $path = "";
     $prive = $_POST['projetPublicEdit'];
-
+    $adminLock = 0;
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjetEdit'];
 
@@ -74,15 +80,16 @@ function modifierProjet()
 
     $stringPart = substr($tabParticipantSansId, 0, strlen($tabParticipantSansId) - 1);
 
-    $projet = new Projet($idProjet, 0, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, "");
+    $projet = new Projet($idProjet, 0, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, "", $adminLock);
 
     if ($tabRes['action'] == null) {
         if ($dao->modifierProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'modifierProjetReussi';
-            $tabRes['idMembre'] = $_SESSION['membre'];
+            $tabRes['message'] = "Projet modifié avec succès";
         } else {
-            $tabRes['test'] = "failed";
+            $tabRes['message'] = "Une erreur s'est produite lors de la modification de votre projet. Un administrateur pourrait l'avoir suspendu. Veuillez contacter le responsable du site.";
         }
+        $tabRes['action'] = "redirigerPageMembre";
+        $tabRes['idMembre'] = $_SESSION['membre'];
     }
 }
 
@@ -101,7 +108,8 @@ function loadPageProjetController()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(), "path" => $projet->getPath()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "prive" => $projet->isPrive(),
+        "path" => $projet->getPath(), "adminLock" => $projet->getAdminLock()
     );
 
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
@@ -139,7 +147,7 @@ function ajouterProjet()
     $descriptionProjet = $_POST['descriptionProjet'];
     $path = "";
     $prive = false;
-
+    $adminLock = 0;
     $nbTelechargements = 0;
     $lienProjet = $_POST['lienProjet'];
 
@@ -147,23 +155,21 @@ function ajouterProjet()
     $thumbnail = "defaultThumbnail.png";
 
     $tagsSTRING = $_POST['tags'];
-    if(strlen($tagsSTRING) > 0) {
+    if (strlen($tagsSTRING) > 0) {
         $tags = explode(',', $tagsSTRING);
-    }
-    else {
+    } else {
         $tags = array();
     }
-    
+
 
     $participantsProjet = $_POST['participantsProjet'];
 
     $tabParticipantAvecId = array();
     $tabParticipantSansId = "";
 
-    if (strlen($participantsProjet) > 0){
+    if (strlen($participantsProjet) > 0) {
         $tabParticipants = explode(',', $participantsProjet);
-    }
-    else {
+    } else {
         $tabParticipants = array();
     }
     foreach ($tabParticipants as $part) {
@@ -178,14 +184,20 @@ function ajouterProjet()
 
     $nomComplet = $dao->getMembreNameById($idMembre);
 
-    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet);
+    $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet, $adminLock);
+
+    
 
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
-            $tabRes['action'] = 'ajouterProjetReussi';
-            $tabRes['idMembre'] = $idMembre;
+            $tabRes['message'] = "Projet ajouté avec succès";
+        }else {
+            $tabRes['message'] = "Une erreur s'est produite. Vous pourriez avoir atteint votre limite de projet.";
         }
+        $tabRes['action'] = 'redirigerPageMembre';
+        $tabRes['idMembre'] = $idMembre;
     }
+  
 }
 
 function loadAutreProjet()
@@ -202,7 +214,8 @@ function loadAutreProjet()
     $tabRes['projet'] = array(
         "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
         "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
-        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath()
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(),
+        "prive" => $projet->isPrive(), "adminLock" => $projet->getAdminLock()
     );
     $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
     $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
@@ -213,7 +226,7 @@ function loadJsonRecherhe()
     global $tabRes;
     global $dao;
     $daoMembre = new MembreDaoImpl();
-    $tabRes['tabMembres'] =  $daoMembre->getAllMembre();
+    $tabRes['tabMembres'] =  $daoMembre->getAllMembreSuggestion();
     $tabRes['tabProjets'] = $dao->getAllProjetsForCards();
 }
 
@@ -240,9 +253,47 @@ function supprimerProjet()
     $projet = $dao->supprimerProjet($idProjet);
 
     if ($tabRes['action'] == null) {
-        $tabRes['action'] = 'supprimerProjet';
+        $tabRes['action'] = 'redirigerPageMembre';
         $tabRes['idMembre'] = $idMembre;
+        $tabRes['message'] = "Projet supprimé avec succès";
     }
+}
+
+function afficherRaison()
+{
+
+    global $tabRes;
+    global $dao;
+
+    $idMembre = $_POST['idMembre'];
+
+    $tabRes['tabRaison'] = $dao->getAllRaisonForMembre($idMembre);
+    $tabRes['action'] = 'afficherRaison';
+}
+
+function adminCacherProjet()
+{
+    global $tabRes;
+    global $dao;
+
+    $idProjet = $_POST['idProjet'];
+    $valeur = $_POST['valeur'];
+
+    $dao->adminCacherProjet($idProjet, $valeur);
+
+    if ($tabRes['action'] == null)
+        $tabRes['action'] = 'autreProjet';
+
+    $projet = $dao->getProjet($idProjet);
+    $tabRes['projet'] = array(
+        "id" => $projet->getId(), "titre" => $projet->getTitre(), "idCreator" => $projet->getCreateurId(), "autreParticipant" => $projet->getAutresParticipants(),
+        "description" => $projet->getDescription(), "lienExterne" => $projet->getLienExterne(),
+        "nomComplet" => $projet->getNomMembre(), "thumbnail" => $projet->getThumbnail(), "path" => $projet->getPath(),
+        "prive" => $projet->isPrive(), "adminLock" => $projet->getAdminLock()
+    );
+    $tabRes['tabParticipantsProjet'] = $dao->getAllRegisteredParticipantsForProjet($idProjet);
+    $tabRes['tabTagsProjet'] = $dao->getAllTagsForProjet($idProjet);
+    $tabRes['msg'] = 'Changement effectué';
 }
 
 echo json_encode($tabRes);

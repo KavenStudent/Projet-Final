@@ -1,23 +1,30 @@
 #adminContainer {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
     flex-wrap: wrap;
-    align-content: center;
-
 }
 
-#report {
+.separator {
+    width: 40em;
+}
+
+.report {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 50%;
+    flex: 1;
+    min-width: 45%;
     height: 650px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    justify-content: flex-start;
 }
 
 #image-profil-report {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+    margin-right: 3px;
 }
 
 #image-profil-report:hover {
@@ -27,18 +34,24 @@
 #card-contenu {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding: 5px;
 }
 
 .myReportCard {
-    margin: 10px;
+    margin: 5px;
 }
 
 h5:hover {
     cursor: pointer;
 }
 
-.descCard {
+.descriptionCard {
     margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.divSignalisation {
+    overflow-y: scroll;
 }

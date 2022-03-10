@@ -94,16 +94,6 @@ textarea {
   color: #4169e1;
 }
 
-/* Termes et Conditions */
-.contentConditions {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #cac7c7;
-  border-radius: 5px;
-}
 
 /* SEARCH BAR */
 
@@ -258,7 +248,6 @@ textarea {
   justify-content: center;
   align-items: center;
   width: 15em;
-  height: 15em;
   padding: 1em;
 }
 
@@ -536,7 +525,9 @@ textarea {
 
 /* PASSWORD DIV EYEs */
 .passwordDivInscription,
-.passwordConfirmDivInscription {
+.passwordConfirmDivInscription,
+.passwordDivModification,
+.passwordDivModificationConfirm {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -548,7 +539,9 @@ textarea {
 }
 
 .passwordCustomInscription,
-.passwordConfirmCustomInscription {
+.passwordConfirmCustomInscription,
+.passwordCustomModification,
+.passwordCustomModificationConfirm {
   border: 0;
 }
 
@@ -581,4 +574,42 @@ textarea {
 /* visited link */
 .memberLink:visited {
   color: red;
+}
+
+.upgrade-button-membre {
+  align-self: center;
+}
+
+.titreMembres {
+  align-self: center;
+  font-size: 2.5em;
+  color: #4169e1;
+  font-weight: bold;
+}
+
+.titreProjets {
+  align-self: center;
+  font-size: 2.5em;
+  color: #4169e1;
+  font-weight: bold;
+}
+
+.imageFrontPage {
+  width: 100%;
+  height: 100%;
+}
+.logo{
+  width: 130px;
+  height: 100px;
+  margin-bottom: 30;
+}
+.logoEyes{
+  width: 140px;
+  height: 100px;
+  margin-bottom: 30;
+}
+.logoTarget{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 30;
 }

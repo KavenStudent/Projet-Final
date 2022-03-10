@@ -177,7 +177,6 @@ window.onload = function () {
     if (searchBar.value == "" || searchBar.value === null) {
       $("#contenuRecherche").html("");
       firstLoad = false;
-      console.log("Je suis vide");
     }
 
     //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
@@ -193,8 +192,48 @@ window.onload = function () {
   });
 };
 
+function setEyesDansFormEdit() {
+  //EYE DANS FORM MODFICATION
+  const togglePasswordModification = document.querySelector(
+    "#togglePasswordModification"
+  );
+  const passwordModification = document.querySelector("#passwordEdit");
+
+  togglePasswordModification.addEventListener("click", function () {
+    // toggle the type attribute
+    const type =
+      passwordModification.getAttribute("type") === "password"
+        ? "text"
+        : "password";
+    passwordModification.setAttribute("type", type);
+
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+
+  //EYE DANS FORM MODFICATION CONFIRMATION
+  const togglePasswordModificationConfirmation = document.querySelector(
+    "#togglePasswordModificationConfirmation"
+  );
+  const passwordModificationConfirmation = document.querySelector(
+    "#confirmPasswordEdit"
+  );
+
+  togglePasswordModificationConfirmation.addEventListener("click", function () {
+    // toggle the type attribute
+    const type =
+      passwordModificationConfirmation.getAttribute("type") === "password"
+        ? "text"
+        : "password";
+    passwordModificationConfirmation.setAttribute("type", type);
+
+    // toggle the icon
+    this.classList.toggle("bi-eye");
+  });
+}
+
 function tagCliquable(input) {
-  console.log("test");
+
   document.getElementById("searchBar").value = input;
   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
   if (input != "" && firstLoad === false) {
@@ -572,3 +611,10 @@ function loadPage() {
       loadMembre(`pageMembre`, typePage);
   }
 }
+
+function afficheSlidePayment(){
+  let bsOffcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
+	bsOffcanvas.show(); // affiche le canvas du panier
+  afficherPaypal();
+}
+

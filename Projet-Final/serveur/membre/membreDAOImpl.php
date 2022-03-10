@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 require_once("membre.php");
 require_once("membreDAO.php");
 require_once("../includes/modele.inc.php");
@@ -25,6 +28,26 @@ class MembreDaoImpl extends Modele implements MembreDao
         }
         return $tab;
     }
+
+    public function getAllMembreSuggestion(): array
+    {
+        try {
+            $tab = array();
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.prive = 0";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+        return $tab;
+    }
+
     public function getAllMembreRecherche(string $par, string $valeurPar): array
     {
         try {
@@ -58,9 +81,12 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             // enregistre dans membre
-            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?)";
+            $requete = "INSERT INTO membre VALUES(0,?,?,?,?,?,?,?,?,?,?)";
             $this->setRequete($requete);
-            $this->setParams(array($Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(), $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null));
+            $this->setParams(array(
+                $Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(),
+                $Membre->getDescription(), $Membre->getPrive(), $Membre->getImageProfil(), $Membre->getMembrePremium(), null, $Membre->getAdminLock()
+            ));
             $stmt = $this->executer();
             $lastId = $this->getLastId();
             // enregistre dans connexion
@@ -116,24 +142,31 @@ class MembreDaoImpl extends Modele implements MembreDao
     public function modifierMembre(Membre $Membre, $dossier): bool
     {
         try {
-
+            $result = true;
             // cherche l'image du film a modifier
-            $requete = "SELECT imageProfil FROM membre WHERE id=?";
+            $requete = "SELECT imageProfil, adminLock FROM membre WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array($Membre->getId()));
             $stmt = $this->executer();
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $ancienneImage = $ligne->imageProfil;
-
+            $adminLock = $ligne->adminLock;
 
             $image = $this->verserFichier($dossier, "imageProfil", $ancienneImage, $Membre->getNom() . $Membre->getPrenom());
+
+            if ($adminLock) {
+                $prive = $adminLock;
+                $result = false;
+            } else {
+                $prive = $Membre->getPrive();
+            }
 
             // modifie dans membre
             $requete = "UPDATE membre SET nom=?,prenom=?,courriel=?,numeroTelephone=?,description=?,prive=?,imageProfil=? WHERE id=?";
             $this->setRequete($requete);
             $this->setParams(array(
                 $Membre->getNom(), $Membre->getPrenom(), $Membre->getCourriel(), $Membre->getNumeroTelephone(),
-                $Membre->getDescription(), $Membre->getPrive(), $image, $Membre->getId()
+                $Membre->getDescription(), $prive, $image, $Membre->getId()
             ));
             $stmt = $this->executer();
 
@@ -142,8 +175,6 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($Membre->getCourriel(), $Membre->getMotdePasse(), $Membre->getActif(), $Membre->getId()));
             $stmt = $this->executer();
-
-            $result = true;
         } catch (Exception $e) {
             echo $e->getMessage();
             $result = false;
@@ -168,7 +199,31 @@ class MembreDaoImpl extends Modele implements MembreDao
 
                     //si c'est un membre
                     if ($membre->role === "M") {
-                        $_SESSION['membre'] = $membre->idMembre;
+
+                        $idMembre = $membre->idMembre;
+                        $_SESSION['membre'] = $idMembre;
+
+                        $requete = "SELECT * FROM membre WHERE id=?";
+                        $this->setRequete($requete);
+                        $this->setParams(array($idMembre));
+                        $stmt = $this->executer();
+                        $ligne = $stmt->fetch(PDO::FETCH_OBJ);
+                        $dateFin = $ligne->dateFinAbonnement;
+
+                        if (!is_null($dateFin)) {
+                            $tabToday = explode("-", date("Y-m-d"));
+                            $tFin = explode("-", $dateFin);
+
+                            $diff = mktime(0, 0, 0, $tFin[1], $tFin[2], $tFin[0]) -
+                                mktime(0, 0, 0, $tabToday[1], $tabToday[2], $tabToday[0]);
+
+                            if ($diff <= 0) {
+                                $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
+                                $this->setRequete($requete);
+                                $this->setParams(array(0, null, $idMembre));
+                                $stmt = $this->executer();
+                            }
+                        }
                     } else if ($membre->role === "A") {
                         $_SESSION['admin'] = $membre->idMembre;
                     }
@@ -207,9 +262,39 @@ class MembreDaoImpl extends Modele implements MembreDao
         return true;
     }
 
-    public function devenirPremium(int $idMembre): bool
+    public function devenirPremium(int $idMembre): array
     {
-        return true;
+        try {
+            $tab = array();
+            $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
+            $today = date("Y-m-d");
+            $dateFin  = date("Y-m-d", strtotime("+1 month", strtotime($today)));
+
+            $this->setRequete($requete);
+            $this->setParams(array(1, $dateFin, $idMembre));
+            $stmt = $this->executer();
+
+            $todayDate = date("Y-m-d");
+            $requete = "INSERT INTO historiquepaiement VALUES(0,?,?,?)";
+            $this->setRequete($requete);
+            $this->setParams(array(4.99, $today, $idMembre));
+            $stmt = $this->executer();
+
+            $requete = "SELECT h.id, h.cout, h.date, h.idMembre, m.courriel, m.prenom, m.nom, m.dateFinAbonnement
+            FROM historiquepaiement h INNER JOIN membre m ON h.idMembre = m.id ORDER BY h.id DESC LIMIT 1";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+            return $tab;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
     }
 
     public function afficherHistoriqueAbonnement(int $idMembre): array
@@ -236,7 +321,7 @@ class MembreDaoImpl extends Modele implements MembreDao
         try {
             $requete = "SELECT m.id, m.nom, m.prenom, m.courriel, m.numeroTelephone,
              m.description, c.actif, m.prive, m.imageProfil, m.membrePremium, 
-            m.dateFinAbonnement, c.motDePasse, c.role, c.actif
+            m.dateFinAbonnement, c.motDePasse, c.role, c.actif, m.adminLock
              FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.id = ?";
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
@@ -267,7 +352,8 @@ class MembreDaoImpl extends Modele implements MembreDao
                     $ligne->membrePremium,
                     $laDate,
                     $ligne->motDePasse,
-                    $ligne->role
+                    $ligne->role,
+                    $ligne->adminLock
                 );
             }
         } catch (Exception $e) {
@@ -293,8 +379,8 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT membre.imageProfil, membre.prenom, membre.nom, COUNT(*) as nb FROM signalisation inner JOIN membre
-             ON idMembre = membre.id GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
+            $requete = "SELECT membre.id as idMembre, membre.imageProfil, membre.prenom, membre.nom, membre.adminLock, COUNT(*) as nb FROM signalisation inner JOIN membre
+            ON idMembre = membre.id GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
@@ -316,8 +402,73 @@ class MembreDaoImpl extends Modele implements MembreDao
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
+            $ligne = $stmt->fetch(PDO::FETCH_OBJ);
 
-            return $stmt->fetch(PDO::FETCH_OBJ);
+            return $ligne->membrePremium;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+    }
+
+    public function addSignalement(int $idMembre, int $idProjet, string $description): bool
+    {
+        $resultat = false;
+        try {
+
+            if ($idProjet == -1) {
+                $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, NULL, ?)";
+                $this->setRequete($requete);
+                $this->setParams(array($idMembre, $description));
+            } else {
+                $requete = "INSERT INTO signalisation (id, idMembre, idProjet ,description) VALUES (0, ?, ?, ?)";
+                $this->setRequete($requete);
+                $this->setParams(array($idMembre, $idProjet, $description));
+            }
+            $this->executer();
+            $resultat = true;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+            return $resultat;
+        }
+    }
+
+    public function adminCacherMembre(int $idMembre, int $valeur): bool
+    {
+        $returnValue = false;
+        try {
+            $requete = "UPDATE membre SET prive=?, adminLock=? WHERE id = ?";
+            $this->setRequete($requete);
+            $this->setParams(array($valeur, $valeur, $idMembre));
+            $stmt = $this->executer();
+
+
+            $returnValue = true;
+        } catch (Exception $e) {
+            $returnValue = false;
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+            return $returnValue;
+        }
+    }
+    public function getFactureMembre(int $idMembre): array
+    {
+        try {
+            $tab = array();
+            $requete = "SELECT h.id, h.cout, h.date, h.idMembre, m.courriel, m.prenom, m.nom, m.dateFinAbonnement
+            FROM historiquepaiement h INNER JOIN membre m ON h.idMembre = m.id WHERE h.idMembre = ? ORDER BY h.id DESC LIMIT 1 ";
+            $this->setRequete($requete);
+            $this->setParams(array($idMembre));
+            $stmt = $this->executer();
+
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+            return $tab;
         } catch (Exception $e) {
             echo $e->getMessage();
         } finally {

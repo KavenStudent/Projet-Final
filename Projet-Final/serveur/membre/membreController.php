@@ -39,6 +39,15 @@ switch ($action) {
     case "loadPageRecherche":
         loadPageRecherche();
         break;
+    case "ajouterSignalisation":
+        ajouterSignalisation();
+        break;
+    case "adminCacherMembre":
+        adminCacherMembre();
+        break;
+    case "devenirPremium":
+        devenirPremium();
+        break;
 }
 
 //Enregistre un membre
@@ -53,13 +62,14 @@ function enregistrerMembre()
     $description = $_POST['description'];
     $actif = 1;
     $prive = 0;
+    $adminLock = 0;
     $imageProfil = "defaultProfil.png";
     $membrePremium = 0;
     $dateFinAbonnement = "";
     $password = $_POST['password'];
     $role = "M";
 
-    $unMembre = new Membre(0, $prenom, $nom,  $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $unMembre = new Membre(0, $prenom, $nom,  $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role, $adminLock);
 
     // couriel deja utilisé existant
     if ($dao->verifierCourriel($courriel)) {
@@ -110,6 +120,7 @@ function modifierMembre()
     $numeroTelephone = $_POST['numeroTelephoneEdit'];
     $description = $_POST['descriptionEdit'];
     $actif = 1;
+    $adminLock = 0;
     $prive = (int) $_POST['profilPublic'];
     // $prive =  $_POST['isPublic'];
     $imageProfil = "";
@@ -120,7 +131,7 @@ function modifierMembre()
 
     $tabRes['test'] =  $prive;
 
-    $unMembre = new Membre($id, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role);
+    $unMembre = new Membre($id, $prenom, $nom, $courriel, $numeroTelephone, $description, $actif, $prive, $imageProfil, $membrePremium, $dateFinAbonnement, $password, $role, $adminLock);
 
     // couriel deja utilisé existant
     if ($dao->verifierCourrielModifier($courriel, $id)) {
@@ -129,9 +140,13 @@ function modifierMembre()
         $tabRes['msg'] = "Le courriel $courriel est déjà utilisé. Choisissez un autre courriel.";
     } else {
         //modifie le membre
-        $dao->modifierMembre($unMembre, "images-profil");
+        if ($dao->modifierMembre($unMembre, "images-profil")) {
+            $tabRes['msg'] = "Profil mis à jour";
+        } else {
+            $tabRes['msg'] = "Une erreur s'est produite. Un administrateur pourrait avour suspendu votre profil. Veuillez contacter le responsable du site.";
+        }
+
         $tabRes['idDuMembre'] = $_SESSION['membre'];
-        $tabRes['msg'] = "Profil à jour";
     }
 }
 
@@ -166,7 +181,7 @@ function loadPageMembre()
             "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
             "description" => $membre->getDescription(), "actif" => $membre->getActif(), "prive" => $membre->getPrive(), "imageProfil" => $membre->getImageProfil(),
             "membrePremium" => $membre->getMembrePremium(), "dateFinAbonnement" => $membre->getDateFinAbonnement(),
-            "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole()
+            "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole(), "adminLock" => $membre->getAdminLock()
         );
         switch ($page) {
             case 'pageMembre':
@@ -193,12 +208,12 @@ function loadPageAccueil()
 
     if ($tabRes['action'] == null) {
         $tabRes['action'] = 'pageAccueil';
-        
+
         if (isset($_SESSION['membre'])) {
-            $id = (int) isset($_SESSION['membre']);
+            $id = (int) $_SESSION['membre'];
             $tabRes['id'] = $id;
             $tabRes['isSub'] = $dao->checkAbonnementMembre($id);
-            print_r($dao->checkAbonnementMembre($id));
+            $tabRes['facture'] = $dao->getFactureMembre($id);
         } else if (isset($_SESSION['admin'])) {
             $tabRes['id'] = 'admin';
         }
@@ -222,12 +237,14 @@ function loadAutrePageMembre()
     global $dao;
 
     $idMembre = $_POST['idMembre'];
-    $idMembreConnecter = $_SESSION['membre'];
+    if (isset($_SESSION['membre'])) {
+        $idMembreConnecter = $_SESSION['membre'];
+    }
     $daoProjet = new ProjetDaoImpl();
     $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
-    if($idMembre == $idMembreConnecter){
+    if (isset($_SESSION['membre']) && $idMembre == $idMembreConnecter) {
         $tabRes['action'] = 'pageMembre';
-    }else{
+    } else {
         $tabRes['action'] = 'autreMembre';
     }
     $daoProjet = new ProjetDaoImpl();
@@ -237,7 +254,8 @@ function loadAutrePageMembre()
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
         "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
         "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
-        "membrePremium" => $membre->getMembrePremium()
+        "membrePremium" => $membre->getMembrePremium(), "adminLock" => $membre->getAdminLock(),
+        "prive" => $membre->getPrive()
     );
 }
 
@@ -245,6 +263,80 @@ function loadPageRecherche()
 {
     global $tabRes;
     $tabRes['action'] = 'loadRecherche';
+}
+
+function ajouterSignalisation()
+{
+    global $tabRes;
+    global $dao;
+    $idMembre = $_POST['idMembre'];
+    $description = $_POST['description'];
+
+    if (isset($_POST['projetRadio'])) {
+        $idProjet = $_POST['projetRadio'];
+    } else {
+        $idProjet = -1;
+    }
+
+    $dao->addSignalement($idMembre, $idProjet, $description);
+    $tabRes['action'] = 'ajouterSignalisation';
+}
+
+function adminCacherMembre()
+{
+    global $tabRes;
+    global $dao;
+
+    $idMembre = $_POST['idMembre'];
+    $valeur = $_POST['valeur'];
+
+    $dao->adminCacherMembre($idMembre, $valeur);
+
+    if ($tabRes['action'] == null)
+        $tabRes['action'] = 'autreMembre';
+
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+    $membre = $dao->getMembre($idMembre);
+    $tabRes['membre'] = array(
+        "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+        "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+        "description" => $membre->getDescription(), "imageProfil" => $membre->getImageProfil(),
+        "membrePremium" => $membre->getMembrePremium(), "adminLock" => $membre->getAdminLock(),
+        "prive" => $membre->getPrive()
+    );
+    $tabRes['msg'] = 'Changement effectué';
+}
+
+function devenirPremium()
+{
+    global $tabRes;
+    global $dao;
+
+    $idMembre = $_POST['idMembre'];
+
+    $facture = $dao->devenirPremium($idMembre);
+
+    $membre = $dao->getMembre($idMembre);
+    $tabRes['membre'] = array(
+        "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
+        "courriel" => $membre->getCourriel(), "numeroTelephone" => $membre->getNumeroTelephone(),
+        "description" => $membre->getDescription(), "actif" => $membre->getActif(), "prive" => $membre->getPrive(), "imageProfil" => $membre->getImageProfil(),
+        "membrePremium" => $membre->getMembrePremium(), "dateFinAbonnement" => $membre->getDateFinAbonnement(),
+        "motDePasse" => $membre->getMotDePasse(), "role" => $membre->getRole(), "adminLock" => $membre->getAdminLock()
+    );
+    $tabRes['action'] = "pageMembre";
+    $daoProjet = new ProjetDaoImpl();
+    $tabRes['listProjet'] = $daoProjet->getAllProjetsForMembre($idMembre);
+
+    $tabRes['msg'] = "Paiement effectué";
+
+    $to = $facture[0]->courriel;
+    $subject = "Paiement";
+    $txt = "Vous êtes abonné!";
+    $headers = "From: projeturanus@gmail.com";
+
+    mail($to, $subject, $txt, $headers);
 }
 
 echo json_encode($tabRes);

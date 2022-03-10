@@ -113,11 +113,19 @@
     max-width: 16em;
     max-height: 30em;
     cursor: pointer;
+    display: flex;
+   
+    align-items: center;
     
 }
 
 .card-item-body{
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 15em;
+    max-width: 15em;
+
 }
 .text-of-card{
 

@@ -2,10 +2,10 @@
 -- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 14, 2022 at 11:38 PM
--- Server version: 5.7.17
--- PHP Version: 7.1.3
+-- Hôte : 127.0.0.1
+-- Généré le :  jeu. 03 mars 2022 à 19:43
+-- Version du serveur :  5.7.17
+-- Version de PHP :  7.1.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bdforuban`
+-- Base de données :  `bdforuban`
 --
 CREATE DATABASE IF NOT EXISTS `bdforuban` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `bdforuban`;
@@ -27,7 +27,7 @@ USE `bdforuban`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `connexion`
+-- Structure de la table `connexion`
 --
 
 CREATE TABLE `connexion` (
@@ -39,16 +39,18 @@ CREATE TABLE `connexion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `connexion`
+-- Déchargement des données de la table `connexion`
 --
 
 INSERT INTO `connexion` (`idMembre`, `courriel`, `motDePasse`, `role`, `actif`) VALUES
-(4, 'vim123@hotmail.fr', '123456789', 'M', 1);
+(3, 'joanie.birtz@gmail.com', '12345678', 'M', 1),
+(4, 'lilou@gmail.com', '123456789', 'M', 1),
+(5, 'vim@gmail.com', '123456789', 'M', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `historiquepaiement`
+-- Structure de la table `historiquepaiement`
 --
 
 CREATE TABLE `historiquepaiement` (
@@ -61,7 +63,7 @@ CREATE TABLE `historiquepaiement` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `membre`
+-- Structure de la table `membre`
 --
 
 CREATE TABLE `membre` (
@@ -74,20 +76,23 @@ CREATE TABLE `membre` (
   `prive` int(1) NOT NULL DEFAULT '0',
   `imageProfil` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `membrePremium` int(1) NOT NULL DEFAULT '0',
-  `dateFinAbonnement` date DEFAULT NULL
+  `dateFinAbonnement` date DEFAULT NULL,
+  `adminLock` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `membre`
+-- Déchargement des données de la table `membre`
 --
 
-INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`) VALUES
-(4, 'Nguyen', 'Vim', 'vim123@hotmail.fr', '5146774205', 'Petit', 0, '9e80eb373c1fc5a1ae715a736e0b0cf0f462df91.png', 0, NULL);
+INSERT INTO `membre` (`id`, `nom`, `prenom`, `courriel`, `numeroTelephone`, `description`, `prive`, `imageProfil`, `membrePremium`, `dateFinAbonnement`, `adminLock`) VALUES
+(3, 'Birtz', 'Joanie', 'joanie.birtz@gmail.com', '4506299345', 'Etudiant infomatique', 0, '9052da0252f46f3deb318fca271842930873f5bb.png', 0, NULL, 0),
+(4, 'Birtz', 'Joanie', 'lilou@gmail.com', '4384061207', 'test', 0, 'defaultProfil.png', 0, NULL, 0),
+(5, 'Nicolas', 'Vim', 'vim@gmail.com', '4384061207', ' trÃ¨s trÃ¨s humble', 1, 'defaultProfil.png', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `membreprojet`
+-- Structure de la table `membreprojet`
 --
 
 CREATE TABLE `membreprojet` (
@@ -95,10 +100,18 @@ CREATE TABLE `membreprojet` (
   `idProjet` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `membreprojet`
+--
+
+INSERT INTO `membreprojet` (`idMembre`, `idProjet`) VALUES
+(3, 11),
+(5, 10);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `projet`
+-- Structure de la table `projet`
 --
 
 CREATE TABLE `projet` (
@@ -112,13 +125,23 @@ CREATE TABLE `projet` (
   `nbTelechargement` int(11) NOT NULL DEFAULT '0',
   `lienExterne` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `nbSignalisation` int(11) NOT NULL DEFAULT '0',
-  `thumbnail` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `thumbnail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `adminLock` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `projet`
+--
+
+INSERT INTO `projet` (`id`, `idCreateur`, `titre`, `description`, `path`, `prive`, `autreParticipant`, `nbTelechargement`, `lienExterne`, `nbSignalisation`, `thumbnail`, `adminLock`) VALUES
+(10, 3, 'Test', 'Yo sa va! .das kjdasljdjaslkdj asldjÃ as dddsasl kdjalsk jddasd jsadkahsdkhaskjdhasdlaskjdlasjdljasslkdjlkasjdljaslkddjlasjkasdjasdskandkjnaskjndkasndkn  kjasdhskjaskjd kjajssdhkjhass kasshdkjj  hasdk  ljadlakjlsajd asljasldjalsk asdjaljdlasjd', '', 0, '', 0, 'https://www.theguardian.com/commentisfree/2015/nov/02/dont-assume-im-an-internet-troll-just-because-you-disagree-with-me', 0, '85643d835606b5a6c57ef9b017a2801357686977.png', 0),
+(11, 5, 'test', 'La sauce est nice!', '', 1, 'Sacha', 0, 'https://www.theguardian.com/commentisfree/2015/nov/02/dont-assume-im-an-internet-troll-just-because-you-disagree-with-me', 0, '6509c2d0d9099a834ddbb1dcee84cf6e7e877487.jpg', 0),
+(25, 3, 'asd', 'asd', '', 0, '', 0, '', 0, 'defaultThumbnail.png', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `projettag`
+-- Structure de la table `projettag`
 --
 
 CREATE TABLE `projettag` (
@@ -126,23 +149,34 @@ CREATE TABLE `projettag` (
   `idTag` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Déchargement des données de la table `projettag`
+--
+
+INSERT INTO `projettag` (`idProjet`, `idTag`) VALUES
+(11, 5),
+(11, 6),
+(10, 2),
+(10, 3),
+(10, 5);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `signalisation`
+-- Structure de la table `signalisation`
 --
 
 CREATE TABLE `signalisation` (
   `id` int(11) NOT NULL,
   `idMembre` int(11) NOT NULL,
-  `idProjet` int(11) NOT NULL,
+  `idProjet` int(11) DEFAULT NULL,
   `description` varchar(1024) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tag`
+-- Structure de la table `tag`
 --
 
 CREATE TABLE `tag` (
@@ -151,51 +185,69 @@ CREATE TABLE `tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Indexes for dumped tables
+-- Déchargement des données de la table `tag`
+--
+
+INSERT INTO `tag` (`id`, `nomTag`) VALUES
+(1, 'Web'),
+(2, 'Js'),
+(3, 'java'),
+(4, 'Test'),
+(5, 'Fruit'),
+(6, 'Cool'),
+(7, 'Lolo'),
+(8, 'op'),
+(9, 'Fixe'),
+(10, 'sa'),
+(11, 'asd'),
+(12, '');
+
+--
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `connexion`
+-- Index pour la table `connexion`
 --
 ALTER TABLE `connexion`
   ADD KEY `idMembre` (`idMembre`);
 
 --
--- Indexes for table `historiquepaiement`
+-- Index pour la table `historiquepaiement`
 --
 ALTER TABLE `historiquepaiement`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idMembre` (`idMembre`);
 
 --
--- Indexes for table `membre`
+-- Index pour la table `membre`
 --
 ALTER TABLE `membre`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `membreprojet`
+-- Index pour la table `membreprojet`
 --
 ALTER TABLE `membreprojet`
   ADD KEY `idMembre` (`idMembre`),
   ADD KEY `idProjet` (`idProjet`);
 
 --
--- Indexes for table `projet`
+-- Index pour la table `projet`
 --
 ALTER TABLE `projet`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idCreateur` (`idCreateur`);
 
 --
--- Indexes for table `projettag`
+-- Index pour la table `projettag`
 --
 ALTER TABLE `projettag`
   ADD KEY `idProjet` (`idProjet`),
   ADD KEY `idTag` (`idTag`);
 
 --
--- Indexes for table `signalisation`
+-- Index pour la table `signalisation`
 --
 ALTER TABLE `signalisation`
   ADD PRIMARY KEY (`id`),
@@ -203,78 +255,78 @@ ALTER TABLE `signalisation`
   ADD KEY `idProjet` (`idProjet`);
 
 --
--- Indexes for table `tag`
+-- Index pour la table `tag`
 --
 ALTER TABLE `tag`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `historiquepaiement`
+-- AUTO_INCREMENT pour la table `historiquepaiement`
 --
 ALTER TABLE `historiquepaiement`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `membre`
+-- AUTO_INCREMENT pour la table `membre`
 --
 ALTER TABLE `membre`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `projet`
+-- AUTO_INCREMENT pour la table `projet`
 --
 ALTER TABLE `projet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
--- AUTO_INCREMENT for table `signalisation`
+-- AUTO_INCREMENT pour la table `signalisation`
 --
 ALTER TABLE `signalisation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
--- AUTO_INCREMENT for table `tag`
+-- AUTO_INCREMENT pour la table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `connexion`
+-- Contraintes pour la table `connexion`
 --
 ALTER TABLE `connexion`
   ADD CONSTRAINT `fk_idmembre` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `historiquepaiement`
+-- Contraintes pour la table `historiquepaiement`
 --
 ALTER TABLE `historiquepaiement`
   ADD CONSTRAINT `historiquepaiement_ibfk_1` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `membreprojet`
+-- Contraintes pour la table `membreprojet`
 --
 ALTER TABLE `membreprojet`
   ADD CONSTRAINT `membreprojet_ibfk_1` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `membreprojet_ibfk_2` FOREIGN KEY (`idProjet`) REFERENCES `projet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `projet`
+-- Contraintes pour la table `projet`
 --
 ALTER TABLE `projet`
   ADD CONSTRAINT `projet_ibfk_2` FOREIGN KEY (`idCreateur`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `projettag`
+-- Contraintes pour la table `projettag`
 --
 ALTER TABLE `projettag`
   ADD CONSTRAINT `projettag_ibfk_1` FOREIGN KEY (`idProjet`) REFERENCES `projet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `projettag_ibfk_2` FOREIGN KEY (`idTag`) REFERENCES `tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `signalisation`
+-- Contraintes pour la table `signalisation`
 --
 ALTER TABLE `signalisation`
   ADD CONSTRAINT `signalisation_ibfk_1` FOREIGN KEY (`idMembre`) REFERENCES `membre` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
