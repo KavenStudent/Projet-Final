@@ -47,4 +47,6 @@ interface MembreDao
     public function checkAbonnementMembre(int $idMembre): bool;
 
     public function adminCacherMembre(int $idMembre, int $valeur): bool;
+
+    public function getFactureMembre(int $idMembre): array;
 }

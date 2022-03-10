@@ -213,6 +213,7 @@ function loadPageAccueil()
             $id = (int) $_SESSION['membre'];
             $tabRes['id'] = $id;
             $tabRes['isSub'] = $dao->checkAbonnementMembre($id);
+            $tabRes['facture'] = $dao->getFactureMembre($id);
         } else if (isset($_SESSION['admin'])) {
             $tabRes['id'] = 'admin';
         }

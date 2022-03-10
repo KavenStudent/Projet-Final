@@ -455,4 +455,24 @@ class MembreDaoImpl extends Modele implements MembreDao
             return $returnValue;
         }
     }
+    public function getFactureMembre(int $idMembre): array
+    {
+        try {
+            $tab = array();
+            $requete = "SELECT h.id, h.cout, h.date, h.idMembre, m.courriel, m.prenom, m.nom, m.dateFinAbonnement
+            FROM historiquepaiement h INNER JOIN membre m ON h.idMembre = m.id WHERE h.idMembre = ? ORDER BY h.id DESC LIMIT 1 ";
+            $this->setRequete($requete);
+            $this->setParams(array($idMembre));
+            $stmt = $this->executer();
+
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $tab[] = $ligne;
+            }
+            return $tab;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($requete);
+        }
+    }
 }
