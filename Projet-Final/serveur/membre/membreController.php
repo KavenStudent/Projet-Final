@@ -317,7 +317,6 @@ function devenirPremium()
 
     $facture = $dao->devenirPremium($idMembre);
 
-    // print_r($facture);
     $membre = $dao->getMembre($idMembre);
     $tabRes['membre'] = array(
         "id" => $membre->getId(), "nom" => $membre->getNom(), "prenom" => $membre->getPrenom(),
