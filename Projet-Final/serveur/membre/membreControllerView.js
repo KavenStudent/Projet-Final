@@ -85,7 +85,7 @@ function afficherPageAccueil(json) {
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">Comment fonctionne la recherche?</h2>
-        <p class="lead">Faites une recherche par nom d'un membre, titre de projet ou tag. Les résultats seront affichés en haut de la page et le contenu de la page pourra être trouvé en dessous. Les résultats sont séparés en deux parties : à gauche, les membres et à droite, les projets. Cliquez sur l'un ou l'autre pour être rediriger vers la page correspondante.</p>
+        <p class="lead">Faites une recherche par nom d'un membre, titre de projet ou tag. Les résultats seront affichés en haut de la page et le contenu de la page pourra être trouvé en dessous. Les résultats sont séparés en deux parties&nbsp: à gauche, les membres et à droite, les projets. Cliquez sur l'un ou l'autre pour être rediriger vers la page correspondante.</p>
       </div>
       <div class="col-md-5">
         <img class="imageFrontPage" src="Projet-Final/client/public/images/Capture.png" class="img-thumbnail" alt="...">
