@@ -345,10 +345,10 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $stmt = $this->executer();
             $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
             FROM projet p
-            INNER JOIN projettag pt ON p.id = pt.idProjet 
-            INNER JOIN tag t ON t.id = pt.idTag 
+            LEFT JOIN projettag pt ON p.id = pt.idProjet 
+            LEFT JOIN tag t ON t.id = pt.idTag 
             INNER JOIN membre m ON p.idCreateur = m.id 
-            WHERE p.idCreateur = ? ORDER BY p.id DESC LIMIT 3";
+            WHERE p.idCreateur = ? GROUP BY p.id ORDER BY p.id DESC LIMIT 3";
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 $idCreateur = $ligne->id;
                 $this->setRequete($requete);

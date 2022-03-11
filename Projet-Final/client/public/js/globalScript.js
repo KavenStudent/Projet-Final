@@ -53,7 +53,10 @@ function filterDataProjet(input, projet) {
   let isExist = false;
   let prenomCreateur = projet.prenom.toLowerCase();
   let nomCreateur = projet.nom.toLowerCase();
-  let tags = projet.tags.toLowerCase();
+  let tags = projet.tags;
+  if(tags!=null && tags.length > 0){
+     tags = tags.toLowerCase();
+  }
   let titre = projet.titre.toLowerCase();
   if (
     prenomCreateur.includes(input) ||
