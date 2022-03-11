@@ -344,6 +344,7 @@ function devenirPremium()
                 <p><span style="font-weight: bold">Montant payé:</span> `.$facture[0]->cout.`$</p>
                 <p><span style="font-weight: bold">Date de la fin de l'abonnement:</span> `.$facture[0]->dateFinAbonnement.`</p>
                 <p style="margin-top: 1rem">Merci de votre achat! :)</p>
+                <p style="margin-top: 1rem; font-size: 0.5rem">Ne répondez pas à ce courriel</p>
             </div>
         </body>
     </html>`;
