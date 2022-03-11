@@ -100,6 +100,35 @@ class Modele
 
 		return $image;
 	}
+	// 8mb 20mb
+	function verserProjet($dossier, $inputNom, $fichierDefaut, $chaine, $membrePremium)
+	{
+		$cheminDossier = "./$dossier/";
+		$nomImage = sha1($chaine . time());
+		$image = $fichierDefaut;
+
+		if ($_FILES[$inputNom]['tmp_name'] !== "") {
+
+			//Upload de la photo
+			$tmp = $_FILES[$inputNom]['tmp_name'];
+			if (!$membrePremium && filesize($tmp) > 8 * pow(1024, 2)) {
+				$image = "";
+			} else if ($membrePremium && filesize($tmp) > 20 * pow(1024, 2)) {
+				$image = "";
+			} else {
+				$fichier = $_FILES[$inputNom]['name'];
+				$extension = strrchr($fichier, '.');
+				@move_uploaded_file($tmp, $cheminDossier . $nomImage . $extension);
+				// Enlever le fichier temporaire charge
+				@unlink($tmp); //effacer le fichier temporaire
+				//Enlever l'ancienne pochette dans le cas de modifier
+				$this->enleverFichier($dossier, $image);
+				$image = $nomImage . $extension;
+			}
+		}
+
+		return $image;
+	}
 
 	function getLastId()
 	{
