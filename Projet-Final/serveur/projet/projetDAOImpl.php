@@ -83,7 +83,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
-            $isMembrePremium = $stmt->fetch(PDO::FETCH_OBJ);
+            $object =$stmt->fetch(PDO::FETCH_OBJ);
+            $isMembrePremium = $object->membrePremium;
 
             if($isMembrePremium){
                 $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ?";
