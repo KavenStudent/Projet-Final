@@ -325,13 +325,41 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $tab = array();
-            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive FROM projet p INNER JOIN projettag pt ON p.id = pt.idProjet INNER JOIN tag t ON t.id = pt.idTag INNER JOIN membre m ON p.idCreateur = m.id WHERE m.prive = 0 GROUP BY p.id";
+            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
+            FROM projet p
+            INNER JOIN projettag pt ON p.id = pt.idProjet 
+            INNER JOIN tag t ON t.id = pt.idTag 
+            INNER JOIN membre m ON p.idCreateur = m.id 
+            WHERE m.prive = 0 AND m.membrePremium = 1 GROUP BY p.id";
+
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 $tab[] = $ligne;
             }
+            
+            $requete = "SELECT * FROM membre m WHERE m.prive = 0 AND m.membrePremium = 0";
+            $this->setRequete($requete);
+            $this->setParams(array());
+            $stmt = $this->executer();
+            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
+            FROM projet p
+            INNER JOIN projettag pt ON p.id = pt.idProjet 
+            INNER JOIN tag t ON t.id = pt.idTag 
+            INNER JOIN membre m ON p.idCreateur = m.id 
+            WHERE p.idCreateur = ? ORDER BY p.id DESC LIMIT 3";
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $idCreateur = $ligne->id;
+                $this->setRequete($requete);
+                $this->setParams(array($idCreateur));
+                $stmt = $this->executer();
+                while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $tab[] = $ligne;
+                }
+            }
+
+
         } catch (Exception $e) {
             echo $e->getMessage();
         } finally {
