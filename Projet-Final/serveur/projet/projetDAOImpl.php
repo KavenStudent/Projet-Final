@@ -134,7 +134,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
-            $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
+
 
             $requete = "SELECT COUNT(p.id) as nbProjets , m.membrePremium FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE idCreateur = ?";
             $this->setRequete($requete);
@@ -142,65 +142,66 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $stmt = $this->executer();
 
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
-            if($ligne->nbProjets >=3 && !$ligne->membrePremium){
+            $premium = $ligne->membrePremium;
+            $path = $this->verserProjet("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier", $premium);
+
+            if ($ligne->nbProjets >= 3 && !$premium) {
                 $returnValue = false;
-            }
-            else{
+            } else {
 
-           
-            //  Ajoute le projet
-            $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail, adminLock) VALUES(0,?,?,?,?,?,?,?,?,?)";
-            $this->setRequete($requete);
-            $this->setParams(array(
-                $projet->getCreateurId(), $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
-                $projet->getAutresParticipants(), $projet->getLienExterne(), $thumbnail, $projet->getAdminLock()
-            ));
-            $stmt = $this->executer();
 
-            $idProjet = $this->getLastProjetId();
-            //  Ajouter les participants au projet
-            if (count($participants) > 0) {
-                $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
-                foreach ($participants as $part) {
+                //  Ajoute le projet
+                $requete = "INSERT INTO projet (id,idCreateur,titre,description,path,prive,autreParticipant,lienExterne,thumbnail, adminLock) VALUES(0,?,?,?,?,?,?,?,?,?)";
+                $this->setRequete($requete);
+                $this->setParams(array(
+                    $projet->getCreateurId(), $projet->getTitre(), $projet->getDescription(), $path, $projet->isPrive(),
+                    $projet->getAutresParticipants(), $projet->getLienExterne(), $thumbnail, $projet->getAdminLock()
+                ));
+                $stmt = $this->executer();
 
-                    //  Ajouter les participants a la table membreprojet
-                    $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
+                $idProjet = $this->getLastProjetId();
+                //  Ajouter les participants au projet
+                if (count($participants) > 0) {
+                    $requete = "INSERT INTO membreprojet (idMembre, idProjet) VALUES (?, ?)";
+                    foreach ($participants as $part) {
 
-                    $idMembre = (int) ($tabPart[2]);
+                        //  Ajouter les participants a la table membreprojet
+                        $tabPart = explode(' ', $part); // Le string de participant contient nom, prenom et l'id du membre separer par un espace
 
-                    $this->setRequete($requete);
-                    $this->setParams(array(
-                        $idMembre,
-                        $idProjet
-                    ));
+                        $idMembre = (int) ($tabPart[2]);
 
-                    $this->executer();
+                        $this->setRequete($requete);
+                        $this->setParams(array(
+                            $idMembre,
+                            $idProjet
+                        ));
+
+                        $this->executer();
+                    }
                 }
-            }
 
-            if (count($tags) > 0) {
-                foreach ($tags as $tag) {
-                    //  Inserer le tag dans la liste de tag s'il n'existe pas deja
-                    $requete = "INSERT INTO tag SELECT * FROM (SELECT 0 as id, ? as nomTag) as new_value
+                if (count($tags) > 0) {
+                    foreach ($tags as $tag) {
+                        //  Inserer le tag dans la liste de tag s'il n'existe pas deja
+                        $requete = "INSERT INTO tag SELECT * FROM (SELECT 0 as id, ? as nomTag) as new_value
                     WHERE NOT EXISTS (
                         SELECT nomTag FROM tag WHERE nomTag = ?
                     );";
-                    $this->setRequete($requete);
-                    $this->setParams(array($tag, $tag));
-                    $stmt = $this->executer();
+                        $this->setRequete($requete);
+                        $this->setParams(array($tag, $tag));
+                        $stmt = $this->executer();
 
-                    //  Ajouter les tags a la table projettag
-                    $requete = "INSERT INTO projettag VALUES (?, (SELECT id FROM tag WHERE nomTag = ?))";
-                    $this->setRequete($requete);
-                    $this->setParams(array($idProjet, $tag));
-                    $stmt = $this->executer();
+                        //  Ajouter les tags a la table projettag
+                        $requete = "INSERT INTO projettag VALUES (?, (SELECT id FROM tag WHERE nomTag = ?))";
+                        $this->setRequete($requete);
+                        $this->setParams(array($idProjet, $tag));
+                        $stmt = $this->executer();
+                    }
                 }
-            }
-            //  Ajouter les tags au projet
+                //  Ajouter les tags au projet
 
-            $returnValue = true;
-        }
-        
+                $returnValue = true;
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
             $returnValue = false;
@@ -214,7 +215,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
         $returnValue = true;
         try {
             // cherche l'image du projet a modifier
-            $requete = "SELECT thumbnail, adminLock, path FROM projet WHERE id=?";
+            $requete = "SELECT p.thumbnail, p.adminLock, p.path, m.membrePremium FROM projet p INNER JOIN membre m ON p.idCreateur = m.id WHERE p.id=?";
             $this->setRequete($requete);
             $this->setParams(array($projet->getId()));
             $stmt = $this->executer();
@@ -223,9 +224,10 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $ancienPath = $ligne->path;
             $idProjet = $projet->getId();
             $adminLock = $ligne->adminLock;
+            $premium = $ligne->membrePremium;
 
             $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
-            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
+            $path = $this->verserProjet("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier", $premium);
 
             if ($adminLock) {
                 $prive = $adminLock;
@@ -242,7 +244,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 $projet->getAutresParticipants(), $projet->getLienExterne(), $image, $idProjet
             ));
             $stmt = $this->executer();
-            
+
 
             //  Supprime les participants deja existants
             $requete = "DELETE FROM membreprojet WHERE idProjet = ?";
