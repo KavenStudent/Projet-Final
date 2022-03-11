@@ -134,7 +134,7 @@ function afficherPageAccueil(json) {
             <p class="titreAbonnementCase">ABONNEMENT</p>
             <ul>
               <li>Informations de profil complètes</li>
-              <li>Fichiers de projet de taille illimité</li>
+              <li>Fichiers de projet de taille à 20MB</li>
               <li>Portfolio de taille illimité</li>
             </ul>
             <button id='upgrade-button' data-bs-toggle="modal" data-bs-target="#modalConnexion">Upgrade</button>
