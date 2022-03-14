@@ -283,7 +283,7 @@ function validerMembreEdit() {
   let myForm = document.getElementById("membreEditForm");
   let password = myForm.passwordEdit.value;
   let confirmPassword = myForm.confirmPasswordEdit.value;
-  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let pattern = /^[A-Za-z0-9\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
@@ -595,21 +595,18 @@ function validationFichier(idInput, premium) {
 
   if (fi.files.length > 0) {
     for (let i = 0; i <= fi.files.length - 1; i++) {
-
       const fsize = fi.files.item(i).size;
 
       if (premium == 0 && fsize >= MAX_SIZE_REGULAR) {
-        afficherSnackbar('La taille du fichier doit être de 8 MB ou moins');
-        fi.value = '';
+        afficherSnackbar("La taille du fichier doit être de 8 MB ou moins");
+        fi.value = "";
       } else if (premium == 1 && fsize >= MAX_SIZE_PREMIUM) {
-        afficherSnackbar('La taille du fichier doit être de 20 MB ou moins');
-        fi.value = '';
+        afficherSnackbar("La taille du fichier doit être de 20 MB ou moins");
+        fi.value = "";
       }
-
     }
   }
 }
-
 
 // function pour loader soit la page d'acceuil, soit la page admin ou la page Membre
 function loadPage() {
