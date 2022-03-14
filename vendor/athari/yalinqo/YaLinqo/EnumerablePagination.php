@@ -1,18 +1,9 @@
 <?php
 
-/**
- * EnumerablePagination trait of Enumerable class.
- * @author Alexander Prokhorov
- * @license Simplified BSD
- * @link https://github.com/Athari/YaLinqo YaLinqo on GitHub
- */
-
 namespace YaLinqo;
 
-/**
- * Trait of {@link Enumerable} containing pagination methods.
- * @package YaLinqo
- */
+use YaLinqo;
+
 trait EnumerablePagination
 {
     /**
@@ -26,7 +17,7 @@ trait EnumerablePagination
      * @return mixed The value at the key in the source sequence.
      * @package YaLinqo\Pagination
      */
-    public function elementAt($key)
+    public function elementAt ($key)
     {
         /** @var $it \Iterator|\ArrayAccess */
         $it = $this->getIterator();
@@ -53,7 +44,7 @@ trait EnumerablePagination
      * @return mixed default value if the key is not found in the source sequence; otherwise, the value at the specified key in the source sequence.
      * @package YaLinqo\Pagination
      */
-    public function elementAtOrDefault($key, $default = null)
+    public function elementAtOrDefault ($key, $default = null)
     {
         /** @var $it \Iterator|\ArrayAccess */
         $it = $this->getIterator();
@@ -81,7 +72,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: the first element in the specified sequence. If predicate is not null: The first element in the sequence that passes the test in the specified predicate function.
      * @package YaLinqo\Pagination
      */
-    public function first($predicate = null)
+    public function first ($predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -104,7 +95,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: default value if source is empty; otherwise, the first element in source. If predicate is not null: default value if source is empty or if no element passes the test specified by predicate; otherwise, the first element in source that passes the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function firstOrDefault($default = null, $predicate = null)
+    public function firstOrDefault ($default = null, $predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -127,7 +118,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: the result of calling a fallback function if source is empty; otherwise, the first element in source. If predicate is not null: the result of calling a fallback function if source is empty or if no element passes the test specified by predicate; otherwise, the first element in source that passes the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function firstOrFallback($fallback, $predicate = null)
+    public function firstOrFallback ($fallback, $predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -151,7 +142,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: the last element in the specified sequence. If predicate is not null: The last element in the sequence that passes the test in the specified predicate function.
      * @package YaLinqo\Pagination
      */
-    public function last($predicate = null)
+    public function last ($predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -180,7 +171,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: default value if source is empty; otherwise, the last element in source. If predicate is not null: default value if source is empty or if no element passes the test specified by predicate; otherwise, the last element in source that passes the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function lastOrDefault($default = null, $predicate = null)
+    public function lastOrDefault ($default = null, $predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -207,7 +198,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: the result of calling a fallback function if source is empty; otherwise, the last element in source. If predicate is not null: the result of calling a fallback function if source is empty or if no element passes the test specified by predicate; otherwise, the last element in source that passes the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function lastOrFallback($fallback, $predicate = null)
+    public function lastOrFallback ($fallback, $predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -235,7 +226,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: the single element of the input sequence. If predicate is not null: The single element of the sequence that passes the test in the specified predicate function.
      * @package YaLinqo\Pagination
      */
-    public function single($predicate = null)
+    public function single ($predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -267,7 +258,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: default value if source is empty; otherwise, the single element of the source. If predicate is not null: default value if source is empty or if no element passes the test specified by predicate; otherwise, the single element of the source that passes the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function singleOrDefault($default = null, $predicate = null)
+    public function singleOrDefault ($default = null, $predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -297,7 +288,7 @@ trait EnumerablePagination
      * @return mixed If predicate is null: the result of calling a fallback function if source is empty; otherwise, the single element of the source. If predicate is not null: the result of calling a fallback function if source is empty or if no element passes the test specified by predicate; otherwise, the single element of the source that passes the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function singleOrFallback($fallback, $predicate = null)
+    public function singleOrFallback ($fallback, $predicate = null)
     {
         $predicate = Utils::createLambda($predicate, 'v,k', Functions::$true);
 
@@ -319,21 +310,16 @@ trait EnumerablePagination
      * <p><b>Syntax</b>: indexOf (value)
      * <p>To search for the zero-based index of the first occurence, call {@link toValues} method first.
      * @param mixed $value The value to locate in the sequence.
-     * @return mixed The key of the first occurrence of value, if found; otherwise, false.
+     * @return mixed The key of the first occurrence of value, if found; otherwise, null.
      * @package YaLinqo\Pagination
      */
-    public function indexOf($value)
+    public function indexOf ($value)
     {
-        $array = $this->tryGetArrayCopy();
-        if ($array !== null)
-            return array_search($value, $array, true);
-        else {
-            foreach ($this as $k => $v) {
-                if ($v === $value)
-                    return $k;
-            }
-            return false;
+        foreach ($this as $k => $v) {
+            if ($v === $value)
+                return $k;
         }
+        return null; // not -1
     }
 
     /**
@@ -344,7 +330,7 @@ trait EnumerablePagination
      * @return mixed The key of the last occurrence of value, if found; otherwise, null.
      * @package YaLinqo\Pagination
      */
-    public function lastIndexOf($value)
+    public function lastIndexOf ($value)
     {
         $key = null;
         foreach ($this as $k => $v) {
@@ -362,7 +348,7 @@ trait EnumerablePagination
      * @return mixed The key of the first occurrence of an element that matches the conditions defined by predicate, if found; otherwise, null.
      * @package YaLinqo\Pagination
      */
-    public function findIndex($predicate)
+    public function findIndex ($predicate)
     {
         $predicate = Utils::createLambda($predicate, 'v,k');
 
@@ -381,7 +367,7 @@ trait EnumerablePagination
      * @return mixed The key of the last occurrence of an element that matches the conditions defined by predicate, if found; otherwise, null.
      * @package YaLinqo\Pagination
      */
-    public function findLastIndex($predicate)
+    public function findLastIndex ($predicate)
     {
         $predicate = Utils::createLambda($predicate, 'v,k');
 
@@ -402,9 +388,9 @@ trait EnumerablePagination
      * @return Enumerable A sequence that contains the elements that occur after the specified index in the input sequence.
      * @package YaLinqo\Pagination
      */
-    public function skip(int $count)
+    public function skip ($count)
     {
-        return new self(function() use ($count) {
+        return new self(function () use ($count) {
             $it = $this->getIterator();
             $it->rewind();
             for ($i = 0; $i < $count && $it->valid(); ++$i)
@@ -425,11 +411,11 @@ trait EnumerablePagination
      * @return Enumerable A sequence that contains the elements from the input sequence starting at the first element in the linear series that does not pass the test specified by predicate.
      * @package YaLinqo\Pagination
      */
-    public function skipWhile($predicate)
+    public function skipWhile ($predicate)
     {
         $predicate = Utils::createLambda($predicate, 'v,k');
 
-        return new self(function() use ($predicate) {
+        return new self(function () use ($predicate) {
             $yielding = false;
             foreach ($this as $k => $v) {
                 if (!$yielding && !$predicate($v, $k))
@@ -449,12 +435,14 @@ trait EnumerablePagination
      * @return Enumerable A sequence that contains the specified number of elements from the start of the input sequence.
      * @package YaLinqo\Pagination
      */
-    public function take(int $count)
+    public function take ($count)
     {
         if ($count <= 0)
             return new self(new \EmptyIterator, false);
 
-        return new self(function() use ($count) {
+        return new self(function () use ($count) {
+            if ($count <= 0)
+                return;
             foreach ($this as $k => $v) {
                 yield $k => $v;
                 if (--$count == 0)
@@ -472,11 +460,11 @@ trait EnumerablePagination
      * @return Enumerable A sequence that contains the elements from the input sequence that occur before the element at which the test no longer passes.
      * @package YaLinqo\Pagination
      */
-    public function takeWhile($predicate)
+    public function takeWhile ($predicate)
     {
         $predicate = Utils::createLambda($predicate, 'v,k');
 
-        return new self(function() use ($predicate) {
+        return new self(function () use ($predicate) {
             foreach ($this as $k => $v) {
                 if (!$predicate($v, $k))
                     break;
@@ -486,8 +474,7 @@ trait EnumerablePagination
     }
 
     /**
-     * Retrieve an external iterator.
      * @return \Iterator
      */
-    public abstract function getIterator();
+    public abstract function getIterator ();
 }

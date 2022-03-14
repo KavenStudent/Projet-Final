@@ -9,6 +9,8 @@
 
 namespace YaLinqo;
 
+use YaLinqo;
+
 /**
  * Functions for creating lambdas.
  * @internal
@@ -32,11 +34,8 @@ class Utils
         'strnatcasecmp' => 14 /*SORT_NATURAL | SORT_FLAG_CASE*/,
     ];
 
-    /**
-     * @codeCoverageIgnore
-     * @internal
-     */
-    public static function init()
+    /** @internal */
+    public static function init ()
     {
         self::$lambdaCache = [
             '$v' => [ 'v,k' => Functions::$value ],
@@ -53,7 +52,7 @@ class Utils
      * @throws \InvalidArgumentException Incorrect lambda syntax.
      * @return callable|null
      */
-    public static function createLambda($closure, string $closureArgs, $default = null)
+    public static function createLambda ($closure, $closureArgs, $default = null)
     {
         if ($closure === null) {
             if ($default === null)
@@ -78,7 +77,7 @@ class Utils
      * @throws \InvalidArgumentException Incorrect lambda syntax.
      * @throws \InvalidArgumentException Incorrect SORT_ flags.
      */
-    public static function createComparer($closure, $sortOrder, &$isReversed)
+    public static function createComparer ($closure, $sortOrder, &$isReversed)
     {
         if ($closure === null) {
             $isReversed = false;
@@ -114,7 +113,7 @@ class Utils
      * @param int|bool $sortOrder
      * @return callable|string|int|null
      */
-    public static function lambdaToSortFlagsAndOrder($closure, &$sortOrder)
+    public static function lambdaToSortFlagsAndOrder ($closure, &$sortOrder)
     {
         if ($sortOrder !== SORT_ASC && $sortOrder !== SORT_DESC)
             $sortOrder = $sortOrder ? SORT_DESC : SORT_ASC;
@@ -133,7 +132,7 @@ class Utils
      * @throws \InvalidArgumentException Incorrect lambda syntax.
      * @return string|null
      */
-    private static function createLambdaFromString(string $closure, string $closureArgs)
+    private static function createLambdaFromString ($closure, $closureArgs)
     {
         $posDollar = strpos($closure, '$');
         if ($posDollar !== false) {
@@ -152,10 +151,8 @@ class Utils
             if (strlen($code) > 0 && $code[0] != '{')
                 $code = "return {$code};";
             $fun = @create_function($args, $code);
-            // @codeCoverageIgnoreStart
             if (!$fun)
                 throw new \InvalidArgumentException(self::ERROR_CANNOT_PARSE_LAMBDA);
-            // @codeCoverageIgnoreEnd
             self::$lambdaCache[$closure][$closureArgs] = $fun;
             return $fun;
         }

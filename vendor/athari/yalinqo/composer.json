@@ -16,10 +16,10 @@
         "docs": "http://athari.github.io/YaLinqo"
     },
     "require": {
-        "php": ">=7.0"
+        "php": ">=5.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5",
+        "phpunit/phpunit": "<6",
         "phpdocumentor/phpdocumentor": "^2.8",
         "satooshi/php-coveralls": "^2.0"
     },

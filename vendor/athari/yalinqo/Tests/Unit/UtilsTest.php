@@ -7,58 +7,56 @@ use YaLinqo\Tests\Stubs\Temp, YaLinqo\Tests\Testing\TestCaseEnumerable;
 
 class UtilsTest extends TestCaseEnumerable
 {
-    /** @covers \YaLinqo\Utils::init
+    /** @covers YaLinqo\Utils::init
      */
-    function testInit()
+    function testInit ()
     {
         U::init();
-        $this->assertInstanceOf(\Closure::class, U::createLambda('$v', 'v,k'));
-        $this->assertInstanceOf(\Closure::class, U::createLambda('$k', 'v,k'));
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
+    /** @covers YaLinqo\Utils::createLambda
      */
-    function testCreateLambda_nullWithoutDefault()
+    function testCreateLambda_nullWithoutDefault ()
     {
         $this->setExpectedException('InvalidArgumentException', U::ERROR_CLOSURE_NULL);
         U::createLambda(null, 'a,b');
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
+    /** @covers YaLinqo\Utils::createLambda
      */
-    function testCreateLambda_notCallable()
+    function testCreateLambda_notCallable ()
     {
         $this->setExpectedException('InvalidArgumentException', U::ERROR_CLOSURE_NOT_CALLABLE);
         U::createLambda('function does not exist', 'a,b');
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
+    /** @covers YaLinqo\Utils::createLambda
      */
-    function testCreateLambda_nullWithDefault()
+    function testCreateLambda_nullWithDefault ()
     {
         $f = U::createLambda(null, 'a,b', true);
         $this->assertSame(true, $f);
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
+    /** @covers YaLinqo\Utils::createLambda
      */
-    function testCreateLambda_closure()
+    function testCreateLambda_closure ()
     {
-        $f = U::createLambda(function($a, $b) { return $a + $b; }, 'a,b');
+        $f = U::createLambda(function ($a, $b) { return $a + $b; }, 'a,b');
         $this->assertSame(5, $f(2, 3));
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
+    /** @covers YaLinqo\Utils::createLambda
      */
-    function testCreateLambda_callableString()
+    function testCreateLambda_callableString ()
     {
         $f = U::createLambda('strlen', 's');
         $this->assertSame(3, $f('abc'));
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
+    /** @covers YaLinqo\Utils::createLambda
      */
-    function testCreateLambda_callableArray()
+    function testCreateLambda_callableArray ()
     {
         $o = new Temp(2);
         $f = U::createLambda([ $o, 'foo' ], 'a');
@@ -69,10 +67,10 @@ class UtilsTest extends TestCaseEnumerable
         $this->assertSame(6, $f(6));
     }
 
-    /** @covers \YaLinqo\Utils::createLambda
-     * @covers \YaLinqo\Utils::createLambdaFromString
+    /** @covers YaLinqo\Utils::createLambda
+     * @covers YaLinqo\Utils::createLambdaFromString
      */
-    function testCreateLambda_lambdaString()
+    function testCreateLambda_lambdaString ()
     {
         $f = U::createLambda('strcmp', 'a,b');
         $this->assertSame(0, $f('a', 'a'));
@@ -108,16 +106,11 @@ class UtilsTest extends TestCaseEnumerable
         $f = U::createLambda('($q, $w, $e, $r) ==> { return $w+$e; }', 'a,b,c,d');
         $this->assertSame(5, $f(1, 2, 3, 4));
         $this->assertSame(5, $f(1, 2, 3, 4, 5));
-
-        $f2 = U::createLambda('($q, $w, $e, $r) ==> { return $w+$e; }', 'a,b,c,d');
-        $this->assertSame($f, $f2);
-        $this->assertSame(5, $f2(1, 2, 3, 4));
-        $this->assertSame(5, $f2(1, 2, 3, 4, 5));
     }
 
-    /** @covers \YaLinqo\Utils::createComparer
+    /** @covers YaLinqo\Utils::createComparer
      */
-    function testCreateComparer_default()
+    function testCreateComparer_default ()
     {
         $isReversed = null;
         $f = U::createComparer(null, SORT_ASC, $isReversed);
@@ -130,9 +123,9 @@ class UtilsTest extends TestCaseEnumerable
         $this->assertSame(false, $isReversed);
     }
 
-    /** @covers \YaLinqo\Utils::createComparer
+    /** @covers YaLinqo\Utils::createComparer
      */
-    function testCreateComparer_sortFlags()
+    function testCreateComparer_sortFlags ()
     {
         $isReversed = null;
 
@@ -155,9 +148,9 @@ class UtilsTest extends TestCaseEnumerable
         $this->assertSame('strnatcasecmp', $f);
     }
 
-    /** @covers \YaLinqo\Utils::createComparer
+    /** @covers YaLinqo\Utils::createComparer
      */
-    function testCreateComparer_sortFlags_numeric()
+    function testCreateComparer_sortFlags_numeric ()
     {
         $isReversed = null;
         $f = U::createComparer(SORT_NUMERIC, SORT_ASC, $isReversed);
@@ -170,27 +163,27 @@ class UtilsTest extends TestCaseEnumerable
         $this->assertSame(false, $isReversed);
     }
 
-    /** @covers \YaLinqo\Utils::createComparer
+    /** @covers YaLinqo\Utils::createComparer
      */
-    function testCreateComparer_sortFlags_closure()
+    function testCreateComparer_sortFlags_closure ()
     {
         $isReversed = null;
         $f = U::createComparer('$a-$b', SORT_ASC, $isReversed);
         $this->assertSame(7, $f(10, 3));
     }
 
-    /** @covers \YaLinqo\Utils::createComparer
+    /** @covers YaLinqo\Utils::createComparer
      */
-    function testCreateComparer_sortFlags_invalid()
+    function testCreateComparer_sortFlags_invalid ()
     {
         $this->setExpectedException('\InvalidArgumentException');
         $isReversed = null;
         U::createComparer(666, SORT_ASC, $isReversed);
     }
 
-    /** @covers \YaLinqo\Utils::lambdaToSortFlagsAndOrder
+    /** @covers YaLinqo\Utils::lambdaToSortFlagsAndOrder
      */
-    function testLambdaToSortFlagsAndOrder_sortFlags()
+    function testLambdaToSortFlagsAndOrder_sortFlags ()
     {
         $order = SORT_ASC;
         $this->assertSame(null, U::lambdaToSortFlagsAndOrder('$v', $order));
@@ -214,9 +207,9 @@ class UtilsTest extends TestCaseEnumerable
         $this->assertSame(SORT_NATURAL | SORT_FLAG_CASE, U::lambdaToSortFlagsAndOrder('strnatcasecmp', $order));
     }
 
-    /** @covers \YaLinqo\Utils::lambdaToSortFlagsAndOrder
+    /** @covers YaLinqo\Utils::lambdaToSortFlagsAndOrder
      */
-    function testLambdaToSortFlagsAndOrder_sortOrder()
+    function testLambdaToSortFlagsAndOrder_sortOrder ()
     {
         $order = false;
         U::lambdaToSortFlagsAndOrder(null, $order);
@@ -233,7 +226,5 @@ class UtilsTest extends TestCaseEnumerable
         $order = SORT_DESC;
         U::lambdaToSortFlagsAndOrder(null, $order);
         $this->assertSame(SORT_DESC, $order);
-
-        $this->assertSame(1, U::lambdaToSortFlagsAndOrder(1, $order));
     }
 }
