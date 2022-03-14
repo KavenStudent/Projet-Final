@@ -83,15 +83,15 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
-            $object =$stmt->fetch(PDO::FETCH_OBJ);
+            $object = $stmt->fetch(PDO::FETCH_OBJ);
             $isMembrePremium = $object->membrePremium;
 
-            if($isMembrePremium){
+            if ($isMembrePremium) {
                 $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ?";
-            }else{
+            } else {
                 $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ? ORDER BY id DESC LIMIT 3";
             }
-            
+
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
@@ -146,7 +146,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
-
+            $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
             $requete = "SELECT COUNT(p.id) as nbProjets , m.membrePremium FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE idCreateur = ?";
             $this->setRequete($requete);
@@ -155,7 +155,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
 
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $premium = $ligne->membrePremium;
-            $path = $this->verserProjet("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier", $premium);
+
 
             if ($ligne->nbProjets >= 3 && !$premium) {
                 $returnValue = false;
@@ -239,7 +239,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $premium = $ligne->membrePremium;
 
             $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
-            $path = $this->verserProjet("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier", $premium);
+            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
             if ($adminLock) {
                 $prive = $adminLock;
@@ -352,7 +352,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 $tab[] = $ligne;
             }
-            
+
             $requete = "SELECT * FROM membre m WHERE m.prive = 0 AND m.membrePremium = 0";
             $this->setRequete($requete);
             $this->setParams(array());
@@ -372,8 +372,6 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                     $tab[] = $ligne;
                 }
             }
-
-
         } catch (Exception $e) {
             echo $e->getMessage();
         } finally {

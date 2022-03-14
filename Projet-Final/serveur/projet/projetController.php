@@ -119,7 +119,7 @@ function loadPageProjetController()
     $tabRes['tabTags'] = $dao->getAllTags();
     $daoMembre = new MembreDaoImpl();
     $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
-    $membre = $dao->getMembre($projet->getCreateurId());
+    $membre = $daoMembre->getMembre($projet->getCreateurId());
     $tabRes['premium'] = $membre->getMembrePremium();
 }
 
@@ -137,7 +137,7 @@ function  loadPageAjouterProjetController()
     $tabRes['tabTags'] = $dao->getAllTags();
     $daoMembre = new MembreDaoImpl();
     $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
-    $membre = $dao->getMembre($idMembre);
+    $membre = $daoMembre->getMembre($idMembre);
     $tabRes['premium'] = $membre->getMembrePremium();
 }
 

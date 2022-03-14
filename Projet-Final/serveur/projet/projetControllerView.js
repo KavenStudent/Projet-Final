@@ -207,7 +207,7 @@ function afficherPageProjetEdit(json) {
 
 <h3>Fichier du projet</h3>
    <div class="form-outline-inpt inpt">
-   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit" onchange="validationFichier('inputFichierEdit', ${json.premium})">
    </div>
    <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
 
@@ -346,7 +346,7 @@ function ajouterProjetAffichage(json) {
 
    <h3>Fichier du projet</h3>
    <div class="form-outline-inpt inpt">
-   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier" onchange="validationFichier('inputFichier', ${json.premium})">
    </div>
    <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
  

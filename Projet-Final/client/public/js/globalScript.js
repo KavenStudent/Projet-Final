@@ -586,6 +586,31 @@ function displayParticipantsMatches() {
   }
   $("#participantsReponse").html(contenu);
 }
+
+//validation du telechargement du fichier projet
+function validationFichier(idInput, premium) {
+  let fi = document.getElementById(idInput);
+  const MAX_SIZE_REGULAR = 8 * Math.pow(1024, 2);
+  const MAX_SIZE_PREMIUM = 20 * Math.pow(1024, 2);
+
+  if (fi.files.length > 0) {
+    for (let i = 0; i <= fi.files.length - 1; i++) {
+
+      const fsize = fi.files.item(i).size;
+
+      if (premium == 0 && fsize >= MAX_SIZE_REGULAR) {
+        afficherSnackbar('La taille du fichier doit être de 8 MB ou moins');
+        fi.value = '';
+      } else if (premium == 1 && fsize >= MAX_SIZE_PREMIUM) {
+        afficherSnackbar('La taille du fichier doit être de 20 MB ou moins');
+        fi.value = '';
+      }
+
+    }
+  }
+}
+
+
 // function pour loader soit la page d'acceuil, soit la page admin ou la page Membre
 function loadPage() {
   var typePage = document.getElementById("typePage").value;
