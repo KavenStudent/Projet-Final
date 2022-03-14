@@ -54,8 +54,8 @@ function filterDataProjet(input, projet) {
   let prenomCreateur = projet.prenom.toLowerCase();
   let nomCreateur = projet.nom.toLowerCase();
   let tags = projet.tags;
-  if(tags!=null && tags.length > 0){
-     tags = tags.toLowerCase();
+  if (tags != null && tags.length > 0) {
+    tags = tags.toLowerCase();
   }
   let titre = projet.titre.toLowerCase();
   if (
@@ -236,7 +236,6 @@ function setEyesDansFormEdit() {
 }
 
 function tagCliquable(input) {
-
   document.getElementById("searchBar").value = input;
   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
   if (input != "" && firstLoad === false) {
@@ -272,7 +271,7 @@ function valider() {
   let myForm = document.getElementById("form-enregistrer-membre");
   let password = myForm.password.value;
   let confirmPassword = myForm.confirmPassword.value;
-  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let pattern = /^[A-Za-z0-9\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
@@ -615,9 +614,10 @@ function loadPage() {
   }
 }
 
-function afficheSlidePayment(){
-  let bsOffcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
-	bsOffcanvas.show(); // affiche le canvas du panier
+function afficheSlidePayment() {
+  let bsOffcanvas = new bootstrap.Offcanvas(
+    document.getElementById("offcanvasRight")
+  );
+  bsOffcanvas.show(); // affiche le canvas du panier
   afficherPaypal();
 }
-
