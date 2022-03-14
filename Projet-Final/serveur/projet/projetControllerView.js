@@ -543,18 +543,35 @@ function redirigerPageMembre(idMembre, message) {
 
 function afficherModalRaison(json) {
   let contenu = "";
-
+  let compteur = 1;
   json.tabRaison.forEach((raison) => {
-    contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">
-   <div class="card-header">
-   ${raison.titre} #${raison.idProjet}
-   </div>
-   <div class="card-body">
-
-     <p>${raison.description}</p>
-
-   </div>
- </div>`;
+    if(raison.idProjet !=null){
+      contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">`;
+      contenu += `<div class="card-header">
+        Raison #${compteur} :
+      </div>
+      <div class="card-body">
+   
+        <p><span style="color:red">Projet signalé :</span> ${raison.titre} #${raison.idProjet}</p>
+        <p>Description : ${raison.description}</p>
+   
+      </div>
+    </div>`;
+    }
+    else {
+      contenu += `  <div class="card descriptionCard">`;
+      contenu += `<div class="card-header">
+      Raison #${compteur} : 
+      </div>
+      <div class="card-body">
+   
+        <p>Description : ${raison.description}</p>
+   
+      </div>
+    </div>`;
+    }
+    compteur++ ;
+  
   });
 
   $(".divSignalisation").html(contenu);
