@@ -76,7 +76,7 @@ function afficherPageProjet(json) {
             aria-label="Autres participants: ">`;
 
   //List participants
-  if(json.tabParticipantsProjet.length >0){
+  if (json.tabParticipantsProjet.length > 0) {
     json.tabParticipantsProjet.forEach((membreProjet) => {
       if (membreProjet.prive != 1) {
         contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
@@ -85,7 +85,7 @@ function afficherPageProjet(json) {
       }
     });
   }
-  
+
   let partArray = json.projet.autreParticipant.split(",");
   partArray.forEach((participant) => {
     contenu += ` <li class="list-inline-item">${participant}</li>`;
@@ -94,14 +94,14 @@ function afficherPageProjet(json) {
   //List tags
   contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags:">`;
 
-  if(json.tabTagsProjet.length > 0){
+  if (json.tabTagsProjet.length > 0) {
     json.tabTagsProjet.forEach((tagProjet) => {
       contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
     });
     contenu = contenu.substring(0, contenu.length - 7) + "</li>";
   }
-  
-  
+
+
   contenu += `</ul>`;
 
   //Description
@@ -518,7 +518,7 @@ function afficherPageAutreProjet(json) {
   json.tabTagsProjet.forEach((tagProjet) => {
     contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
   });
-  contenu = contenu.substring(0, contenu.length -7) + "</li>";
+  contenu = contenu.substring(0, contenu.length - 7) + "</li>";
   contenu += `</ul>`;
 
 
