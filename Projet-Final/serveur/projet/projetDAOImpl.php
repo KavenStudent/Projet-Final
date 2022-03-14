@@ -1,9 +1,9 @@
 <?php
-require_once ("../../../vendor/autoloader.php");
+require_once ("../../../vendor/autoload.php");
 require_once("projet.php");
 require_once("projetDAO.php");
 require_once("../includes/modele.inc.php");
-
+use \YaLinqo\Linq;
 
 
 class ProjetDaoImpl extends Modele implements ProjetDao
@@ -355,6 +355,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 $tab[] = $ligne;
             }
 
+
            
             $tabAllProjetPublicNoPremium = [];
             $requete = "SELECT * FROM projet p LEFT JOIN projettag pt ON p.id = pt.idProjet 
@@ -366,10 +367,10 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setParams(array());
             $stmt = $this->executer();
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $tabAllProjetPublicNoPremium[] = $ligne;
+                $tabAllProjetPublicNoPremium[] = array($ligne);
             }
-
-            $result = from($tabAllProjetPublicNoPremium)
+           
+            $result = Linq ::from($tabAllProjetPublicNoPremium)
             ->groupBy('$projet ==> $projet["idCreateur"]')
             ->select('$projet')
             ->take(3);
