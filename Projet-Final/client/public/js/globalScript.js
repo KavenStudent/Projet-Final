@@ -59,6 +59,8 @@ function filterDataProjet(input, projet) {
   let tags = projet.tags;
   if(tags!=null && tags.length > 0){
      tags = tags.toLowerCase();
+  }else{
+     tags = "";
   }
   let titre = projet.titre.toLowerCase();
   if (

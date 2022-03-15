@@ -343,8 +343,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $tab = array();
             $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
             FROM projet p
-            INNER JOIN projettag pt ON p.id = pt.idProjet 
-            INNER JOIN tag t ON t.id = pt.idTag 
+            LEFT JOIN projettag pt ON p.id = pt.idProjet 
+            LEFT JOIN tag t ON t.id = pt.idTag 
             INNER JOIN membre m ON p.idCreateur = m.id 
             WHERE m.prive = 0 AND m.membrePremium = 1 GROUP BY p.id";
 
@@ -354,55 +354,36 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 $tab[] = $ligne;
             }
-
-            
            
             $tabAllProjetPublicNoPremium = [];
-            $requete = "SELECT idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
+            $tabAllIdDistinct = [];
+            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
             FROM projet p 
             LEFT JOIN projettag pt ON p.id = pt.idProjet 
             LEFT JOIN tag t ON t.id = pt.idTag
             INNER JOIN membre m ON p.idCreateur = m.id
-            WHERE m.prive = 0 AND m.membrePremium = 0";
+            WHERE m.prive = 0 AND m.membrePremium = 0 GROUP BY p.id";
 
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $tabAllProjetPublicNoPremium[] = array( 'idMembre'=>$ligne->idMembre,'tags'=>$ligne->tags,
+                $tabAllProjetPublicNoPremium[] = array( "idMembre"=>$ligne->idMembre,'tags'=>$ligne->tags,
             'titre'=>$ligne->titre, 'idProjet'=>$ligne->idProjet, 'nbTelechargement'=>$ligne->nbTelechargement,'nom'=>$ligne->nom,
             'prenom'=>$ligne->prenom, 'prive'=>$ligne->prive, 'membrePremium'=>$ligne->membrePremium);
             }
-            print_r("AVANT LE FILTER : ");
-            print_r($tabAllProjetPublicNoPremium);
-            $result = Enumerable::from($tabAllProjetPublicNoPremium)
-            ->groupBy('$projet ==> $projet["idMembre"]')
-            ->take(3)->toList();
 
-            print_r("------------------------------------------------------------------");
-            
-            print_r("ICI RESULT : ");
-            print_r($result);
-            // $requete = "SELECT * FROM membre m WHERE m.prive = 0 AND m.membrePremium = 0";
-            // $this->setRequete($requete);
-            // $this->setParams(array());
-            // $stmt = $this->executer();
-            // $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
-            // FROM projet p
-            // LEFT JOIN projettag pt ON p.id = pt.idProjet 
-            // LEFT JOIN tag t ON t.id = pt.idTag 
-            // INNER JOIN membre m ON p.idCreateur = m.id 
-            // WHERE p.idCreateur = ? GROUP BY p.id ORDER BY p.id DESC LIMIT 3";
-            // while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            //     $idCreateur = $ligne->id;
-            //     $this->setRequete($requete);
-            //     $this->setParams(array($idCreateur));
-            //     $stmt = $this->executer();
-            //     while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            //         $tab[] = $ligne;
-            //     }
-            // }
+            $tabAllIdDistinct[] = Enumerable::from($tabAllProjetPublicNoPremium)->distinct('$projet ==> $projet["idMembre"]')->toList();
 
+            foreach($tabAllIdDistinct[0] as $row){
+                $result = Enumerable::from($tabAllProjetPublicNoPremium)->where('$projet ==> $projet["idMembre"] == '.$row["idMembre"])
+                ->orderByDescending('$projet ==> $projet["idProjet"]')->take(3)->toList();
+
+                foreach($result as $projetArray){
+                    $projet = (object) $projetArray;
+                    $tab[] = $projet;
+                } 
+            }
 
         } catch (Exception $e) {
             echo $e->getMessage();
