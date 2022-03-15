@@ -358,7 +358,9 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             
            
             $tabAllProjetPublicNoPremium = [];
-            $requete = "SELECT * FROM projet p LEFT JOIN projettag pt ON p.id = pt.idProjet 
+            $requete = "SELECT idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
+            FROM projet p 
+            LEFT JOIN projettag pt ON p.id = pt.idProjet 
             LEFT JOIN tag t ON t.id = pt.idTag
             INNER JOIN membre m ON p.idCreateur = m.id
             WHERE m.prive = 0 AND m.membrePremium = 0";
@@ -367,14 +369,19 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setParams(array());
             $stmt = $this->executer();
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $tabAllProjetPublicNoPremium[] = array('idCreateur'=>$ligne->idCreateur);
+                $tabAllProjetPublicNoPremium[] = array( 'idMembre'=>$ligne->idMembre,'tags'=>$ligne->tags,
+            'titre'=>$ligne->titre, 'idProjet'=>$ligne->idProjet, 'nbTelechargement'=>$ligne->nbTelechargement,'nom'=>$ligne->nom,
+            'prenom'=>$ligne->prenom, 'prive'=>$ligne->prive, 'membrePremium'=>$ligne->membrePremium);
             }
-           print_r($tabAllProjetPublicNoPremium);
+            print_r("AVANT LE FILTER : ");
+            print_r($tabAllProjetPublicNoPremium);
             $result = Enumerable::from($tabAllProjetPublicNoPremium)
-            ->groupBy('$projet ==> $projet["idCreateur"]')
-            ->select('$projet')
-            ->take(3);
+            ->groupBy('$projet ==> $projet["idMembre"]')
+            ->take(3)->toList();
 
+            print_r("------------------------------------------------------------------");
+            
+            print_r("ICI RESULT : ");
             print_r($result);
             // $requete = "SELECT * FROM membre m WHERE m.prive = 0 AND m.membrePremium = 0";
             // $this->setRequete($requete);
