@@ -14,7 +14,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre";
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE connexion.role = 'M' ";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
@@ -33,7 +33,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.prive = 0";
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.prive = 0 AND connexion.role = 'M'";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
@@ -48,34 +48,6 @@ class MembreDaoImpl extends Modele implements MembreDao
         return $tab;
     }
 
-    public function getAllMembreRecherche(string $par, string $valeurPar): array
-    {
-        try {
-            $tab = array();
-
-            switch (trim($par)) {
-                case "membre":
-                    $requete = "SELECT m.idMembre, m.prenom, m.nom, m.courriel, m.sexe, m.dateDeNaissance, c.statut, c.role FROM membres m INNER JOIN connexion c ON m.idMembre = c.idMembre WHERE LOWER(nom) LIKE CONCAT('%', ?, '%') OR LOWER(prenom) LIKE CONCAT('%', ?, '%')";
-                    break;
-                case "tout":
-                    $requete = "SELECT m.idMembre, m.prenom, m.nom, m.courriel, m.sexe, m.dateDeNaissance, c.statut, c.role FROM membres m INNER JOIN connexion c ON m.idMembre = c.idMembre WHERE 1=? OR 1=?";
-                    $valeurPar = 1;
-                    break;
-            }
-            $this->setRequete($requete);
-            $this->setParams(array(trim($valeurPar), trim($valeurPar)));
-            $stmt = $this->executer();
-
-            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $tab[] = $ligne;
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        } finally {
-            unset($requete);
-        }
-        return $tab;
-    }
 
     public function enregistrerMembre(Membre $Membre): bool
     {
