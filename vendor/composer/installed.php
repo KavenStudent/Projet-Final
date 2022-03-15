@@ -1,22 +1,31 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '90329d5256d75ebc4b18f66ae4fd25283f5a8a09',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '90329d5256d75ebc4b18f66ae4fd25283f5a8a09',
+            'dev_requirement' => false,
+        ),
+        'athari/yalinqo' => array(
+            'pretty_version' => 'v2.4.2',
+            'version' => '2.4.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../athari/yalinqo',
+            'aliases' => array(),
+            'reference' => 'cb8afe0c03a9ea639f9a14ea78641abb2b7682fb',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
