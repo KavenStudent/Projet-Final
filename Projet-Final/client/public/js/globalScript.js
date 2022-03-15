@@ -57,6 +57,7 @@ function filterDataProjet(input, projet) {
   let prenomCreateur = projet.prenom.toLowerCase();
   let nomCreateur = projet.nom.toLowerCase();
   let tags = projet.tags;
+
   if(tags!=null && tags.length > 0){
      tags = tags.toLowerCase();
   }else{
@@ -73,7 +74,7 @@ function filterDataProjet(input, projet) {
   }
   return isExist;
 }
-// FUNCTION POUR ENLEVER TOUT LES CHARACTÈRES DANS LE CHAMP DE RECHERCHE 
+// FUNCTION POUR ENLEVER TOUT LES CHARACTÈRES DANS LE CHAMP DE RECHERCHE
 function clearInputSearch() {
   let searchBar = document.getElementById("searchBar");
   searchBar.value = "";
@@ -120,9 +121,8 @@ function loadData() {
 
 // ---------------------------------------QUAND LA PAGE EST LOAD--------EXECUTE PLUSIEURS ACTIONS
 window.onload = function () {
-
   loadPage();
-  // empeche d'utiliser la touche entrer dans les forms -----LE ENTER CAUSE UN BOGUE, SA FAIT RELOAD LA PAGE À LA PLACE D'ACTIVER UNE FONCTION (SUBMIT LE FORM DANS LE VIDE) 
+  // empeche d'utiliser la touche entrer dans les forms -----LE ENTER CAUSE UN BOGUE, SA FAIT RELOAD LA PAGE À LA PLACE D'ACTIVER UNE FONCTION (SUBMIT LE FORM DANS LE VIDE)
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
       event.preventDefault();
@@ -243,7 +243,6 @@ function setEyesDansFormEdit() {
 }
 // FUNCTION LORSQUE QU'ON CLIQUE SUR UN TAG LA RECHERCHE SERA APPELÉ AUTOMATIQUEMENT POUR CE TAG
 function tagCliquable(input) {
-
   document.getElementById("searchBar").value = input;
   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
   if (input != "" && firstLoad === false) {
@@ -257,14 +256,12 @@ function tagCliquable(input) {
   }
 }
 
-
-
 // VALIDER LE FORM DEVENIR MEMBRE
 function valider() {
   let myForm = document.getElementById("form-enregistrer-membre");
   let password = myForm.password.value;
   let confirmPassword = myForm.confirmPassword.value;
-  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let pattern = /^[A-Za-z0-9\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
@@ -289,7 +286,7 @@ function validerMembreEdit() {
   let myForm = document.getElementById("membreEditForm");
   let password = myForm.passwordEdit.value;
   let confirmPassword = myForm.confirmPasswordEdit.value;
-  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let pattern = /^[A-Za-z0-9\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
@@ -354,7 +351,7 @@ function closeToast() {
   $("#toastForm").toast("hide");
 }
 
-//FUNCTION POUR LOAD UNE IMAGE 
+//FUNCTION POUR LOAD UNE IMAGE
 
 var loadFile = function (event) {
   var output = document.getElementById("output");
@@ -592,6 +589,28 @@ function displayParticipantsMatches() {
   }
   $("#participantsReponse").html(contenu);
 }
+
+//validation du telechargement du fichier projet
+function validationFichier(idInput, premium) {
+  let fi = document.getElementById(idInput);
+  const MAX_SIZE_REGULAR = 8 * Math.pow(1024, 2);
+  const MAX_SIZE_PREMIUM = 20 * Math.pow(1024, 2);
+
+  if (fi.files.length > 0) {
+    for (let i = 0; i <= fi.files.length - 1; i++) {
+      const fsize = fi.files.item(i).size;
+
+      if (premium == 0 && fsize >= MAX_SIZE_REGULAR) {
+        afficherSnackbar("La taille du fichier doit être de 8 MB ou moins");
+        fi.value = "";
+      } else if (premium == 1 && fsize >= MAX_SIZE_PREMIUM) {
+        afficherSnackbar("La taille du fichier doit être de 20 MB ou moins");
+        fi.value = "";
+      }
+    }
+  }
+}
+
 // function pour loader soit la page d'acceuil, soit la page admin ou la page Membre
 function loadPage() {
   var typePage = document.getElementById("typePage").value;
@@ -607,10 +626,12 @@ function loadPage() {
       loadMembre(`pageMembre`, typePage);
   }
 }
+
 // Permet d'afficher le slider avec le paiement par paypal.
-function afficheSlidePayment(){
-  let bsOffcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
-	bsOffcanvas.show(); // affiche le canvas du panier
+function afficheSlidePayment() {
+  let bsOffcanvas = new bootstrap.Offcanvas(
+    document.getElementById("offcanvasRight")
+  );
+  bsOffcanvas.show(); // affiche le canvas du panier
   afficherPaypal();
 }
-

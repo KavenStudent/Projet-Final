@@ -1,57 +1,59 @@
 #adminContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .separator {
-    width: 40em;
+  width: 40em;
 }
 
 .report {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    flex: 1;
-    min-width: 45%;
-    height: 650px;
-    overflow-y: auto;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex: 1;
+  min-width: 45%;
+  height: 650px;
+  overflow-y: auto;
+  justify-content: flex-start;
+  border: 1px solid #6f89d6;
+  border-radius: 10px;
 }
 
 #image-profil-report {
-    width: 80px;
-    height: 80px;
-    margin-right: 3px;
+  width: 80px;
+  height: 80px;
+  margin-right: 3px;
 }
 
 #image-profil-report:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #card-contenu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
 }
 
 .myReportCard {
-    margin: 5px;
+  margin: 5px;
 }
 
 h5:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .descriptionCard {
-    margin-bottom: 10px;
-    cursor: pointer;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .divSignalisation {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
