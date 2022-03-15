@@ -544,35 +544,40 @@ function redirigerPageMembre(idMembre, message) {
 function afficherModalRaison(json) {
   let contenu = "";
   let compteur = 1;
-  json.tabRaison.forEach((raison) => {
-    if(raison.idProjet !=null){
-      contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">`;
-      contenu += `<div class="card-header">
-        Raison #${compteur} :
-      </div>
-      <div class="card-body">
-   
-        <p><span style="color:red">Projet signalé :</span> ${raison.titre} #${raison.idProjet}</p>
-        <p>Description : ${raison.description}</p>
-   
-      </div>
-    </div>`;
-    }
-    else {
-      contenu += `  <div class="card descriptionCard">`;
-      contenu += `<div class="card-header">
-      Raison #${compteur} : 
-      </div>
-      <div class="card-body">
-   
-        <p>Description : ${raison.description}</p>
-   
-      </div>
-    </div>`;
-    }
-    compteur++ ;
-  
-  });
+  if (json.tabRaison.length > 0) {
+    json.tabRaison.forEach((raison) => {
+      if (raison.idProjet != null) {
+        contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">`;
+        contenu += `<div class="card-header">
+          Raison #${compteur} :
+        </div>
+        <div class="card-body">
+     
+          <p><span style="color:red">Projet signalé :</span> ${raison.titre} #${raison.idProjet}</p>
+          <p>Description : ${raison.description}</p>
+     
+        </div>
+      </div>`;
+      }
+      else {
+        contenu += `  <div class="card descriptionCard">`;
+        contenu += `<div class="card-header">
+        Raison #${compteur} : 
+        </div>
+        <div class="card-body">
+     
+          <p>Description : ${raison.description}</p>
+     
+        </div>
+      </div>`;
+      }
+      compteur++;
+
+    });
+  } else if (json.tabRaison.length == 0) {
+    contenu += `<div> Aucune raison </div>`;
+  }
+
 
   $(".divSignalisation").html(contenu);
   $("#modalSignalisation").modal("show");
