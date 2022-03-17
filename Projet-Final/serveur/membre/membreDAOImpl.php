@@ -193,11 +193,9 @@ class MembreDaoImpl extends Modele implements MembreDao
                                 $requete = "UPDATE membre SET membrePremium=?, dateFinAbonnement=? WHERE id=?";
                                 $this->setRequete($requete);
                                 $this->setParams(array(0, null, $idMembre));
-                                $stmt = $this->executer();
 
                                 $to = $ligne->courriel;
-                                $today = date("Y-m-d");
-                                $dateDebut  = date("Y-m-d", strtotime("-1 month", strtotime($today)));
+                                $dateDebut  = date("Y-m-d", strtotime("-1 month", strtotime($ligne->dateFinAbonnement)));
                                 $subject = "Abonnement expiré";
                                 $txt = '<html>
                                     <body>
@@ -209,14 +207,14 @@ class MembreDaoImpl extends Modele implements MembreDao
                                         </style>
                                         <p><span style="font-weight: bold">Votre abonnement a expiré!</span></p>' . "\r\n".'
                                         <p><span style="font-weight: bold">Date d\'achat de l\'abonnement: </span></p>' . $dateDebut . "\r\n".'
-                                        <p><span style="font-weight: bold">Date de fin d\'abonnement: </span></p>' . $today . "\r\n".'
+                                        <p><span style="font-weight: bold">Date de fin d\'abonnement: </span></p>' . $ligne->dateFinAbonnement . "\r\n".'
                                         </div>
                                     </body>
                                 </html>';
                                 $headers = "From: projeturanus@gmail.com" . "\r\n";
                                 $headers .= "Content-type:text/html;charset=UTF-8";
 
-    mail($to, $subject, $txt, $headers);
+                                mail($to, $subject, $txt, $headers);
                             }
                         }
                     } else if ($membre->role === "A") {
