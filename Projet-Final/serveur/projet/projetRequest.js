@@ -98,13 +98,11 @@ function modifierProjet(idProjet) {
       $(".lds-ring").removeClass("hidden");
     },
     success: function (reponse) {
-      loadJsonRecherhe();
       $(".lds-ring").addClass("hidden");
       projetVue(reponse);
     },
-    fail: function (err) { },
-    complete: function () {
-    },
+    fail: function (err) {$(".lds-ring").addClass("hidden"); },
+
   });
 }
 

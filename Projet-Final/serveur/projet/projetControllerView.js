@@ -225,7 +225,7 @@ function afficherPageProjetEdit(json) {
   contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet prive</label>
   </div>
  </div>
-  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
 <button type="button" class="btn btn-primary btn-block mb-4" onclick="validerProjetEdit(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);
@@ -237,6 +237,7 @@ function afficherPageProjetEdit(json) {
   });
 
   //Système de tags
+  clearTagsBase();
   setTagsBase();
 
   let monInputTag = document.getElementById("monInputTag");
