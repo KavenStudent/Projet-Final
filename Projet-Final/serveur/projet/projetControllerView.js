@@ -237,6 +237,7 @@ function afficherPageProjetEdit(json) {
   });
 
   //Système de tags
+  clearTagsBase();
   setTagsBase();
 
   let monInputTag = document.getElementById("monInputTag");
