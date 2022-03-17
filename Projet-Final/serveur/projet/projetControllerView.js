@@ -92,7 +92,7 @@ function afficherPageProjet(json) {
   });
 
   //List tags
-  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags:">`;
+  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags: ">`;
 
   if (json.tabTagsProjet.length > 0) {
     json.tabTagsProjet.forEach((tagProjet) => {
