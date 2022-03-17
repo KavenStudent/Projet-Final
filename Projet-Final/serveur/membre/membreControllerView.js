@@ -191,17 +191,17 @@ function afficherPageMembre(json, listProjet) {
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
 
-                    <label><strong>Numéro identifiant:</strong> <span>${json.membre.id}</span></label>
+                    <label><strong>Numéro identifiant: </strong> <span>${json.membre.id}</span></label>
 
-                    <label><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
+                    <label><strong>Nom: </strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     
-                    <label><strong>Courriel:</strong> <span>${json.membre.courriel}</span></label>
+                    <label><strong>Courriel: </strong> <span>${json.membre.courriel}</span></label>
                     
-                    <label><strong>Téléphone:</strong> <span>${json.membre.numeroTelephone}</span></label>
+                    <label><strong>Téléphone: </strong> <span>${json.membre.numeroTelephone}</span></label>
                     
-                    <label><strong>Description:</strong><span ><div id='description-profil'>${json.membre.description}</div></span></label>
+                    <label><strong>Description: </strong><span ><div id='description-profil'>${json.membre.description}</div></span></label>
                     
-                    <label><strong>Statut :</strong> <span>`;
+                    <label><strong>Statut: </strong> <span>`;
 
   if (json.membre.membrePremium == 0) {
     contenu += `non-abonné </span></label> 
@@ -407,17 +407,17 @@ function afficherPageAutreMembre(json, listProjet) {
                 <img id='image-profil' src="Projet-Final/serveur/membre/images-profil/${json.membre.imageProfil}" alt="Image du profil" class="img-thumbnail" alt="...">
                 <div class="container informations-profil">
 
-                    <label><strong>Numéro identifiant:</strong> <span>${json.membre.id}</span></label>
+                    <label><strong>Numéro identifiant: </strong> <span>${json.membre.id}</span></label>
 
-                    <label class=""><strong>Nom:</strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
+                    <label class=""><strong>Nom: </strong> <span>${json.membre.prenom} ${json.membre.nom}</span></label>
                     
-                    <label><strong>Courriel:</strong> <span>${json.membre.courriel}</span></label>
+                    <label><strong>Courriel: </strong> <span>${json.membre.courriel}</span></label>
                     
-                    <label><strong>Téléphone:</strong> <span>${json.membre.numeroTelephone}</span></label>
+                    <label><strong>Téléphone: </strong> <span>${json.membre.numeroTelephone}</span></label>
                     
-                    <label><strong>Description:</strong><span ><div id='description-profil'>${json.membre.description}</div></span></label>
+                    <label><strong>Description: </strong><span ><div id='description-profil'>${json.membre.description}</div></span></label>
                     
-                    <label><strong>Statut :</strong> <span>`;
+                    <label><strong>Statut: </strong> <span>`;
 
   if (json.membre.membrePremium == 0) {
     contenu += `non-abonné`;
