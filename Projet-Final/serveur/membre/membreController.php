@@ -21,6 +21,9 @@ switch ($action) {
     case "modifierMembre":
         modifierMembre();
         break;
+    case "tableMembres":
+        tableMembres();
+        break;
     case "loadMembre":
         loadPageMembre();
         break;
@@ -145,6 +148,18 @@ function modifierMembre()
 
         $tabRes['idDuMembre'] = $_SESSION['membre'];
     }
+}
+
+//table de tous les membre
+function tableMembres()
+{
+    global $tabRes;
+    global $dao;
+    $par = $_POST['par'];
+    $valeurPar = strtolower(trim($_POST['valeurPar']));
+    $tabRes['action'] = "tableMembres";
+    //retourne tout les membre
+    $tabRes['listeMembres'] = $dao->getAllMembreRecherche($par, $valeurPar);
 }
 
 // FUNCTIONS LOAD PAGES
@@ -320,25 +335,20 @@ function devenirPremium()
     $subject = "Paiement";
     $txt = '<html>
         <body>
-            <div class="mailContainer">
-            <style scoped>
-                .mailContainer{
-                    display: flex; flex: 1; flex-direction: column;
-                }
-            </style>
-            <h1 style="margin-bottom: 1rem">Preuve de paiement</h1>'."\r\n".'
-                <p>________________________________________</p>'."\r\n".'
-                <p><span style="font-weight: bold"># d\'identification de la facture:</span> ' . $facture[0]->id . '</p>'."\r\n".'
-                <p><span style="font-weight: bold">Nom du membre:</span> ' . $facture[0]->prenom . ' ' . $facture[0]->nom . '</p>'."\r\n".'
-                <p><span style="font-weight: bold">Date du paiement:</span> ' . $facture[0]->date . '</p>'."\r\n".'
-                <p><span style="font-weight: bold">Montant payé:</span> ' . $facture[0]->cout . '$</p>'."\r\n".'
-                <p><span style="font-weight: bold">Date de la fin de l\'abonnement:</span> ' . $facture[0]->dateFinAbonnement . '</p>'."\r\n".'
-                <p style="margin-top: 1rem">Merci de votre achat! :)</p>'."\r\n".'
+            <div style="display: flex; flex: 1; flex-direction: column;">
+            <h1 style="margin-bottom: 1rem">Preuve de paiement</h1>
+            <div>________________________________________</div>
+                <p><span style="font-weight: bold"># d\'identification de la facture:</span> '.$facture[0]->id.'</p>
+                <p><span style="font-weight: bold">Nom du membre:</span> '.$facture[0]->prenom.' '.$facture[0]->nom.'</p>
+                <p><span style="font-weight: bold">Date du paiement:</span> '.$facture[0]->date.'</p>
+                <p><span style="font-weight: bold">Montant payé:</span> '.$facture[0]->cout.'$</p>
+                <p><span style="font-weight: bold">Date de la fin de l\'abonnement:</span> '.$facture[0]->dateFinAbonnement.'</p>
+                <p style="margin-top: 1rem">Merci de votre achat! :)</p>
                 <p style="margin-top: 1rem; font-size: 0.5rem">Ne répondez pas à ce courriel</p>
             </div>
         </body>
     </html>';
-    $headers = "From: projeturanus@gmail.com" . "\r\n";
+    $headers = "From: projeturanus@gmail.com"."\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8";
 
     mail($to, $subject, $txt, $headers);
