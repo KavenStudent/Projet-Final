@@ -239,10 +239,9 @@ function telechargerProjet()
     global $dao;
 
     $idProjet = $_POST['idProjet'];
-
     $projet = $dao->getProjet($idProjet);
-
     $dao->telechargerProjet($projet->getId(), $projet->getNbTelechargements());
+ 
 }
 
 function supprimerProjet()
