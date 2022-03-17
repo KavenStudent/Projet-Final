@@ -14,7 +14,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE connexion.role = 'M' ";
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE c.role = 'M' ";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
@@ -33,7 +33,7 @@ class MembreDaoImpl extends Modele implements MembreDao
     {
         try {
             $tab = array();
-            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.prive = 0 AND connexion.role = 'M'";
+            $requete = "SELECT m.id, m.prive, m.prenom, m.nom, m.imageProfil, c.actif, c.role FROM membre m INNER JOIN connexion c ON m.id = c.idMembre WHERE m.prive = 0 AND c.role = 'M'";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
