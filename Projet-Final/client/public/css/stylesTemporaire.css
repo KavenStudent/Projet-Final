@@ -1,160 +1,159 @@
-#output , #outputThumbnail {
-    height: 20rem;
-    width: 20rem;
-    border-radius: 50px;
+#output,
+#outputThumbnail {
+  height: 20rem;
+  width: 20rem;
+  border-radius: 50px;
 }
 
-.myRowFile{
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
+.myRowFile {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
-#switchBox{
-    justify-content: flex-end;
-    display: flex;
+#switchBox {
+  justify-content: flex-end;
+  display: flex;
 }
-.profilEdit{
-    margin: auto;
-    padding: 10px;
-}
-
-.list{
-    border: 1px solid black;
-    /* background-color:#4169e157; */
-    overflow-y: auto;
-    max-height:40em;
-    min-height: 17em;
-    padding: 0em 2em 0em 2em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-radius: 5px;
-    min-width: 20em;
+.profilEdit {
+  margin: auto;
+  padding: 10px;
 }
 
-#containerRecherche{
-    border: 5px solid #4169E1;
-    background-color:#4169e157;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-    
-    /* border-bottom: 1px solid black; */
-    border-radius: 5px;
-    margin-bottom: 1em;
-    overflow-x: auto;
+.list {
+  border: 1px solid black;
+  /* background-color:#4169e157; */
+  overflow-y: auto;
+  max-height: 40em;
+  min-height: 17em;
+  padding: 0em 2em 0em 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-radius: 5px;
+  min-width: 20em;
 }
 
-#listMembre, #listProjet{
-   
-    flex:1;
-    display: flex;
-    flex-direction: column;
-    margin-right: 0.5em;
-    margin-left: 0.5em;
+#containerRecherche {
+  border: 5px solid #4169e1;
+  background-color: #4169e157;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+
+  /* border-bottom: 1px solid black; */
+  border-radius: 5px;
+  margin-bottom: 1em;
+  overflow-x: auto;
 }
 
-.headerListMembre{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-weight: bold;
-    min-width: 20em;
-    min-height: 1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    padding-bottom: 0;
-    margin-bottom: 0.5em;
-    border-bottom: 1px solid black;
+#listMembre,
+#listProjet {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
 }
 
-
-.headerListProjet{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    font-weight: bold;
-    min-width: 20em;
-    min-height: 1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    padding-bottom: 0;
-    margin-bottom: 0.5em;
-    border-bottom: 1px solid black;
+.headerListMembre {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: bold;
+  min-width: 20em;
+  min-height: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid black;
 }
 
-.headerListProjet p{
- flex: 1;
+.headerListProjet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: bold;
+  min-width: 20em;
+  min-height: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid black;
 }
 
-.cardMembreSuggestion, .cardProjetSuggestion{
-    border: 1px solid black;
-    min-height: 3em;
-    max-height: 3em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    margin-bottom: 1em;
-    background-color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    flex-wrap: wrap;
-    min-width: 20em;
+.headerListProjet p {
+  flex: 1;
+}
+
+.cardMembreSuggestion,
+.cardProjetSuggestion {
+  border: 1px solid black;
+  min-height: 3em;
+  max-height: 4em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-bottom: 1em;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  flex-wrap: wrap;
+  min-width: 20em;
 }
 
 @media only screen and (max-width: 990px) {
-    .list{
-        overflow-x: scroll;
-    }
-    #containerRecherche{
-        flex-wrap: wrap;
-    }
-    
+  .list {
+    overflow-x: scroll;
+  }
+  #containerRecherche {
+    flex-wrap: wrap;
+  }
 }
 
-.nomMembreSuggestion, .idMembreSuggestion{
-    color: black;
-    font-weight: bold;
-    margin-bottom: 0;
-    word-wrap: break-word;
+.nomMembreSuggestion,
+.idMembreSuggestion {
+  color: black;
+  font-weight: bold;
+  margin-bottom: 0;
+  word-wrap: break-word;
 }
 
- .titreProjetSuggestion, .createurProjetSuggestion, .nombreTelechargement{
-    color: black;
-    font-weight: bold;
-    margin-bottom: 0;
-    flex: 1;
-    word-wrap: break-word;
+.titreProjetSuggestion,
+.createurProjetSuggestion,
+.nombreTelechargement {
+  color: black;
+  font-weight: bold;
+  margin-bottom: 0;
+  flex: 1;
+  word-wrap: break-word;
 }
 
-.imageProfilMembreSuggestion{
-    max-width: 2em;
-    max-height: 2em;
+.imageProfilMembreSuggestion {
+  max-width: 2em;
+  max-height: 2em;
 }
 
-.thumbnail-in-Card{
-    max-height: 15em;
-    min-height: 15em;
-    max-width: 13em;
-    min-width: 13em;
-    padding-top: 1em;
-    padding-bottom: 1em;
+.thumbnail-in-Card {
+  max-height: 15em;
+  min-height: 15em;
+  max-width: 13em;
+  min-width: 13em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 
-    border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #000000;
 }
 
-
-
-.card-title-item{
-    align-self: center;
+.card-title-item {
+  align-self: center;
 }
 
-.card-text-item{
-    justify-content: flex-start;
+.card-text-item {
+  justify-content: flex-start;
 }
-
-
