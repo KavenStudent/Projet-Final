@@ -147,18 +147,6 @@ function modifierMembre()
     }
 }
 
-//table de tous les membre
-function tableMembres()
-{
-    global $tabRes;
-    global $dao;
-    $par = $_POST['par'];
-    $valeurPar = strtolower(trim($_POST['valeurPar']));
-    $tabRes['action'] = "tableMembres";
-    //retourne tout les membre
-    $tabRes['listeMembres'] = $dao->getAllMembreRecherche($par, $valeurPar);
-}
-
 // FUNCTIONS LOAD PAGES
 
 function loadPageMembre()
