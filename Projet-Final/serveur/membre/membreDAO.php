@@ -7,9 +7,6 @@ interface MembreDao
 
     public function getAllMembreSuggestion(): array;
 
-    //Retourne tout les membres avec de recherhce
-    public function getAllMembreRecherche(string $par, string $valeurPar): array;
-
     //Enregistre un membre
     public function enregistrerMembre(Membre $Membre): bool;
 

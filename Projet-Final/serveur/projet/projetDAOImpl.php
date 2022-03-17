@@ -1,7 +1,9 @@
 <?php
+require_once ("../../../vendor/autoload.php");
 require_once("projet.php");
 require_once("projetDAO.php");
 require_once("../includes/modele.inc.php");
+use \YaLinqo\Enumerable;
 
 
 class ProjetDaoImpl extends Modele implements ProjetDao
@@ -83,15 +85,15 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
-            $object =$stmt->fetch(PDO::FETCH_OBJ);
+            $object = $stmt->fetch(PDO::FETCH_OBJ);
             $isMembrePremium = $object->membrePremium;
 
-            if($isMembrePremium){
+            if ($isMembrePremium) {
                 $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ?";
-            }else{
+            } else {
                 $requete = "SELECT id, titre, description, thumbnail FROM projet WHERE idCreateur = ? ORDER BY id DESC LIMIT 3";
             }
-            
+
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();
@@ -146,7 +148,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $thumbnail = $this->verserFichier("thumbnail", "imageVignette", "defaultThumbnail.png", $projet->getTitre() . $projet->getCreateurId());
-
+            $path = $this->verserFichier("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
             $requete = "SELECT COUNT(p.id) as nbProjets , m.membrePremium FROM projet p INNER JOIN membre m ON m.id = p.idCreateur WHERE idCreateur = ?";
             $this->setRequete($requete);
@@ -155,7 +157,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
 
             $ligne = $stmt->fetch(PDO::FETCH_OBJ);
             $premium = $ligne->membrePremium;
-            $path = $this->verserProjet("fichiersProjet", "inputFichier", "", $projet->getTitre() . $projet->getCreateurId() . "fichier", $premium);
+
 
             if ($ligne->nbProjets >= 3 && !$premium) {
                 $returnValue = false;
@@ -239,7 +241,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $premium = $ligne->membrePremium;
 
             $image = $this->verserFichier("thumbnail", "thumbnail", $ancienneImage, $projet->getTitre() . $projet->getCreateurId());
-            $path = $this->verserProjet("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier", $premium);
+            $path = $this->verserFichier("fichiersProjet", "inputFichierEdit", $ancienPath, $projet->getTitre() . $projet->getCreateurId() . "fichier");
 
             if ($adminLock) {
                 $prive = $adminLock;
@@ -341,8 +343,8 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $tab = array();
             $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
             FROM projet p
-            INNER JOIN projettag pt ON p.id = pt.idProjet 
-            INNER JOIN tag t ON t.id = pt.idTag 
+            LEFT JOIN projettag pt ON p.id = pt.idProjet 
+            LEFT JOIN tag t ON t.id = pt.idTag 
             INNER JOIN membre m ON p.idCreateur = m.id 
             WHERE m.prive = 0 AND m.membrePremium = 1 GROUP BY p.id";
 
@@ -352,28 +354,37 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
                 $tab[] = $ligne;
             }
-            
-            $requete = "SELECT * FROM membre m WHERE m.prive = 0 AND m.membrePremium = 0";
+
+           
+            $tabAllProjetPublicNoPremium = [];
+            $tabAllIdDistinct = [];
+            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
+            FROM projet p 
+            LEFT JOIN projettag pt ON p.id = pt.idProjet 
+            LEFT JOIN tag t ON t.id = pt.idTag
+            INNER JOIN membre m ON p.idCreateur = m.id
+            WHERE m.prive = 0 AND m.membrePremium = 0 GROUP BY p.id";
+
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
-            $requete = "SELECT p.id as idProjet, p.titre, p.nbTelechargement, GROUP_CONCAT(t.nomTag) as tags, m.nom as nom, m.prenom as prenom, m.id  as idMembre , p.prive , m.membrePremium
-            FROM projet p
-            LEFT JOIN projettag pt ON p.id = pt.idProjet 
-            LEFT JOIN tag t ON t.id = pt.idTag 
-            INNER JOIN membre m ON p.idCreateur = m.id 
-            WHERE p.idCreateur = ? GROUP BY p.id ORDER BY p.id DESC LIMIT 3";
             while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                $idCreateur = $ligne->id;
-                $this->setRequete($requete);
-                $this->setParams(array($idCreateur));
-                $stmt = $this->executer();
-                while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $tab[] = $ligne;
-                }
+                $tabAllProjetPublicNoPremium[] = array( "idMembre"=>$ligne->idMembre,'tags'=>$ligne->tags,
+            'titre'=>$ligne->titre, 'idProjet'=>$ligne->idProjet, 'nbTelechargement'=>$ligne->nbTelechargement,'nom'=>$ligne->nom,
+            'prenom'=>$ligne->prenom, 'prive'=>$ligne->prive, 'membrePremium'=>$ligne->membrePremium);
             }
 
+            $tabAllIdDistinct[] = Enumerable::from($tabAllProjetPublicNoPremium)->distinct('$projet ==> $projet["idMembre"]')->toList();
 
+            foreach($tabAllIdDistinct[0] as $row){
+                $result = Enumerable::from($tabAllProjetPublicNoPremium)->where('$projet ==> $projet["idMembre"] == '.$row["idMembre"])
+                ->orderByDescending('$projet ==> $projet["idProjet"]')->take(3)->toList();
+
+                foreach($result as $projetArray){
+                    $projet = (object) $projetArray;
+                    $tab[] = $projet;
+                } 
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         } finally {
@@ -445,7 +456,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
     {
         try {
             $tab = array();
-            $requete = "SELECT s.id, s.idMembre, s.idProjet, s.description, p.titre FROM signalisation s inner JOIN projet p on s.idProjet = p.id WHERE s.idMembre = ?";
+            $requete = "SELECT s.id, s.idMembre, s.idProjet, s.description, p.titre FROM signalisation s LEFT JOIN projet p on s.idProjet = p.id WHERE s.idMembre = ?";
             $this->setRequete($requete);
             $this->setParams(array($idMembre));
             $stmt = $this->executer();

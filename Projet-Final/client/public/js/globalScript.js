@@ -1,27 +1,30 @@
+// -----------------VARIABLES POUR SAUVEGARDER TOUT LES TAGS ET PARTICIPANTS DE LA BASE DE DONNÉES
 let tagsArray = [];
 let participantsArray = [];
 let firstLoad = false;
-
+// -----------------FUNCTION POUR SET LES TAGS
 function setTagsArray(newArray) {
   tagsArray = newArray;
 }
-
+// -----------------FUNCTION POUR SET LES PARTICIPANTS
 function setParticipantsArray(newArray) {
   participantsArray = newArray;
 }
 
 // SYSTEME DE RECHERCHE
+// DEUX VARIABLES LOCALES SAUVEGARDENT LISTE DE MEMBRES ET LISTE DE PROJETS
 let dataMembre = [];
 let dataProjet = [];
 
+// GETTER POUR LISTE DE MEMBRES
 function getDataMembre() {
   return dataMembre;
 }
-
+// GETTER POUR LISTE DE PROJETS
 function getDataProjet() {
   return dataProjet;
 }
-
+// SETTER POUR LA LISTE DE MEMBRES ET LISTE DE PROJETS DANS LES VARIABLES LOCALES
 function setData(newDataMembres, newDataProjets) {
   dataMembre = new Array();
   dataProjet = new Array();
@@ -38,7 +41,7 @@ function setData(newDataMembres, newDataProjets) {
     });
   }
 }
-
+// FUNCTION POUR FILTRER LA LISTE DE MEMBRES
 function filterDataMembre(input, membre) {
   let isExist = false;
   let nom = membre.nom.toLowerCase();
@@ -48,14 +51,17 @@ function filterDataMembre(input, membre) {
   }
   return isExist;
 }
-
+// FUNCTION POUR FILTRER LA LISTE DE PROJETS
 function filterDataProjet(input, projet) {
   let isExist = false;
   let prenomCreateur = projet.prenom.toLowerCase();
   let nomCreateur = projet.nom.toLowerCase();
   let tags = projet.tags;
+
   if(tags!=null && tags.length > 0){
      tags = tags.toLowerCase();
+  }else{
+     tags = "";
   }
   let titre = projet.titre.toLowerCase();
   if (
@@ -68,13 +74,13 @@ function filterDataProjet(input, projet) {
   }
   return isExist;
 }
-
+// FUNCTION POUR ENLEVER TOUT LES CHARACTÈRES DANS LE CHAMP DE RECHERCHE
 function clearInputSearch() {
   let searchBar = document.getElementById("searchBar");
   searchBar.value = "";
   firstLoad = false;
 }
-
+// FUNCTION POUR AFFICHER LA LISTE DE MEMBRES ET LA LISTE DE PROJETS À PARTIR DE LA BASE DE DONNÉES LOCALES
 function loadData() {
   let dataMembre = getDataMembre();
   let dataProjet = getDataProjet();
@@ -113,10 +119,10 @@ function loadData() {
   $("#contenuCardsProjet").html(contenuProjet);
 }
 
+// ---------------------------------------QUAND LA PAGE EST LOAD--------EXECUTE PLUSIEURS ACTIONS
 window.onload = function () {
-  showConditions();
   loadPage();
-  // empeche d'utiliser la touche entrer dans les forms
+  // empeche d'utiliser la touche entrer dans les forms -----LE ENTER CAUSE UN BOGUE, SA FAIT RELOAD LA PAGE À LA PLACE D'ACTIVER UNE FONCTION (SUBMIT LE FORM DANS LE VIDE)
   $(window).keydown(function (event) {
     if (event.keyCode == 13) {
       event.preventDefault();
@@ -194,7 +200,8 @@ window.onload = function () {
     }
   });
 };
-
+// --------------------------------------------------------------FIN QUAND LA PAGE EST LOAD----------------
+// FUNCTION POUR SETTER LE EYE DU PASSWORD DANS LA PAGE EDIT MEMBRE LORSQUE QUAND LOAD LA PAGE MEMBRE EDIT
 function setEyesDansFormEdit() {
   //EYE DANS FORM MODFICATION
   const togglePasswordModification = document.querySelector(
@@ -234,9 +241,8 @@ function setEyesDansFormEdit() {
     this.classList.toggle("bi-eye");
   });
 }
-
+// FUNCTION LORSQUE QU'ON CLIQUE SUR UN TAG LA RECHERCHE SERA APPELÉ AUTOMATIQUEMENT POUR CE TAG
 function tagCliquable(input) {
-
   document.getElementById("searchBar").value = input;
   //Si ya une valeur et il n'est pas sur la page de recherche return la page de recherche
   if (input != "" && firstLoad === false) {
@@ -250,29 +256,12 @@ function tagCliquable(input) {
   }
 }
 
-// fonction show terme et conditions
-function showConditions() {
-  var coll = document.getElementsByClassName("collapsible");
-
-  for (var i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
-  }
-}
-
-// valide le form devenir membre
+// VALIDER LE FORM DEVENIR MEMBRE
 function valider() {
   let myForm = document.getElementById("form-enregistrer-membre");
   let password = myForm.password.value;
   let confirmPassword = myForm.confirmPassword.value;
-  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let pattern = /^[A-Za-z0-9\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
@@ -292,12 +281,12 @@ function valider() {
   }
 }
 
-// valide le form modifier membre
+// VALIDER LE FORM MODIFIER MEMBRE
 function validerMembreEdit() {
   let myForm = document.getElementById("membreEditForm");
   let password = myForm.passwordEdit.value;
   let confirmPassword = myForm.confirmPasswordEdit.value;
-  let pattern = /^[A-Za-z0-9\p{P}\p{S}]{8,}$/;
+  let pattern = /^[A-Za-z0-9\p{S}]{8,}$/;
   let valide = true;
 
   if (!myForm.checkValidity()) {
@@ -317,7 +306,7 @@ function validerMembreEdit() {
   }
 }
 
-// valide le form creer projet
+// VALIDER LE FORM CREER PROJET
 function validerProjetCreate(idProjet) {
   let myForm = document.getElementById("ajouterProjetForm");
   let valide = true;
@@ -332,7 +321,7 @@ function validerProjetCreate(idProjet) {
   }
 }
 
-// valide le form modifier projet
+// VALIDER LE FORM MODIFIER PROJET
 function validerProjetEdit(idProjet) {
   let myForm = document.getElementById("formProjetEdit");
   let valide = true;
@@ -346,23 +335,23 @@ function validerProjetEdit(idProjet) {
     modifierProjet(idProjet);
   }
 }
-
+// AFFICHER UN SNACKBAR
 function afficherSnackbar(text) {
   var x = document.getElementById("snackbar");
   x.innerHTML = text;
   x.className = "show";
   setTimeout(function () {
     x.className = x.className.replace("show", "");
-  }, 3000);
+  }, 5000);
 }
 
-//Permet de fermer les toasts
+//PERMET DE FERMER LES TOASTS
 function closeToast() {
   $("#toast").toast("hide");
   $("#toastForm").toast("hide");
 }
 
-// fonction onload Image
+//FUNCTION POUR LOAD UNE IMAGE
 
 var loadFile = function (event) {
   var output = document.getElementById("output");
@@ -372,7 +361,7 @@ var loadFile = function (event) {
   };
 };
 
-// fonction onload Image Thumbnail
+// FUNCTION POUR LOAD UN IMAGE THUMBNAIL
 var loadFileThumbnail = function (event) {
   var output = document.getElementById("outputThumbnail");
   output.src = URL.createObjectURL(event.target.files[0]);
@@ -381,7 +370,7 @@ var loadFileThumbnail = function (event) {
   };
 };
 
-// fonction reset form et Image vide
+// FUNCTION POUR RESET LE FORM ET UNLOAD L'IMAGE
 
 function resetForm() {
   setTimeout(function () {
@@ -389,7 +378,7 @@ function resetForm() {
     output.src = "Projet-Final/serveur/projet/thumbnail/defaultThumbnail.png";
   }, 0);
 }
-
+// FUNCTION POUR CHERCHER UN TAG DANS UNE LISTE DE TAGS
 function findTag(tag, tagsArray) {
   return tagsArray.filter((t) => {
     if (t.toLowerCase().includes(tag.toLowerCase())) {
@@ -397,7 +386,7 @@ function findTag(tag, tagsArray) {
     }
   });
 }
-
+// FUNCTION POUR CHERCHER UN PARTICIPANT DANS UNE LISTE DE PARTICIPANTS
 function findParticipant(participant, participantsArray) {
   return participantsArray.filter((p) => {
     let nomComplet = p.prenom + " " + p.nom;
@@ -408,7 +397,7 @@ function findParticipant(participant, participantsArray) {
 }
 
 // TAGS SYSTEM
-
+// LISTE DE TAGS D'UN PROJET ET LISTE DE PARTICIPANTS D'UN PROJET
 let tags = [];
 let participants = [];
 
@@ -426,11 +415,12 @@ function setParticipantsBase() {
   });
 }
 
-//Clear les tags ou participants
+//Clear les tags
 function clearTagsBase() {
   tags = new Array();
 }
 
+//Cleat les participants
 function clearParticipantsBase() {
   participants = new Array();
 }
@@ -453,7 +443,7 @@ function createTag(label, nomDeClasse, classTag) {
 
   closeBtn.setAttribute("data-item", label);
   closeBtn.innerHTML = "close";
-
+  // ------------------VIEW DU TAG------------------------------------------
   // <div class="tag etiquette">
   // <span class="tagValueCreate" >label</span>
   // <i class="material-icons btnCloseEtiquette" data-item='label'>close</i>
@@ -575,7 +565,7 @@ function isLabelExist(label, list) {
   return exist;
 }
 
-//Ajoute des suggestions et add le tag lors du click de la suggestion
+//Permet de chercher s'il existe puis afficher les tags en suggestion
 function displayTagMatches2() {
   let value = document.getElementById("monInputTag").value;
   let contenu = "";
@@ -587,7 +577,7 @@ function displayTagMatches2() {
   }
   $("#tagsReponse").html(contenu);
 }
-
+// Permet de chercher s'il existe puis afficher les participants en suggestion
 function displayParticipantsMatches() {
   let value = document.getElementById("participantsInput").value;
   let contenu = "";
@@ -600,6 +590,28 @@ function displayParticipantsMatches() {
   $("#participantsReponse").html(contenu);
 }
 
+//validation du telechargement du fichier projet
+function validationFichier(idInput, premium) {
+  let fi = document.getElementById(idInput);
+  const MAX_SIZE_REGULAR = 8 * Math.pow(1024, 2);
+  const MAX_SIZE_PREMIUM = 20 * Math.pow(1024, 2);
+
+  if (fi.files.length > 0) {
+    for (let i = 0; i <= fi.files.length - 1; i++) {
+      const fsize = fi.files.item(i).size;
+
+      if (premium == 0 && fsize >= MAX_SIZE_REGULAR) {
+        afficherSnackbar("La taille du fichier doit être de 8 MB ou moins");
+        fi.value = "";
+      } else if (premium == 1 && fsize >= MAX_SIZE_PREMIUM) {
+        afficherSnackbar("La taille du fichier doit être de 20 MB ou moins");
+        fi.value = "";
+      }
+    }
+  }
+}
+
+// function pour loader soit la page d'acceuil, soit la page admin ou la page Membre
 function loadPage() {
   var typePage = document.getElementById("typePage").value;
 
@@ -615,9 +627,11 @@ function loadPage() {
   }
 }
 
-function afficheSlidePayment(){
-  let bsOffcanvas = new bootstrap.Offcanvas(document.getElementById("offcanvasRight"));
-	bsOffcanvas.show(); // affiche le canvas du panier
+// Permet d'afficher le slider avec le paiement par paypal.
+function afficheSlidePayment() {
+  let bsOffcanvas = new bootstrap.Offcanvas(
+    document.getElementById("offcanvasRight")
+  );
+  bsOffcanvas.show(); // affiche le canvas du panier
   afficherPaypal();
 }
-

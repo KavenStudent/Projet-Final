@@ -104,15 +104,13 @@ function modifierMembre() {
       $('.lds-ring').removeClass('hidden');
     },
     success: function (reponse) {
+      $(".lds-ring").addClass("hidden");
       if (reponse.msg != null) {
-        loadMembre("pageMembre", reponse.idDuMembre);
-        afficherSnackbar(reponse.msg);
+        loadMembre("pageMembre", reponse.idDuMembre, reponse.msg);
       }
     },
-    fail: function (err) { },
-    complete: function () {
-      $('.lds-ring').addClass('hidden');
-    },
+    fail: function (err) { $(".lds-ring").addClass("hidden");},
+
   });
 
 }

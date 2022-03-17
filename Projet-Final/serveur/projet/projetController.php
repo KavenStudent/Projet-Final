@@ -119,6 +119,8 @@ function loadPageProjetController()
     $tabRes['tabTags'] = $dao->getAllTags();
     $daoMembre = new MembreDaoImpl();
     $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
+    $membre = $daoMembre->getMembre($projet->getCreateurId());
+    $tabRes['premium'] = $membre->getMembrePremium();
 }
 
 function  loadPageAjouterProjetController()
@@ -135,6 +137,8 @@ function  loadPageAjouterProjetController()
     $tabRes['tabTags'] = $dao->getAllTags();
     $daoMembre = new MembreDaoImpl();
     $tabRes['tabParticipants'] = $daoMembre->getAllMembre();
+    $membre = $daoMembre->getMembre($idMembre);
+    $tabRes['premium'] = $membre->getMembrePremium();
 }
 
 function ajouterProjet()
@@ -186,18 +190,17 @@ function ajouterProjet()
 
     $projet = new Projet(0, $idMembre, $titreProjet, $descriptionProjet, $path, $prive, $stringPart, $nbTelechargements, $lienProjet, $thumbnail, $nomComplet, $adminLock);
 
-    
+
 
     if ($tabRes['action'] == null) {
         if ($dao->creerProjet($projet, $tags, $tabParticipantAvecId)) {
             $tabRes['message'] = "Projet ajouté avec succès";
-        }else {
+        } else {
             $tabRes['message'] = "Une erreur s'est produite. Vous pourriez avoir atteint votre limite de projet.";
         }
         $tabRes['action'] = 'redirigerPageMembre';
         $tabRes['idMembre'] = $idMembre;
     }
-  
 }
 
 function loadAutreProjet()

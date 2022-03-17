@@ -76,7 +76,7 @@ function afficherPageProjet(json) {
             aria-label="Autres participants: ">`;
 
   //List participants
-  if(json.tabParticipantsProjet.length >0){
+  if (json.tabParticipantsProjet.length > 0) {
     json.tabParticipantsProjet.forEach((membreProjet) => {
       if (membreProjet.prive != 1) {
         contenu += ` <li class="list-inline-item"><a href="javascript:;" onclick="loadAutreMembre(${membreProjet.idMembre})">${membreProjet.prenom} ${membreProjet.nom}</a></li>`;
@@ -85,7 +85,7 @@ function afficherPageProjet(json) {
       }
     });
   }
-  
+
   let partArray = json.projet.autreParticipant.split(",");
   partArray.forEach((participant) => {
     contenu += ` <li class="list-inline-item">${participant}</li>`;
@@ -94,14 +94,14 @@ function afficherPageProjet(json) {
   //List tags
   contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags:">`;
 
-  if(json.tabTagsProjet.length > 0){
+  if (json.tabTagsProjet.length > 0) {
     json.tabTagsProjet.forEach((tagProjet) => {
       contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
     });
     contenu = contenu.substring(0, contenu.length - 7) + "</li>";
   }
-  
-  
+
+
   contenu += `</ul>`;
 
   //Description
@@ -207,7 +207,7 @@ function afficherPageProjetEdit(json) {
 
 <h3>Fichier du projet</h3>
    <div class="form-outline-inpt inpt">
-   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichierEdit' id="inputFichierEdit" onchange="validationFichier('inputFichierEdit', ${json.premium})">
    </div>
    <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
 
@@ -346,7 +346,7 @@ function ajouterProjetAffichage(json) {
 
    <h3>Fichier du projet</h3>
    <div class="form-outline-inpt inpt">
-   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier">
+   <input class="form-control" type="file" accept=".zip,.rar,.7zip" name='inputFichier' id="inputFichier" onchange="validationFichier('inputFichier', ${json.premium})">
    </div>
    <p class="noteEnter">Note: Choisissez un fichier compresser que les utilisateurs pourront télécharger</p>
  
@@ -518,7 +518,7 @@ function afficherPageAutreProjet(json) {
   json.tabTagsProjet.forEach((tagProjet) => {
     contenu += `<li class="list-inline-item"><a href="#navbarNavAltMarkup" onclick="tagCliquable('${tagProjet.nomTag}')">${tagProjet.nomTag}</a> |</li>`;
   });
-  contenu = contenu.substring(0, contenu.length -7) + "</li>";
+  contenu = contenu.substring(0, contenu.length - 7) + "</li>";
   contenu += `</ul>`;
 
 
@@ -543,19 +543,41 @@ function redirigerPageMembre(idMembre, message) {
 
 function afficherModalRaison(json) {
   let contenu = "";
+  let compteur = 1;
+  if (json.tabRaison.length > 0) {
+    json.tabRaison.forEach((raison) => {
+      if (raison.idProjet != null) {
+        contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">`;
+        contenu += `<div class="card-header">
+          Raison #${compteur} :
+        </div>
+        <div class="card-body">
+     
+          <p><span style="color:red">Projet signalé :</span> ${raison.titre} #${raison.idProjet}</p>
+          <p>Description : ${raison.description}</p>
+     
+        </div>
+      </div>`;
+      }
+      else {
+        contenu += `  <div class="card descriptionCard">`;
+        contenu += `<div class="card-header">
+        Raison #${compteur} : 
+        </div>
+        <div class="card-body">
+     
+          <p>Description : ${raison.description}</p>
+     
+        </div>
+      </div>`;
+      }
+      compteur++;
 
-  json.tabRaison.forEach((raison) => {
-    contenu += `  <div class="card descriptionCard" onclick="loadPageAutreProjet(${raison.idProjet})">
-   <div class="card-header">
-   ${raison.titre} #${raison.idProjet}
-   </div>
-   <div class="card-body">
+    });
+  } else if (json.tabRaison.length == 0) {
+    contenu += `<div> Aucune signalisation </div>`;
+  }
 
-     <p>${raison.description}</p>
-
-   </div>
- </div>`;
-  });
 
   $(".divSignalisation").html(contenu);
   $("#modalSignalisation").modal("show");
