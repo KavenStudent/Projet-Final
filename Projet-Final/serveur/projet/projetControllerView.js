@@ -190,7 +190,7 @@ function afficherPageProjetEdit(json) {
     });
   }
 
-  contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -#]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
@@ -330,7 +330,7 @@ function ajouterProjetAffichage(json) {
       <!-- TAGS ICI -->
       <div class="tag-container">
 
-        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -#]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
