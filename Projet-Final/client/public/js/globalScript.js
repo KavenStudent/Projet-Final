@@ -3,12 +3,12 @@ let tagsArray = [];
 let participantsArray = [];
 let firstLoad = false;
 // -----------------FUNCTION POUR SET LES TAGS
-function setTagsArray(newArray) {
-  tagsArray = newArray;
+function setClearTagsArray() {
+  tagsArray = new Array();
 }
 // -----------------FUNCTION POUR SET LES PARTICIPANTS
-function setParticipantsArray(newArray) {
-  participantsArray = newArray;
+function setClearParticipantsArray() {
+  participantsArray = new Array();
 }
 
 // SYSTEME DE RECHERCHE

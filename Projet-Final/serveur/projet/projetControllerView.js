@@ -230,7 +230,7 @@ function afficherPageProjetEdit(json) {
 </form>`;
   $("#contenu").html(contenu);
 
-  setTagsArray(new Array());
+  setClearTagsArray();
 
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
@@ -258,7 +258,7 @@ function afficherPageProjetEdit(json) {
 
     displayTagMatches2();
   });
-
+  setClearParticipantsArray();
   clearParticipantsBase();
   setParticipantsBase();
 
@@ -361,7 +361,7 @@ function ajouterProjetAffichage(json) {
 
   $("#contenu").html(contenu);
 
-  setTagsArray(new Array());
+  setClearTagsArray();
 
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
@@ -388,7 +388,7 @@ function ajouterProjetAffichage(json) {
 
     displayTagMatches2();
   });
-  setParticipantsArray(new Array());
+  setClearParticipantsArray();
   clearParticipantsBase();
 
   json.tabParticipants.forEach((element) => {
