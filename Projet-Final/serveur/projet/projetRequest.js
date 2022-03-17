@@ -180,7 +180,6 @@ function telechargerProjet(idProjet) {
   var form = new FormData();
   form.append("action", "telechargerProjet");
   form.append("idProjet", idProjet);
-
   $.ajax({
     type: "POST",
     url: "./Projet-Final/serveur/projet/projetController.php",
@@ -193,7 +192,6 @@ function telechargerProjet(idProjet) {
     },
     success: function (reponse) {
       loadJsonRecherhe();
-      projetVue(reponse);
     },
     fail: function (err) { },
     complete: function () {

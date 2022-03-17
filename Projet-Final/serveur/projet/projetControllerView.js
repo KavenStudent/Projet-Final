@@ -57,8 +57,8 @@ function afficherPageProjet(json) {
         <div class="d-grid gap-2">`;
 
   if (json.projet.path.length > 0) {
-    contenu += `<a onclick="telechargerProjet(${json.projet.id})" class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
-          Télécharger
+    contenu += `<a class="btn btn-primary telechargerButton" href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+          <p class="telechargerButtonText" onclick="telechargerProjet(${json.projet.id})">Télécharger</p>
          </a>`;
   }
 
@@ -471,8 +471,8 @@ function afficherPageAutreProjet(json) {
         <div class="d-grid gap-2">`;
 
   if (json.projet.path.length > 0) {
-    contenu += `<a  class="btn btn-primary"href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
-          Télécharger
+    contenu += `<a class="btn btn-primary telechargerButton" href="Projet-Final/serveur/projet/fichiersProjet/${json.projet.path}" download>
+          <p class="telechargerButtonText" onclick="telechargerProjet(${json.projet.id})">Télécharger</p>
           </a>`;
   }
 

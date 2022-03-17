@@ -326,7 +326,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
             $this->setParams(array(
                 $newNbTelechargement, $idProjet
             ));
-            $stmt = $this->executer();
+            $this->executer();
             $returnValue = true;
         } catch (Exception $e) {
             $returnValue = false;
