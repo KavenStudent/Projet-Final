@@ -92,7 +92,7 @@
 .cardProjetSuggestion {
   border: 1px solid black;
   min-height: 3em;
-  max-height: 4em;
+  max-height: 6em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
