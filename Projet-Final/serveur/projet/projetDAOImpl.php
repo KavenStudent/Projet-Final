@@ -327,7 +327,7 @@ class ProjetDaoImpl extends Modele implements ProjetDao
                 $newNbTelechargement, $idProjet
             ));
             $stmt = $this->executer();
-            $returnValue = $stmt->fetch(PDO::FETCH_OBJ);
+            $returnValue = true;
         } catch (Exception $e) {
             $returnValue = false;
             echo $e->getMessage();
