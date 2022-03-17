@@ -88,7 +88,7 @@ function afficherPageAccueil(json) {
         <p class="lead">Faites une recherche par nom d'un membre, titre de projet ou tag. Les résultats seront affichés en haut de la page et le contenu de la page pourra être trouvé en dessous. Les résultats sont séparés en deux parties : à gauche, les membres et à droite, les projets. Cliquez sur l'un ou l'autre pour être rediriger vers la page correspondante.</p>
       </div>
       <div class="col-md-5">
-        <img class="imageFrontPage" src="Projet-Final/client/public/images/Capture.png" class="img-thumbnail" alt="...">
+        <img class="imageFrontPage" src="Projet-Final/client/public/images/Recherche.png" class="img-thumbnail" alt="...">
       </div>
     </div>
 
@@ -100,7 +100,7 @@ function afficherPageAccueil(json) {
         <p class="lead">Commencez par vous connecter (ou vous créer un compte). Une fois sur votre page de membre, cliquez sur le bouton "Nouveau projet" et renseignez tous les champs. Il peut être bénéfique de détailler sur quelles parties du projet vous avez travaillés si vous n'étiez pas le seul contributeur. Une fois le projet créé, la liste de projets de votre portfolio sera affiché sur votre page de profil.</p>
       </div>
       <div class="col-md-5 order-md-1">
-      <img class="imageFrontPage" src="Projet-Final/client/public/images/CapturePorfolio.PNG" class="img-thumbnail" alt="...">
+      <img class="imageFrontPage" src="Projet-Final/client/public/images/Profil.PNG" class="img-thumbnail" alt="...">
       </div>
     </div>
 
