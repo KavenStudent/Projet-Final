@@ -92,7 +92,7 @@ function afficherPageProjet(json) {
   });
 
   //List tags
-  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags:">`;
+  contenu += `</ul><ul id="projetTagsDiv" name="projetTagsDiv" class="list-inline" aria-label="Tags: ">`;
 
   if (json.tabTagsProjet.length > 0) {
     json.tabTagsProjet.forEach((tagProjet) => {
@@ -110,7 +110,7 @@ function afficherPageProjet(json) {
   // array.forEach(tags => {
   //     //mettre les tags
   // });
-  contenu += `Lien: <a href=${json.projet.lienExterne}>
+  contenu += `Lien: <a href=${json.projet.lienExterne} target="_blank">
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
     
@@ -190,7 +190,7 @@ function afficherPageProjetEdit(json) {
     });
   }
 
-  contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  contenu += `<input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -#]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
@@ -225,18 +225,19 @@ function afficherPageProjetEdit(json) {
   contenu += `<label class="form-check-label" for="flexSwitchCheckChecked">Projet prive</label>
   </div>
  </div>
-  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Cancel</button>
+  <button type="submit" class="btn btn-primary btn-block mb-4 canBtn">Annuler</button>
 <button type="button" class="btn btn-primary btn-block mb-4" onclick="validerProjetEdit(${json.projet.id})">Sauvegarder</button>
 </form>`;
   $("#contenu").html(contenu);
 
-  setTagsArray(new Array());
+  setClearTagsArray();
 
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
   });
 
   //Système de tags
+  clearTagsBase();
   setTagsBase();
 
   let monInputTag = document.getElementById("monInputTag");
@@ -257,7 +258,7 @@ function afficherPageProjetEdit(json) {
 
     displayTagMatches2();
   });
-
+  setClearParticipantsArray();
   clearParticipantsBase();
   setParticipantsBase();
 
@@ -329,7 +330,7 @@ function ajouterProjetAffichage(json) {
       <!-- TAGS ICI -->
       <div class="tag-container">
 
-        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+        <input id="monInputTag" type="text" onkeypress="return /[0-9a-zA-Z -#]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un tag.</p>
     
@@ -360,7 +361,7 @@ function ajouterProjetAffichage(json) {
 
   $("#contenu").html(contenu);
 
-  setTagsArray(new Array());
+  setClearTagsArray();
 
   json.tabTags.forEach((element) => {
     tagsArray.push(element.nomTag);
@@ -387,7 +388,7 @@ function ajouterProjetAffichage(json) {
 
     displayTagMatches2();
   });
-  setParticipantsArray(new Array());
+  setClearParticipantsArray();
   clearParticipantsBase();
 
   json.tabParticipants.forEach((element) => {
@@ -528,7 +529,7 @@ function afficherPageAutreProjet(json) {
   // array.forEach(tags => {
   //     //mettre les tags
   // });
-  contenu += `Lien: <a href=${json.projet.lienExterne}>
+  contenu += `Lien: <a href=${json.projet.lienExterne} target="_blank">
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
         </div>

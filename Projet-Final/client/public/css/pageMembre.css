@@ -27,10 +27,10 @@
     flex-wrap: wrap;
     flex-direction: column;
     border: 0.5px solid #4169E1;
-    max-width: 15em;
+    max-width: 20em;
     max-height: 35em;
     margin-top: 1em;
-    text-align:justify;
+    text-align:left;
     padding: 1em;
 }
 

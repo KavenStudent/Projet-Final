@@ -354,7 +354,7 @@ class MembreDaoImpl extends Modele implements MembreDao
             $requete = "SELECT membre.id as idMembre, membre.imageProfil, membre.prenom, membre.nom, membre.adminLock, COUNT(signalisation.idMembre) as nb 
             FROM membre LEFT OUTER JOIN signalisation ON membre.id = signalisation.idMembre 
             INNER JOIN connexion ON membre.id = connexion.idMembre where connexion.role = 'M' 
-            GROUP BY signalisation.idMembre ORDER BY COUNT(*) DESC";
+            GROUP BY membre.id ORDER BY COUNT(signalisation.idMembre) DESC";
             $this->setRequete($requete);
             $this->setParams(array());
             $stmt = $this->executer();
