@@ -110,7 +110,7 @@ function afficherPageProjet(json) {
   // array.forEach(tags => {
   //     //mettre les tags
   // });
-  contenu += `Lien: <a href=${json.projet.lienExterne}>
+  contenu += `Lien: <a href=${json.projet.lienExterne} target="_blank">
             <p class="lead">${json.projet.lienExterne}</p>
         </a>
     
