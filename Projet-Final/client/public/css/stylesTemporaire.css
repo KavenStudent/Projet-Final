@@ -62,7 +62,7 @@
   justify-content: space-between;
   font-weight: bold;
   min-width: 20em;
-  min-height: 1em;
+  min-height: 2em;
   padding-left: 0.5em;
   padding-right: 0.5em;
   padding-bottom: 0;
@@ -76,7 +76,7 @@
   justify-content: space-around;
   font-weight: bold;
   min-width: 20em;
-  min-height: 1em;
+  min-height: 2em;
   padding-left: 0.5em;
   padding-right: 0.5em;
   padding-bottom: 0;
