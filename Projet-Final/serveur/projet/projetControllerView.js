@@ -163,7 +163,7 @@ function afficherPageProjetEdit(json) {
     });
   }
 
-  contenu += `<input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+  contenu += `<input id="participantsInput" type="text" onkeypress="return /[a-zA-Z -]/i.test(event.key)" />
   </div>
   <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
 
@@ -310,7 +310,7 @@ function ajouterProjetAffichage(json) {
      <label class="form-label" for="participantsProjet">Participants:</label>
       <!-- PARTICIPANTS TAGS -->
      <div class="participant-container">
-        <input id="participantsInput" type="text" onkeypress="return /[0-9a-zA-Z -]/i.test(event.key)" />
+        <input id="participantsInput" type="text" onkeypress="return /[a-zA-Z -]/i.test(event.key)" />
       </div>
       <p class="noteEnter">Note: Utiliser "enter" pour ajouter un participant.</p>
 
